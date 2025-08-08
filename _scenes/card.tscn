@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3i8hnmtb7yf7"]
+
+[ext_resource type="Script" uid="uid://d4mjpcesgje3r" path="res://_scripts/card_board.gd" id="1_ajdvn"]
+[ext_resource type="Texture2D" uid="uid://co4u5nsn2qenl" path="res://art/cards/outcasts/AsheGem.png" id="1_wb4pw"]
+[ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/cards/card_back.png" id="2_ajdvn"]
+[ext_resource type="Script" uid="uid://crwv7yyx4j40c" path="res://_scripts/components/grab_component.gd" id="3_wb4pw"]
+[ext_resource type="Script" uid="uid://wtisdwi7dsn5" path="res://_scripts/components/flip_component.gd" id="5_hkicm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wb4pw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i5pp"]
+albedo_texture = ExtResource("1_wb4pw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_pjytt"]
+material = SubResource("StandardMaterial3D_1i5pp")
+size = Vector2(1.31, 1.86)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4rk6"]
+albedo_texture = ExtResource("2_ajdvn")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wb4pw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Card" type="Area3D"]
+transform = Transform3D(-1, -1.67038e-22, 1.31134e-07, 1.31134e-07, -1.91069e-15, 1, 0, 1, 1.91069e-15, 0, 0, 0)
+script = ExtResource("1_ajdvn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.24, 0, 0, 0, 1.795, 4.44089e-16, 0, 7.10543e-15, 0.14, 0, 0, 0)
+shape = SubResource("BoxShape3D_wb4pw")
+
+[node name="front_quad" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_pjytt")
+
+[node name="back_quad" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_b4rk6")
+mesh = SubResource("QuadMesh_pjytt")
+
+[node name="GrabComponent" type="Node" parent="." node_paths=PackedStringArray("_flip_component")]
+script = ExtResource("3_wb4pw")
+_flip_component = NodePath("../FlipComponent")
+
+[node name="FlipComponent" type="Node" parent="."]
+script = ExtResource("5_hkicm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wb4pw")
