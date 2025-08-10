@@ -233,3 +233,4 @@ libraries = {
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Control/TextureButton" to="." method="_on_texture_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="pressed" from="Control/TextureButton" to="." method="_on_texture_button_pressed"]

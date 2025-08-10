@@ -24,3 +24,7 @@ func _on_texture_button_mouse_entered() -> void:
 
 func _on_texture_button_mouse_exited() -> void:
 	_return_size()
+	
+func _on_texture_button_pressed() -> void:
+	CardManager.Instance.rpc("spawn_new_card", {"card_res" : card_res})
+	queue_free()

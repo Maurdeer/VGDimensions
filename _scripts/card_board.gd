@@ -6,10 +6,10 @@ class_name CardBoard
 @export var card_res: Card
 
 # Predetermined Utilities
-@onready var _front_face: MeshInstance3D = $front_quad
+@export var _front_face: MeshInstance3D
 
 func _init(p_card_res: Card = null) -> void:
 	card_res = p_card_res
 
 func _on_place() -> void:
-	pass
+	_front_face.get_active_material(0).albedo_texture = card_res.card_art

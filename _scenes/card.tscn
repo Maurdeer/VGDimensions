@@ -26,9 +26,10 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Card" type="Area3D"]
+[node name="Card" type="Area3D" node_paths=PackedStringArray("_front_face")]
 transform = Transform3D(-1, -1.67038e-22, 1.31134e-07, 1.31134e-07, -1.91069e-15, 1, 0, 1, 1.91069e-15, 0, 0, 0)
 script = ExtResource("1_ajdvn")
+_front_face = NodePath("front_quad")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.24, 0, 0, 0, 1.795, 4.44089e-16, 0, 7.10543e-15, 0.14, 0, 0, 0)
