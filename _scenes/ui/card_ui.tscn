@@ -6,8 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_lrhec"]
 script = ExtResource("3_mkotd")
-card_art = ExtResource("1_eet8q")
-card_type = 0
+name = ""
+type = 0
 metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
 
 [sub_resource type="Animation" id="Animation_mkotd"]

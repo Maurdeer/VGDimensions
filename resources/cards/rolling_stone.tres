@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://cjdamd13vqgk0"]
+
+[ext_resource type="Texture2D" uid="uid://c2bg6bssgpba0" path="res://art/cards/outcasts/RollingStone.png" id="1_jpul5"]
+[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/resources/card.gd" id="2_pskq8"]
+
+[resource]
+script = ExtResource("2_pskq8")
+name = "rolling_stone"
+front_texture = ExtResource("1_jpul5")
+type = 1
+metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"

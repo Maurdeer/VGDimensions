@@ -1,42 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn13yxrmi3ifo"]
+[gd_scene load_steps=7 format=3 uid="uid://cn13yxrmi3ifo"]
 
 [ext_resource type="PackedScene" uid="uid://dhf7srp4vh2ak" path="res://_scenes/ui/card_ui.tscn" id="1_088ld"]
-[ext_resource type="Texture2D" uid="uid://ch6ep6mlsu77a" path="res://art/cards/outcasts/SturdyRope.png" id="2_bbkdi"]
-[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/resources/card.gd" id="3_kj0sm"]
-[ext_resource type="Texture2D" uid="uid://bvvvy7bwkk6jq" path="res://art/cards/outcasts/LilGuy.png" id="4_obs8u"]
-[ext_resource type="Texture2D" uid="uid://beby6d1dmt0d7" path="res://art/cards/outcasts/RockBlock.png" id="5_6oowg"]
-[ext_resource type="Texture2D" uid="uid://c2bg6bssgpba0" path="res://art/cards/outcasts/RollingStone.png" id="6_3un88"]
-[ext_resource type="Texture2D" uid="uid://wuhmk8emdwwj" path="res://art/cards/outcasts/Torch.png" id="7_lk42w"]
-
-[sub_resource type="Resource" id="Resource_dex7w"]
-script = ExtResource("3_kj0sm")
-card_art = ExtResource("2_bbkdi")
-card_type = 1
-metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
-
-[sub_resource type="Resource" id="Resource_ml85l"]
-script = ExtResource("3_kj0sm")
-card_art = ExtResource("4_obs8u")
-card_type = 0
-metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
-
-[sub_resource type="Resource" id="Resource_4dkvo"]
-script = ExtResource("3_kj0sm")
-card_art = ExtResource("5_6oowg")
-card_type = 1
-metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
-
-[sub_resource type="Resource" id="Resource_olwpf"]
-script = ExtResource("3_kj0sm")
-card_art = ExtResource("6_3un88")
-card_type = 1
-metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
-
-[sub_resource type="Resource" id="Resource_d16ci"]
-script = ExtResource("3_kj0sm")
-card_art = ExtResource("7_lk42w")
-card_type = 0
-metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
+[ext_resource type="Resource" uid="uid://cvgcar8yvb5mo" path="res://resources/cards/sturdy_rope.tres" id="2_bbkdi"]
+[ext_resource type="Resource" uid="uid://ck4m0onnu3ink" path="res://resources/cards/rock_block.tres" id="3_f13b1"]
+[ext_resource type="Resource" uid="uid://cjdamd13vqgk0" path="res://resources/cards/rolling_stone.tres" id="4_obs8u"]
+[ext_resource type="Resource" uid="uid://cp6ska3148b1v" path="res://resources/cards/torch.tres" id="5_6oowg"]
+[ext_resource type="Resource" uid="uid://c2sqv5nvydduf" path="res://resources/cards/lil_guy.tres" id="6_3un88"]
 
 [node name="PlayerHand" type="Control"]
 layout_mode = 3
@@ -60,20 +29,20 @@ metadata/_edit_use_anchors_ = true
 
 [node name="card_ui" parent="HBoxContainer" instance=ExtResource("1_088ld")]
 layout_mode = 2
-card_res = SubResource("Resource_dex7w")
+card_res = ExtResource("2_bbkdi")
 
 [node name="card_ui2" parent="HBoxContainer" instance=ExtResource("1_088ld")]
 layout_mode = 2
-card_res = SubResource("Resource_ml85l")
+card_res = ExtResource("3_f13b1")
 
 [node name="card_ui3" parent="HBoxContainer" instance=ExtResource("1_088ld")]
 layout_mode = 2
-card_res = SubResource("Resource_4dkvo")
+card_res = ExtResource("4_obs8u")
 
 [node name="card_ui4" parent="HBoxContainer" instance=ExtResource("1_088ld")]
 layout_mode = 2
-card_res = SubResource("Resource_olwpf")
+card_res = ExtResource("5_6oowg")
 
 [node name="card_ui5" parent="HBoxContainer" instance=ExtResource("1_088ld")]
 layout_mode = 2
-card_res = SubResource("Resource_d16ci")
+card_res = ExtResource("6_3un88")

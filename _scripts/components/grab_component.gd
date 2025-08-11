@@ -10,6 +10,7 @@ var _grabbing: bool = false
 # (Ryan) Temporary input testing function
 # Remove later when input system gets implemented
 func _input(event):
+	if not is_multiplayer_authority(): return
 	var casted = ray_cast()
 	if casted == parent and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		_grabbing = event.is_pressed()	

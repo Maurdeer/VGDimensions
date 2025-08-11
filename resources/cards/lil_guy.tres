@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://c2sqv5nvydduf"]
+
+[ext_resource type="Texture2D" uid="uid://bvvvy7bwkk6jq" path="res://art/cards/outcasts/LilGuy.png" id="1_fbddn"]
+[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/resources/card.gd" id="2_amprh"]
+
+[resource]
+script = ExtResource("2_amprh")
+name = "lil_guy"
+front_texture = ExtResource("1_fbddn")
+type = 0
+metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"

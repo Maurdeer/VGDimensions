@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Card" load_steps=3 format=3 uid="uid://ck4m0onnu3ink"]
+
+[ext_resource type="Texture2D" uid="uid://beby6d1dmt0d7" path="res://art/cards/outcasts/RockBlock.png" id="1_h3svy"]
+[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/resources/card.gd" id="2_1cqwg"]
+
+[resource]
+script = ExtResource("2_1cqwg")
+name = "rock_block"
+front_texture = ExtResource("1_h3svy")
+type = 1
+metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"

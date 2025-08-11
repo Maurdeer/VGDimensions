@@ -8,7 +8,7 @@ extends Control
 @onready var card_texture: TextureRect = $Control/TextureRect
 
 func _ready() -> void:
-	card_texture.texture = card_res.card_art
+	card_texture.texture = card_res.front_texture
 	
 # Interaction related
 func _expand() -> void:
@@ -26,5 +26,5 @@ func _on_texture_button_mouse_exited() -> void:
 	_return_size()
 	
 func _on_texture_button_pressed() -> void:
-	CardManager.Instance.rpc("spawn_new_card", {"card_res" : card_res})
+	CardManager.Instance.spawn_new_card(card_res.name)
 	queue_free()

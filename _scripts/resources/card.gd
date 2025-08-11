@@ -1,10 +1,13 @@
 extends Resource
 class_name Card
 
-@export var card_art: Texture
+@export var name: String
+@export var front_texture: Texture
 enum CardType {FEATURE, ASSET}
-@export var card_type: CardType
+@export var type: CardType
 
-func _init(p_card_art: Texture = null, p_card_type: CardType = CardType.FEATURE):
-	card_art = p_card_art
-	card_type = p_card_type
+
+func _init(p_name: String = "", p_front_texture: Texture = null, p_type: CardType = CardType.FEATURE):
+	name = p_name
+	front_texture = p_front_texture
+	type = p_type
