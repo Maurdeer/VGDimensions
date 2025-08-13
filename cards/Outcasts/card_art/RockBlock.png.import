@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvvvy7bwkk6jq"
-path="res://.godot/imported/LilGuy.png-a22f61699b9358309534de60e7c29263.ctex"
+uid="uid://beby6d1dmt0d7"
+path="res://.godot/imported/RockBlock.png-44b77d235a7d8e8f658a0f4031a881f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cards/outcasts/LilGuy.png"
-dest_files=["res://.godot/imported/LilGuy.png-a22f61699b9358309534de60e7c29263.ctex"]
+source_file="res://cards/Outcasts/card_art/RockBlock.png"
+dest_files=["res://.godot/imported/RockBlock.png-44b77d235a7d8e8f658a0f4031a881f1.ctex"]
 
 [params]
 

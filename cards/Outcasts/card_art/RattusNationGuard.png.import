@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beby6d1dmt0d7"
-path="res://.godot/imported/RockBlock.png-f42a235dada1e3054e1333e285a1bc54.ctex"
+uid="uid://diad8r2kvaae"
+path="res://.godot/imported/RattusNationGuard.png-4bb4b3efbe6a9d718e7796601d686980.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cards/outcasts/RockBlock.png"
-dest_files=["res://.godot/imported/RockBlock.png-f42a235dada1e3054e1333e285a1bc54.ctex"]
+source_file="res://cards/Outcasts/card_art/RattusNationGuard.png"
+dest_files=["res://.godot/imported/RattusNationGuard.png-4bb4b3efbe6a9d718e7796601d686980.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 extends Control
-class_name CardUI
-
+class_name CardShopUI
+# TODO: This will be the UI to show the information about each card
 # User Specifications
 @export var m_card_res: Card
 
@@ -15,20 +15,9 @@ func set_card_reference(p_card_res: Card) -> void:
 func _on_card_change() -> void:
 	m_card_texture.texture = m_card_res.front_texture
 	
-# Interaction related
-func _expand() -> void:
-	m_animation_player.play("card_expand")
-	
-func _return_size() -> void:
-	m_animation_player.play("card_return")
-
-func _on_texture_button_mouse_entered() -> void:
-	_expand()
-
-func _on_texture_button_mouse_exited() -> void:
-	_return_size()
-	
 func _on_texture_button_pressed() -> void:
-	# Note: Instead of this, you would call the card's play function
-	CardManager.Instance.spawn_new_card(m_card_res)
+	# Give card to player
+	PlayerHand.Instance.add_card(m_card_res)
+	
+	# Tell all peers that this card has been purchased via an RPC of some sort
 	queue_free()

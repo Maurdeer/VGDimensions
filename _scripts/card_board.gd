@@ -1,6 +1,9 @@
 extends Area3D
 
+# The physical card on the field, extending this card can specify the differences on how it can
+# Effect the field.
 class_name CardBoard
+
 
 # User Specifications
 @export var card_res: Card

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diad8r2kvaae"
-path="res://.godot/imported/RattusNationGuard.png-c2602244df3d84a6f00ff074c8a83994.ctex"
+uid="uid://ch6ep6mlsu77a"
+path="res://.godot/imported/SturdyRope.png-066216aeae9084c8eba70654aba2be8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cards/outcasts/RattusNationGuard.png"
-dest_files=["res://.godot/imported/RattusNationGuard.png-c2602244df3d84a6f00ff074c8a83994.ctex"]
+source_file="res://cards/Outcasts/card_art/SturdyRope.png"
+dest_files=["res://.godot/imported/SturdyRope.png-066216aeae9084c8eba70654aba2be8e.ctex"]
 
 [params]
 

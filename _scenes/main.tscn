@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://qbfs8ormbac4"]
+[gd_scene load_steps=9 format=3 uid="uid://qbfs8ormbac4"]
 
 [ext_resource type="PackedScene" uid="uid://d3i8hnmtb7yf7" path="res://_scenes/card.tscn" id="1_dmym1"]
 [ext_resource type="Script" uid="uid://cppbbdl5m3drc" path="res://_scripts/card_manager.gd" id="1_lavtb"]
 [ext_resource type="Script" uid="uid://pk1n1twtsqrr" path="res://_scripts/ui/multiplayer_ui_lobby.gd" id="2_x6rnu"]
 [ext_resource type="PackedScene" uid="uid://cn13yxrmi3ifo" path="res://_scenes/ui/player_hand.tscn" id="3_3q5j6"]
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/resources/card.gd" id="4_ce27d"]
+[ext_resource type="PackedScene" uid="uid://bea47r1wvyfdl" path="res://_scenes/ui/card_shop.tscn" id="6_ce27d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dmym1"]
 
@@ -12,6 +13,9 @@
 script = ExtResource("4_ce27d")
 name = ""
 type = 0
+game_origin = 0
+deleon_value = 0
+health_point = 0
 metadata/_custom_type_script = "uid://ctp2cmjlkd2n6"
 
 [node name="Main" type="Node3D"]
@@ -75,6 +79,12 @@ offset_left = 367.0
 offset_top = 989.0
 offset_right = -114.0
 offset_bottom = 186.0
+
+[node name="card_shop" parent="." instance=ExtResource("6_ce27d")]
+offset_left = 6.0
+offset_top = 261.0
+offset_right = -52.0
+offset_bottom = -171.0
 
 [connection signal="pressed" from="MultiplayerUILobby/Host" to="MultiplayerUILobby" method="_on_host_pressed"]
 [connection signal="pressed" from="MultiplayerUILobby/Join" to="MultiplayerUILobby" method="_on_join_pressed"]

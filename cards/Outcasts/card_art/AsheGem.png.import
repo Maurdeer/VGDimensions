@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://co4u5nsn2qenl"
-path.s3tc="res://.godot/imported/AsheGem.png-68211144c53ee19f2c0f704ad7d5c126.s3tc.ctex"
+path.s3tc="res://.godot/imported/AsheGem.png-779ed1764e4b794653bd07e11a014fa5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/cards/outcasts/AsheGem.png"
-dest_files=["res://.godot/imported/AsheGem.png-68211144c53ee19f2c0f704ad7d5c126.s3tc.ctex"]
+source_file="res://cards/Outcasts/card_art/AsheGem.png"
+dest_files=["res://.godot/imported/AsheGem.png-779ed1764e4b794653bd07e11a014fa5.s3tc.ctex"]
 
 [params]
 

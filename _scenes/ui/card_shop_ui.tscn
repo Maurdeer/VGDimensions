@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhf7srp4vh2ak"]
+[gd_scene load_steps=8 format=3 uid="uid://wyik2xgjsjb4"]
 
-[ext_resource type="Texture2D" uid="uid://co4u5nsn2qenl" path="res://cards/Outcasts/card_art/AsheGem.png" id="1_eet8q"]
-[ext_resource type="Script" uid="uid://w7wxaffufu2x" path="res://_scripts/ui/card_ui.gd" id="1_mkotd"]
+[ext_resource type="Script" uid="uid://c6e2soo26vn2r" path="res://_scenes/ui/card_shop_ui.gd" id="1_mysx4"]
+[ext_resource type="Resource" uid="uid://ck4m0onnu3ink" path="res://cards/Outcasts/resources/rock_block.tres" id="2_ib6xr"]
+[ext_resource type="Texture2D" uid="uid://co4u5nsn2qenl" path="res://cards/Outcasts/card_art/AsheGem.png" id="3_erdfv"]
 
 [sub_resource type="Animation" id="Animation_mkotd"]
 length = 0.001
@@ -20,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control/TextureButton:disabled")
+tracks/1/path = NodePath("Control/TextureRect/TextureButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -72,7 +73,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control/TextureButton:disabled")
+tracks/1/path = NodePath("Control/TextureRect/TextureButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -124,7 +125,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control/TextureButton:disabled")
+tracks/1/path = NodePath("Control/TextureRect/TextureButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -165,56 +166,62 @@ _data = {
 &"card_return": SubResource("Animation_lrhec")
 }
 
-[node name="Card" type="Control"]
+[node name="card_shop_ui" type="Control"]
 layout_mode = 3
-anchor_left = 0.431
-anchor_top = 0.323
-anchor_right = 0.571
-anchor_bottom = 0.679
-offset_left = 132.48
-offset_top = 191.16
-offset_right = -136.32
-offset_bottom = -193.32
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-script = ExtResource("1_mkotd")
+size_flags_vertical = 3
+script = ExtResource("1_mysx4")
+m_card_res = ExtResource("2_ib6xr")
 metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -0.0800018
+offset_bottom = 0.0800018
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -157.5
-offset_top = -423.0
-offset_right = 117.5
-offset_bottom = -40.0
+anchor_bottom = 0.5
+offset_left = -137.5
+offset_top = -191.5
+offset_right = 137.5
+offset_bottom = 191.5
 grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("1_eet8q")
+grow_vertical = 2
+texture = ExtResource("3_erdfv")
 expand_mode = 1
 
-[node name="TextureButton" type="TextureButton" parent="Control"]
+[node name="TextureButton" type="TextureButton" parent="Control/TextureRect"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -156.5
-offset_top = -422.0
-offset_right = 116.5
-offset_bottom = -40.0
+anchor_bottom = 0.5
+offset_left = -136.5
+offset_top = -191.0
+offset_right = 136.5
+offset_bottom = 191.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -223,6 +230,6 @@ libraries = {
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Control/TextureButton" to="." method="_on_texture_button_mouse_entered"]
-[connection signal="mouse_exited" from="Control/TextureButton" to="." method="_on_texture_button_mouse_exited"]
-[connection signal="pressed" from="Control/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="mouse_entered" from="Control/TextureRect/TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/TextureRect/TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="pressed" from="Control/TextureRect/TextureButton" to="." method="_on_texture_button_pressed"]
