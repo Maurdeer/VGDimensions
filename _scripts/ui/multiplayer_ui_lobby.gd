@@ -9,6 +9,7 @@ func _on_host_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(DEFAULT_PORT)
 	multiplayer.multiplayer_peer = peer
+	CardShop.Instance.fill_up_shop()
 	_hide_lobby_menu()
 
 func _on_join_pressed() -> void:

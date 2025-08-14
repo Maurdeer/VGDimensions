@@ -12,13 +12,14 @@ static var Instance: CardManager
 
 # Private Members
 var card_resources: Dictionary[String, Card]
+var spawn_function 
 
 #region Godot Messages
 func _ready() -> void:
 	# Logic of setting what happens on calling spawn
 	#spawner.add_spawnable_scene(spawnable_card_3D_scene.resource_path)
 	card_resources = _get_all_card_resources("res://cards/")
-	spawner.spawn_function = func(data):
+	spawn_function = func(data):
 		var card_instance = spawnable_card_3D_scene.instantiate()
 		var card_name: String = data[1]
 		var card_res: Card = card_resources[card_name]
@@ -86,4 +87,5 @@ func _rpc_spawn_new_card(card_name: String) -> void:
 
 func _spawn_card(id: int, card_name: String) -> void:
 	if !spawnable_card_3D_scene: return
+	spawner.spawn_function = spawn_function
 	var node: Node = spawner.spawn([id, card_name])
