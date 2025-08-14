@@ -18,7 +18,5 @@ func _on_card_change() -> void:
 func _on_texture_button_pressed() -> void:
 	# Give card to player
 	PlayerHand.Instance.add_card(m_card_res)
-	
-	# Tell all peers that this card has been purchased via an RPC of some sort
-	set_multiplayer_authority(multiplayer.get_unique_id())
+	CardShop.Instance.rpc("remove_card", m_card_res.name)
 	queue_free()

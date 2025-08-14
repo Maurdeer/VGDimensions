@@ -5,6 +5,10 @@ extends VBoxContainer
 var DEFAULT_IP_ADDRESS: String = "localhost"
 var DEFAULT_PORT: int = 12345
 
+func _ready() -> void:
+	if multiplayer.is_server():
+		multiplayer.peer_connected.connect(_on_peer_joined)
+
 func _on_host_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(DEFAULT_PORT)
@@ -17,6 +21,9 @@ func _on_join_pressed() -> void:
 	peer.create_client(DEFAULT_IP_ADDRESS, DEFAULT_PORT)
 	multiplayer.multiplayer_peer = peer
 	_hide_lobby_menu()
+	
+func _on_peer_joined(id: int) -> void:
+	CardShop.Instance.update_shops_with_this_shop()
 
 func _on_spawn_card_pressed() -> void:
 	if !card_res: 

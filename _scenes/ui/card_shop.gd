@@ -5,31 +5,48 @@ static var Instance: CardShop
 @export var card_shop_ui_scene: PackedScene
 @export var container: Control
 @onready var spawner: MultiplayerSpawner = $"../MultiplayerSpawner"
-var spawn_function
 const max_shop_size: int = 3
-
-func _ready() -> void:
-	spawn_function = func(data):
-		var card_name: String = data[0]
-		var card_res: Card = CardManager.Instance.card_resources[card_name]
-		var card_shop_ui: CardShopUI = card_shop_ui_scene.instantiate()
-		container.add_child(card_shop_ui)
-		card_shop_ui.set_card_reference(card_res)
-		return card_shop_ui
+var m_card_ids: Array[String]
+var m_cards: Array[Card]
 
 func fill_up_shop() -> void:
 	if not multiplayer.is_server(): return
 	for i in range(max_shop_size):
 		var card = CardManager.Instance.card_resources.values().pick_random()
-		add_card(card)
+		rpc("add_card", card.name)
 
 # Interface to add the cards to the shop
-func add_card(card: Card):
-	spawner.spawn_function = spawn_function
-	spawner.spawn([card.name])
+@rpc("any_peer", "call_local", "reliable")
+func add_card(card_res_id: String):
+	var card_res: Card = CardManager.Instance.card_resources[card_res_id]
+	var card_shop_ui: CardShopUI = card_shop_ui_scene.instantiate()
+	container.add_child(card_shop_ui)
+	card_shop_ui.set_card_reference(card_res)
+	m_card_ids.append(card_res.name)
+	m_cards.append(card_res)
 
-#@rpc("any_peer", "call_local", "reliable")
-#func _add_card_rpc(card_name: String):
+@rpc("any_peer", "call_local", "reliable")
+func remove_card(card_res_id: String):
+	var card_res: Card = CardManager.Instance.card_resources[card_res_id]
+	m_card_ids.erase(card_res.name)
+	m_cards.erase(card_res)
+
+@rpc("any_peer", "call_remote", "reliable")
+func refresh_shop(p_card_ids: Array[String]):
+	_remove_all_cards()
+	for id in p_card_ids:
+		add_card(id)
+
+func update_shops_with_this_shop() -> void:
+	rpc("refresh_shop", m_card_ids) 
+	
+	
+func _remove_all_cards() -> void:
+	for i in range(m_cards.size()):
+		m_cards[i].queue_free()
+	
+	m_cards.clear()
+	m_card_ids.clear()
 	
 func _enter_tree() -> void:
 	_singleton_init()
