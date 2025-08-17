@@ -23,13 +23,11 @@ func _on_join_pressed() -> void:
 	_hide_lobby_menu()
 	
 func _on_peer_joined(id: int) -> void:
-	CardShop.Instance.update_shops_with_this_shop()
+	CardShop.Instance.rpc_id(id, "refresh_shop", CardShop.Instance.m_card_ids)
 
 func _on_spawn_card_pressed() -> void:
-	if !card_res: 
-		printerr("Can't spawn with null card")
-		return
-	card_manager.rpc("spawn_new_card", {"card_res" : card_res})
+	CardShop.Instance.remove_all_cards()
+	CardShop.Instance.fill_up_shop()
 	
 func _hide_lobby_menu() -> void:
 	$Host.visible = false

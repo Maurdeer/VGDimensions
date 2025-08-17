@@ -29,6 +29,8 @@ func _ready() -> void:
 		(card_instance as CardBoard)._on_place()
 		
 		return card_instance
+	
+	spawner.spawn_function = spawn_function
 
 func _enter_tree() -> void:
 	_singleton_init()
@@ -87,5 +89,4 @@ func _rpc_spawn_new_card(card_name: String) -> void:
 
 func _spawn_card(id: int, card_name: String) -> void:
 	if !spawnable_card_3D_scene: return
-	spawner.spawn_function = spawn_function
 	var node: Node = spawner.spawn([id, card_name])
