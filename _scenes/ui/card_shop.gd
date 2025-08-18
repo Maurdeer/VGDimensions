@@ -9,7 +9,6 @@ const max_shop_size: int = 3
 var m_card_uis: Array[CardShopUI]
 var m_card_ids: Array[String]
 
-
 func fill_up_shop() -> void:
 	if not multiplayer.is_server(): return
 	for i in range(max_shop_size):

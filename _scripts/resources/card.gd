@@ -1,8 +1,12 @@
-extends Resource
+extends Node2D
 class_name Card
 
-@export var name: String
-@export var front_texture: Texture
+# Physical Details
+@export var _front_texture: Texture
+
+# Information
+@export var _type: CardType
+@export var _game_origin: GameOrigin
 enum CardType {
 	FEATURE, 
 	ASSET, 
@@ -62,12 +66,46 @@ enum GameOrigin {
 	MURDER_MOST_FOUL,
 	SLEIGHERS,
 }
-@export var type: CardType
-@export var game_origin: GameOrigin
-@export var deleon_value: int
-@export var health_point: int
 
-func _init(p_name: String = "", p_front_texture: Texture = null, p_type: CardType = CardType.FEATURE):
-	name = p_name
-	front_texture = p_front_texture
-	type = p_type
+# Stats
+@export var _social_cost: int
+@export var _deleon_value: int
+@export var _starting_hp: int
+
+# Attributes
+@export var _movable: bool = true
+@export var _burnable: bool = true
+@export var _discardable: bool = true
+@export var _stackable: bool = true
+
+# Dynamic Stats
+var hp: int
+var grid_pos: Vector2
+var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
+
+func _enter_tree() -> void:
+	hp = _starting_hp
+
+# Overridable Functions
+func on_state_of_grid_change() -> void:
+	pass
+func on_end_of_turn() -> void:
+	pass
+func on_start_of_turn() -> void:
+	pass
+func on_damage() -> void:
+	pass
+func on_discard() -> void:
+	pass
+func on_burn() -> void:
+	pass
+func on_stack() -> void:
+	pass
+func on_flip() -> void:
+	pass
+func on_move() -> void:
+	pass
+func on_replace() -> void:
+	pass
+func on_play() -> void:
+	pass
