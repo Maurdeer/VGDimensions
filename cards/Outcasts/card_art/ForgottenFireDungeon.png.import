@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://dkq3xgy1h5wd1"
+path="res://.godot/imported/ForgottenFireDungeon.png-b60cd3c6962628a3ae33c99c7ecb7a34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/ForgottenFireDungeon.png"
+dest_files=["res://.godot/imported/ForgottenFireDungeon.png-b60cd3c6962628a3ae33c99c7ecb7a34.ctex"]
 
 [params]
 

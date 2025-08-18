@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://ceefg7ca4ndc5"
+path="res://.godot/imported/BluePlatform.png-422dd929998aaf868870e30890cfce4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/BluePlatform.png"
+dest_files=["res://.godot/imported/BluePlatform.png-422dd929998aaf868870e30890cfce4b.ctex"]
 
 [params]
 

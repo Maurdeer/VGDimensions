@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://7lylwqbp2heq"]
+
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://cards/card.tscn" id="1_oefs3"]
+[ext_resource type="Texture2D" uid="uid://bf11k4ab571t6" path="res://cards/Outcasts/card_art/TinkersNailGun.png" id="2_xg15g"]
+
+[node name="Tinker\'s Nail Gun" instance=ExtResource("1_oefs3")]
+
+[node name="card_front" parent="." index="1"]
+texture = ExtResource("2_xg15g")

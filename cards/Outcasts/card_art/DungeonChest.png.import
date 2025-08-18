@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://b51ar2ays8stp"
+path="res://.godot/imported/DungeonChest.png-d0e5a52e305c65fcb5ef6b81c942d79a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/DungeonChest.png"
+dest_files=["res://.godot/imported/DungeonChest.png-d0e5a52e305c65fcb5ef6b81c942d79a.ctex"]
 
 [params]
 

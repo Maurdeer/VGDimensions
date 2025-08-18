@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://pm77jkjirv2h"
+path="res://.godot/imported/RightPaw.png-da982c4776bbecd8b8f46c4a346dacb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/RightPaw.png"
+dest_files=["res://.godot/imported/RightPaw.png-da982c4776bbecd8b8f46c4a346dacb5.ctex"]
 
 [params]
 

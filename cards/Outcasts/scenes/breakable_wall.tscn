@@ -1,5 +1,5 @@
 [gd_scene load_steps=2 format=3 uid="uid://bipb46tbluwae"]
 
-[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card.tscn" id="1_6uf2s"]
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://cards/card.tscn" id="1_6uf2s"]
 
 [node name="BreakableWall" instance=ExtResource("1_6uf2s")]

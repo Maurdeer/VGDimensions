@@ -88,6 +88,10 @@ var player_owner: String # (Temp) A string for now until we change this to somet
 var revealed: bool = false
 
 func _enter_tree() -> void:
+	revealed = false
+	refresh_stats()
+	
+func refresh_stats() -> void:
 	hp = _starting_hp
 
 func damage(amount: int) -> void:
@@ -101,10 +105,14 @@ func flip() -> void:
 func flip_reveal() -> void:
 	animation_player.play("flip_reveal")
 	revealed = true
+	on_flip_reveal()
 
 func flip_hide() -> void:
 	animation_player.play("flip_hide")
 	revealed = false
+	on_flip_hide()
+	
+
 
 # Overridable Functions
 func on_state_of_grid_change() -> void:
@@ -121,7 +129,9 @@ func on_burn() -> void:
 	pass
 func on_stack() -> void:
 	pass
-func on_flip() -> void:
+func on_flip_hide() -> void:
+	pass
+func on_flip_reveal() -> void:
 	pass
 func on_move() -> void:
 	pass
@@ -129,3 +139,7 @@ func on_replace() -> void:
 	pass
 func on_play() -> void:
 	pass
+
+
+func _on_drag_and_drop_component_2d_on_double_click() -> void:
+	flip()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://dkygl1ok7q8jp"
+path="res://.godot/imported/BurrowedCaves.png-98f50bc87c284e12e2693da8aab5260a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/BurrowedCaves.png"
+dest_files=["res://.godot/imported/BurrowedCaves.png-98f50bc87c284e12e2693da8aab5260a.ctex"]
 
 [params]
 

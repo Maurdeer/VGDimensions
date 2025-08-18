@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://b8pf4dgkmhm3l"
+path="res://.godot/imported/TinkersDoor.png-18396f2f40ad64f5ad329424a0c2169a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/TinkersDoor.png"
+dest_files=["res://.godot/imported/TinkersDoor.png-18396f2f40ad64f5ad329424a0c2169a.ctex"]
 
 [params]
 

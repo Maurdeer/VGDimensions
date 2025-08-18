@@ -6,7 +6,7 @@
 [node name="main" type="Node2D"]
 
 [node name="BreakableWall" parent="." instance=ExtResource("1_x6rnu")]
-position = Vector2(265, 299)
+position = Vector2(295, 305)
 
 [node name="Tinker\'s Nail Gun" parent="." instance=ExtResource("2_3q5j6")]
-position = Vector2(672, 297)
+position = Vector2(745, 303)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be875cewqh8qi"
-path="res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"
+uid="uid://cf7jgrssoeb25"
+path="res://.godot/imported/TheUltimateProphecy.png-58c2d5e707d90336c42f8377765bc33a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Torch.png"
-dest_files=["res://.godot/imported/Torch.png-528b66a28eb4b7d48aee8b8a46ef2e90.ctex"]
+source_file="res://cards/Outcasts/card_art/TheUltimateProphecy.png"
+dest_files=["res://.godot/imported/TheUltimateProphecy.png-58c2d5e707d90336c42f8377765bc33a.ctex"]
 
 [params]
 
