@@ -86,6 +86,10 @@ var player_owner: String # (Temp) A string for now until we change this to somet
 func _enter_tree() -> void:
 	hp = _starting_hp
 
+func damage(amount: int) -> void:
+	hp -= amount
+	on_damage()
+
 # Overridable Functions
 func on_state_of_grid_change() -> void:
 	pass

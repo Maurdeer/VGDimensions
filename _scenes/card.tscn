@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=4 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/resources/card.gd" id="1_7otmd"]
+[ext_resource type="Texture2D" uid="uid://fumuhmgt5lgv" path="res://art/VGDevBack2.png" id="2_wb4pw"]
+[ext_resource type="Texture2D" uid="uid://bu1q3i2gm30ce" path="res://cards/Outcasts/card_art/BreakableWall.png" id="3_ajdvn"]
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_7otmd")
+
+[node name="card_back" type="Sprite2D" parent="."]
+scale = Vector2(0.177352, 0.177352)
+texture = ExtResource("2_wb4pw")
+
+[node name="card_front" type="Sprite2D" parent="."]
+scale = Vector2(0.177352, 0.177352)
+texture = ExtResource("3_ajdvn")
