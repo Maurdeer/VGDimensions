@@ -72,16 +72,20 @@ enum GameOrigin {
 @export var _deleon_value: int
 @export var _starting_hp: int
 
-# Attributes
+# States
 @export var _movable: bool = true
 @export var _burnable: bool = true
 @export var _discardable: bool = true
 @export var _stackable: bool = true
 
+# Utilities
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 # Dynamic Stats
 var hp: int
 var grid_pos: Vector2
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
+var revealed: bool = false
 
 func _enter_tree() -> void:
 	hp = _starting_hp
@@ -89,6 +93,18 @@ func _enter_tree() -> void:
 func damage(amount: int) -> void:
 	hp -= amount
 	on_damage()
+
+func flip() -> void:
+	if revealed: flip_hide()
+	else: flip_reveal()
+
+func flip_reveal() -> void:
+	animation_player.play("flip_reveal")
+	revealed = true
+
+func flip_hide() -> void:
+	animation_player.play("flip_hide")
+	revealed = false
 
 # Overridable Functions
 func on_state_of_grid_change() -> void:
