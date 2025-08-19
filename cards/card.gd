@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 class_name Card
 
@@ -5,8 +6,18 @@ class_name Card
 @export var _front_texture: Texture
 
 # Information
-@export var _type: CardType
-@export var _game_origin: GameOrigin
+@export var _title: String:
+	set (value):
+		_title = value
+		_on_values_change()
+@export var _type: CardType:
+	set (value):
+		_type = value
+		_on_values_change()
+@export var _game_origin: GameOrigin:
+	set (value):
+		_game_origin = value
+		_on_values_change()
 enum CardType {
 	FEATURE, 
 	ASSET, 
@@ -112,6 +123,10 @@ func flip_hide() -> void:
 	revealed = false
 	on_flip_hide()
 	
+# Tool Related
+func _on_values_change() -> void:
+	$card_front/title_frame/Label.text = _title
+	
 
 
 # Overridable Functions
@@ -140,6 +155,6 @@ func on_replace() -> void:
 func on_play() -> void:
 	pass
 
-
+# Extra
 func _on_drag_and_drop_component_2d_on_double_click() -> void:
 	flip()

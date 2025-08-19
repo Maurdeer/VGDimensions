@@ -1,9 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=15 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://cards/card.gd" id="1_q5obu"]
 [ext_resource type="Texture2D" uid="uid://fumuhmgt5lgv" path="res://art/VGDevBack2.png" id="2_e484p"]
-[ext_resource type="Texture2D" uid="uid://bu1q3i2gm30ce" path="res://cards/Outcasts/card_art/BreakableWall.png" id="3_fpac0"]
+[ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="3_auvip"]
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
+[ext_resource type="Texture2D" uid="uid://t6g1sww4brbj" path="res://art/card_ui/image_bkg.png" id="4_geen5"]
+[ext_resource type="Texture2D" uid="uid://bnove3tmf34re" path="res://art/card_ui/Description Area.png" id="4_jsqqk"]
+[ext_resource type="Texture2D" uid="uid://dkg6fwxywrngc" path="res://art/card_ui/image_frame.png" id="5_iruc6"]
+[ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="7_53nac"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8rp0"]
+font_size = 100
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ajdvn"]
 length = 0.001
@@ -100,6 +108,7 @@ size = Vector2(384, 536)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_q5obu")
+_title = "Title"
 
 [node name="card_back" type="Sprite2D" parent="."]
 scale = Vector2(0.177, 0.177)
@@ -107,14 +116,50 @@ texture = ExtResource("2_e484p")
 
 [node name="card_front" type="Sprite2D" parent="."]
 scale = Vector2(1e-05, 0.177)
-texture = ExtResource("3_fpac0")
+
+[node name="title_frame" type="Sprite2D" parent="card_front"]
+position = Vector2(0, -1209.04)
+texture = ExtResource("3_auvip")
+
+[node name="Label" type="Label" parent="card_front/title_frame"]
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.5
+anchor_right = 0.985
+anchor_bottom = 0.5
+offset_left = -903.12
+offset_top = -150.0
+offset_right = -904.88
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_l8rp0")
+
+[node name="image_bkg" type="Sprite2D" parent="card_front"]
+position = Vector2(0, -536.723)
+texture = ExtResource("4_geen5")
+
+[node name="image_frame" type="Sprite2D" parent="card_front"]
+position = Vector2(0, -536.723)
+texture = ExtResource("5_iruc6")
+
+[node name="description_frame" type="Sprite2D" parent="card_front"]
+position = Vector2(-2.09808e-05, 711.864)
+texture = ExtResource("4_jsqqk")
+
+[node name="typing_frame" type="Sprite2D" parent="card_front"]
+position = Vector2(0, 112.994)
+texture = ExtResource("7_53nac")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_51bko")
 }
+speed_scale = 3.0
 
 [node name="drag_and_drop_component2D" type="Area2D" parent="."]
+visible = false
 script = ExtResource("4_f61jr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drag_and_drop_component2D"]
