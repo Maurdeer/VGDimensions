@@ -9,10 +9,10 @@ var _riftGridHeight: int
 
 #Create Grid
 func drawInitialGrid():
-	for i in _riftGridWidth:
-		riftGrid[i] = Array([], TYPE_ARRAY, "Array", null)
-		for j in _riftGridHeight:
-			riftGrid[i][j] = Array([], TYPE_OBJECT, "Node", null)
+	for i in _riftGridWidth + 2:
+		riftGrid[i] = Array([], TYPE_OBJECT, "Deck", null)
+		for j in _riftGridHeight + 2:
+			riftGrid[i][j] = Deck.new()
 			drawCard(i,j)
 
 #GRID INFORMATION
@@ -39,22 +39,22 @@ func getCardPosition():
 
 func drawCard(drawToX: int, drawToY: int) -> void:
 	#get card from deck
-	var newCard: Card
+	var newCard: Card = Card.new()
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	placeCard(drawToX, drawToY, newCard)
  
 func placeCard(placeAtX: int, placeAtY: int, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
-	riftGrid[placeAtY][placeAtX].push_back(newCard)
+	riftGrid[placeAtY][placeAtX].addCard(newCard)
 
 func moveCardOff(moveOffX: int, moveOffY: int) -> Card:
 	return riftGrid[moveOffY][moveOffX].pop_back()
 
 func discardCard(discardFromX: int, discardFromY: int) -> Card:
-	return riftGrid[discardFromY][discardFromX].pop_back()
+	return riftGrid[discardFromY][discardFromX].removeCard()
 
 func removeCard(removeFromX: int, removeFromY: int) -> Card:
-	return riftGrid[removeFromY][removeFromX].pop_back()
+	return riftGrid[removeFromY][removeFromX].removeCard()
 
 func mutateCardStat():
 	pass
