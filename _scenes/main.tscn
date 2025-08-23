@@ -1,12 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckef5ss54helk"]
+[gd_scene load_steps=2 format=3 uid="uid://ckef5ss54helk"]
 
-[ext_resource type="PackedScene" uid="uid://bipb46tbluwae" path="res://cards/Outcasts/scenes/breakable_wall.tscn" id="1_x6rnu"]
-[ext_resource type="PackedScene" uid="uid://7lylwqbp2heq" path="res://cards/Outcasts/scenes/tinker's_nail_gun.tscn" id="2_3q5j6"]
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://cards/card.tscn" id="1_dmym1"]
 
 [node name="main" type="Node2D"]
 
-[node name="BreakableWall" parent="." instance=ExtResource("1_x6rnu")]
-position = Vector2(265, 299)
-
-[node name="Tinker\'s Nail Gun" parent="." instance=ExtResource("2_3q5j6")]
-position = Vector2(672, 297)
+[node name="Card" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(244, 302)

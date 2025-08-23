@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkpxbucletyl7"
-path.s3tc="res://.godot/imported/AsheGem.png-779ed1764e4b794653bd07e11a014fa5.s3tc.ctex"
+uid="uid://cx5x8lcn1vfcy"
+path="res://.godot/imported/play.png-3e1e2e7b69824670e0eda79d189d3784.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/AsheGem.png"
-dest_files=["res://.godot/imported/AsheGem.png-779ed1764e4b794653bd07e11a014fa5.s3tc.ctex"]
+source_file="res://art/card_ui/play.png"
+dest_files=["res://.godot/imported/play.png-3e1e2e7b69824670e0eda79d189d3784.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

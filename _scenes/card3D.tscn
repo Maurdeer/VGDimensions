@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://d3i8hnmtb7yf7"]
 
 [ext_resource type="Script" uid="uid://d4mjpcesgje3r" path="res://_scripts/card_board.gd" id="1_ajdvn"]
-[ext_resource type="Texture2D" uid="uid://co4u5nsn2qenl" path="res://cards/Outcasts/card_art/AsheGem.png" id="1_wb4pw"]
+[ext_resource type="Texture2D" uid="uid://dkpxbucletyl7" path="res://cards/Outcasts/card_art/AsheGem.png" id="1_wb4pw"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="2_ajdvn"]
 [ext_resource type="Script" uid="uid://crwv7yyx4j40c" path="res://_scripts/components/grab_component.gd" id="3_wb4pw"]
 [ext_resource type="Script" uid="uid://wtisdwi7dsn5" path="res://_scripts/components/flip_component.gd" id="5_hkicm"]
