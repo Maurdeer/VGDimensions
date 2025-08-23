@@ -8,30 +8,43 @@ var deckArray: Array[Card]
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	
-	
 func setSize():
 	pass
-func getSize() -> int:
-	return deckSize
 
-func drawCard():
-	pass
+func getSize() -> int:
+	return deckArray.size()
+
+func drawCards(count : int):
+	var drawnCards = []
+	for i in range(count):
+		drawnCards.append(deckArray.pop_back())
+	return drawnCards
+
 func searchForCard():
 	pass
-func addCard(newCard: Card, count := 1):
-	pass
+	
+func addCard(cardArray):
+	for card in cardArray:
+		deckArray.push_back(card)
+		
+
+func addCardAtLocation(cardArray, location := getSize()):
+	# Returns success or failure according to Godot
+	return deckArray.insert(cardArray, location)
+
 func removeCard(removedCard: Card, count := 1) -> Card:
 	return deckArray.pop_back()
+	
 func burnCard():
+	# Take a card from the top of the deck and remove it or
 	pass
-func buryCard():
-	pass
+
 func shuffleDeck():
-	pass
-func mergeDeck():
+	deckArray.shuffle()
+
+func mergeDeck(passingDeck : Deck):
 	pass
