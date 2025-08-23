@@ -9,9 +9,9 @@ var _riftGridHeight: int
 
 #Create Grid
 func drawInitialGrid():
-	for i in _riftGridWidth + 2:
+	for i in _riftGridWidth:
 		riftGrid[i] = Array([], TYPE_OBJECT, "Deck", null)
-		for j in _riftGridHeight + 2:
+		for j in _riftGridHeight:
 			riftGrid[i][j] = Deck.new()
 			drawCard(i,j)
 
@@ -50,10 +50,10 @@ func placeCard(placeAtX: int, placeAtY: int, newCard: Card) -> void:
 func moveCardOff(moveOffX: int, moveOffY: int) -> Card:
 	return riftGrid[moveOffY][moveOffX].pop_back()
 
-func discardCard(discardFromX: int, discardFromY: int) -> Card:
-	return riftGrid[discardFromY][discardFromX].removeCard()
+func discardCard(discardFromX: int, discardFromY: int, targetDeck: Deck):
+	targetDeck.addCard(riftGrid[discardFromY][discardFromX].removeCardFromGrid())
 
-func removeCard(removeFromX: int, removeFromY: int) -> Card:
+func removeCardFromGrid(removeFromX: int, removeFromY: int) -> Card:
 	return riftGrid[removeFromY][removeFromX].removeCard()
 
 func mutateCardStat():
@@ -62,16 +62,28 @@ func mutateCardStat():
 func setCardPosition():
 	pass
 
-func swapCards():
-	pass
+func swapCards(card1X: int, card1Y: int, card2X: int, card2Y: int):
+	var tempCard: Card = riftGrid[card1X][card1Y].removeCard()
+	riftGrid[card1X][card1Y].addCard(riftGrid[card2X][card2Y].removeCard())
+	riftGrid[card2X][card2Y].addCard(tempCard)
 
-func suffleCardBackInDeck():
-	pass
+func swapDecks(deck1X: int, deck1Y: int, deck2X: int, deck2Y: int):
+	var tempDeck: Deck = riftGrid[deck1X][deck1Y]
+	riftGrid[deck1X][deck1Y] = riftGrid[deck2X][deck2Y]
+	riftGrid[deck2X][deck2Y] = tempDeck
 
-func shiftCards():
-	pass
+func shuffleCardBackInDeck(shuffleCard: Card, targetDeck: Deck):
+	targetDeck.addCard(shuffleCard)
+	targetDeck.shuffleDeck()
+	return
 
-func loopCards():
+func shiftCards(rowNotCol: bool, upNotDown: bool, index: int, amount: int):
+	if rowNotCol:
+		pass
+	else:
+		pass
+
+func loopCards(rowNotCol: bool, upNotDown: bool, index: int, amount: int):
 	pass
 
 func revolveCards():
