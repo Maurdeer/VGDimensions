@@ -1,4 +1,5 @@
 extends Node2D
+class_name RiftGrid
 
 var riftGrid: Array[Array]
 
@@ -77,7 +78,7 @@ func shuffleCardBackInDeck(shuffleCard: Card, targetDeck: Deck):
 	targetDeck.shuffleDeck()
 	return
 
-func shiftCards(rowNotCol: bool, upNotDown: bool, index: int, amount: int):
+func shiftCards(shifterCardX: int, shifterCardY: int, rowNotCol: bool, upNotDown: bool, index: int, amount: int):
 	if rowNotCol:
 		pass
 	else:
