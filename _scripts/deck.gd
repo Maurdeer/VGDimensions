@@ -18,6 +18,9 @@ func setSize():
 func getSize() -> int:
 	return deckArray.size()
 
+func getDeck():
+	return deckArray
+
 func drawCards(count : int):
 	var drawnCards = []
 	for i in range(count):
@@ -36,7 +39,7 @@ func addCardAtLocation(cardArray, location := getSize()):
 	# Returns success or failure according to Godot
 	return deckArray.insert(cardArray, location)
 
-func removeCard(removedCard: Card, count := 1) -> Card:
+func removeCard(removedCard : Card, count := 1) -> Card:
 	return deckArray.pop_back()
 	
 func burnCard():
@@ -46,5 +49,5 @@ func burnCard():
 func shuffleDeck():
 	deckArray.shuffle()
 
-func mergeDeck(passingDeck : Deck):
-	pass
+func mergeDeck(passedDeck : Deck):
+	deckArray.append(passedDeck.getDeck())
