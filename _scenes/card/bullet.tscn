@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://duo3p8powrn74"]
+
+[ext_resource type="Script" uid="uid://b8sw5oa7g1hqp" path="res://cards/bullet.gd" id="1_om6cl"]
+[ext_resource type="Texture2D" uid="uid://cn2xsvq40uh5b" path="res://art/card_ui/bullet_frame.png" id="2_olb4i"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="3_om6cl"]
+
+[sub_resource type="FontFile" id="FontFile_olb4i"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7q1tm"]
+font = SubResource("FontFile_olb4i")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_53nac"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[node name="Bullet" type="HBoxContainer"]
+size_flags_vertical = 0
+script = ExtResource("1_om6cl")
+
+[node name="bullet_frame" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_olb4i")
+
+[node name="icon" type="TextureRect" parent="bullet_frame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -39.0
+offset_right = 34.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_om6cl")
+
+[node name="Label" type="Label" parent="bullet_frame/icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -37.0
+offset_right = 19.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+label_settings = SubResource("LabelSettings_7q1tm")
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="."]
+custom_minimum_size = Vector2(43.97, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "This is going to  be the primary way we will discuss these texts for the game for the time being"
+label_settings = SubResource("LabelSettings_53nac")
+autowrap_mode = 2

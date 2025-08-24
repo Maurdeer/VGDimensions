@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cppbbdl5m3drc" path="res://_scripts/card_manager.gd" id="1_lavtb"]
 [ext_resource type="Script" uid="uid://pk1n1twtsqrr" path="res://_scripts/ui/multiplayer_ui_lobby.gd" id="2_x6rnu"]
 [ext_resource type="PackedScene" uid="uid://cn13yxrmi3ifo" path="res://_scenes/ui/player_hand.tscn" id="3_3q5j6"]
-[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://cards/card.gd" id="4_ce27d"]
+[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="4_ce27d"]
 [ext_resource type="PackedScene" uid="uid://bea47r1wvyfdl" path="res://_scenes/ui/card_shop.tscn" id="6_ce27d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dmym1"]

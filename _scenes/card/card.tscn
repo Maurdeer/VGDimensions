@@ -1,19 +1,18 @@
-[gd_scene load_steps=26 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=24 format=3 uid="uid://c3e8058lwu0a"]
 
-[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://cards/card.gd" id="1_q5obu"]
-[ext_resource type="Texture2D" uid="uid://fumuhmgt5lgv" path="res://art/VGDevBack2.png" id="2_e484p"]
-[ext_resource type="Texture2D" uid="uid://c1fpt8hg726ma" path="res://cards/Outcasts/card_art/BlueButton.png" id="2_l8rp0"]
+[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
+[ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
 [ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="3_auvip"]
+[ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
 [ext_resource type="Texture2D" uid="uid://t6g1sww4brbj" path="res://art/card_ui/image_bkg.png" id="4_geen5"]
 [ext_resource type="Texture2D" uid="uid://bnove3tmf34re" path="res://art/card_ui/Description Area.png" id="4_jsqqk"]
 [ext_resource type="Texture2D" uid="uid://cmnhoqlxq5vvd" path="res://art/card_ui/effects_frame copy 3.png" id="5_53nac"]
 [ext_resource type="Texture2D" uid="uid://dkg6fwxywrngc" path="res://art/card_ui/image_frame.png" id="5_iruc6"]
+[ext_resource type="Texture2D" uid="uid://dn1ehevmh1cr2" path="res://cards/Outcasts/MainMenuBackground2.png" id="5_xq267"]
 [ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="6_l8rp0"]
 [ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="7_53nac"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="7_l8rp0"]
-[ext_resource type="Texture2D" uid="uid://cn2xsvq40uh5b" path="res://art/card_ui/bullet_frame.png" id="11_8uw76"]
-[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="12_1de77"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e258s"]
 font_size = 50
@@ -24,11 +23,10 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 100
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_53nac"]
-font_size = 50
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="FontFile" id="FontFile_iootb"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -144,16 +142,30 @@ size = Vector2(384, 536)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_q5obu")
-_card_art = ExtResource("2_l8rp0")
-_title = "Button"
-_deleon_value = 5
+_title = "Title"
 
 [node name="card_back" type="Sprite2D" parent="."]
+clip_children = 2
 scale = Vector2(1e-05, 0.177)
-texture = ExtResource("2_e484p")
+texture = ExtResource("3_7ystx")
+
+[node name="image" type="Sprite2D" parent="card_back"]
+clip_children = 2
+scale = Vector2(3.65269, 3.65269)
+texture = ExtResource("4_7ystx")
 
 [node name="card_front" type="Sprite2D" parent="."]
 scale = Vector2(0.177, 0.177)
+
+[node name="card_background" type="Sprite2D" parent="card_front"]
+clip_children = 2
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_7ystx")
+
+[node name="nestedImage" type="Sprite2D" parent="card_front/card_background"]
+position = Vector2(996.404, 0)
+scale = Vector2(6.89, 6.89)
+texture = ExtResource("5_xq267")
 
 [node name="card_art_container" type="Sprite2D" parent="card_front"]
 clip_children = 1
@@ -162,7 +174,6 @@ texture = ExtResource("4_geen5")
 
 [node name="card_art" type="Sprite2D" parent="card_front/card_art_container"]
 position = Vector2(0, 536.723)
-texture = ExtResource("2_l8rp0")
 
 [node name="image_frame" type="Sprite2D" parent="card_front"]
 position = Vector2(0, -536.723)
@@ -212,6 +223,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="deleon_value_frame" type="TextureRect" parent="card_front/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("5_53nac")
 
@@ -229,7 +241,7 @@ offset_left = 21.997
 offset_top = 16.002
 offset_right = 78.997
 offset_bottom = 85.002
-text = "5"
+text = "-1"
 label_settings = SubResource("LabelSettings_e258s")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -250,7 +262,7 @@ offset_right = -904.88
 offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Button"
+text = "Title"
 label_settings = SubResource("LabelSettings_l8rp0")
 
 [node name="description_frame" type="Sprite2D" parent="card_front"]
@@ -262,38 +274,6 @@ offset_left = -904.0
 offset_top = -514.0
 offset_right = 842.0
 offset_bottom = 554.0
-
-[node name="Bullet" type="HBoxContainer" parent="card_front/description_frame/bullet_list"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="bullet_frame" type="TextureRect" parent="card_front/description_frame/bullet_list/Bullet"]
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("11_8uw76")
-
-[node name="icon" type="TextureRect" parent="card_front/description_frame/bullet_list/Bullet/bullet_frame"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -39.0
-offset_right = 34.0
-offset_bottom = 39.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("12_1de77")
-
-[node name="description" type="Label" parent="card_front/description_frame/bullet_list/Bullet"]
-custom_minimum_size = Vector2(43.97, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "This is going to  be the primary way we will discuss these texts for the game for the time being"
-label_settings = SubResource("LabelSettings_53nac")
-autowrap_mode = 2
 
 [node name="fun_description" type="Label" parent="card_front/description_frame"]
 anchors_preset = 7

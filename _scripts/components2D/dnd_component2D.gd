@@ -31,10 +31,12 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		else:
 			is_dragging = false
 
+var scale_prior_to_hover: Vector2
 func _on_mouse_entered() -> void:
 	if is_dragging: return
-	_parent.scale = Vector2(1.05, 1.05)
+	scale_prior_to_hover = _parent.scale
+	_parent.scale *= 1.05
 	
 func _on_mouse_exited() -> void:
-	if is_dragging: return
-	_parent.scale = Vector2(1, 1)
+	if is_dragging or not scale_prior_to_hover: return
+	_parent.scale = scale_prior_to_hover
