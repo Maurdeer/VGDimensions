@@ -1,6 +1,31 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgrqj32tibok0"]
 
-[ext_resource type="Script" uid="uid://dnu2i04hrhd01" path="res://_scripts/RiftGrid.gd" id="1_50p6h"]
+[ext_resource type="PackedScene" uid="uid://cc70mp6vbhwht" path="res://_scenes/CardSlot.tscn" id="1_s65mu"]
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_50p6h")
+[node name="RiftGrid" type="Node2D"]
+
+[node name="CardSlot" parent="." instance=ExtResource("1_s65mu")]
+
+[node name="CardSlot2" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(250, 0)
+
+[node name="CardSlot3" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(500, 0)
+
+[node name="CardSlot4" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(0, 325)
+
+[node name="CardSlot5" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(250, 325)
+
+[node name="CardSlot6" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(500, 325)
+
+[node name="CardSlot7" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(0, 650)
+
+[node name="CardSlot8" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(250, 650)
+
+[node name="CardSlot9" parent="." instance=ExtResource("1_s65mu")]
+position = Vector2(500, 650)

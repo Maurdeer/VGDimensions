@@ -144,8 +144,6 @@ size = Vector2(384, 536)
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
 _title = "Title"
-draggable = null
-playable = null
 
 [node name="card_back" type="Sprite2D" parent="."]
 clip_children = 2

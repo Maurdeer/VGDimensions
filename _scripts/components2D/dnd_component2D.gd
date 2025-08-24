@@ -30,7 +30,27 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 			else:
 				on_single_click.emit()
 		else:
+			var cardSlotFound = checkForCardSlot()
+			if cardSlotFound:
+				#print()
+				_parent.global_position = cardSlotFound.global_position
 			is_dragging = false
+
+# Implementation taken from Godot 4 Card Game Tutorial #3 Card Slots
+# You know this isn't GPT because only a human can be this bad.
+# This can't be right bc we aren't really using Collision Masks rn but wtv.
+func checkForCardSlot():
+	var spaceState = get_world_2d().direct_space_state
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
+	parameters.collide_with_areas = true
+	parameters.collision_mask = 2
+	var result = spaceState.intersect_point(parameters)
+	if result.size() > 0:
+		print("Collision occured")
+		print(result[0].collider.get_parent())
+		return result[0].collider.get_parent()
+	return null
 
 var scale_prior_to_hover: Vector2
 func _on_mouse_entered() -> void:
