@@ -122,6 +122,14 @@ enum GameOrigin {
 @export_group("Bullet Descriptions")
 @export var bullets: Array[BulletResource]
 
+# Physical Card Properities
+@export_group("Physical Properities")
+@export var draggable: bool = true:
+	set(value):
+		draggable = value
+		$drag_and_drop_component2D.draggable = value
+@export var playable: bool = true
+
 # Utilities
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var bullet_scene: PackedScene
@@ -131,11 +139,16 @@ var hp: int
 var grid_pos: Vector2
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
+var on_player_hand: bool
 
 func _enter_tree() -> void:
 	revealed = true
 	bullet_scene = preload("res://_scenes/card/bullet.tscn")
 	refresh_stats()
+	call_deferred("_setup")
+	
+func _setup() -> void:
+	$drag_and_drop_component2D.draggable = draggable
 	
 func refresh_stats() -> void:
 	hp = _starting_hp
@@ -250,3 +263,7 @@ func on_play() -> void:
 # Card Features
 func _on_drag_and_drop_component_2d_on_double_click() -> void:
 	flip()
+
+func _on_drag_and_drop_component_2d_on_single_click() -> void:
+	if not playable: return
+	on_play()

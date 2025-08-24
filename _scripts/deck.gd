@@ -1,12 +1,19 @@
-extends Node
+extends Node2D
 class_name Deck
 
 @export var deckSize: int = 0
+@export var flipped: bool = false
+@export var draggable: bool = false
 var deckArray: Array[Card]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	call_deferred("_setup")
+	
+func _setup() -> void:
+	for child in get_children():
+		if child is Card:
+			addCard(child)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,16 +37,23 @@ func drawCards(count : int):
 func searchForCard():
 	pass
 	
-func addCard(cardArray):
+func addCards(cardArray: Array[Card]):
 	for card in cardArray:
-		deckArray.push_back(card)
-		
+		addCard(card)
+	
+func addCard(card: Card):
+	deckArray.push_back(card)
+	if flipped:
+		card.flip_hide()
+	else:
+		card.flip_reveal()
+	card.draggable = draggable
 
 func addCardAtLocation(cardArray, location := getSize()):
 	# Returns success or failure according to Godot
 	return deckArray.insert(cardArray, location)
 
-func removeCard(removedCard : Card, count := 1) -> Card:
+func removeCard() -> Card:
 	return deckArray.pop_back()
 	
 func burnCard():

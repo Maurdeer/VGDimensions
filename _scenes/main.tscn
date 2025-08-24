@@ -1,37 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckef5ss54helk"]
+[gd_scene load_steps=4 format=3 uid="uid://ckef5ss54helk"]
 
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
-[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_x6rnu"]
-[ext_resource type="Texture2D" uid="uid://c1fpt8hg726ma" path="res://cards/Outcasts/card_art/BlueButton.png" id="3_lavtb"]
-[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="4_6bnj4"]
-[ext_resource type="Texture2D" uid="uid://vuavdekf1jhm" path="res://cards/Outcasts/card_art/AirVent.png" id="5_6bnj4"]
-
-[sub_resource type="Resource" id="Resource_ce27d"]
-resource_local_to_scene = true
-script = ExtResource("4_6bnj4")
-bullet_type = 5
-bullet_cost = 0
-bullet_description = "Stacking on this card will result in the button being pressed and discarding immeditly."
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
+[ext_resource type="PackedScene" uid="uid://b6hb2w7m7p6sh" path="res://cards/Outcasts/scenes/tinker.tscn" id="3_3q5j6"]
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_x6rnu")
+
+[node name="player_hand" parent="." instance=ExtResource("2_ce27d")]
+position = Vector2(799, 833)
 
 [node name="Card" parent="." instance=ExtResource("1_dmym1")]
-position = Vector2(1707, 867)
-scale = Vector2(0.55, 0.55)
-_card_art = ExtResource("3_lavtb")
-_title = "Alphasbet "
-_type = 6
-_starting_hp = 10
-bullets = Array[ExtResource("4_6bnj4")]([SubResource("Resource_ce27d")])
+position = Vector2(431, 375)
+draggable = true
+playable = true
 
 [node name="Card2" parent="." instance=ExtResource("1_dmym1")]
-position = Vector2(1309, 879)
-scale = Vector2(0.55, 0.55)
-_card_art = ExtResource("5_6bnj4")
-_title = "AireVent"
-_type = 4
-_game_origin = 25
-_starting_hp = 10
-bullets = Array[ExtResource("4_6bnj4")]([SubResource("Resource_ce27d")])
+position = Vector2(787, 428)
+draggable = true
+playable = true
+
+[node name="Card3" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(1154, 404)
+draggable = true
+playable = true
+
+[node name="Tinker" parent="." instance=ExtResource("3_3q5j6")]
+position = Vector2(1521, 325)

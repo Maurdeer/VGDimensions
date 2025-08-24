@@ -5,6 +5,7 @@ var is_dragging: bool = false
 @onready var _parent: Node2D = $".."
 signal on_single_click
 signal on_double_click
+var draggable: bool = true
 
 
 func _process(delta):
@@ -18,7 +19,7 @@ func follow_mouse():
 	_parent.global_position = get_global_mouse_position()
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if not event is InputEventMouseButton: return
+	if not event is InputEventMouseButton or not draggable: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 		if mouse_button_event.pressed:
