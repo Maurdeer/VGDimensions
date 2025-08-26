@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=25 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
+[ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/CardVisualizer.gd" id="2_mb7jp"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
 [ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="3_auvip"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
@@ -143,7 +144,9 @@ size = Vector2(384, 536)
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
-_title = "Title"
+
+[node name="EngineVisualizer" type="Node" parent="."]
+script = ExtResource("2_mb7jp")
 
 [node name="card_back" type="Sprite2D" parent="."]
 clip_children = 2
@@ -263,7 +266,6 @@ offset_right = -904.88
 offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Title"
 label_settings = SubResource("LabelSettings_l8rp0")
 
 [node name="description_frame" type="Sprite2D" parent="card_front"]

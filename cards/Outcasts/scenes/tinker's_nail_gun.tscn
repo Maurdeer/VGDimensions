@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://da0f2j05ibvx2"]
+
+[ext_resource type="Texture2D" uid="uid://bf11k4ab571t6" path="res://cards/Outcasts/card_art/TinkersNailGun.png" id="2_xg15g"]
+
+[node name="Tinker\'s Nail Gun"]
+
+[node name="card_front" parent="." index="1"]
+texture = ExtResource("2_xg15g")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckef5ss54helk"]
 
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
-[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
-[ext_resource type="PackedScene" uid="uid://b6hb2w7m7p6sh" path="res://cards/Outcasts/scenes/tinker.tscn" id="3_3q5j6"]
-[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
+[ext_resource type="PackedScene" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
+[ext_resource type="PackedScene" path="res://cards/Outcasts/scenes/tinker.tscn" id="3_3q5j6"]
+[ext_resource type="PackedScene" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
 
 [node name="main" type="Node2D"]
 
