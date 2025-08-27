@@ -1,6 +1,14 @@
 @tool
 extends Node
+class_name CardVisualizer
+
+# Exists to deal with editor based card updating
 @onready var card: Card = $".."
+@export var card_resource: CardResource:
+	get:
+		if card:
+			return card.resource
+		return card_resource
 var bullet_scene: PackedScene
 
 # Purpose: Provide a seemless way of seeing updates to this node while in the editor.
@@ -8,21 +16,21 @@ var bullet_scene: PackedScene
 # during runtime.
 
 func _ready() -> void:
-	bullet_scene = preload("res://_scenes/card/bullet.tscn")
-	if not Engine.is_editor_hint():
+	bullet_scene = preload("res://_scenes/card/bullet_visualizer.tscn")
+	if not Engine.is_editor_hint() and (card_resource or card.resource):
 		_on_values_change()
-		$"../card_front/description_frame/fun_description".text = card.resource.quip_description
+		$"description_frame/fun_description".text = card_resource.quip_description
 
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() and (card_resource or card.resource):
 		_on_values_change()
-		$"../card_front/description_frame/fun_description".text = card.resource.quip_description
+		$"description_frame/fun_description".text = card_resource.quip_description
 	
 
 func _on_values_change() -> void:
-	if not card.resource: return
+	if not card_resource: return
 	
 	# Visualization Updates
 	call_deferred("_on_title_change")
@@ -36,69 +44,85 @@ func _on_values_change() -> void:
 	call_deferred("_on_deleon_value_change")
 	
 	# Bullet Description Updates:
-	#call_deferred("_on_bullet_description_change")
+	call_deferred("_on_bullet_description_change")
 	
 func _on_title_change() -> void:
-	var title_label = $"../card_front/title_frame/Label"
+	var title_label = $"title_frame/Label"
 	if not title_label: return
-	title_label.text = card.resource.title
+	title_label.text = card_resource.title
 	
 func _on_game_origin_change() -> void:
-	var game_origin_label = $"../card_front/typing_frame/game_origin_label"
+	var game_origin_label = $"typing_frame/game_origin_label"
 	if not game_origin_label: return
-	game_origin_label.text = CardResource.GameOrigin.keys()[card.resource.game_origin].capitalize()
+	game_origin_label.text = CardResource.GameOrigin.keys()[card_resource.game_origin].capitalize()
 	
 func _on_card_type_change() -> void:
-	var card_type_label = $"../card_front/typing_frame/type_label"
+	var card_type_label = $"typing_frame/type_label"
 	if not card_type_label: return
-	card_type_label.text = CardResource.CardType.keys()[card.resource.type].capitalize()
+	card_type_label.text = CardResource.CardType.keys()[card_resource.type].capitalize()
 	
 func _on_card_art_change() -> void:
-	var card_art = $"../card_front/card_art_container/card_art"
+	var card_art = $"card_art_container/card_art"
 	if not card_art: return
-	card_art.texture = card.resource.card_art
+	card_art.texture = card_resource.card_art
 	
 func _on_starting_hp_change() -> void:
-	var health_value_frame = $"../card_front/HBoxContainer/health_value_frame"
-	var health_value_label = $"../card_front/HBoxContainer/health_value_frame/TextureRect/Label2"
+	var health_value_frame = $"HBoxContainer/health_value_frame"
+	var health_value_label = $"HBoxContainer/health_value_frame/TextureRect/Label2"
 	if not health_value_frame or not health_value_label: return
-	health_value_frame.visible = card.resource.starting_hp >= 0
-	health_value_label.text = "%s" % card.resource.starting_hp
+	health_value_frame.visible = card_resource.starting_hp >= 0
+	health_value_label.text = "%s" % card_resource.starting_hp
 	
 func _on_deleon_value_change() -> void:
-	var deleon_value_frame = $"../card_front/HBoxContainer/deleon_value_frame"
-	var deleon_value_label = $"../card_front/HBoxContainer/deleon_value_frame/TextureRect/Label"
+	var deleon_value_frame = $"HBoxContainer/deleon_value_frame"
+	var deleon_value_label = $"HBoxContainer/deleon_value_frame/TextureRect/Label"
 	if not deleon_value_frame or not deleon_value_label: return
-	deleon_value_label.text = "%s" % card.resource.deleon_value
-	deleon_value_frame.visible = card.resource.deleon_value >= 0
+	deleon_value_label.text = "%s" % card_resource.deleon_value
+	deleon_value_frame.visible = card_resource.deleon_value >= 0
 		
 func _on_effector_bools_change() -> void:
-	$"../card_front/Effectors/not_movable_frame".visible = not card.resource.movable
-	$"../card_front/Effectors/not_burnable_frame".visible = not card.resource.burnable
-	$"../card_front/Effectors/not_stackable_frame".visible = not card.resource.stackable
-	$"../card_front/Effectors/not_discardable_frame".visible = not card.resource.discardable
-	$"../card_front/Effectors/not_flippable_frame".visible = not card.resource.flippable
-	$"../card_front/Effectors/not_stunnable_frame2".visible = not card.resource.stunnable
-	$"../card_front/Effectors/refreshable_frame".visible = card.resource.refreshable
+	$"Effectors/not_movable_frame".visible = not card_resource.movable
+	$"Effectors/not_burnable_frame".visible = not card_resource.burnable
+	$"Effectors/not_stackable_frame".visible = not card_resource.stackable
+	$"Effectors/not_discardable_frame".visible = not card_resource.discardable
+	$"Effectors/not_flippable_frame".visible = not card_resource.flippable
+	$"Effectors/not_stunnable_frame2".visible = not card_resource.stunnable
+	$"Effectors/refreshable_frame".visible = card_resource.refreshable
 	
 func _on_bullet_description_change() -> void:
 	# Running this more than once is kinda a nightmare ngl
-	var bullet_list = $"../card_front/description_frame/bullet_list"
-	var child_count: int = bullet_list.get_child_count()
+	var bullet_list = $"description_frame/bullet_list"
 	if not bullet_list: return
-		
+	var child_count: int = bullet_list.get_child_count()
+	
 	var child_idx: int = 0
-	for bullet in card.resource.bullets:
-		if not bullet is BulletResource: continue
-		if child_idx >= child_count:
-			var bullet_node = card.resource.bullet_scene.instantiate()
-			bullet_list.add_child(bullet_node)
-			if Engine.is_editor_hint():
-				bullet_node.owner = get_tree().edited_scene_root
-		(bullet_list.get_child(child_idx) as Bullet).bullet_resource = bullet
-		child_idx += 1
+	if card_resource.bullets and card_resource.bullets.size() >= 1:
+		# No Change needs to be done
+		if child_count == card_resource.bullets.size(): return
+		
+		# Update the changes completly, no incrementals to avoid state issues!
+		
+		for bullet in card_resource.bullets:
+			if not bullet is BulletResource: continue
+			
+			# Add a new bullet child if you are missing one.
+			# (Ryan) Turn this into a pooling mechanism instead!!!
+			# Pool around 7 to start with
+			if child_idx >= child_count:
+				var bullet_node = bullet_scene.instantiate()
+				bullet_list.add_child(bullet_node)
+				
+				# It woudln't add it to the edited scene root without it.
+				# But would that work during runtime?
+				if Engine.is_editor_hint():
+					bullet_node.owner = get_tree().edited_scene_root
+			
+			# Set the bullet node to have the resource, which should update its visual on its own.
+			(bullet_list.get_child(child_idx) as BulletVisualizer).bullet_resource = bullet
+			child_idx += 1
 		
 	# Remove extra bullet children
+	# (Ryan) Turn this into a pooling mechanism instead!!!
 	for j in range(child_idx, child_count):
 		bullet_list.get_child(j).queue_free()
 	

@@ -1,13 +1,23 @@
 @tool
 extends HBoxContainer
-class_name Bullet
+class_name BulletVisualizer
 
 var bullet_resource: BulletResource:
 	set(value):
 		bullet_resource = value
-		call_deferred("_on_value_change")
+		call_deferred("_on_values_change")
+		
+func _ready() -> void:
+	if not Engine.is_editor_hint() and bullet_resource:
+		_on_values_change()
+
+func _process(_delta) -> void:
+	# Polling BS technically ok because its just in the editor,
+	# But would be better if its event handeled
+	if Engine.is_editor_hint() and bullet_resource:
+		_on_values_change()
 	
-func _on_value_change() -> void:
+func _on_values_change() -> void:
 	$bullet_frame/icon/Label.visible = false
 	match(bullet_resource.bullet_type):
 		BulletResource.BulletType.PLAY:

@@ -166,21 +166,10 @@ scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
 resource = SubResource("Resource_bjelf")
 
-[node name="Visualizer" type="Node" parent="."]
-script = ExtResource("2_mb7jp")
-
-[node name="card_back" type="Sprite2D" parent="."]
-clip_children = 2
-scale = Vector2(1e-05, 0.177)
-texture = ExtResource("3_7ystx")
-
-[node name="image" type="Sprite2D" parent="card_back"]
-clip_children = 2
-scale = Vector2(3.65269, 3.65269)
-texture = ExtResource("4_7ystx")
-
 [node name="card_front" type="Sprite2D" parent="."]
 scale = Vector2(0.177, 0.177)
+script = ExtResource("2_mb7jp")
+card_resource = SubResource("Resource_bjelf")
 
 [node name="card_background" type="Sprite2D" parent="card_front"]
 clip_children = 2
@@ -465,6 +454,23 @@ label_settings = SubResource("LabelSettings_auvip")
 horizontal_alignment = 2
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="card_back" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(4.76837e-06, 0)
+scale = Vector2(1e-05, 0.177)
+
+[node name="card_background2" type="Sprite2D" parent="card_back"]
+clip_children = 2
+position = Vector2(-2.69399e-05, 0)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_7ystx")
+
+[node name="image" type="Sprite2D" parent="card_back/card_background2"]
+clip_children = 2
+position = Vector2(-14.0076, 0)
+scale = Vector2(3.94079, 3.32063)
+texture = ExtResource("4_7ystx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
