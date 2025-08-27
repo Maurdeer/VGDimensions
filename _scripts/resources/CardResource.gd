@@ -105,7 +105,7 @@ enum GameOrigin {
 	set(value):
 		if value is EventResource: value.setup(self)
 		_on_play = value
-@export var _on_action: EventResource:
+@export var _on_action: ActionEvent:
 	set(value):
 		if value is EventResource: value.setup(self)
 		_on_action = value
