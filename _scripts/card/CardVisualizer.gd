@@ -17,14 +17,14 @@ var bullet_scene: PackedScene
 
 func _ready() -> void:
 	bullet_scene = preload("res://_scenes/card/bullet_visualizer.tscn")
-	if not Engine.is_editor_hint() and (card_resource or card.resource):
+	if not Engine.is_editor_hint() and (card_resource or (card and card.resource)):
 		_on_values_change()
 		$"description_frame/fun_description".text = card_resource.quip_description
 
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
-	if Engine.is_editor_hint() and (card_resource or card.resource):
+	if Engine.is_editor_hint() and (card_resource or (card and card.resource)):
 		_on_values_change()
 		$"description_frame/fun_description".text = card_resource.quip_description
 	
@@ -38,6 +38,7 @@ func _on_values_change() -> void:
 	call_deferred("_on_card_type_change")
 	call_deferred("_on_card_art_change")
 	call_deferred("_on_effector_bools_change")
+	call_deferred("_on_background_art_change")
 	
 	# Value TAB updates
 	call_deferred("_on_starting_hp_change")
@@ -88,6 +89,9 @@ func _on_effector_bools_change() -> void:
 	$"Effectors/not_flippable_frame".visible = not card_resource.flippable
 	$"Effectors/not_stunnable_frame2".visible = not card_resource.stunnable
 	$"Effectors/refreshable_frame".visible = card_resource.refreshable
+	
+func _on_background_art_change() -> void:
+	$card_background/nestedImage.texture = card_resource.background_art
 	
 func _on_bullet_description_change() -> void:
 	# Running this more than once is kinda a nightmare ngl

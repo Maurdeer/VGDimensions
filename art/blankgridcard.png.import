@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn1ehevmh1cr2"
-path="res://.godot/imported/MainMenuBackground2.png-3785e55c6c690d48f03f8e1b8e6b8bfe.ctex"
+uid="uid://bhxsnpgegdxuk"
+path="res://.godot/imported/blankgridcard.png-76b0229bf939673c55ece6543577dba4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/MainMenuBackground2.png"
-dest_files=["res://.godot/imported/MainMenuBackground2.png-3785e55c6c690d48f03f8e1b8e6b8bfe.ctex"]
+source_file="res://art/blankgridcard.png"
+dest_files=["res://.godot/imported/blankgridcard.png-76b0229bf939673c55ece6543577dba4.ctex"]
 
 [params]
 

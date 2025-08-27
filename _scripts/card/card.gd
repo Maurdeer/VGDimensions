@@ -36,7 +36,7 @@ func refresh_stats() -> void:
 
 func damage(amount: int) -> void:
 	hp -= amount
-	resource.on_damage.execute()
+	resource.on_damage()
 
 func flip() -> void:
 	if revealed: flip_hide()
@@ -45,15 +45,15 @@ func flip() -> void:
 func flip_reveal() -> void:
 	animation_player.play("flip_reveal")
 	revealed = true
-	if resource.on_flip_reveal: resource.on_flip_reveal.execute()
+	if resource.on_flip_reveal: resource.on_flip_reveal()
 
 func flip_hide() -> void:
 	animation_player.play("flip_hide")
 	revealed = false
-	if resource.on_flip_hide: resource.on_flip_hide.execute()
+	if resource.on_flip_hide: resource.on_flip_hide()
 	
 func play() -> void:
-	resource.on_play.execute()
+	resource.on_play()
 
 # Card Input Functions
 func _on_drag_and_drop_component_2d_on_double_click() -> void:

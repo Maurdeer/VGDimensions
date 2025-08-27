@@ -101,44 +101,118 @@ enum GameOrigin {
 
 # Action Events
 @export_group("Action Events")
-@export var on_play: EventResource
-@export var on_action: EventResource
-@export var on_social: SocialEvent
+@export var _on_play: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_play = value
+@export var _on_action: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_action = value
+@export var _on_social: SocialEvent:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_social = value
 
 # Passive Events
 @export_group("Passive Events")
-@export var on_enter_tree: EventResource
-@export var on_state_of_grid_change: EventResource
-@export var on_end_of_turn: EventResource
-@export var on_start_of_turn: EventResource
-@export var on_damage: EventResource
-@export var on_discard: EventResource
-@export var on_burn: EventResource
-@export var on_stack: EventResource
-@export var on_flip_hide: EventResource
-@export var on_flip_reveal: EventResource
-@export var on_move: EventResource
-@export var on_replace: EventResource
+@export var _on_enter_tree: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_enter_tree = value
+@export var _on_state_of_grid_change: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_state_of_grid_change = value
+@export var _on_end_of_turn: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_end_of_turn = value
+@export var _on_start_of_turn: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_start_of_turn = value
+@export var _on_damage: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_damage = value
+@export var _on_discard: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_discard = value
+@export var _on_burn: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_burn = value
+@export var _on_stack: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_stack = value
+@export var _on_flip_hide: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_flip_hide = value
+@export var _on_flip_reveal: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_flip_reveal = value
+@export var _on_move: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_move = value
+@export var _on_replace: EventResource:
+	set(value):
+		if value is EventResource: value.setup(self)
+		_on_replace = value
 
 # Reference to card
 var card_ref: Card
-
-func _init() -> void:
-	# Action Events
-	if on_play: on_play.setup(self)
-	if on_action: on_action.setup(self)
-	if on_social: on_social.setup(self)
 	
-	#Passive Events
-	if on_enter_tree: on_enter_tree.setup(self)
-	if on_state_of_grid_change: on_state_of_grid_change.setup(self)
-	if on_end_of_turn: on_end_of_turn.setup(self)
-	if on_start_of_turn: on_start_of_turn.setup(self)
-	if on_damage: on_damage.setup(self)
-	if on_discard: on_discard.setup(self)
-	if on_burn: on_burn.setup(self)
-	if on_stack: on_stack.setup(self)
-	if on_flip_hide: on_flip_hide.setup(self)
-	if on_flip_reveal: on_flip_reveal.setup(self)
-	if on_move: on_move.setup(self)
-	if on_replace: on_replace.setup(self)
+# Action Functions
+func on_play() -> void:
+	if not _on_play: return
+	_on_play.execute()
+func on_action() -> void:
+	if not _on_action: return
+	_on_action.execute()
+func social() -> void:
+	if not _on_social: return
+	_on_social.execute()
+
+# Passive Functions
+func on_enter_tree() -> void:
+	if not _on_enter_tree: return
+	_on_enter_tree.execute()
+func on_state_of_grid_change() -> void:
+	if not _on_state_of_grid_change: return
+	_on_state_of_grid_change.execute()
+func on_end_of_turn() -> void:
+	if not _on_end_of_turn: return
+	_on_end_of_turn.execute()
+func on_start_of_turn() -> void:
+	if not _on_start_of_turn: return
+	_on_start_of_turn.execute()
+func on_damage() -> void:
+	if not _on_damage: return
+	_on_damage.execute()
+func on_discard() -> void:
+	if not _on_discard: return
+	_on_discard.execute()
+func on_burn() -> void:
+	if not _on_burn: return
+	_on_burn.exectue()
+func on_stack() -> void:
+	if not _on_stack: return
+	_on_stack.exectue()
+func on_flip_hide() -> void:
+	if not _on_flip_hide: return
+	_on_flip_hide.exectue()
+func on_flip_reveal() -> void:
+	if not _on_flip_reveal: return
+	_on_flip_reveal.exectue()
+func on_move() -> void:
+	if not _on_move: return
+	_on_move.exectue()
+func on_replace() -> void:
+	if not _on_replace: return
+	_on_replace.exectue()

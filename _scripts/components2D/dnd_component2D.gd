@@ -8,7 +8,7 @@ signal on_double_click
 var draggable: bool = true
 
 
-func _process(delta):
+func _process(_delta):
 	_input_process()
 
 func _input_process() -> void:
@@ -18,7 +18,7 @@ func _input_process() -> void:
 func follow_mouse():
 	_parent.global_position = get_global_mouse_position()
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not event is InputEventMouseButton or not draggable: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:

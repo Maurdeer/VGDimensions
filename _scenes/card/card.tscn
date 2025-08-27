@@ -1,23 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=15 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_7ystx"]
-[ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/CardVisualizer.gd" id="2_mb7jp"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
-[ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="3_auvip"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xq267"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
-[ext_resource type="Texture2D" uid="uid://t6g1sww4brbj" path="res://art/card_ui/image_bkg.png" id="4_geen5"]
-[ext_resource type="Texture2D" uid="uid://bnove3tmf34re" path="res://art/card_ui/Description Area.png" id="4_jsqqk"]
-[ext_resource type="Texture2D" uid="uid://cmnhoqlxq5vvd" path="res://art/card_ui/effects_frame copy 3.png" id="5_53nac"]
-[ext_resource type="Texture2D" uid="uid://dkg6fwxywrngc" path="res://art/card_ui/image_frame.png" id="5_iruc6"]
-[ext_resource type="Texture2D" uid="uid://dn1ehevmh1cr2" path="res://cards/Outcasts/MainMenuBackground2.png" id="5_xq267"]
-[ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="6_l8rp0"]
-[ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="7_53nac"]
-[ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="7_l8rp0"]
+[ext_resource type="PackedScene" uid="uid://dmeep3ulpyypw" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
+[ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
 
-[sub_resource type="Resource" id="Resource_bjelf"]
+[sub_resource type="Resource" id="Resource_r36b4"]
 script = ExtResource("3_xq267")
 title = ""
 type = 0
@@ -34,39 +26,6 @@ flippable = true
 bullets = Array[ExtResource("2_7ystx")]([])
 quip_description = ""
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
-
-[sub_resource type="LabelSettings" id="LabelSettings_e258s"]
-font_size = 50
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_l8rp0"]
-font_size = 100
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="FontFile" id="FontFile_iootb"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/45/0/ascent = 0.0
-cache/0/45/0/descent = 0.0
-cache/0/45/0/underline_position = 0.0
-cache/0/45/0/underline_thickness = 0.0
-cache/0/45/0/scale = 1.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_0tfah"]
-font = SubResource("FontFile_iootb")
-font_size = 45
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_auvip"]
-font_size = 70
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ajdvn"]
 length = 0.001
@@ -164,298 +123,13 @@ size = Vector2(384, 536)
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
-resource = SubResource("Resource_bjelf")
+resource = SubResource("Resource_r36b4")
 
-[node name="card_front" type="Sprite2D" parent="."]
-scale = Vector2(0.177, 0.177)
-script = ExtResource("2_mb7jp")
-card_resource = SubResource("Resource_bjelf")
-
-[node name="card_background" type="Sprite2D" parent="card_front"]
-clip_children = 2
-scale = Vector2(1.1, 1.1)
-texture = ExtResource("3_7ystx")
-
-[node name="nestedImage" type="Sprite2D" parent="card_front/card_background"]
-position = Vector2(996.404, 0)
-scale = Vector2(6.89, 6.89)
-texture = ExtResource("5_xq267")
-
-[node name="card_art_container" type="Sprite2D" parent="card_front"]
-clip_children = 1
-position = Vector2(0, -536.723)
-texture = ExtResource("4_geen5")
-
-[node name="card_art" type="Sprite2D" parent="card_front/card_art_container"]
-position = Vector2(0, 536.723)
-
-[node name="image_frame" type="Sprite2D" parent="card_front"]
-position = Vector2(0, -536.723)
-texture = ExtResource("5_iruc6")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="card_front"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 504.0
-offset_top = -1164.0
-offset_right = 844.0
-offset_bottom = -1002.0
-grow_horizontal = 0
-theme_override_constants/separation = 30
-alignment = 2
-
-[node name="health_value_frame" type="TextureRect" parent="card_front/HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/HBoxContainer/health_value_frame"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.168
-anchor_top = 0.306
-anchor_right = 0.828
-anchor_bottom = 0.798
-offset_left = -5.68968
-offset_top = -4.37424
-offset_right = 3.01031
-offset_bottom = 14.9218
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_l8rp0")
-
-[node name="Label2" type="Label" parent="card_front/HBoxContainer/health_value_frame/TextureRect"]
-layout_mode = 2
-offset_left = 26.404
-offset_top = 11.3
-offset_right = 83.404
-offset_bottom = 80.3
-text = "-1"
-label_settings = SubResource("LabelSettings_e258s")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="deleon_value_frame" type="TextureRect" parent="card_front/HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/HBoxContainer/deleon_value_frame"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="Label" type="Label" parent="card_front/HBoxContainer/deleon_value_frame/TextureRect"]
-layout_mode = 0
-offset_left = 21.997
-offset_top = 16.002
-offset_right = 78.997
-offset_bottom = 85.002
-text = "-1"
-label_settings = SubResource("LabelSettings_e258s")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Effectors" type="HBoxContainer" parent="card_front"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -874.0
-offset_top = -1164.0
-offset_right = 841.0
-offset_bottom = -1002.0
-grow_horizontal = 0
-theme_override_constants/separation = 30
-
-[node name="not_movable_frame" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_movable_frame"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.168
-anchor_top = 0.306
-anchor_right = 0.828
-anchor_bottom = 0.798
-offset_left = -5.68968
-offset_top = -4.37424
-offset_right = 3.01031
-offset_bottom = 14.9218
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_l8rp0")
-
-[node name="not_burnable_frame" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_burnable_frame"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="not_stackable_frame" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_stackable_frame"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="not_discardable_frame" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_discardable_frame"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="not_flippable_frame" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_flippable_frame"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="not_stunnable_frame2" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_stunnable_frame2"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="refreshable_frame" type="TextureRect" parent="card_front/Effectors"]
-visible = false
-layout_mode = 2
-texture = ExtResource("5_53nac")
-
-[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/refreshable_frame"]
-layout_mode = 0
-offset_left = 26.296
-offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
-texture = ExtResource("7_l8rp0")
-
-[node name="title_frame" type="Sprite2D" parent="card_front"]
-position = Vector2(0, -1209.04)
-texture = ExtResource("3_auvip")
-
-[node name="Label" type="Label" parent="card_front/title_frame"]
-anchors_preset = -1
-anchor_left = 0.015
-anchor_top = 0.5
-anchor_right = 0.985
-anchor_bottom = 0.5
-offset_left = -903.12
-offset_top = -150.0
-offset_right = -904.88
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-label_settings = SubResource("LabelSettings_l8rp0")
-
-[node name="description_frame" type="Sprite2D" parent="card_front"]
-position = Vector2(-2.09808e-05, 711.864)
-texture = ExtResource("4_jsqqk")
-
-[node name="bullet_list" type="VBoxContainer" parent="card_front/description_frame"]
-offset_left = -904.0
-offset_top = -514.0
-offset_right = 842.0
-offset_bottom = 554.0
-
-[node name="fun_description" type="Label" parent="card_front/description_frame"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -1663.0
-offset_top = -748.0
-offset_right = -64.0
-offset_bottom = -607.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
-label_settings = SubResource("LabelSettings_0tfah")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-justification_flags = 131
-
-[node name="typing_frame" type="Sprite2D" parent="card_front"]
-position = Vector2(0, 112.994)
-texture = ExtResource("7_53nac")
-
-[node name="game_origin_label" type="Label" parent="card_front/typing_frame"]
-anchors_preset = -1
-anchor_left = 0.0175135
-anchor_top = 0.50121
-anchor_right = 0.988477
-anchor_bottom = 0.50121
-offset_left = -861.316
-offset_top = -117.143
-offset_right = -861.316
-offset_bottom = -7.1432
-grow_horizontal = 2
-grow_vertical = 2
-text = "Vgdev"
-label_settings = SubResource("LabelSettings_auvip")
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="type_label" type="Label" parent="card_front/typing_frame"]
-anchors_preset = -1
-anchor_left = 0.0146099
-anchor_top = 0.50121
-anchor_right = 0.985574
-anchor_bottom = 0.50121
-offset_left = -861.316
-offset_top = -117.143
-offset_right = -861.316
-offset_bottom = -7.1432
-grow_horizontal = 2
-grow_vertical = 2
-text = "Feature"
-label_settings = SubResource("LabelSettings_auvip")
-horizontal_alignment = 2
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="card_front" parent="." instance=ExtResource("4_pots7")]
+card_resource = SubResource("Resource_r36b4")
 
 [node name="card_back" type="Sprite2D" parent="."]
+visible = false
 clip_children = 2
 position = Vector2(4.76837e-06, 0)
 scale = Vector2(1e-05, 0.177)
@@ -477,6 +151,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_51bko")
 }
 speed_scale = 3.0
+
+[node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
+visible = false
+card_resource = SubResource("Resource_r36b4")
 
 [node name="drag_and_drop_component2D" type="Area2D" parent="."]
 script = ExtResource("4_f61jr")

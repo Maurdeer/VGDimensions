@@ -1,23 +1,23 @@
 [gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://doj57pqlx14mt"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_1rnrp"]
-[ext_resource type="Texture2D" uid="uid://dn1ehevmh1cr2" path="res://cards/Outcasts/MainMenuBackground2.png" id="1_4siri"]
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://cards/Outcasts/outcasts_background.png" id="2_4siri"]
 [ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="2_fik20"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_plkjb"]
-[ext_resource type="Texture2D" uid="uid://bu1q3i2gm30ce" path="res://cards/Outcasts/card_art/BreakableWall.png" id="3_vw1rj"]
+[ext_resource type="Texture2D" uid="uid://cqtl56byt7dgk" path="res://cards/Outcasts/card_art/AirDungeon.png" id="4_4siri"]
+
+[sub_resource type="Resource" id="Resource_vw1rj"]
+script = ExtResource("2_fik20")
+health_amount = 2
+cap_at_starting_hp = true
+metadata/_custom_type_script = "uid://bfa0ox70sgb47"
 
 [sub_resource type="Resource" id="Resource_4siri"]
 script = ExtResource("1_1rnrp")
 bullet_type = 5
 bullet_cost = 0
-bullet_description = "Heals to max HP at the end of the current turn."
+bullet_description = "Heal to full hp at the end of the current turn."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_plkjb"]
-script = ExtResource("2_fik20")
-health_amount = 2
-heal_to_starting_hp = true
-metadata/_custom_type_script = "uid://bfa0ox70sgb47"
 
 [resource]
 script = ExtResource("2_plkjb")
@@ -34,8 +34,8 @@ refreshable = false
 stunnable = true
 flippable = true
 bullets = Array[ExtResource("1_1rnrp")]([SubResource("Resource_4siri")])
-quip_description = "\"Funny Description here boys and girls!\""
-card_art = ExtResource("3_vw1rj")
-background_art = ExtResource("1_4siri")
-on_end_of_turn = SubResource("Resource_plkjb")
+quip_description = "\"Crunchy Walls\""
+card_art = ExtResource("4_4siri")
+background_art = ExtResource("2_4siri")
+_on_end_of_turn = SubResource("Resource_vw1rj")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

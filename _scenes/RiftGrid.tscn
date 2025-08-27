@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b71wnop14kqyg"]
+[gd_scene load_steps=2 format=3 uid="uid://bgrqj32tibok0"]
 
-[ext_resource type="PackedScene" path="res://_scenes/CardSlot.tscn" id="1_s65mu"]
+[ext_resource type="PackedScene" uid="uid://cc70mp6vbhwht" path="res://_scenes/CardSlot.tscn" id="1_s65mu"]
 
 [node name="RiftGrid" type="Node2D"]
 

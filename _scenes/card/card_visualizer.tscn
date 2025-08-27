@@ -1,0 +1,449 @@
+[gd_scene load_steps=24 format=3 uid="uid://dmeep3ulpyypw"]
+
+[ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/CardVisualizer.gd" id="1_51wi6"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_gved7"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_eevst"]
+[ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="4_dkm5d"]
+[ext_resource type="Texture2D" uid="uid://t6g1sww4brbj" path="res://art/card_ui/image_bkg.png" id="6_8lnxd"]
+[ext_resource type="Texture2D" uid="uid://dkg6fwxywrngc" path="res://art/card_ui/image_frame.png" id="7_r8tiv"]
+[ext_resource type="Texture2D" uid="uid://cmnhoqlxq5vvd" path="res://art/card_ui/effects_frame copy 3.png" id="8_m0jti"]
+[ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="9_tbra6"]
+[ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="10_fh26a"]
+[ext_resource type="Texture2D" uid="uid://423bb7447g6p" path="res://art/card_ui/move_icon copy.png" id="11_eevst"]
+[ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="11_rw1a8"]
+[ext_resource type="Texture2D" uid="uid://dvkwbpkg0sghm" path="res://art/card_ui/no-symbol.png" id="12_dkm5d"]
+[ext_resource type="Texture2D" uid="uid://bnove3tmf34re" path="res://art/card_ui/Description Area.png" id="12_hdudp"]
+[ext_resource type="Texture2D" uid="uid://bhxhtvqq7257s" path="res://art/card_ui/fire_icon copy.png" id="13_8lnxd"]
+[ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="13_deg38"]
+[ext_resource type="Texture2D" uid="uid://bqqkvq20w5r7w" path="res://art/card_ui/stack_icon copy.png" id="14_r8tiv"]
+[ext_resource type="Texture2D" uid="uid://um134rv7t03" path="res://art/card_ui/discard_icon copy.png" id="15_m0jti"]
+
+[sub_resource type="Resource" id="Resource_fefyn"]
+script = ExtResource("3_eevst")
+title = ""
+type = 0
+game_origin = 0
+deleon_value = -1
+starting_hp = -1
+movable = true
+burnable = true
+discardable = true
+stackable = true
+refreshable = false
+stunnable = true
+flippable = true
+bullets = Array[ExtResource("2_gved7")]([])
+quip_description = ""
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
+
+[sub_resource type="LabelSettings" id="LabelSettings_e258s"]
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8rp0"]
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_iootb"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/45/0/ascent = 0.0
+cache/0/45/0/descent = 0.0
+cache/0/45/0/underline_position = 0.0
+cache/0/45/0/underline_thickness = 0.0
+cache/0/45/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0tfah"]
+font = SubResource("FontFile_iootb")
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_auvip"]
+font_size = 70
+font_color = Color(0, 0, 0, 1)
+
+[node name="card_front" type="Sprite2D"]
+scale = Vector2(0.177, 0.177)
+script = ExtResource("1_51wi6")
+card_resource = SubResource("Resource_fefyn")
+
+[node name="card_background" type="Sprite2D" parent="."]
+clip_children = 2
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_dkm5d")
+
+[node name="nestedImage" type="Sprite2D" parent="card_background"]
+
+[node name="card_art_container" type="Sprite2D" parent="."]
+clip_children = 1
+position = Vector2(0, -536.723)
+texture = ExtResource("6_8lnxd")
+
+[node name="background" type="Sprite2D" parent="card_art_container"]
+self_modulate = Color(1, 1, 1, 0.117647)
+clip_children = 2
+texture = ExtResource("6_8lnxd")
+
+[node name="card_art" type="Sprite2D" parent="card_art_container"]
+
+[node name="image_frame" type="Sprite2D" parent="."]
+position = Vector2(0, -536.723)
+texture = ExtResource("7_r8tiv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 504.0
+offset_top = -1164.0
+offset_right = 844.0
+offset_bottom = -1002.0
+grow_horizontal = 0
+theme_override_constants/separation = 30
+alignment = 2
+
+[node name="health_value_frame" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/health_value_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.168
+anchor_top = 0.306
+anchor_right = 0.828
+anchor_bottom = 0.798
+offset_left = -5.68968
+offset_top = -4.37424
+offset_right = 3.01031
+offset_bottom = 14.9218
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_tbra6")
+
+[node name="Label2" type="Label" parent="HBoxContainer/health_value_frame/TextureRect"]
+layout_mode = 2
+offset_left = 26.404
+offset_top = 11.3
+offset_right = 83.404
+offset_bottom = 80.3
+text = "-1"
+label_settings = SubResource("LabelSettings_e258s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="deleon_value_frame" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/deleon_value_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("10_fh26a")
+
+[node name="Label" type="Label" parent="HBoxContainer/deleon_value_frame/TextureRect"]
+layout_mode = 0
+offset_left = 21.997
+offset_top = 16.002
+offset_right = 78.997
+offset_bottom = 85.002
+text = "-1"
+label_settings = SubResource("LabelSettings_e258s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Effectors" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -874.0
+offset_top = -1164.0
+offset_right = 841.0
+offset_bottom = -1002.0
+grow_horizontal = 0
+theme_override_constants/separation = 30
+
+[node name="not_movable_frame" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/not_movable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.168
+anchor_top = 0.306
+anchor_right = 0.828
+anchor_bottom = 0.798
+offset_left = 13.182
+offset_top = 7.083
+offset_right = -11.118
+offset_bottom = 3.379
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_eevst")
+expand_mode = 1
+
+[node name="no_symbol_texrect" type="TextureRect" parent="Effectors/not_movable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_top = 0.14
+anchor_right = 0.959
+anchor_bottom = 1.0
+offset_left = -0.852001
+offset_top = 0.0769997
+offset_right = -0.972
+offset_bottom = 0.757004
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dkm5d")
+expand_mode = 1
+
+[node name="not_burnable_frame" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/not_burnable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.168
+anchor_top = 0.306
+anchor_right = 0.828
+anchor_bottom = 0.798
+offset_left = 13.182
+offset_top = 7.083
+offset_right = -11.118
+offset_bottom = 3.379
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_8lnxd")
+expand_mode = 1
+
+[node name="no_symbol_texrect" type="TextureRect" parent="Effectors/not_burnable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_top = 0.14
+anchor_right = 0.959
+anchor_bottom = 1.0
+offset_left = -0.852001
+offset_top = 0.0769997
+offset_right = -0.972
+offset_bottom = 0.757004
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dkm5d")
+expand_mode = 1
+
+[node name="not_stackable_frame" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/not_stackable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.168
+anchor_top = 0.306
+anchor_right = 0.828
+anchor_bottom = 0.798
+offset_left = 13.182
+offset_top = 7.083
+offset_right = -11.118
+offset_bottom = 3.379
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_r8tiv")
+expand_mode = 1
+
+[node name="no_symbol_texrect" type="TextureRect" parent="Effectors/not_stackable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_top = 0.14
+anchor_right = 0.959
+anchor_bottom = 1.0
+offset_left = -0.852001
+offset_top = 0.0769997
+offset_right = -0.972
+offset_bottom = 0.757004
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dkm5d")
+expand_mode = 1
+
+[node name="not_discardable_frame" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/not_discardable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.168
+anchor_top = 0.306
+anchor_right = 0.828
+anchor_bottom = 0.798
+offset_left = 13.182
+offset_top = 7.083
+offset_right = -11.118
+offset_bottom = 3.379
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_m0jti")
+expand_mode = 1
+
+[node name="no_symbol_texrect" type="TextureRect" parent="Effectors/not_discardable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_top = 0.14
+anchor_right = 0.959
+anchor_bottom = 1.0
+offset_left = -0.852001
+offset_top = 0.0769997
+offset_right = -0.972
+offset_bottom = 0.757004
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dkm5d")
+expand_mode = 1
+
+[node name="not_flippable_frame" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/not_flippable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("10_fh26a")
+
+[node name="not_stunnable_frame2" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/not_stunnable_frame2"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("10_fh26a")
+
+[node name="refreshable_frame" type="TextureRect" parent="Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_m0jti")
+
+[node name="TextureRect" type="TextureRect" parent="Effectors/refreshable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("10_fh26a")
+
+[node name="title_frame" type="Sprite2D" parent="."]
+position = Vector2(0, -1209.04)
+texture = ExtResource("11_rw1a8")
+
+[node name="Label" type="Label" parent="title_frame"]
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.5
+anchor_right = 0.985
+anchor_bottom = 0.5
+offset_left = -897.12
+offset_top = -150.0
+offset_right = -916.88
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_l8rp0")
+
+[node name="description_frame" type="Sprite2D" parent="."]
+position = Vector2(-2.09808e-05, 711.864)
+texture = ExtResource("12_hdudp")
+
+[node name="bullet_list" type="VBoxContainer" parent="description_frame"]
+offset_left = -904.0
+offset_top = -514.0
+offset_right = 842.0
+offset_bottom = 554.0
+
+[node name="fun_description" type="Label" parent="description_frame"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1663.0
+offset_top = -748.0
+offset_right = -64.0
+offset_bottom = -607.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+label_settings = SubResource("LabelSettings_0tfah")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 131
+
+[node name="typing_frame" type="Sprite2D" parent="."]
+position = Vector2(0, 112.994)
+texture = ExtResource("13_deg38")
+
+[node name="game_origin_label" type="Label" parent="typing_frame"]
+anchors_preset = -1
+anchor_left = 0.0210894
+anchor_top = 0.505314
+anchor_right = 0.975793
+anchor_bottom = 0.505316
+offset_left = -861.316
+offset_top = -117.143
+offset_right = -861.316
+offset_bottom = -7.1432
+grow_horizontal = 2
+grow_vertical = 2
+text = "Vgdev"
+label_settings = SubResource("LabelSettings_auvip")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="type_label" type="Label" parent="typing_frame"]
+anchors_preset = -1
+anchor_left = 0.0245737
+anchor_top = 0.505314
+anchor_right = 0.979278
+anchor_bottom = 0.505316
+offset_left = -861.316
+offset_top = -117.143
+offset_right = -861.316
+offset_bottom = -7.1432
+grow_horizontal = 2
+grow_vertical = 2
+text = "Feature"
+label_settings = SubResource("LabelSettings_auvip")
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
