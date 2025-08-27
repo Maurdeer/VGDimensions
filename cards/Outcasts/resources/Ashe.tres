@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://cgc6j288lco7g"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_gdfbu"]
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://cards/Outcasts/outcasts_background.png" id="1_py6y2"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_2258d"]
+[ext_resource type="Texture2D" uid="uid://dxsicibt8xu3t" path="res://cards/Outcasts/card_art/Ashe.png" id="3_11ysp"]
+
+[sub_resource type="Resource" id="Resource_py6y2"]
+script = ExtResource("1_gdfbu")
+bullet_type = 3
+bullet_cost = 1
+bullet_description = "Swap places with any adjacent card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_11ysp"]
+script = ExtResource("1_gdfbu")
+bullet_type = 3
+bullet_cost = 2
+bullet_description = "Swap any 2 cards on the rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_c7etx"]
+script = ExtResource("1_gdfbu")
+bullet_type = 3
+bullet_cost = 2
+bullet_description = "Deal 4 damage to any adjacent damagable card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_c6myj"]
+script = ExtResource("1_gdfbu")
+bullet_type = 5
+bullet_cost = 0
+bullet_description = "Double Trouble: Deal an additional 2 damage if Tinker is next to this card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_2258d")
+title = "Ashe"
+type = 6
+game_origin = 25
+deleon_value = -1
+starting_hp = -1
+movable = true
+burnable = true
+discardable = true
+stackable = true
+refreshable = false
+stunnable = true
+flippable = true
+bullets = Array[ExtResource("1_gdfbu")]([SubResource("Resource_py6y2"), SubResource("Resource_11ysp"), SubResource("Resource_c7etx"), SubResource("Resource_c6myj")])
+quip_description = "\"Lost to time, yet still persists in its own mystery.\""
+card_art = ExtResource("3_11ysp")
+background_art = ExtResource("1_py6y2")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

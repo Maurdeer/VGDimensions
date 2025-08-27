@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://clmoqxht57i46" path="res://art/card_ui/gridcard_img_background.png" id="3_tbwoo"]
 [ext_resource type="Texture2D" uid="uid://c4su30057qlh6" path="res://art/card_ui/gridcardimage_frame.png" id="4_jey1p"]
 
-[sub_resource type="Resource" id="Resource_tffan"]
+[sub_resource type="Resource" id="Resource_tbwoo"]
 script = ExtResource("3_jey1p")
 title = ""
 type = 0
@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 [node name="gridcard_visualizer" type="Sprite2D"]
 scale = Vector2(0.177, 0.177)
 script = ExtResource("1_7gw3y")
-card_resource = SubResource("Resource_tffan")
+card_resource = SubResource("Resource_tbwoo")
 
 [node name="background_container" type="Sprite2D" parent="."]
 clip_children = 2

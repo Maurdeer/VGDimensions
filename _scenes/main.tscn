@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckef5ss54helk"]
+[gd_scene load_steps=7 format=3 uid="uid://ckef5ss54helk"]
 
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
 [ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/Outcasts/resources/BreakableWall.tres" id="4_6bnj4"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
+[ext_resource type="Resource" uid="uid://cgc6j288lco7g" path="res://cards/Outcasts/resources/Ashe.tres" id="5_ce27d"]
+[ext_resource type="Resource" uid="uid://dkv5fsn4snafe" path="res://cards/Outcasts/resources/Tinker.tres" id="6_urak4"]
 
 [node name="main" type="Node2D"]
 
@@ -29,7 +31,17 @@ position = Vector2(1154, 404)
 [node name="RiftGrid" parent="." instance=ExtResource("4_lavtb")]
 position = Vector2(552, -35)
 
-[node name="Card4" parent="." instance=ExtResource("1_dmym1")]
+[node name="breakable_wall_card" parent="." instance=ExtResource("1_dmym1")]
 position = Vector2(1763, 596)
 resource = ExtResource("4_6bnj4")
+playable = false
+
+[node name="ashe_card" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(1592, 288)
+resource = ExtResource("5_ce27d")
+playable = false
+
+[node name="tinker_card" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(1797, -5)
+resource = ExtResource("6_urak4")
 playable = false

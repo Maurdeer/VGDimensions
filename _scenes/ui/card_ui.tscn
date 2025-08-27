@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhf7srp4vh2ak"]
+[gd_scene load_steps=7 format=3 uid="uid://c5r6gn3u75qad"]
 
-[ext_resource type="Texture2D" uid="uid://dkpxbucletyl7" path="res://cards/Outcasts/card_art/AsheGem.png" id="1_eet8q"]
 [ext_resource type="Script" uid="uid://w7wxaffufu2x" path="res://_scripts/ui/card_ui.gd" id="1_mkotd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eet8q"]
+load_path = "res://.godot/imported/AsheGem.png-779ed1764e4b794653bd07e11a014fa5.s3tc.ctex"
 
 [sub_resource type="Animation" id="Animation_mkotd"]
 length = 0.001
@@ -199,7 +201,7 @@ offset_right = 117.5
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("1_eet8q")
+texture = SubResource("CompressedTexture2D_eet8q")
 expand_mode = 1
 
 [node name="TextureButton" type="TextureButton" parent="Control"]

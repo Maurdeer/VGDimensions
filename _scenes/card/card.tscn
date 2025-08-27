@@ -118,7 +118,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f61jr"]
-size = Vector2(384, 536)
+size = Vector2(341.818, 476.364)
 
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
@@ -129,7 +129,6 @@ resource = SubResource("Resource_r36b4")
 card_resource = SubResource("Resource_r36b4")
 
 [node name="card_back" type="Sprite2D" parent="."]
-visible = false
 clip_children = 2
 position = Vector2(4.76837e-06, 0)
 scale = Vector2(1e-05, 0.177)
@@ -160,7 +159,7 @@ card_resource = SubResource("Resource_r36b4")
 script = ExtResource("4_f61jr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drag_and_drop_component2D"]
-position = Vector2(0, 4)
+position = Vector2(-8.66977e-07, -1.73395e-06)
 shape = SubResource("RectangleShape2D_f61jr")
 
 [connection signal="input_event" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_input_event"]
