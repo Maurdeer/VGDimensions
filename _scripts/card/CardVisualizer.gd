@@ -7,14 +7,19 @@ var bullet_scene: PackedScene
 # without needing to do it during runtime while also not needing to run this functionality
 # during runtime.
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	bullet_scene = preload("res://_scenes/card/bullet.tscn")
+	if not Engine.is_editor_hint():
+		_on_values_change()
+		$"../card_front/description_frame/fun_description".text = card.resource.quip_description
 
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
 	if Engine.is_editor_hint():
 		_on_values_change()
+		$"../card_front/description_frame/fun_description".text = card.resource.quip_description
+	
 
 func _on_values_change() -> void:
 	if not card.resource: return
@@ -68,7 +73,13 @@ func _on_deleon_value_change() -> void:
 	deleon_value_frame.visible = card.resource.deleon_value >= 0
 		
 func _on_effector_bools_change() -> void:
-	pass
+	$"../card_front/Effectors/not_movable_frame".visible = not card.resource.movable
+	$"../card_front/Effectors/not_burnable_frame".visible = not card.resource.burnable
+	$"../card_front/Effectors/not_stackable_frame".visible = not card.resource.stackable
+	$"../card_front/Effectors/not_discardable_frame".visible = not card.resource.discardable
+	$"../card_front/Effectors/not_flippable_frame".visible = not card.resource.flippable
+	$"../card_front/Effectors/not_stunnable_frame2".visible = not card.resource.stunnable
+	$"../card_front/Effectors/refreshable_frame".visible = card.resource.refreshable
 	
 func _on_bullet_description_change() -> void:
 	# Running this more than once is kinda a nightmare ngl

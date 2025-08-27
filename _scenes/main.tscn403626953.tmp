@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckef5ss54helk"]
+
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
+[ext_resource type="PackedScene" uid="uid://b6hb2w7m7p6sh" path="res://cards/Outcasts/scenes/tinker.tscn" id="3_3q5j6"]
+
+[node name="main" type="Node2D"]
+
+[node name="player_hand" parent="." instance=ExtResource("2_ce27d")]
+position = Vector2(799, 833)
+
+[node name="Card" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(431, 375)
+draggable = true
+playable = true
+
+[node name="Card2" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(787, 428)
+draggable = true
+playable = true
+
+[node name="Card3" parent="." instance=ExtResource("1_dmym1")]
+position = Vector2(1154, 404)
+draggable = true
+playable = true
+
+[node name="Tinker" parent="." instance=ExtResource("3_3q5j6")]
+position = Vector2(1521, 325)

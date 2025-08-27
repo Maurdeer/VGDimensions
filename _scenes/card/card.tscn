@@ -1,9 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=28 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_7ystx"]
 [ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/CardVisualizer.gd" id="2_mb7jp"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
 [ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="3_auvip"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xq267"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
 [ext_resource type="Texture2D" uid="uid://t6g1sww4brbj" path="res://art/card_ui/image_bkg.png" id="4_geen5"]
@@ -14,6 +16,24 @@
 [ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="6_l8rp0"]
 [ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="7_53nac"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="7_l8rp0"]
+
+[sub_resource type="Resource" id="Resource_bjelf"]
+script = ExtResource("3_xq267")
+title = ""
+type = 0
+game_origin = 0
+deleon_value = -1
+starting_hp = -1
+movable = true
+burnable = true
+discardable = true
+stackable = true
+refreshable = false
+stunnable = true
+flippable = true
+bullets = Array[ExtResource("2_7ystx")]([])
+quip_description = ""
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [sub_resource type="LabelSettings" id="LabelSettings_e258s"]
 font_size = 50
@@ -144,8 +164,9 @@ size = Vector2(384, 536)
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
+resource = SubResource("Resource_bjelf")
 
-[node name="EngineVisualizer" type="Node" parent="."]
+[node name="Visualizer" type="Node" parent="."]
 script = ExtResource("2_mb7jp")
 
 [node name="card_back" type="Sprite2D" parent="."]
@@ -250,6 +271,115 @@ label_settings = SubResource("LabelSettings_e258s")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Effectors" type="HBoxContainer" parent="card_front"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -874.0
+offset_top = -1164.0
+offset_right = 841.0
+offset_bottom = -1002.0
+grow_horizontal = 0
+theme_override_constants/separation = 30
+
+[node name="not_movable_frame" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_movable_frame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.168
+anchor_top = 0.306
+anchor_right = 0.828
+anchor_bottom = 0.798
+offset_left = -5.68968
+offset_top = -4.37424
+offset_right = 3.01031
+offset_bottom = 14.9218
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_l8rp0")
+
+[node name="not_burnable_frame" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_burnable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("7_l8rp0")
+
+[node name="not_stackable_frame" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_stackable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("7_l8rp0")
+
+[node name="not_discardable_frame" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_discardable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("7_l8rp0")
+
+[node name="not_flippable_frame" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_flippable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("7_l8rp0")
+
+[node name="not_stunnable_frame2" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/not_stunnable_frame2"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("7_l8rp0")
+
+[node name="refreshable_frame" type="TextureRect" parent="card_front/Effectors"]
+visible = false
+layout_mode = 2
+texture = ExtResource("5_53nac")
+
+[node name="TextureRect" type="TextureRect" parent="card_front/Effectors/refreshable_frame"]
+layout_mode = 0
+offset_left = 26.296
+offset_top = 43.298
+offset_right = 129.296
+offset_bottom = 145.298
+texture = ExtResource("7_l8rp0")
+
 [node name="title_frame" type="Sprite2D" parent="card_front"]
 position = Vector2(0, -1209.04)
 texture = ExtResource("3_auvip")
@@ -291,7 +421,6 @@ offset_bottom = -607.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
-text = "\"Funny description right here\""
 label_settings = SubResource("LabelSettings_0tfah")
 horizontal_alignment = 1
 vertical_alignment = 1

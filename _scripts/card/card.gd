@@ -22,7 +22,7 @@ var revealed: bool
 var on_player_hand: bool
 
 func _enter_tree() -> void:
-	resource.card = self
+	resource.card_ref = self
 	revealed = true
 	refresh_stats()
 	call_deferred("_setup")
@@ -36,7 +36,7 @@ func refresh_stats() -> void:
 
 func damage(amount: int) -> void:
 	hp -= amount
-	resource.on_damage()
+	resource.on_damage.execute()
 
 func flip() -> void:
 	if revealed: flip_hide()
@@ -45,15 +45,15 @@ func flip() -> void:
 func flip_reveal() -> void:
 	animation_player.play("flip_reveal")
 	revealed = true
-	resource.on_flip_reveal()
+	if resource.on_flip_reveal: resource.on_flip_reveal.execute()
 
 func flip_hide() -> void:
 	animation_player.play("flip_hide")
 	revealed = false
-	resource.on_flip_hide()
+	if resource.on_flip_hide: resource.on_flip_hide.execute()
 	
-func play(selection: int) -> void:
-	resource.on_play_functions[selection].call()
+func play() -> void:
+	resource.on_play.execute()
 
 # Card Input Functions
 func _on_drag_and_drop_component_2d_on_double_click() -> void:
@@ -61,4 +61,4 @@ func _on_drag_and_drop_component_2d_on_double_click() -> void:
 
 func _on_drag_and_drop_component_2d_on_single_click() -> void:
 	if not playable: return
-	play(0)
+	play()
