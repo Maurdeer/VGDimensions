@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=17 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_7ystx"]
+[ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="2_uhl3e"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xq267"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
@@ -9,11 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://dmeep3ulpyypw" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
 [ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
 
+[sub_resource type="Resource" id="Resource_u8xt1"]
+script = ExtResource("2_uhl3e")
+health_amount = 0
+cap_at_starting_hp = false
+metadata/_custom_type_script = "uid://bfa0ox70sgb47"
+
 [sub_resource type="Resource" id="Resource_r36b4"]
 script = ExtResource("3_xq267")
-title = ""
+title = "Tile of card"
 type = 0
-game_origin = 0
+game_origin = 9
 deleon_value = -1
 starting_hp = -1
 movable = true
@@ -25,6 +32,7 @@ stunnable = true
 flippable = true
 bullets = Array[ExtResource("2_7ystx")]([])
 quip_description = ""
+_on_damage = SubResource("Resource_u8xt1")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [sub_resource type="Animation" id="Animation_ajdvn"]
