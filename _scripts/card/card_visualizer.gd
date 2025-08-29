@@ -3,30 +3,32 @@ extends Node
 class_name CardVisualizer
 
 # Exists to deal with editor based card updating
-@onready var card: Card = $".."
+@export var card: Card
 @export var card_resource: CardResource:
 	get:
 		if card:
 			return card.resource
 		return card_resource
-var bullet_scene: PackedScene
+@export var bullet_scene: PackedScene
 
 # Purpose: Provide a seemless way of seeing updates to this node while in the editor.
 # without needing to do it during runtime while also not needing to run this functionality
 # during runtime.
 
 func _ready() -> void:
-	bullet_scene = preload("res://_scenes/card/bullet_visualizer.tscn")
+	if not bullet_scene:
+		printerr("Bullet Scene was not intialized with a bullet visualizer! CardVisualizer will not run!")
+		return
 	if not Engine.is_editor_hint() and (card_resource or (card and card.resource)):
 		_on_values_change()
-		$"description_frame/fun_description".text = card_resource.quip_description
+		$"description_frame/fun_description".text = "\"%s\"" % card_resource.quip_description
 
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
 	if Engine.is_editor_hint() and (card_resource or (card and card.resource)):
 		_on_values_change()
-		$"description_frame/fun_description".text = card_resource.quip_description
+		$"description_frame/fun_description".text = "\"%s\"" % card_resource.quip_description
 	
 
 func _on_values_change() -> void:

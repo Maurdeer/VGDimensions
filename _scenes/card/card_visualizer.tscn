@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dmeep3ulpyypw"]
+[gd_scene load_steps=22 format=3 uid="uid://dmeep3ulpyypw"]
 
 [ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/card_visualizer.gd" id="1_51wi6"]
-[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_gved7"]
-[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_eevst"]
+[ext_resource type="PackedScene" uid="uid://duo3p8powrn74" path="res://_scenes/card/bullet_visualizer.tscn" id="2_dkm5d"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="4_dkm5d"]
 [ext_resource type="Texture2D" uid="uid://t6g1sww4brbj" path="res://art/card_ui/image_bkg.png" id="6_8lnxd"]
 [ext_resource type="Texture2D" uid="uid://dkg6fwxywrngc" path="res://art/card_ui/image_frame.png" id="7_r8tiv"]
@@ -17,24 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="13_deg38"]
 [ext_resource type="Texture2D" uid="uid://bqqkvq20w5r7w" path="res://art/card_ui/stack_icon copy.png" id="14_r8tiv"]
 [ext_resource type="Texture2D" uid="uid://um134rv7t03" path="res://art/card_ui/discard_icon copy.png" id="15_m0jti"]
-
-[sub_resource type="Resource" id="Resource_fefyn"]
-script = ExtResource("3_eevst")
-title = ""
-type = 0
-game_origin = 0
-deleon_value = -1
-starting_hp = -1
-movable = true
-burnable = true
-discardable = true
-stackable = true
-refreshable = false
-stunnable = true
-flippable = true
-bullets = Array[ExtResource("2_gved7")]([])
-quip_description = ""
-metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [sub_resource type="LabelSettings" id="LabelSettings_e258s"]
 font_size = 50
@@ -69,10 +50,10 @@ font_color = Color(0, 0, 0, 1)
 font_size = 70
 font_color = Color(0, 0, 0, 1)
 
-[node name="card_front" type="Sprite2D"]
+[node name="card_visualizer" type="Sprite2D"]
 scale = Vector2(0.177, 0.177)
 script = ExtResource("1_51wi6")
-card_resource = SubResource("Resource_fefyn")
+bullet_scene = ExtResource("2_dkm5d")
 
 [node name="card_background" type="Sprite2D" parent="."]
 clip_children = 2
@@ -372,9 +353,9 @@ anchor_left = 0.015
 anchor_top = 0.5
 anchor_right = 0.985
 anchor_bottom = 0.5
-offset_left = -897.12
+offset_left = -886.12
 offset_top = -150.0
-offset_right = -916.88
+offset_right = -927.88
 offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -403,6 +384,7 @@ offset_bottom = -607.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+text = "\"\""
 label_settings = SubResource("LabelSettings_0tfah")
 horizontal_alignment = 1
 vertical_alignment = 1

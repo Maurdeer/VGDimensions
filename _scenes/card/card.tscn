@@ -1,26 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=15 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
-[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_7ystx"]
-[ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="2_uhl3e"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_r36b4"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
-[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xq267"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_uhl3e"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
 [ext_resource type="PackedScene" uid="uid://dmeep3ulpyypw" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
 [ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
 
 [sub_resource type="Resource" id="Resource_u8xt1"]
-script = ExtResource("2_uhl3e")
-health_amount = 0
-cap_at_starting_hp = false
-metadata/_custom_type_script = "uid://bfa0ox70sgb47"
-
-[sub_resource type="Resource" id="Resource_r36b4"]
-script = ExtResource("3_xq267")
-title = "Tile of card"
+script = ExtResource("3_uhl3e")
+title = ""
 type = 0
-game_origin = 9
+game_origin = 0
 deleon_value = -1
 starting_hp = -1
 movable = true
@@ -30,9 +23,8 @@ stackable = true
 refreshable = false
 stunnable = true
 flippable = true
-bullets = Array[ExtResource("2_7ystx")]([])
+bullets = Array[ExtResource("2_r36b4")]([])
 quip_description = ""
-_on_damage = SubResource("Resource_u8xt1")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [sub_resource type="Animation" id="Animation_ajdvn"]
@@ -131,10 +123,11 @@ size = Vector2(341.818, 476.364)
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
-resource = SubResource("Resource_r36b4")
+resource = SubResource("Resource_u8xt1")
 
-[node name="card_front" parent="." instance=ExtResource("4_pots7")]
-card_resource = SubResource("Resource_r36b4")
+[node name="card_front" parent="." node_paths=PackedStringArray("card") instance=ExtResource("4_pots7")]
+card = NodePath("..")
+card_resource = SubResource("Resource_u8xt1")
 
 [node name="card_back" type="Sprite2D" parent="."]
 clip_children = 2
@@ -161,7 +154,7 @@ speed_scale = 3.0
 
 [node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
 visible = false
-card_resource = SubResource("Resource_r36b4")
+card_resource = SubResource("Resource_u8xt1")
 
 [node name="drag_and_drop_component2D" type="Area2D" parent="."]
 script = ExtResource("4_f61jr")

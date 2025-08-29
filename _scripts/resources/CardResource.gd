@@ -99,14 +99,11 @@ enum GameOrigin {
 @export var card_art: Texture
 @export var background_art: Texture # By Default base it off of the game
 
-# Action Events
-@export_group("Action Events")
-@export var _on_play: EventResource
-@export var _on_action: ActionEvent
-@export var _on_social: SocialEvent
-
 # Passive Events
 @export_group("Passive Events")
+@export var _on_play: EventResource
+@export var _on_action: EventResource
+@export var _on_social: EventResource
 @export var _on_enter_tree: EventResource
 @export var _on_state_of_grid_change: EventResource
 @export var _on_end_of_turn: EventResource
@@ -120,51 +117,66 @@ enum GameOrigin {
 @export var _on_move: EventResource
 @export var _on_replace: EventResource
 	
-# Action Functions
-func on_play(grid_pos: Vector2) -> void:
-	if not _on_play: return
-	_on_play.execute(grid_pos)
-func on_action(grid_pos: Vector2) -> void:
-	if not _on_action: return
-	_on_action.execute(grid_pos)
-func on_social(grid_pos: Vector2) -> void:
-	if not _on_social: return
-	_on_social.execute(grid_pos)
-
+func set_up_event_resources(card_ref: Card):
+	if _on_play: _on_play.card_ref = card_ref
+	if _on_action: _on_action.card_ref = card_ref
+	if _on_social: _on_social.card_ref = card_ref
+	if _on_enter_tree: _on_enter_tree.card_ref = card_ref
+	if _on_state_of_grid_change: _on_state_of_grid_change.card_ref = card_ref
+	if _on_end_of_turn: _on_end_of_turn.card_ref = card_ref
+	if _on_start_of_turn: _on_start_of_turn.card_ref = card_ref
+	if _on_damage: _on_damage.card_ref = card_ref
+	if _on_discard: _on_discard.card_ref = card_ref 
+	if _on_burn: _on_burn.card_ref = card_ref
+	if _on_stack: _on_stack.card_ref = card_ref
+	if _on_flip_hide: _on_flip_hide.card_ref = card_ref
+	if _on_flip_reveal: _on_flip_reveal.card_ref = card_ref
+	if _on_move: _on_move.card_ref = card_ref 
+	if _on_replace: _on_replace.card_ref = card_ref
+	
 # Passive Functions
-func on_enter_tree(grid_pos: Vector2) -> void:
+func on_play() -> void:
+	if not _on_play: return
+	_on_play.execute()
+func on_action() -> void:
+	if not _on_action: return
+	_on_action.execute()
+func on_social() -> void:
+	if not _on_social: return
+	_on_social.execute()
+func on_enter_tree() -> void:
 	if not _on_enter_tree: return
-	_on_enter_tree.execute(grid_pos)
-func on_state_of_grid_change(grid_pos: Vector2) -> void:
+	_on_enter_tree.execute()
+func on_state_of_grid_change() -> void:
 	if not _on_state_of_grid_change: return
-	_on_state_of_grid_change.execute(grid_pos)
-func on_end_of_turn(grid_pos: Vector2) -> void:
+	_on_state_of_grid_change.execute()
+func on_end_of_turn() -> void:
 	if not _on_end_of_turn: return
-	_on_end_of_turn.execute(grid_pos)
-func on_start_of_turn(grid_pos: Vector2) -> void:
+	_on_end_of_turn.execute()
+func on_start_of_turn() -> void:
 	if not _on_start_of_turn: return
-	_on_start_of_turn.execute(grid_pos)
-func on_damage(grid_pos: Vector2) -> void:
+	_on_start_of_turn.execute()
+func on_damage() -> void:
 	if not _on_damage: return
-	_on_damage.execute(grid_pos)
-func on_discard(grid_pos: Vector2) -> void:
+	_on_damage.execute()
+func on_discard() -> void:
 	if not _on_discard: return
-	_on_discard.execute(grid_pos)
-func on_burn(grid_pos: Vector2) -> void:
+	_on_discard.execute()
+func on_burn() -> void:
 	if not _on_burn: return
-	_on_burn.exectue(grid_pos)
-func on_stack(grid_pos: Vector2) -> void:
+	_on_burn.exectue()
+func on_stack() -> void:
 	if not _on_stack: return
-	_on_stack.exectue(grid_pos)
-func on_flip_hide(grid_pos: Vector2) -> void:
+	_on_stack.exectue()
+func on_flip_hide() -> void:
 	if not _on_flip_hide: return
-	_on_flip_hide.exectue(grid_pos)
-func on_flip_reveal(grid_pos: Vector2) -> void:
+	_on_flip_hide.exectue()
+func on_flip_reveal() -> void:
 	if not _on_flip_reveal: return
-	_on_flip_reveal.exectue(grid_pos)
-func on_move(grid_pos: Vector2) -> void:
+	_on_flip_reveal.exectue()
+func on_move() -> void:
 	if not _on_move: return
-	_on_move.exectue(grid_pos)
-func on_replace(grid_pos: Vector2) -> void:
+	_on_move.exectue()
+func on_replace() -> void:
 	if not _on_replace: return
-	_on_replace.exectue(grid_pos)
+	_on_replace.exectue()

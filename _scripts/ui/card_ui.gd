@@ -1,34 +1,4 @@
 extends Control
-class_name CardUI
-
-# User Specifications
-@export var m_card_res: Card
-
-# Predetermined Utilities
-@onready var m_animation_player: AnimationPlayer = $AnimationPlayer
-@onready var m_card_texture: TextureRect = $Control/TextureRect
-
-func set_card_reference(p_card_res: Card) -> void:
-	m_card_res = p_card_res
-	_on_card_change()
-
-func _on_card_change() -> void:
-	m_card_texture.texture = m_card_res.front_texture
 	
-# Interaction related
-func _expand() -> void:
-	m_animation_player.play("card_expand")
-	
-func _return_size() -> void:
-	m_animation_player.play("card_return")
-
-func _on_texture_button_mouse_entered() -> void:
-	_expand()
-
-func _on_texture_button_mouse_exited() -> void:
-	_return_size()
-	
-func _on_texture_button_pressed() -> void:
-	# Note: Instead of this, you would call the card's play function
-	CardManager.Instance.spawn_new_card(m_card_res)
-	queue_free()
+func set_card(card_resource: CardResource) -> void:
+	$Control/card_visualizer.card_resource = card_resource

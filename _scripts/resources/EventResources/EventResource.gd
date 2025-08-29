@@ -1,5 +1,7 @@
 extends Resource
 class_name EventResource
 
-func execute(grid_pos: Vector2) -> void:
+var card_ref: Card
+
+func execute() -> void:
 	pass
