@@ -47,8 +47,8 @@ func checkForCardSlot():
 	parameters.collision_mask = 2
 	var result = spaceState.intersect_point(parameters)
 	if result.size() > 0:
-		print("Collision occured")
-		print(result[0].collider.get_parent())
+		#print("Collision occured")
+		#print(result[0].collider.get_parent())
 		return result[0].collider.get_parent()
 	return null
 
