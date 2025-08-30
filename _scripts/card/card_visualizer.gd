@@ -97,6 +97,7 @@ func _on_background_art_change() -> void:
 	
 func _on_bullet_description_change() -> void:
 	# Running this more than once is kinda a nightmare ngl
+	if not bullet_scene: return
 	var bullet_list = $"description_frame/bullet_list"
 	if not bullet_list: return
 	var child_count: int = bullet_list.get_child_count()
@@ -124,7 +125,8 @@ func _on_bullet_description_change() -> void:
 					bullet_node.owner = get_tree().edited_scene_root
 			
 			# Set the bullet node to have the resource, which should update its visual on its own.
-			(bullet_list.get_child(child_idx) as BulletVisualizer).bullet_resource = bullet
+			var bullet_visual: BulletVisualizer = bullet_list.get_child(child_idx)
+			if bullet_visual: bullet_visual.bullet_resource = bullet
 			child_idx += 1
 		
 	# Remove extra bullet children

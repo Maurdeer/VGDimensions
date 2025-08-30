@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxsicibt8xu3t"
-path="res://.godot/imported/Ashe.png-01c3e17629be1e1b24605ba091233bfe.ctex"
+uid="uid://cqtl56byt7dgk"
+path="res://.godot/imported/AirDungeon.png-9fb2c5f78bfd688ff4044bdeed9dae10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/Ashe.png"
-dest_files=["res://.godot/imported/Ashe.png-01c3e17629be1e1b24605ba091233bfe.ctex"]
+source_file="res://art/card_art/Outcasts/AirDungeon.png"
+dest_files=["res://.godot/imported/AirDungeon.png-9fb2c5f78bfd688ff4044bdeed9dae10.ctex"]
 
 [params]
 

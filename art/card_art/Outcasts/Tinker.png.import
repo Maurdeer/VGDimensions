@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvvvy7bwkk6jq"
-path="res://.godot/imported/LilGuy.png-011e23621468f0426c33a34f0e72b0ef.ctex"
+uid="uid://ce46jtioa5jf"
+path="res://.godot/imported/Tinker.png-a7c81ac0856e7616c8d32eccecd8381d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/_VGDev/card_art/LilGuy.png"
-dest_files=["res://.godot/imported/LilGuy.png-011e23621468f0426c33a34f0e72b0ef.ctex"]
+source_file="res://art/card_art/Outcasts/Tinker.png"
+dest_files=["res://.godot/imported/Tinker.png-a7c81ac0856e7616c8d32eccecd8381d.ctex"]
 
 [params]
 
