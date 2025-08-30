@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk17qxwnktu1c"]
+[gd_scene load_steps=4 format=3 uid="uid://ds2nqf41arlqv"]
 
-[ext_resource type="Script" uid="uid://poocu7ctbt0u" path="res://_scripts/ui/card_ui.gd" id="1_cpksn"]
-[ext_resource type="PackedScene" uid="uid://dmeep3ulpyypw" path="res://_scenes/card/card_visualizer.tscn" id="1_geqo5"]
-[ext_resource type="PackedScene" uid="uid://cu2ifw8a0acjy" path="res://_scenes/card/clickable_bullet_visualizer.tscn" id="3_noe4a"]
+[ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="1_geqo5"]
+[ext_resource type="PackedScene" uid="uid://b37sabp04csw5" path="res://_scenes/card/clickable_bullet_visualizer.tscn" id="3_noe4a"]
+
+[sub_resource type="GDScript" id="GDScript_jsu6u"]
+script/source = "extends Control
+class_name CardPopupUI
+
+@export var play_active: bool
+@export var interact_active: bool
+@export var bullet_scene: PackedScene 
+
+func _ready() -> void:
+	bullet_scene.play_active = play_active
+	bullet_scene.interact_active = interact_active
+	$Control/card_visualizer.bullet_scene = bullet_scene
+	
+func set_card(card_resource: CardResource) -> void:
+	$Control/card_visualizer.card_resource = card_resource
+	
+"
 
 [node name="CardPopupUI" type="Control"]
 layout_mode = 3
@@ -13,7 +30,8 @@ offset_left = 1457.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_cpksn")
+script = SubResource("GDScript_jsu6u")
+bullet_scene = ExtResource("3_noe4a")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -32,4 +50,4 @@ grow_vertical = 2
 [node name="card_visualizer" parent="Control" instance=ExtResource("1_geqo5")]
 position = Vector2(223, 533)
 scale = Vector2(0.23, 0.23)
-bullet_scene = ExtResource("3_noe4a")
+bullet_scene = null

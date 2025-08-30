@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu2ifw8a0acjy"]
+[gd_scene load_steps=8 format=3 uid="uid://b37sabp04csw5"]
 
 [ext_resource type="PackedScene" uid="uid://duo3p8powrn74" path="res://_scenes/card/bullet_visualizer.tscn" id="1_gawem"]
 [ext_resource type="Texture2D" uid="uid://cn2xsvq40uh5b" path="res://art/card_ui/bullet_frame.png" id="2_fbdqj"]
@@ -28,6 +28,8 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="ClickableBullet" instance=ExtResource("1_gawem")]
 script = ExtResource("2_r72vv")
+play_active = false
+interact_active = false
 
 [node name="TextureButton" type="TextureButton" parent="." index="0"]
 layout_mode = 2

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_uhl3e"]
 [ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
-[ext_resource type="PackedScene" uid="uid://dmeep3ulpyypw" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
+[ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
 [ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
 
 [sub_resource type="Resource" id="Resource_u8xt1"]
