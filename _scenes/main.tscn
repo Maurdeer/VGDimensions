@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
 [ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/Outcasts/resources/BreakableWall.tres" id="4_6bnj4"]
-[ext_resource type="PackedScene" uid="uid://b71wnop14kqyg" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
 [ext_resource type="Resource" uid="uid://cgc6j288lco7g" path="res://cards/Outcasts/resources/Ashe.tres" id="5_ce27d"]
 [ext_resource type="Resource" uid="uid://dkv5fsn4snafe" path="res://cards/Outcasts/resources/Tinker.tres" id="6_urak4"]
 [ext_resource type="PackedScene" uid="uid://b6kr78hmw6jcw" path="res://_scenes/card/clickable_card_visualizer.tscn" id="7_urak4"]
