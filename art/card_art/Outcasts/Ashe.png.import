@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vcrdhe8qpt3m"
-path="res://.godot/imported/outcasts_background.png-404ddf9cf5663e01d2090e25ab36e18c.ctex"
+uid="uid://dxsicibt8xu3t"
+path="res://.godot/imported/Ashe.png-3514c315305b8672bb6d652a075f178f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/outcasts_background.png"
-dest_files=["res://.godot/imported/outcasts_background.png-404ddf9cf5663e01d2090e25ab36e18c.ctex"]
+source_file="res://art/card_art/Outcasts/Ashe.png"
+dest_files=["res://.godot/imported/Ashe.png-3514c315305b8672bb6d652a075f178f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqtl56byt7dgk"
-path="res://.godot/imported/AirDungeon.png-0e1f85acb8b9c224f748908c5b1f84b5.ctex"
+uid="uid://vcrdhe8qpt3m"
+path="res://.godot/imported/outcasts_background.png-e150eb745511c8199003ea4a95f1588b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/Outcasts/card_art/AirDungeon.png"
-dest_files=["res://.godot/imported/AirDungeon.png-0e1f85acb8b9c224f748908c5b1f84b5.ctex"]
+source_file="res://art/card_background_art/outcasts_background.png"
+dest_files=["res://.godot/imported/outcasts_background.png-e150eb745511c8199003ea4a95f1588b.ctex"]
 
 [params]
 
