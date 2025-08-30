@@ -97,6 +97,7 @@ func _on_background_art_change() -> void:
 	
 func _on_bullet_description_change() -> void:
 	# Running this more than once is kinda a nightmare ngl
+	if not bullet_scene: return
 	var bullet_list = $"description_frame/bullet_list"
 	if not bullet_list: return
 	var child_count: int = bullet_list.get_child_count()
