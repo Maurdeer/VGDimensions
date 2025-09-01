@@ -1,3 +1,4 @@
+@tool
 extends CardVisualizer
 class_name ClickableCardVisualizer
 

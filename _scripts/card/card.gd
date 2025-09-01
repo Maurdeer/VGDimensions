@@ -93,5 +93,12 @@ func _on_drag_and_drop_component_2d_on_double_click() -> void:
 	flip()
 
 func _on_drag_and_drop_component_2d_on_single_click() -> void:
+	CardInspector.Instance.set_card(self)
 	if not playable: return
 	play()
+
+func _on_drag_and_drop_component_2d_on_drop() -> void:
+	pass # Replace with function body.
+
+func _on_drag_and_drop_component_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

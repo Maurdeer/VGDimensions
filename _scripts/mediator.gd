@@ -1,68 +1,65 @@
 extends Node2D
-# The class the handles the interactions between cards and the rift grid
-# all called in one neat little area
+## The class the handles the interactions between cards and the rift grid
+##
+## Currently communication with the mediator handles everything locally
+## The future update to this script will make it handle network RPCs to make calls
+## State Updates to newly added or returning clients will be managed by an external script
+## that this script may communicate with.
+## This is why currently its just wrapping around the exact calls as RiftGrid!
 class_name Mediator
 
-static var rift_grid: RiftGrid
-static var curr_card: Card			# need this temporarily for placing new cards on the rift_grid
-static var card1_pos: Vector2		# the card calling the action
-static var user_input: Vector2		# the rift tile clicked on by the player
+# Singleton Stuff
+static var Instance: Mediator:
+	get:
+		if not Instance:
+			Instance = Mediator.new()
+		return Instance
+			
+var curr_card: Card # need this temporarily for placing new cards on the rift_grid
+var card1_pos: Vector2 # the card calling the action
+var user_input: Vector2 # the rift tile clicked on by the player
 
 func _ready() -> void:
-	rift_grid = get_node("RiftGrid")	#TODO not sure if this is right, check later
+	if Instance: 
+		queue_free()
+		return
+	Instance = self
+	
+func request_player_card_selection() -> Vector2:
+	# Communicate with card selector and await its input
+	
+	# (Ryan) Utilize Await right here to wait for the input to come from the user
+	# The idea is that this selection would be returned back here
+	# You are likely to have this selector come from the rift grid itself.
+	return Vector2(0,0)
 
-# TODO: not sure how you guys want to pass me the card position data yet
-# so I set up this function for you to manually call if needed
-# feel free to change it
-static func set_current_card(card_ref: Card) -> void:
-	curr_card = card_ref
-	card1_pos = card_ref.grid_pos
-
-static func get_user_input() -> void:
-	user_input = Vector2(0,0)	#TODO: call whatever function is going to be used for that user input. replace the (0,0)
-
-# Waits for the user to click on a rift_grid node before continuing
-static func wait_confirmation():
-	print("waiting for user input")
-	# TODO: something like await $UserClick.click_confirmed or wtv it ends up being
-	# or maybe i have to await for the get user input im really not sure yet
-	print("user input confirmed")
-	return true
-
-static func swap_card(card_ref: Card) -> void:
-	set_current_card(card_ref)
-	await wait_confirmation()		# wait until user input is finished
+func swap_card(card_pos_a: Vector2i, card_pos_b: Vector2i) -> void:
 	#TODO: probably add a catch if the rift grid says the move is illegal
-	rift_grid.swapCards(card1_pos.x, card1_pos.y, user_input.x, user_input.y)
+	RiftGrid.Instance.swapCards(card_pos_a, card_pos_b)
 	
-static func get_card_attribute() -> void:
-	rift_grid.getCardAttribute()
+func get_card_attribute() -> void:
+	RiftGrid.Instance.getCardAttribute()
 	
-static func get_card_position() -> void:
-	rift_grid.getCardPosition()
+func get_card_position() -> void:
+	RiftGrid.Instance.getCardPosition()
 	
-static func draw_card() -> void:
-	await wait_confirmation()
-	rift_grid.drawCard(user_input.x, user_input.y)
+func draw_card(draw_to: Vector2i) -> void:
+	RiftGrid.Instance.drawCard(draw_to)
 	
-static func place_card() -> void:
-	await wait_confirmation()
-	rift_grid.placeCard(card1_pos.x, card1_pos.y, curr_card)
+func place_card(place_at: Vector2i, new_card: Card) -> void:
+	RiftGrid.Instance.placeCard(place_at, new_card)
 
-static func moveCardOff() -> void:
-	await wait_confirmation()
-	rift_grid.moveCardOff(card1_pos.x, card1_pos.y)
+func moveCardOff(card_pos: Vector2i) -> Card:
+	return RiftGrid.Instance.moveCardOff(card_pos)
 
 # static func discard_card() ->
 #TODO: i need a way to get the deck on a certain tile of the rift grid to implement this o7
 
-static func remove_card_from_grid() -> void:
-	await wait_confirmation()
-	rift_grid.removeCardFromGrid(card1_pos.x, card1_pos.y)
+func remove_card_from_grid(card_pos: Vector2i) -> void:
+	RiftGrid.Instance.removeCardFromGrid(card_pos)
 	
-static func swap_decks() -> void:
-	await wait_confirmation()
-	rift_grid.swapDecks(card1_pos.x, card1_pos.y, user_input.x, user_input.y)
+func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i) -> void:
+	RiftGrid.Instance.swapDecks(deck_pos_a, deck_pos_b)
 
 #TODO: i need more information from the user input to implement these (like targeting deck, and how directions are handled)
 #shuffleCardBackInDeck(shuffleCard: Card, targetDeck: Deck):
