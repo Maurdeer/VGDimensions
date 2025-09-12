@@ -2,6 +2,10 @@
 extends Node
 class_name CardVisualizer
 
+## Purpose: Provide a seemless way of seeing updates to this node while in the editor.
+## without needing to do it during runtime while also not needing to run this functionality
+## during runtime.
+
 # Exists to deal with editor based card updating
 @export var card: Card
 @export var card_resource: CardResource:
@@ -9,11 +13,12 @@ class_name CardVisualizer
 		if card:
 			return card.resource
 		return card_resource
+	set(value):
+		card_resource = value
+		_on_values_change()
+
 @export var bullet_scene: PackedScene
 
-# Purpose: Provide a seemless way of seeing updates to this node while in the editor.
-# without needing to do it during runtime while also not needing to run this functionality
-# during runtime.
 
 func _ready() -> void:
 	if not bullet_scene:
@@ -21,15 +26,12 @@ func _ready() -> void:
 		return
 	if not Engine.is_editor_hint() and (card_resource or (card and card.resource)):
 		_on_values_change()
-		$"description_frame/fun_description".text = "\"%s\"" % card_resource.quip_description
 
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
 	if Engine.is_editor_hint() and (card_resource or (card and card.resource)):
 		_on_values_change()
-		$"description_frame/fun_description".text = "\"%s\"" % card_resource.quip_description
-	
 
 func _on_values_change() -> void:
 	if not card_resource: return
@@ -48,6 +50,7 @@ func _on_values_change() -> void:
 	
 	# Bullet Description Updates:
 	call_deferred("_on_bullet_description_change")
+	call_deferred("_on_funny_quip_change")
 	
 func _on_title_change() -> void:
 	var title_label = $"title_frame/Label"
@@ -134,6 +137,10 @@ func _on_bullet_description_change() -> void:
 	for j in range(child_idx, child_count):
 		bullet_list.get_child(j).queue_free()
 	
+func _on_funny_quip_change() -> void:
+	var funny_quip = $description_frame/fun_description
+	if not funny_quip: return
+	funny_quip.text = "\"%s\"" % card_resource.quip_description
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_EDITOR_POST_SAVE:
 		_on_values_change()

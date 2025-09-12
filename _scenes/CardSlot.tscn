@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc70mp6vbhwht"]
+[gd_scene load_steps=5 format=3 uid="uid://cc70mp6vbhwht"]
 
+[ext_resource type="Script" uid="uid://cceuyfxu2x70f" path="res://_scripts/card/card_slot.gd" id="1_b52bl"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="1_vlagw"]
+[ext_resource type="Script" uid="uid://djko6spet1i6j" path="res://_scripts/components2D/dropslot_component2D.gd" id="2_h6fwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h6fwf"]
-size = Vector2(354.318, 483.864)
+size = Vector2(318.182, 441.818)
 
 [node name="CardSlot" type="Node2D"]
 scale = Vector2(0.55, 0.55)
+script = ExtResource("1_b52bl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4
@@ -14,8 +17,13 @@ position = Vector2(9.53674e-07, -1.81818)
 scale = Vector2(0.177, 0.177)
 texture = ExtResource("1_vlagw")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+[node name="DropSlotComponent2D" type="Area2D" parent="."]
+script = ExtResource("2_h6fwf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropSlotComponent2D"]
+position = Vector2(0.909094, -2.72727)
 shape = SubResource("RectangleShape2D_h6fwf")
+
+[connection signal="area_entered" from="DropSlotComponent2D" to="DropSlotComponent2D" method="_on_area_entered"]
+[connection signal="area_exited" from="DropSlotComponent2D" to="DropSlotComponent2D" method="_on_area_exited"]
+[connection signal="on_drop" from="DropSlotComponent2D" to="." method="_on_drop_slot_component_2d_on_drop"]

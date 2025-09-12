@@ -1,12 +1,19 @@
 extends Area2D
 class_name DragAndDropComponent2D
 
+@export_group("Specifications")
+@export var snap_to_original_position: bool = true
+
 var is_dragging: bool = false
 @onready var _parent: Node2D = $".."
 signal on_single_click
 signal on_double_click
+signal on_drop
 var draggable: bool = true
+var pre_drag_pos: Vector2
 
+func _ready() -> void:
+	pre_drag_pos = _parent.global_position
 
 func _process(_delta):
 	_input_process()
@@ -23,34 +30,23 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 		if mouse_button_event.pressed:
+			# Dragging
 			is_dragging = true
 			
+			# (Ryan) Temp bad input lowkey ngl :D
 			if mouse_button_event.double_click:
 				on_double_click.emit()
 			else:
 				on_single_click.emit()
 		else:
-			var cardSlotFound = checkForCardSlot()
-			if cardSlotFound:
-				#print()
-				_parent.global_position = cardSlotFound.global_position
+			# Dropped
+			on_drop.emit()
+			_parent.global_position = pre_drag_pos
+			
+			# Call drop functions
+			if hovering_over_area_temp: hovering_over_area_temp.drop(self)
+			pre_drag_pos = _parent.global_position
 			is_dragging = false
-
-# Implementation taken from Godot 4 Card Game Tutorial #3 Card Slots
-# You know this isn't GPT because only a human can be this bad.
-# This can't be right bc we aren't really using Collision Masks rn but wtv.
-func checkForCardSlot():
-	var spaceState = get_world_2d().direct_space_state
-	var parameters = PhysicsPointQueryParameters2D.new()
-	parameters.position = get_global_mouse_position()
-	parameters.collide_with_areas = true
-	parameters.collision_mask = 2
-	var result = spaceState.intersect_point(parameters)
-	if result.size() > 0:
-		#print("Collision occured")
-		#print(result[0].collider.get_parent())
-		return result[0].collider.get_parent()
-	return null
 
 var scale_prior_to_hover: Vector2
 func _on_mouse_entered() -> void:
@@ -61,3 +57,15 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if is_dragging or not scale_prior_to_hover: return
 	_parent.scale = scale_prior_to_hover
+
+var hovering_over_area_temp: DropSlot2D
+func _on_area_entered(area: Area2D) -> void:
+	var dropslot: DropSlot2D = area as DropSlot2D
+	if not dropslot: return
+	hovering_over_area_temp = dropslot
+	
+func _on_area_exited(area: Area2D) -> void:
+	if not hovering_over_area_temp: return
+	var dropslot: DropSlot2D = area as DropSlot2D
+	if not dropslot or dropslot != hovering_over_area_temp: return
+	hovering_over_area_temp = null

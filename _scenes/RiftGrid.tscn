@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgrqj32tibok0"]
+[gd_scene load_steps=3 format=3 uid="uid://bgrqj32tibok0"]
 
+[ext_resource type="Script" uid="uid://dnu2i04hrhd01" path="res://_scripts/RiftGrid.gd" id="1_exr2v"]
 [ext_resource type="PackedScene" uid="uid://cc70mp6vbhwht" path="res://_scenes/CardSlot.tscn" id="1_s65mu"]
 
 [node name="RiftGrid" type="Node2D"]
+script = ExtResource("1_exr2v")
 
 [node name="CardSlot" parent="." instance=ExtResource("1_s65mu")]
 
