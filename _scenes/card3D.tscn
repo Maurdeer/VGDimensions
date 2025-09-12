@@ -32,7 +32,6 @@ func _on_place() -> void:
 [sub_resource type="BoxShape3D" id="BoxShape3D_wb4pw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eet8q"]
-load_path = "res://.godot/imported/AsheGem.png-779ed1764e4b794653bd07e11a014fa5.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i5pp"]
 albedo_texture = SubResource("CompressedTexture2D_eet8q")

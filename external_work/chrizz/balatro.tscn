@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3s1nb5elpdfk"]
+
+[ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="1_epb2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bidyi"]
+shader = ExtResource("1_epb2m")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bidyi"]
+
+[node name="Balatro" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bidyi")
+position = Vector2(80.5, -53)
+scale = Vector2(1080, 1080)
+texture = SubResource("CanvasTexture_bidyi")
