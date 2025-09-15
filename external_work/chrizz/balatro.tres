@@ -1,10 +1,10 @@
 [gd_resource type="VisualShader" load_steps=31 format=3 uid="uid://cyc3ken2k7hyv"]
 
-[ext_resource type="Script" uid="uid://dfr2u8mfhg0cg" path="res://addons/shaderV/rgba/noise/perlin2d.gd" id="1_1dubm"]
-[ext_resource type="Script" uid="uid://iwmljka45alx" path="res://addons/shaderV/uv/animated/rotateAnimated.gd" id="2_74354"]
-[ext_resource type="Script" uid="uid://nqluus6p0df2" path="res://addons/shaderV/rgba/posterize.gd" id="3_74354"]
-[ext_resource type="Script" uid="uid://bvbp5dmhkkst1" path="res://addons/shaderV/rgba/noise/generic2d.gd" id="3_cncg3"]
-[ext_resource type="Script" uid="uid://caqtktn3l5etg" path="res://addons/shaderV/uv/twirl.gd" id="4_xcot1"]
+[ext_resource type="Script" uid="uid://c27ovo3qks6pf" path="res://addons/shaderV/rgba/noise/perlin2d.gd" id="1_1dubm"]
+[ext_resource type="Script" uid="uid://bbrp5fkorvckv" path="res://addons/shaderV/uv/animated/rotateAnimated.gd" id="2_74354"]
+[ext_resource type="Script" uid="uid://dmqrimfuhjb3t" path="res://addons/shaderV/rgba/posterize.gd" id="3_74354"]
+[ext_resource type="Script" uid="uid://2qaj03lo2x6g" path="res://addons/shaderV/rgba/noise/generic2d.gd" id="3_cncg3"]
+[ext_resource type="Script" uid="uid://87v2qwl8p20v" path="res://addons/shaderV/uv/twirl.gd" id="4_xcot1"]
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_rcdnq"]
 default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
@@ -245,7 +245,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-142.382, -43.5629)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(1280, 260)

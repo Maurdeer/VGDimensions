@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckef5ss54helk"]
+[gd_scene load_steps=10 format=3 uid="uid://ckef5ss54helk"]
 
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
+[ext_resource type="PackedScene" uid="uid://b3s1nb5elpdfk" path="res://external_work/chrizz/balatro.tscn" id="1_owtmn"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
 [ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/BreakableWall.tres" id="4_6bnj4"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
@@ -10,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://b6kr78hmw6jcw" path="res://_scenes/card/clickable_card_visualizer.tscn" id="7_urak4"]
 
 [node name="main" type="Node2D"]
+
+[node name="Balatro" parent="." instance=ExtResource("1_owtmn")]
+position = Vector2(744, 343)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(842, 342)
