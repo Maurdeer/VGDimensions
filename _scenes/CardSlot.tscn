@@ -12,7 +12,7 @@ scale = Vector2(0.55, 0.55)
 script = ExtResource("1_b52bl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -4
+z_index = -1
 position = Vector2(9.53674e-07, -1.81818)
 scale = Vector2(0.177, 0.177)
 texture = ExtResource("1_vlagw")

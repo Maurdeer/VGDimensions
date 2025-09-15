@@ -10,6 +10,7 @@ shader = ExtResource("1_epb2m")
 [node name="Balatro" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -10
 material = SubResource("ShaderMaterial_bidyi")
 position = Vector2(80.5, -53)
 scale = Vector2(1080, 1080)

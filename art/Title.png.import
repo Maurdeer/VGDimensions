@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds4rnuhypjs8a"
-path="res://.godot/imported/godot_logo.png-89258be532bb292e475149e3c00d215d.ctex"
+uid="uid://b1bcybpnupaha"
+path="res://.godot/imported/Title.png-383b93c2195e98709fe4f51df9a508ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/shaderV/examples/godot_logo.png"
-dest_files=["res://.godot/imported/godot_logo.png-89258be532bb292e475149e3c00d215d.ctex"]
+source_file="res://art/Title.png"
+dest_files=["res://.godot/imported/Title.png-383b93c2195e98709fe4f51df9a508ae.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

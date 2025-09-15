@@ -11,20 +11,6 @@
 
 [sub_resource type="Resource" id="Resource_u8xt1"]
 script = ExtResource("3_uhl3e")
-title = ""
-type = 0
-game_origin = 0
-deleon_value = -1
-starting_hp = -1
-movable = true
-burnable = true
-discardable = true
-stackable = true
-refreshable = false
-stunnable = true
-flippable = true
-bullets = Array[ExtResource("2_r36b4")]([])
-quip_description = ""
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [sub_resource type="Animation" id="Animation_ajdvn"]
