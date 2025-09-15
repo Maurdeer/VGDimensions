@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GNM="*res://external_work/ryan/network_manager.gd"
+Noray="*res://addons/netfox.noray/noray.gd"
+PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 
 [display]
 
@@ -27,6 +29,10 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="VGDev Clash"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg")
 
 [input]
 

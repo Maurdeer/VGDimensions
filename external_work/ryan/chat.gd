@@ -3,6 +3,10 @@ extends Control
 @onready var message_text: LineEdit = $MarginContainer/VBoxContainer/HBoxContainer/message_text
 @onready var messages: VBoxContainer = $MarginContainer/VBoxContainer/Messages
 
+
+func _ready() -> void:
+	rpc("create_message", "%s has Joined Session" % GNM.player_name)
+
 func send_message(msg: String) -> void:
 	var geared_msg = "(%s): %s" % [GNM.player_name, msg]
 	rpc("create_message", geared_msg)
