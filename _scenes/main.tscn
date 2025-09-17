@@ -20,7 +20,7 @@ position = Vector2(842, 342)
 zoom = Vector2(0.9, 0.9)
 
 [node name="player_hand" parent="." instance=ExtResource("2_ce27d")]
-position = Vector2(799, 833)
+position = Vector2(657, 877)
 
 [node name="RiftGrid" parent="." instance=ExtResource("4_lavtb")]
 position = Vector2(552, -35)
@@ -43,10 +43,10 @@ playable = false
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -224.0
-offset_top = -259.0
-offset_right = 1907.0
-offset_bottom = 940.0
+offset_left = -180.0
+offset_top = -252.0
+offset_right = 1951.0
+offset_bottom = 947.0
 mouse_filter = 2
 
 [node name="CardPopupUI" type="Control" parent="GUI"]
