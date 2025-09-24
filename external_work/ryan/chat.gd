@@ -4,20 +4,20 @@ extends Control
 @onready var messages: VBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/Messages
 @onready var scroll_container: ScrollContainer = $MarginContainer/VBoxContainer/ScrollContainer
 @onready var scrollbar = scroll_container.get_v_scroll_bar()
+var message_strings: Array[String]
 
 func _ready() -> void:
 	scrollbar.changed.connect(_on_scrollbar_changed)
-	
-func on_player_join() -> void:
-	rpc("create_message", "%s has Joined Session" % GNM.player_name)
-		
+	GNM.player_connected.connect(_on_player_join)
+
 func send_message(msg: String) -> void:
-	var geared_msg = "(%s): %s" % [GNM.player_name, msg]
+	var geared_msg = "(%s): %s" % [GNM.player_info['name'], msg]
 	rpc("create_message", geared_msg)
 
 @rpc("any_peer", "call_local")
 func create_message(msg: String) -> void:
 	var label: Label = Label.new()
+	message_strings.append(msg)
 	label.text = msg
 	messages.add_child(label)
 	label.grab_focus()
@@ -35,3 +35,11 @@ func _input(event: InputEvent) -> void:
 func _on_scrollbar_changed() -> void:
 	scroll_container.scroll_vertical = scrollbar.max_value
 	
+func _on_player_join(pid, _player_info) -> void:
+	if multiplayer.is_server():
+		if pid == 1: 
+			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])
+		else:
+			for msg in message_strings:
+				rpc_id(pid, "create_message", msg)
+			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])
