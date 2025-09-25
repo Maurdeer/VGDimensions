@@ -22,6 +22,11 @@ func create_message(msg: String) -> void:
 	messages.add_child(label)
 	label.grab_focus()
 	
+@rpc("any_peer", "call_local")
+func create_messages(msgs: Array[String]) -> void:
+	for msg in msgs:
+		create_message(msg)
+	
 func _on_send_button_pressed() -> void:
 	send_message(message_text.text)
 	message_text.text = ""
@@ -40,6 +45,5 @@ func _on_player_join(pid, _player_info) -> void:
 		if pid == 1: 
 			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])
 		else:
-			for msg in message_strings:
-				rpc_id(pid, "create_message", msg)
+			rpc_id(pid, "create_messages", message_strings)
 			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])

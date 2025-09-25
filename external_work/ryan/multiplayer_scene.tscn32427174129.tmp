@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c57bmxyf3rgq6"]
+[gd_scene load_steps=8 format=3 uid="uid://c57bmxyf3rgq6"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://external_work/ryan/game_manager.gd" id="1_ay0ix"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_q84rm"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="4_otue7"]
 [ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/BreakableWall.tres" id="5_rs56h"]
 [ext_resource type="Resource" uid="uid://dkv5fsn4snafe" path="res://cards/Tinker.tres" id="6_ds5pv"]
-[ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="8_ccn5w"]
 
 [node name="MultiplayerScene" type="Control"]
 layout_mode = 3
@@ -20,15 +19,4 @@ script = ExtResource("1_ay0ix")
 cards = Array[ExtResource("2_ytfpk")]([ExtResource("3_ccn5w"), ExtResource("4_otue7"), ExtResource("5_rs56h"), ExtResource("6_ds5pv"), ExtResource("4_otue7"), ExtResource("4_otue7"), ExtResource("4_otue7")])
 
 [node name="player_hand" parent="." instance=ExtResource("2_q84rm")]
-position = Vector2(0, 408)
-scale = Vector2(0.9, 0.9)
-
-[node name="PlayArea" type="Node2D" parent="."]
-position = Vector2(0, 180)
-scale = Vector2(0.6640372, 0.5597048)
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayArea"]
-scale = Vector2(0.55999994, 0.2800008)
-texture = ExtResource("8_ccn5w")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(930, 809)

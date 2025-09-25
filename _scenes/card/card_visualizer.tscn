@@ -19,22 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bqqkvq20w5r7w" path="res://art/card_ui/stack_icon copy.png" id="14_r8tiv"]
 [ext_resource type="Texture2D" uid="uid://um134rv7t03" path="res://art/card_ui/discard_icon copy.png" id="15_m0jti"]
 
-[sub_resource type="Resource" id="Resource_m0jti"]
+[sub_resource type="Resource" id="Resource_8lnxd"]
 script = ExtResource("3_r8tiv")
-title = ""
-type = 0
-game_origin = 0
-deleon_value = -1
-starting_hp = -1
-movable = true
-burnable = true
-discardable = true
-stackable = true
-refreshable = false
-stunnable = true
-flippable = true
-bullets = Array[ExtResource("2_8lnxd")]([])
-quip_description = ""
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [sub_resource type="LabelSettings" id="LabelSettings_e258s"]
@@ -73,7 +59,7 @@ font_color = Color(0, 0, 0, 1)
 [node name="card_visualizer" type="Sprite2D"]
 scale = Vector2(0.177, 0.177)
 script = ExtResource("1_51wi6")
-card_resource = SubResource("Resource_m0jti")
+card_resource = SubResource("Resource_8lnxd")
 bullet_scene = ExtResource("2_dkm5d")
 
 [node name="card_background" type="Sprite2D" parent="."]
@@ -132,7 +118,7 @@ grow_vertical = 2
 texture = ExtResource("9_tbra6")
 
 [node name="Label2" type="Label" parent="HBoxContainer/health_value_frame/TextureRect"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 26.404
 offset_top = 11.3
 offset_right = 83.404

@@ -1,53 +1,45 @@
 extends Node2D
 class_name PlayerHand
 
+const hand_limit: int = 5
 @export var discard_pile: Deck
 @export var draw_pile: Deck
-@onready var slot_1: Control = $HBoxContainer/Slot1
-@onready var slot_2: Control = $HBoxContainer/Slot2
-@onready var slot_3: Control = $HBoxContainer/Slot3
-@onready var slot_4: Control = $HBoxContainer/Slot4
-@onready var slot_5: Control = $HBoxContainer/Slot5
+@onready var slots: HBoxContainer = $HBoxContainer/Slots
+var empty_card: Card
+
+var cards_in_hand: Array[Card] = []
 
 func _ready() -> void:
-	call_deferred("_setup")
-
-func _setup() -> void:
-	fill_hand()
+	call_deferred("_after_ready")
+	
+func _after_ready() -> void:
+	pass
+	
+func add_to_discard_pile(card: Card) -> void:
+	discard_pile.addCard(card)
 	
 func fill_hand() -> void:
-	if draw_pile.getSize() == 0: return
-	if slot_1.get_child_count() == 0:
-		var card: Card = draw_pile.removeCard()
-		card.get_parent().remove_child(card)
-		slot_1.add_child(card)
-		card.position = Vector2.ZERO
-		card.flip_reveal()
-	if draw_pile.getSize() == 0: return
-	if slot_2.get_child_count() == 0:
-		var card: Card = draw_pile.removeCard()
-		card.get_parent().remove_child(card)
-		slot_2.add_child(card)
-		card.position = Vector2.ZERO
-		card.flip_reveal()
-	if draw_pile.getSize() == 0: return
-	if slot_3.get_child_count() == 0:
-		var card: Card = draw_pile.removeCard()
-		card.get_parent().remove_child(card)
-		slot_3.add_child(card)
-		card.position = Vector2.ZERO
-		card.flip_reveal()
-	if draw_pile.getSize() == 0: return
-	if slot_4.get_child_count() == 0:
-		var card: Card = draw_pile.removeCard()
-		card.get_parent().remove_child(card)
-		slot_4.add_child(card)
-		card.position = Vector2.ZERO
-		card.flip_reveal()
-	if draw_pile.getSize() == 0: return
-	if slot_5.get_child_count() == 0:
-		var card: Card = draw_pile.removeCard()
-		card.get_parent().remove_child(card)
-		slot_5.add_child(card)
-		card.position = Vector2.ZERO
-		card.flip_reveal()
+	if draw_pile.deck_size + discard_pile.deck_size < hand_limit: 
+		printerr("Too little wack, need more cards in your cumilative deck (5 or more cards)")
+		return
+	while cards_in_hand.size() < hand_limit:
+		draw_card_to_hand()
+		
+func draw_card_to_hand() -> void:
+	if draw_pile.is_empty(): reshuffle_draw_pile()
+	if draw_pile.is_empty(): 
+		printerr("Upon Reshuffling, Draw Pile is still empty!")
+		return
+	var card: Card = draw_pile.remove_top_card()
+	card.flip_reveal()
+	card.draggable = true
+	var slot: Control = Control.new()
+	slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	slot.add_child(card)
+	slots.add_child(slot)
+	cards_in_hand.append(card)
+	
+func reshuffle_draw_pile() -> void:
+	draw_pile.mergeDeck(discard_pile)
+	draw_pile.shuffleDeck()

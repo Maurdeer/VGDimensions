@@ -23,6 +23,10 @@ var grid_pos: Vector2
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
 var on_player_hand: bool
+var card_id: String:
+	get:
+		if not resource: return ""
+		return construct_card_id(resource.title, resource.game_origin)
 
 # Dynamic Bullet Functions
 var _play_bullets: Array[BulletResource]
@@ -102,3 +106,6 @@ func _on_drag_and_drop_component_2d_on_drop() -> void:
 
 func _on_drag_and_drop_component_2d_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
+
+static func construct_card_id(title: String, game_origin: CardResource.GameOrigin) -> String:
+	return "%s-%s" % [title, CardResource.GameOrigin.keys()[game_origin]]

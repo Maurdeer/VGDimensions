@@ -1,67 +1,89 @@
 extends Node2D
 class_name Deck
 
-@export var deckSize: int = 0
+var deck_size: int:
+	get:
+		return deck_array.size()
 @export var flipped: bool = false
-@export var draggable: bool = false
-var deckArray: Array[Card]
+var deck_array: Array[Card]
+var card_dict: Dictionary[String, Array]
+var empty_card: Card
+const CARD = preload("uid://c3e8058lwu0a")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	call_deferred("_setup")
-	
-func _setup() -> void:
-	for child in get_children():
-		if child is Card:
-			addCard(child)
+	call_deferred("_after_ready")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-	
-func setSize():
-	pass
-
-func getSize() -> int:
-	return deckArray.size()
-
-func getDeck():
-	return deckArray
+func _after_ready() -> void:
+	empty_card = CARD.instantiate()
+	empty_card.resource = CardResource.new()
+	add_child(empty_card)
+	empty_card.flip_hide()
 
 func drawCards(count : int):
 	var drawnCards = []
 	for i in range(count):
-		drawnCards.append(deckArray.pop_back())
+		drawnCards.append(deck_array.pop_back())
 	return drawnCards
 
-func searchForCard():
-	pass
-	
+func searchForCard(card_id: String) -> Card:
+	if not card_dict.has(card_id) or card_dict[card_id].is_empty(): return null
+	return card_dict[card_id][0]
+
 func addCards(cardArray: Array[Card]):
 	for card in cardArray:
 		addCard(card)
-	
+
 func addCard(card: Card):
-	deckArray.push_back(card)
-	if flipped:
-		card.flip_hide()
+	var card_id: String = Card.construct_card_id(card.resource.title, card.resource.game_origin)
+	if deck_size > 0:
+		remove_child(deck_array[deck_size - 1])
 	else:
-		card.flip_reveal()
-	card.draggable = draggable
+		remove_child(empty_card)
+		
+	deck_array.push_back(card)
+	if card_dict.has(card_id): card_dict[card_id].append(card)
+	else: card_dict[card_id] = [card]
+	add_child(card)
+	if flipped: card.flip_reveal()
+	else: card.flip_hide()
 
-func addCardAtLocation(cardArray, location := getSize()):
-	# Returns success or failure according to Godot
-	return deckArray.insert(cardArray, location)
-
-func removeCard() -> Card:
-	return deckArray.pop_back()
+func remove_top_card() -> Card:
+	if deck_size <= 0: return
+	remove_child(deck_array[deck_size - 1])
+	var removed_card = deck_array.pop_back()
+	card_dict[removed_card.card_id].pop_back()
 	
-func burnCard():
-	# Take a card from the top of the deck and remove it or
-	pass
+	if deck_size > 0:
+		add_child(deck_array[deck_size - 1])
+	else:
+		add_child(empty_card)
+		
+	return removed_card
+
+func clear_deck() -> void:
+	if deck_size <= 0: return
+	remove_child(deck_array[deck_size - 1])
+	add_child(empty_card)
+	deck_array.clear()
+	card_dict.clear()
 
 func shuffleDeck():
-	deckArray.shuffle()
+	deck_array.shuffle()
 
-func mergeDeck(passedDeck : Deck):
-	deckArray.append(passedDeck.getDeck())
+func mergeDeck(merging_deck : Deck):
+	deck_array.append_array(merging_deck.deck_array)
+	merging_deck.clear_deck()
+	
+	add_child(deck_array[deck_size - 1])
+	if flipped: deck_array[deck_size - 1].flip_reveal()
+	else: deck_array[deck_size - 1].flip_hide()
+	
+	# Update card dictionary:
+	card_dict.clear()
+	for card in deck_array:
+		if card_dict.has(card.card_id): card_dict[card.card_id].append(card)
+		else: card_dict[card.card_id] = [card]
+
+func is_empty() -> bool:
+	return deck_size == 0
+	
