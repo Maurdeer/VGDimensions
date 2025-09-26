@@ -152,6 +152,7 @@ shape = SubResource("RectangleShape2D_f61jr")
 [connection signal="area_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_entered"]
 [connection signal="area_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_exited"]
 [connection signal="body_entered" from="drag_and_drop_component2D" to="." method="_on_drag_and_drop_component_2d_body_entered"]
+[connection signal="input_event" from="drag_and_drop_component2D" to="." method="_on_drag_and_drop_component_2d_input_event"]
 [connection signal="input_event" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_input_event"]
 [connection signal="mouse_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_mouse_exited"]

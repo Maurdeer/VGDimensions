@@ -1,6 +1,9 @@
 extends Node2D
 class_name Card
 
+signal played
+signal interacted
+
 @export var resource: CardResource:
 	set(value):
 		resource = value
@@ -12,7 +15,9 @@ class_name Card
 	set(value):
 		draggable = value
 		$drag_and_drop_component2D.draggable = value
-@export var playable: bool = true
+var playable: bool = false
+var interactable: bool = false
+const SELECTION_UI = preload("uid://vei3yr63fqcj")
 
 # Utilities
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -75,36 +80,51 @@ func flip_hide() -> void:
 	revealed = false
 	if resource.on_flip_hide: resource.on_flip_hide()
 	
-func play() -> void:		
+func play() -> void:
 	if _play_bullets.size() == 1:
 		# Execute function right way, no selection needed!
-		_play_bullets[0].bullet_event.execute()
+		if _play_bullets[0].bullet_event: _play_bullets[0].bullet_event.execute()
 	elif _play_bullets.size() > 1:
 		# TODO: Pull Up Play Selection UI to pick an event to do.
 		# Let the function call poll until that option was picked
-		pass
-		
+		var select_UI: SelectionUI = SELECTION_UI.instantiate()
+		get_tree().root.add_child(select_UI)
+		select_UI.setup_play_selections(resource)
+		await select_UI.selection_complete
 	# Passive Call Now
+	played.emit()
 	resource.on_play()
 	
 func interact() -> void:
 	# TODO: Pull Up Grid Selection UI to pick an event to do.
 	# Let the function call poll until that option was picked
-	pass
+	var select_UI: SelectionUI = SELECTION_UI.instantiate()
+	get_tree().root.add_child(select_UI)
+	select_UI.setup_interact_selections(resource)
+	await select_UI.selection_complete
+	interacted.emit()
 
 # Card Input Functions
-func _on_drag_and_drop_component_2d_on_double_click() -> void:
+func _on_double_click() -> void:
 	flip()
 
-func _on_drag_and_drop_component_2d_on_single_click() -> void:
-	CardInspector.Instance.set_card(self)
-	if not playable: return
-	play()
+func _on_single_click() -> void:
+	if CardInspector.Instance: CardInspector.Instance.set_card(self)
+	if playable: play()
+	elif interactable: interact()
+	
 
+func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if not event is InputEventMouseButton: return
+	var mouse_button_event: InputEventMouseButton = event
+	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
+		if mouse_button_event.pressed:
+			if mouse_button_event.double_click:
+				_on_double_click()
+			else:
+				_on_single_click()
+				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
-	pass # Replace with function body.
-
-func _on_drag_and_drop_component_2d_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 
 static func construct_card_id(title: String, game_origin: CardResource.GameOrigin) -> String:

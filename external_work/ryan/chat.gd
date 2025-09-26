@@ -18,6 +18,7 @@ func send_message(msg: String) -> void:
 func create_message(msg: String) -> void:
 	var label: Label = Label.new()
 	message_strings.append(msg)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.text = msg
 	messages.add_child(label)
 	label.grab_focus()
