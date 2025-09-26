@@ -7,17 +7,17 @@ var deck_size: int:
 @export var flipped: bool = false
 var deck_array: Array[Card]
 var card_dict: Dictionary[String, Array]
-var empty_card: Card
 const CARD = preload("uid://c3e8058lwu0a")
 
 func _ready():
 	call_deferred("_after_ready")
 
 func _after_ready() -> void:
-	empty_card = CARD.instantiate()
-	empty_card.resource = CardResource.new()
-	add_child(empty_card)
-	empty_card.flip_hide()
+	#empty_card = CARD.instantiate()
+	#empty_card.resource = CardResource.new()
+	#add_child(empty_card)
+	#empty_card.flip_hide()
+	pass
 
 func drawCards(count : int):
 	var drawnCards = []
@@ -35,11 +35,7 @@ func addCards(cardArray: Array[Card]):
 
 func addCard(card: Card):
 	var card_id: String = Card.construct_card_id(card.resource.title, card.resource.game_origin)
-	if deck_size > 0:
-		remove_child(deck_array[deck_size - 1])
-	else:
-		remove_child(empty_card)
-		
+	if deck_size > 0: remove_child(deck_array[deck_size - 1])
 	deck_array.push_back(card)
 	if card_dict.has(card_id): card_dict[card_id].append(card)
 	else: card_dict[card_id] = [card]
@@ -53,17 +49,13 @@ func remove_top_card() -> Card:
 	var removed_card = deck_array.pop_back()
 	card_dict[removed_card.card_id].pop_back()
 	
-	if deck_size > 0:
-		add_child(deck_array[deck_size - 1])
-	else:
-		add_child(empty_card)
+	if deck_size > 0: add_child(deck_array[deck_size - 1])
 		
 	return removed_card
 
 func clear_deck() -> void:
 	if deck_size <= 0: return
 	remove_child(deck_array[deck_size - 1])
-	add_child(empty_card)
 	deck_array.clear()
 	card_dict.clear()
 
@@ -71,6 +63,7 @@ func shuffleDeck():
 	deck_array.shuffle()
 
 func mergeDeck(merging_deck : Deck):
+	if deck_size > 0: remove_child(deck_array[deck_size - 1])
 	deck_array.append_array(merging_deck.deck_array)
 	merging_deck.clear_deck()
 	

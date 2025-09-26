@@ -22,15 +22,15 @@ func _ready() -> void:
 func _after_ready() -> void:
 	pass
 	
-func add_to_discard_pile(card: Card) -> void:
-	card.draggable = false
-	discard_pile.addCard(card)
+func clear_hand() -> void:
+	for card in cards_in_hand.keys():
+		discard_card(card)
 	
 func fill_hand() -> void:
 	if draw_pile.deck_size + discard_pile.deck_size < hand_limit: 
 		printerr("Too little wack, need more cards in your cumilative deck (5 or more cards)")
 		return
-	while cards_in_hand.size() < hand_limit:
+	while not slot_queue.is_empty():
 		draw_card_to_hand()
 		
 func draw_card_to_hand() -> void:
@@ -59,10 +59,16 @@ func reshuffle_draw_pile() -> void:
 	draw_pile.shuffleDeck()
 	
 func discard_card(card: Card) -> void:
-	if not cards_in_hand.has(card): 
-		printerr("\"%s\" card from %s is not in player hand" % [card.resource.title, card.resource.game_origin]) 
-		return
-	cards_in_hand[card].remove_child(card)
+	if cards_in_hand.has(card): 
+		# Handle removal of objects related to card hand
+		cards_in_hand[card].remove_child(card)
+		slots.remove_child(cards_in_hand[card])
+		slot_queue.append(cards_in_hand[card])
+		cards_in_hand.erase(card)
+	
+	# TODO: Replace these with the state system variant of cards
+	card.draggable = false
+	card.playable = false
+	card.interactable = false
+	
 	discard_pile.addCard(card)
-	slots.remove_child(cards_in_hand[card])
-	cards_in_hand.erase(card)

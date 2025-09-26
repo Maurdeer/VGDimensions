@@ -3,7 +3,7 @@ class_name GameManager
 
 @export var cards: Array[CardResource]
 
-@onready var player_hand: PlayerHand = $player_hand
+@onready var player_hand: PlayerHand = $Control/player_hand
 const CARD = preload("uid://c3e8058lwu0a")
 
 
@@ -17,6 +17,11 @@ func create_cards_for_player_hand():
 	for card_res in cards:
 		var card: Card = CARD.instantiate()
 		card.resource = card_res
-		player_hand.add_to_discard_pile(card)
+		player_hand.discard_card(card)
 		
+	player_hand.fill_hand()
+
+
+func _on_next_turn_button_pressed() -> void:
+	player_hand.clear_hand()
 	player_hand.fill_hand()
