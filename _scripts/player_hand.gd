@@ -46,7 +46,6 @@ func draw_card_to_hand() -> void:
 	card.playable = true
 	var on_played = func(): discard_card(card)
 	card.played.connect(on_played)
-	card.played.connect(func(): card.played.disconnect(on_played))
 	
 	# Acquire a slot from the slot queue to hold the card
 	var slot: Control = slot_queue.pop_back()
@@ -61,6 +60,8 @@ func reshuffle_draw_pile() -> void:
 func discard_card(card: Card) -> void:
 	if cards_in_hand.has(card): 
 		# Handle removal of objects related to card hand
+		var on_played = func(): discard_card(card)
+		if card.played.is_connected(on_played): card.played.disconnect(on_played)
 		cards_in_hand[card].remove_child(card)
 		slots.remove_child(cards_in_hand[card])
 		slot_queue.append(cards_in_hand[card])
