@@ -6,8 +6,6 @@ class_name DragAndDropComponent2D
 
 var is_dragging: bool = false
 @onready var _parent: Node2D = $".."
-signal on_single_click
-signal on_double_click
 signal on_drop
 var draggable: bool = true
 var pre_drag_pos: Vector2

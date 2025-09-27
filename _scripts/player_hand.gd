@@ -61,7 +61,9 @@ func discard_card(card: Card) -> void:
 	if cards_in_hand.has(card): 
 		# Handle removal of objects related to card hand
 		var on_played = func(): discard_card(card)
-		if card.played.is_connected(on_played): card.played.disconnect(on_played)
+		if card.played.is_connected(on_played): 
+			print("Disconnected")
+			card.played.disconnect(on_played)
 		cards_in_hand[card].remove_child(card)
 		slots.remove_child(cards_in_hand[card])
 		slot_queue.append(cards_in_hand[card])

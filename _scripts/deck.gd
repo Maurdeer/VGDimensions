@@ -34,21 +34,27 @@ func addCards(cardArray: Array[Card]):
 		addCard(card)
 
 func addCard(card: Card):
+	if card in deck_array: return
 	var card_id: String = Card.construct_card_id(card.resource.title, card.resource.game_origin)
-	if deck_size > 0: remove_child(deck_array[deck_size - 1])
+	if deck_size > 0: 
+		remove_child(deck_array[deck_size - 1])
 	deck_array.push_back(card)
-	if card_dict.has(card_id): card_dict[card_id].append(card)
-	else: card_dict[card_id] = [card]
+	if card_dict.has(card_id): 
+		card_dict[card_id].append(card)
+	else: 
+		card_dict[card_id] = [card]
 	add_child(card)
-	if flipped: card.flip_reveal()
-	else: card.flip_hide()
+	if flipped: 
+		card.flip_reveal()
+	else: 
+		card.flip_hide()
 
 func remove_top_card() -> Card:
 	if deck_size <= 0: return
-	remove_child(deck_array[deck_size - 1])
 	var removed_card = deck_array.pop_back()
 	card_dict[removed_card.card_id].pop_back()
 	
+	remove_child(removed_card)
 	if deck_size > 0: add_child(deck_array[deck_size - 1])
 		
 	return removed_card
@@ -60,7 +66,10 @@ func clear_deck() -> void:
 	card_dict.clear()
 
 func shuffleDeck():
+	if deck_size <= 0: return
+	remove_child(deck_array[deck_size - 1])
 	deck_array.shuffle()
+	add_child(deck_array[deck_size - 1])
 
 func mergeDeck(merging_deck : Deck):
 	if deck_size > 0: remove_child(deck_array[deck_size - 1])
