@@ -1,12 +1,14 @@
-extends Node2D
+extends Control
 class_name RiftGrid
 
 static var Instance: RiftGrid
+@onready var grid_container: GridContainer = $GridContainer
+const CARD = preload("uid://c3e8058lwu0a")
 
 var riftGrid: Array[Array]
 
-var _riftGridWidth: int
-var _riftGridHeight: int
+var _riftGridWidth: int = 3
+var _riftGridHeight: int = 3
 
 func _ready() -> void:
 	# Initialize Singleton
@@ -19,11 +21,21 @@ func _ready() -> void:
 
 #Create Grid
 func drawInitialGrid():
-	for i in _riftGridHeight:
-		riftGrid[i] = Array([], TYPE_OBJECT, "Deck", null)
-		for j in _riftGridWidth:
-			riftGrid[i][j] = Deck.new()
-			drawCard(Vector2i(i,j))
+	grid_container.columns = _riftGridWidth
+	for i in range(_riftGridHeight):
+		riftGrid.append([])
+		for j in range(_riftGridWidth):
+			var deck: Deck = Deck.new()
+			deck.flipped = true
+			riftGrid[i].append(deck)
+			
+			# Visual Element
+			var slot: RiftGridSlot = RiftGridSlot.new()
+			slot.grid_position = Vector2i(j,i)
+			slot.add_child(riftGrid[i][j])
+			grid_container.add_child(slot)
+			
+			drawCard(Vector2i(j,i))
 
 #GRID INFORMATION
 func getGridXDim() -> int:
@@ -49,12 +61,13 @@ func getCardPosition():
 
 func drawCard(draw_to: Vector2i) -> void:
 	#get card from deck
-	var newCard: Card = Card.new()
+	var newCard: Card = CARD.instantiate()
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	placeCard(draw_to, newCard)
  
 func placeCard(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
+	newCard.grid_pos = place_at
 	riftGrid[place_at.y][place_at.x].addCard(newCard)
 
 func moveCardOff(move_off: Vector2i) -> Card:

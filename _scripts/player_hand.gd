@@ -1,6 +1,8 @@
 extends Node2D
 class_name PlayerHand
 
+static var Instance: PlayerHand
+
 const hand_limit: int = 5
 @export var discard_pile: Deck
 @export var draw_pile: Deck
@@ -11,6 +13,11 @@ var slot_queue: Array[Control]
 var cards_in_hand: Dictionary[Card, Control] = {}
 
 func _ready() -> void:
+	if Instance: 
+		queue_free()
+		return
+	Instance = self
+	
 	for i in range(hand_limit):
 		var slot: Control = Control.new()
 		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -27,9 +34,6 @@ func clear_hand() -> void:
 		discard_card(card)
 	
 func fill_hand() -> void:
-	if draw_pile.deck_size + discard_pile.deck_size < hand_limit: 
-		printerr("Too little wack, need more cards in your cumilative deck (5 or more cards)")
-		return
 	while not slot_queue.is_empty():
 		draw_card_to_hand()
 		
@@ -44,9 +48,13 @@ func draw_card_to_hand() -> void:
 	var card: Card = draw_pile.remove_top_card()
 	card.flip_reveal()
 	card.playable = true
-	var on_played = func(): discard_card(card)
+	var on_played: Callable
+	match(card.resource.type):
+		CardResource.CardType.FEATURE:
+			on_played = discard_card
+		CardResource.CardType.ASSET:
+			pass
 	card.played.connect(on_played)
-	
 	# Acquire a slot from the slot queue to hold the card
 	var slot: Control = slot_queue.pop_back()
 	slot.add_child(card)
@@ -58,20 +66,18 @@ func reshuffle_draw_pile() -> void:
 	draw_pile.shuffleDeck()
 	
 func discard_card(card: Card) -> void:
-	if cards_in_hand.has(card): 
-		# Handle removal of objects related to card hand
-		var on_played = func(): discard_card(card)
-		if card.played.is_connected(on_played): 
-			print("Disconnected")
-			card.played.disconnect(on_played)
-		cards_in_hand[card].remove_child(card)
-		slots.remove_child(cards_in_hand[card])
-		slot_queue.append(cards_in_hand[card])
-		cards_in_hand.erase(card)
+	remove_card_from_hand(card)
 	
 	# TODO: Replace these with the state system variant of cards
-	card.draggable = false
 	card.playable = false
 	card.interactable = false
 	
 	discard_pile.addCard(card)
+	
+func remove_card_from_hand(card: Card) -> void:
+	if not cards_in_hand.has(card): return
+	if card.played.is_connected(discard_card): card.played.disconnect(discard_card)
+	if card.get_parent() == cards_in_hand[card]: cards_in_hand[card].remove_child(card)
+	slots.remove_child(cards_in_hand[card])
+	slot_queue.append(cards_in_hand[card])
+	cards_in_hand.erase(card)

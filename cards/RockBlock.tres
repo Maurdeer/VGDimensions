@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://bwgk83gwvfr8w"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_n6tfm"]
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_xcs7r"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cmp8r"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="2_jowf0"]
+[ext_resource type="Texture2D" uid="uid://cqtl56byt7dgk" path="res://art/card_art/Outcasts/AirDungeon.png" id="4_3xv7v"]
+
+[sub_resource type="Resource" id="Resource_xcs7r"]
+script = ExtResource("2_jowf0")
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_n6tfm"]
+script = ExtResource("1_n6tfm")
+bullet_event = SubResource("Resource_xcs7r")
+bullet_description = "Place this card anywhere you select bruh"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_cmp8r")
+title = "Rock Block"
+type = 1
+game_origin = 25
+bullets = Array[ExtResource("1_n6tfm")]([SubResource("Resource_n6tfm")])
+quip_description = "hehehehheh dude"
+card_art = ExtResource("4_3xv7v")
+background_art = ExtResource("1_xcs7r")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

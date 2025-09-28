@@ -4,6 +4,7 @@ class_name GameManager
 @export var cards: Array[CardResource]
 
 @onready var player_hand: PlayerHand = $Control/player_hand
+@onready var rift_grid: RiftGrid = $RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")
 
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 
 func _after_ready() -> void:
 	create_cards_for_player_hand()
+	rift_grid.drawInitialGrid()
 	
 func create_cards_for_player_hand():
 	for card_res in cards:

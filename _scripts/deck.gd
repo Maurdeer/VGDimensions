@@ -5,6 +5,7 @@ var deck_size: int:
 	get:
 		return deck_array.size()
 @export var flipped: bool = false
+@export var draggable: bool = false
 var deck_array: Array[Card]
 var card_dict: Dictionary[String, Array]
 const CARD = preload("uid://c3e8058lwu0a")
@@ -36,6 +37,7 @@ func addCards(cardArray: Array[Card]):
 func addCard(card: Card):
 	if card in deck_array: return
 	var card_id: String = Card.construct_card_id(card.resource.title, card.resource.game_origin)
+	card.draggable = draggable
 	if deck_size > 0: 
 		remove_child(deck_array[deck_size - 1])
 	deck_array.push_back(card)
@@ -43,11 +45,19 @@ func addCard(card: Card):
 		card_dict[card_id].append(card)
 	else: 
 		card_dict[card_id] = [card]
+		
+		
+	if card.get_parent(): card.get_parent().remove_child(card)
 	add_child(card)
+	
 	if flipped: 
 		card.flip_reveal()
 	else: 
 		card.flip_hide()
+		
+func get_top_card() -> Card:
+	if deck_size <= 0: return null
+	return deck_array[deck_size - 1]
 
 func remove_top_card() -> Card:
 	if deck_size <= 0: return
@@ -72,13 +82,15 @@ func shuffleDeck():
 	add_child(deck_array[deck_size - 1])
 
 func mergeDeck(merging_deck : Deck):
+	if merging_deck.deck_size <= 0: return
 	if deck_size > 0: remove_child(deck_array[deck_size - 1])
 	deck_array.append_array(merging_deck.deck_array)
 	merging_deck.clear_deck()
 	
-	add_child(deck_array[deck_size - 1])
-	if flipped: deck_array[deck_size - 1].flip_reveal()
-	else: deck_array[deck_size - 1].flip_hide()
+	if deck_size > 0:
+		add_child(deck_array[deck_size - 1])
+		if flipped: deck_array[deck_size - 1].flip_reveal()
+		else: deck_array[deck_size - 1].flip_hide()
 	
 	# Update card dictionary:
 	card_dict.clear()
