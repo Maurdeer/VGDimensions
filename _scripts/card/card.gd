@@ -80,11 +80,13 @@ func flip() -> void:
 	else: flip_reveal()
 
 func flip_reveal() -> void:
+	if not is_visible_in_tree(): return
 	animation_player.play("flip_reveal")
 	revealed = true
 	if resource.on_flip_reveal: resource.on_flip_reveal()
 
 func flip_hide() -> void:
+	if not is_visible_in_tree(): return
 	animation_player.play("flip_hide")
 	revealed = false
 	if resource.on_flip_hide: resource.on_flip_hide()

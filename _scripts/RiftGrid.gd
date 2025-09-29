@@ -5,10 +5,22 @@ static var Instance: RiftGrid
 @onready var grid_container: GridContainer = $GridContainer
 const CARD = preload("uid://c3e8058lwu0a")
 
-var riftGrid: Array[Array]
+var grid: Array[Array]
 
-var _riftGridWidth: int = 3
-var _riftGridHeight: int = 3
+var rift_grid_width: int = 3
+var rift_grid_height: int = 3
+
+var rift_card_pack: CardPackResource:
+	set(value):
+		rift_card_pack = value
+		if not rift_card_pack: return
+		for card_res in rift_card_pack.card_resources.keys():
+			for i in rift_card_pack.card_resources[card_res]:
+				var card: Card = CARD.instantiate()
+				card.resource = card_res
+				_card_refs.append(card)
+var _card_refs: Array[Card]
+var _rift_deck: Deck = Deck.new()
 
 func _ready() -> void:
 	# Initialize Singleton
@@ -20,35 +32,32 @@ func _ready() -> void:
 #Add functionality for border cards, a la Bullet spawning locations in Willow
 
 #Create Grid
-func drawInitialGrid():
-	grid_container.columns = _riftGridWidth
-	for i in range(_riftGridHeight):
-		riftGrid.append([])
-		for j in range(_riftGridWidth):
+func clear_grid() -> void:
+	for child in grid_container.get_children():
+		child.queue_free()
+	grid.clear()
+	_rift_deck.clear_deck()
+
+func draw_initial_grid():
+	if not grid.is_empty() or not _rift_deck.is_empty(): clear_grid()
+	for card in _card_refs:
+		_rift_deck.addCard(card)
+	_rift_deck.shuffleDeck()
+	grid_container.columns = rift_grid_width
+	for i in range(rift_grid_height):
+		grid.append([])
+		for j in range(rift_grid_width):
 			var deck: Deck = Deck.new()
 			deck.flipped = true
-			riftGrid[i].append(deck)
+			grid[i].append(deck)
 			
 			# Visual Element
 			var slot: RiftGridSlot = RiftGridSlot.new()
 			slot.grid_position = Vector2i(j,i)
-			slot.add_child(riftGrid[i][j])
+			slot.add_child(grid[i][j])
 			grid_container.add_child(slot)
 			
-			drawCard(Vector2i(j,i))
-
-#GRID INFORMATION
-func getGridXDim() -> int:
-	return _riftGridWidth
-
-func getGridYDim() -> int:
-	return _riftGridHeight
-
-func setGridXDim(newDim: int) -> void:
-	_riftGridWidth = newDim
-
-func setGridYDim(newDim: int) -> void:
-	_riftGridHeight = newDim
+			draw_card(Vector2i(j,i))
 
 #CARD INFORMATION
 func getCardAttribute():
@@ -59,25 +68,29 @@ func getCardPosition():
 
 #MODIFY AND MOVE CARDS
 
-func drawCard(draw_to: Vector2i) -> void:
+func draw_card(draw_to: Vector2i) -> void:
 	#get card from deck
-	var newCard: Card = CARD.instantiate()
+	var new_card: Card
+	if not _rift_deck.is_empty():
+		new_card = _rift_deck.remove_top_card()
+	else:
+		new_card = CARD.instantiate()
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
-	placeCard(draw_to, newCard)
+	placeCard(draw_to, new_card)
  
 func placeCard(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	newCard.grid_pos = place_at
-	riftGrid[place_at.y][place_at.x].addCard(newCard)
+	grid[place_at.y][place_at.x].addCard(newCard)
 
 func moveCardOff(move_off: Vector2i) -> Card:
-	return riftGrid[move_off.y][move_off.x].pop_back()
+	return grid[move_off.y][move_off.x].pop_back()
 
 func discardCard(discard_from: Vector2i, target_deck: Deck):
-	target_deck.addCard(riftGrid[discard_from.y][discard_from.x].removeCardFromGrid())
+	target_deck.addCard(grid[discard_from.y][discard_from.x].removeCardFromGrid())
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
-	return riftGrid[remove_from.y][remove_from.x].removeCard()
+	return grid[remove_from.y][remove_from.x].removeCard()
 
 func mutateCardStat():
 	pass
@@ -86,14 +99,14 @@ func setCardPosition():
 	pass
 
 func swapCards(card_a: Vector2i, card_b: Vector2i):
-	var tempCard: Card = riftGrid[card_a.y][card_a.x].removeCard()
-	riftGrid[card_a.y][card_a.x].addCard(riftGrid[card_b.y][card_b.x].removeCard())
-	riftGrid[card_b.y][card_b.x].addCard(tempCard)
+	var tempCard: Card = grid[card_a.y][card_a.x].removeCard()
+	grid[card_a.y][card_a.x].addCard(grid[card_b.y][card_b.x].removeCard())
+	grid[card_b.y][card_b.x].addCard(tempCard)
 
 func swapDecks(deck_a: Vector2i, deck_b: Vector2i):
-	var tempDeck: Deck = riftGrid[deck_a.y][deck_a.x]
-	riftGrid[deck_a.x][deck_a.y] = riftGrid[deck_b.y][deck_b.x]
-	riftGrid[deck_b.y][deck_b.x] = tempDeck
+	var tempDeck: Deck = grid[deck_a.y][deck_a.x]
+	grid[deck_a.x][deck_a.y] = grid[deck_b.y][deck_b.x]
+	grid[deck_b.y][deck_b.x] = tempDeck
 
 func shuffleCardBackInDeck(shuffleCard: Card, targetDeck: Deck):
 	targetDeck.addCard(shuffleCard)
@@ -109,34 +122,34 @@ func shiftCardsHorizontal(start_pos: Vector2i, leftNotRight: bool, amount: int):
 			var tempDeck2: Deck = Deck.new()
 			while i >= 0:
 				if i - 1 >= 0:
-					tempDeck = riftGrid[start_pos.y][i - 1]
-					riftGrid[start_pos.y][i - 1] = riftGrid[start_pos.y][i]
-					riftGrid[start_pos.y][i] = tempDeck2
+					tempDeck = grid[start_pos.y][i - 1]
+					grid[start_pos.y][i - 1] = grid[start_pos.y][i]
+					grid[start_pos.y][i] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in riftGrid[start_pos.y][i].size():
+					for deadCard in grid[start_pos.y][i].size():
 						discardCard(Vector2i(i, start_pos.y), discardPile)
-					riftGrid[start_pos.y][i] = tempDeck2
+					grid[start_pos.y][i] = tempDeck2
 				i -= 1
-			drawCard(start_pos)
+			draw_card(start_pos)
 			amount -= 1
 	else:
 		while amount > 0:
 			var i: int = start_pos.y
 			var tempDeck: Deck = Deck.new()
 			var tempDeck2: Deck = Deck.new()
-			while i < _riftGridWidth:
-				if i + 1 < _riftGridWidth:
-					tempDeck = riftGrid[start_pos.y][i + 1]
-					riftGrid[start_pos.y][i + 1] = riftGrid[start_pos.y][i]
-					riftGrid[start_pos.y][i] = tempDeck2
+			while i < rift_grid_width:
+				if i + 1 < rift_grid_width:
+					tempDeck = grid[start_pos.y][i + 1]
+					grid[start_pos.y][i + 1] = grid[start_pos.y][i]
+					grid[start_pos.y][i] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in riftGrid[start_pos.y][i].size():
+					for deadCard in grid[start_pos.y][i].size():
 						discardCard(Vector2i(i, start_pos.y), discardPile)
-					riftGrid[start_pos.y][i] = tempDeck2
+					grid[start_pos.y][i] = tempDeck2
 				i += 1
-			drawCard(start_pos)
+			draw_card(start_pos)
 			amount -= 1
 
 func shiftCardsVertical(start_pos: Vector2i, upNotDown: bool, amount: int):
@@ -148,63 +161,63 @@ func shiftCardsVertical(start_pos: Vector2i, upNotDown: bool, amount: int):
 			var tempDeck2: Deck = Deck.new()
 			while i >= 0:
 				if i - 1 >= 0:
-					tempDeck = riftGrid[i - 1][start_pos.x]
-					riftGrid[i - 1][start_pos.x] = riftGrid[i][start_pos.x]
-					riftGrid[i][start_pos.x] = tempDeck2
+					tempDeck = grid[i - 1][start_pos.x]
+					grid[i - 1][start_pos.x] = grid[i][start_pos.x]
+					grid[i][start_pos.x] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in riftGrid[i][start_pos.x].size():
+					for deadCard in grid[i][start_pos.x].size():
 						discardCard(Vector2i(start_pos.x, i), discardPile)
-					riftGrid[i][start_pos.x] = tempDeck2
+					grid[i][start_pos.x] = tempDeck2
 				i -= 1
-			drawCard(start_pos)
+			draw_card(start_pos)
 			amount -= 1
 	else:
 		while amount > 0:
 			var i: int = start_pos.y
 			var tempDeck: Deck = Deck.new()
 			var tempDeck2: Deck = Deck.new()
-			while i < _riftGridHeight:
-				if i + 1 < _riftGridHeight:
-					tempDeck = riftGrid[i + 1][start_pos.x]
-					riftGrid[i + 1][start_pos.x] = riftGrid[i][start_pos.x]
-					riftGrid[i][start_pos.x] = tempDeck2
+			while i < rift_grid_height:
+				if i + 1 < rift_grid_height:
+					tempDeck = grid[i + 1][start_pos.x]
+					grid[i + 1][start_pos.x] = grid[i][start_pos.x]
+					grid[i][start_pos.x] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in riftGrid[i][start_pos.x].size():
+					for deadCard in grid[i][start_pos.x].size():
 						discardCard(Vector2(start_pos.x, i), discardPile)
-					riftGrid[i][start_pos.x] = tempDeck2
+					grid[i][start_pos.x] = tempDeck2
 				i += 1
-			drawCard(start_pos)
+			draw_card(start_pos)
 			amount -= 1
 
 func loopCardsHorizontal(startY: int, leftNotRight: bool, amount: int):
 	if leftNotRight:
 		while amount > 0:
-			var tempDeck: Deck = riftGrid[startY].pop_front()
-			riftGrid[startY].push_back(tempDeck)
+			var tempDeck: Deck = grid[startY].pop_front()
+			grid[startY].push_back(tempDeck)
 	else:
 		while amount > 0:
-			var tempDeck: Deck = riftGrid[startY].pop_back()
-			riftGrid[startY].push_front(tempDeck)
+			var tempDeck: Deck = grid[startY].pop_back()
+			grid[startY].push_front(tempDeck)
 
 func loopCardsVertical(startX: int, upNotDown: bool, amount: int):
 	if upNotDown:
 		while amount > 0:
-			var tempDeck: Deck = riftGrid[0][startX]
+			var tempDeck: Deck = grid[0][startX]
 			var i: int = 1
-			while i < _riftGridHeight:
-				riftGrid[i - 1][startX] = riftGrid[i][startX]
+			while i < rift_grid_height:
+				grid[i - 1][startX] = grid[i][startX]
 				i += 1
-			riftGrid[_riftGridHeight - 1][startX] = tempDeck
+			grid[rift_grid_height - 1][startX] = tempDeck
 	else:
 		while amount > 0:
-			var tempDeck: Deck = riftGrid[_riftGridHeight - 1][startX]
-			var i: int = _riftGridHeight - 2
+			var tempDeck: Deck = grid[rift_grid_height - 1][startX]
+			var i: int = rift_grid_height - 2
 			while i >= 0:
-				riftGrid[i + 1][startX] = riftGrid[i][startX]
+				grid[i + 1][startX] = grid[i][startX]
 				i -= 1
-			riftGrid[0][startX] = tempDeck
+			grid[0][startX] = tempDeck
 
 func revolveCards():
 	pass

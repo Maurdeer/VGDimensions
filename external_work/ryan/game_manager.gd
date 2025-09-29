@@ -2,6 +2,7 @@ extends Node
 class_name GameManager
 
 @export var cards: Array[CardResource]
+@export var card_pack: CardPackResource
 
 @onready var player_hand: PlayerHand = $Control/player_hand
 @onready var rift_grid: RiftGrid = $RiftGrid
@@ -13,7 +14,8 @@ func _ready() -> void:
 
 func _after_ready() -> void:
 	create_cards_for_player_hand()
-	rift_grid.drawInitialGrid()
+	rift_grid.rift_card_pack = card_pack
+	rift_grid.draw_initial_grid()
 	
 func create_cards_for_player_hand():
 	for card_res in cards:
@@ -22,7 +24,6 @@ func create_cards_for_player_hand():
 		player_hand.discard_card(card)
 		
 	player_hand.fill_hand()
-
 
 func _on_next_turn_button_pressed() -> void:
 	player_hand.clear_hand()

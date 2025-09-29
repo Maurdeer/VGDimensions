@@ -18,8 +18,8 @@ func _ready() -> void:
 
 func player_select_card() -> void:
 	_first = true
-	for i in rift_grid.getGridYDim():
-		for deck: Deck in rift_grid.riftGrid[i]:
+	for i in rift_grid.rift_grid_height:
+		for deck: Deck in rift_grid.grid[i]:
 			var card: Card = deck.get_top_card()
 			
 			# TODO: Replace with State Swapping
@@ -37,8 +37,8 @@ func on_card_clicked(grid_pos: Vector2i):
 	# Handle this in the state machine of card instead of here
 	# For now just set them to interactable since we know they are cards on
 	# the grid.
-	for i in rift_grid.getGridYDim():
-		for deck: Deck in rift_grid.riftGrid[i]:
+	for i in rift_grid.rift_grid_height:
+		for deck: Deck in rift_grid.grid[i]:
 			var card: Card = deck.get_top_card()
 			
 			# TODO: Replace with State Swapping
