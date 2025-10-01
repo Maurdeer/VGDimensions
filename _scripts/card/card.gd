@@ -31,6 +31,7 @@ const SELECTION_UI = preload("uid://vei3yr63fqcj")
 # Utilities
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var card_sm: CardStateMachine = $CardSM
+@onready var dnd_2d: DragAndDropComponent2D = $drag_and_drop_component2D
 
 # Dynamic Stats
 var hp: int
@@ -49,12 +50,16 @@ var _action_bullets: Array[BulletResource]
 var _social_bullets: Array[BulletResource]
 
 func _enter_tree() -> void:
-	revealed = true
 	refresh_stats()
 	call_deferred("_setup")
 	
 func _setup() -> void:
-	$drag_and_drop_component2D.draggable = draggable
+	# Play the animation when entering the tree
+	if not revealed: animation_player.play("flip_hide")
+	else: animation_player.play("flip_reveal")
+	
+	# Let card be draggable on launch or not
+	dnd_2d.draggable = draggable
 	
 func _on_resource_change() -> void:
 	for bullet in resource.bullets:
@@ -82,20 +87,18 @@ func flip() -> void:
 	else: flip_reveal()
 
 func flip_reveal() -> void:
-	if not is_visible_in_tree(): 
-		push_warning("Trying to play reveal card animation that isn't in tree")
-		return
-	animation_player.play("flip_reveal")
+	if revealed: return
+	if is_visible_in_tree(): 
+		animation_player.play("flip_reveal")
+		resource.on_flip_reveal() # (Ryan) May want to remove, this is kinda not good
 	revealed = true
-	if resource.on_flip_reveal: resource.on_flip_reveal()
 
 func flip_hide() -> void:
-	if not is_visible_in_tree(): 
-		push_warning("Trying to play hide card animation that isn't in tree")
-		return
-	animation_player.play("flip_hide")
+	if not revealed: return
+	if is_visible_in_tree(): 
+		animation_player.play("flip_hide")
+		resource.on_flip_hide() # (Ryan) May want to remove, this is kinda not good
 	revealed = false
-	if resource.on_flip_hide: resource.on_flip_hide()
 
 # Card Input Functions
 func _on_double_click() -> void:

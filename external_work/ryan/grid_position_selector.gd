@@ -24,7 +24,7 @@ func player_select_card_adj_to_position(pos: Vector2i) -> void:
 			if (card.grid_pos - pos).length() == 1:
 				card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
 			else:
-				card.card_sm.transition_to_state(CardStateMachine.StateType.UNINTERACTABLE)
+				card.card_sm.transition_to_state(CardStateMachine.StateType.UNSELECTABLE)
 			card.selected.connect(on_card_clicked)
 			
 	# TODO: Some kind of highlight vfx over each RiftGridSlot would be nice

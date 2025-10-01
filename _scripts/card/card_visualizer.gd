@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends Sprite2D
 class_name CardVisualizer
 
 ## Purpose: Provide a seemless way of seeing updates to this node while in the editor.

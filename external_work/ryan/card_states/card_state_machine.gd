@@ -5,7 +5,8 @@ enum StateType {
 	UNINTERACTABLE = 0, 
 	IN_HAND, 
 	ON_RIFT, 
-	SELECTABLE
+	SELECTABLE,
+	UNSELECTABLE
 }
 
 var states: Array[CardState]
@@ -14,6 +15,7 @@ func _ready() -> void:
 	states.append(InHandCardState.new())
 	states.append(OnRiftCardState.new())
 	states.append(SelectableCardState.new())
+	states.append(UnselectableCardState.new())
 	
 	for state in states:
 		add_child(state)

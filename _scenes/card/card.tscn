@@ -113,6 +113,7 @@ script = ExtResource("1_q5obu")
 resource = SubResource("Resource_u8xt1")
 
 [node name="card_visualizer" parent="." node_paths=PackedStringArray("card") instance=ExtResource("4_pots7")]
+use_parent_material = true
 card = NodePath("..")
 card_resource = SubResource("Resource_u8xt1")
 
