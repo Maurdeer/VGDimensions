@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://g2ssr3tyqdis"]
+
+[ext_resource type="Script" uid="uid://bjgegi1onssbv" path="res://external_work/ryan/chat.gd" id="1_1yq7a"]
+
+[node name="Chat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1yq7a")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_behavior_recursive = 2
+follow_focus = true
+draw_focus_border = true
+horizontal_scroll_mode = 0
+
+[node name="Messages" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_behavior_recursive = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="message_text" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Type Message Here"
+keep_editing_on_text_submit = true
+
+[node name="send_button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Send"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/send_button" to="." method="_on_send_button_pressed"]

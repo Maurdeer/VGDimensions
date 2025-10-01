@@ -9,20 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_tbwoo"]
 script = ExtResource("3_jey1p")
-title = ""
-type = 0
-game_origin = 0
-deleon_value = -1
-starting_hp = -1
-movable = true
-burnable = true
-discardable = true
-stackable = true
-refreshable = false
-stunnable = true
-flippable = true
-bullets = Array[ExtResource("2_tbwoo")]([])
-quip_description = ""
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
 [node name="gridcard_visualizer" type="Sprite2D"]

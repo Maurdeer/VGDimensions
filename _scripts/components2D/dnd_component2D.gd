@@ -6,8 +6,6 @@ class_name DragAndDropComponent2D
 
 var is_dragging: bool = false
 @onready var _parent: Node2D = $".."
-signal on_single_click
-signal on_double_click
 signal on_drop
 var draggable: bool = true
 var pre_drag_pos: Vector2
@@ -32,12 +30,6 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		if mouse_button_event.pressed:
 			# Dragging
 			is_dragging = true
-			
-			# (Ryan) Temp bad input lowkey ngl :D
-			if mouse_button_event.double_click:
-				on_double_click.emit()
-			else:
-				on_single_click.emit()
 		else:
 			# Dropped
 			on_drop.emit()

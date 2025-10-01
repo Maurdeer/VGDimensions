@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckef5ss54helk"]
+
+[ext_resource type="PackedScene" uid="uid://b3s1nb5elpdfk" path="res://external_work/chrizz/balatro.tscn" id="1_owtmn"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/rift_grid.tscn" id="4_lavtb"]
+[ext_resource type="Script" uid="uid://bwkue74uh1m7y" path="res://_scripts/ui/card_inspector.gd" id="7_hi6yo"]
+[ext_resource type="PackedScene" uid="uid://b6kr78hmw6jcw" path="res://_scenes/card/clickable_card_visualizer.tscn" id="7_urak4"]
+
+[node name="main" type="Node2D"]
+
+[node name="Balatro" parent="." instance=ExtResource("1_owtmn")]
+position = Vector2(744, 343)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(842, 342)
+zoom = Vector2(0.9, 0.9)
+
+[node name="player_hand" parent="." instance=ExtResource("2_ce27d")]
+position = Vector2(799, 833)
+
+[node name="RiftGrid" parent="." instance=ExtResource("4_lavtb")]
+offset_left = 552.0
+offset_top = -35.0
+offset_right = 552.0
+offset_bottom = -35.0
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -224.0
+offset_top = -259.0
+offset_right = 1907.0
+offset_bottom = 940.0
+mouse_filter = 2
+
+[node name="CardPopupUI" type="Control" parent="GUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -422.0
+offset_top = -302.0
+offset_bottom = 302.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardInspector" type="Control" parent="GUI/CardPopupUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = 6.5
+offset_right = -62.0
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_hi6yo")
+
+[node name="clickable_card_visualizer" parent="GUI/CardPopupUI/CardInspector" instance=ExtResource("7_urak4")]
+scale = Vector2(0.25, 0.25)
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="Mediator" type="Node" parent="Managers"]

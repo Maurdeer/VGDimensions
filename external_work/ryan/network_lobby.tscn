@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=3 uid="uid://ci47eik7lfa7d"]
+
+[ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="1_m1sd3"]
+[ext_resource type="Script" uid="uid://dfx8rqq4tlwp4" path="res://_scripts/ui/main_menu.gd" id="1_sdrmk"]
+[ext_resource type="Texture2D" uid="uid://b1bcybpnupaha" path="res://art/Title.png" id="2_sdrmk"]
+[ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://external_work/ryan/chat.tscn" id="4_d2i2g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2i2g"]
+shader = ExtResource("1_m1sd3")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_crufo"]
+
+[sub_resource type="Animation" id="Animation_crufo"]
+resource_name = "ShowLobby"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yenhm"]
+_data = {
+&"ShowLobby": SubResource("Animation_crufo")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sdrmk")
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_d2i2g")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_crufo")
+expand_mode = 1
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_right = 0.87500006
+anchor_bottom = 0.58100003
+offset_left = 0.75
+offset_right = -0.7501221
+offset_bottom = -0.4800415
+grow_horizontal = 2
+texture = ExtResource("2_sdrmk")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -319.24316
+offset_top = -192.0
+offset_right = 319.24316
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="name_line-edit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+placeholder_text = "Insert Player Name Here"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="host_button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Host"
+
+[node name="join_button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Join"
+
+[node name="ip-address_line-edit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+placeholder_text = "Join IP Address"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Title")
+libraries = {
+&"": SubResource("AnimationLibrary_yenhm")
+}
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Chat" parent="." instance=ExtResource("4_d2i2g")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.569
+anchor_right = 0.29700002
+offset_top = -0.52001953
+offset_right = 0.75994873
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/join_button" to="." method="_on_join_button_pressed"]

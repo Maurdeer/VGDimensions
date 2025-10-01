@@ -1,12 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckef5ss54helk"]
+[gd_scene load_steps=6 format=3 uid="uid://ckef5ss54helk"]
 
-[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_dmym1"]
 [ext_resource type="PackedScene" uid="uid://b3s1nb5elpdfk" path="res://external_work/chrizz/balatro.tscn" id="1_owtmn"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
-[ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/BreakableWall.tres" id="4_6bnj4"]
-[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/RiftGrid.tscn" id="4_lavtb"]
-[ext_resource type="Resource" uid="uid://cgc6j288lco7g" path="res://cards/Ashe.tres" id="5_ce27d"]
-[ext_resource type="Resource" uid="uid://dkv5fsn4snafe" path="res://cards/Tinker.tres" id="6_urak4"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/rift_grid.tscn" id="4_lavtb"]
 [ext_resource type="Script" uid="uid://bwkue74uh1m7y" path="res://_scripts/ui/card_inspector.gd" id="7_hi6yo"]
 [ext_resource type="PackedScene" uid="uid://b6kr78hmw6jcw" path="res://_scenes/card/clickable_card_visualizer.tscn" id="7_urak4"]
 
@@ -23,22 +19,10 @@ zoom = Vector2(0.9, 0.9)
 position = Vector2(657, 877)
 
 [node name="RiftGrid" parent="." instance=ExtResource("4_lavtb")]
-position = Vector2(552, -35)
-
-[node name="breakable_wall_card" parent="." instance=ExtResource("1_dmym1")]
-position = Vector2(149, 580)
-resource = ExtResource("4_6bnj4")
-playable = false
-
-[node name="ashe_card" parent="." instance=ExtResource("1_dmym1")]
-position = Vector2(-22, 272)
-resource = ExtResource("5_ce27d")
-playable = false
-
-[node name="tinker_card" parent="." instance=ExtResource("1_dmym1")]
-position = Vector2(183, -21)
-resource = ExtResource("6_urak4")
-playable = false
+offset_left = 552.0
+offset_top = -35.0
+offset_right = 552.0
+offset_bottom = -35.0
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3

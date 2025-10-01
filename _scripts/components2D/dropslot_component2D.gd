@@ -1,7 +1,6 @@
 extends Area2D
 class_name DropSlot2D
 
-@onready var _parent: Node = $".."
 signal on_drop(dnd_comp: DragAndDropComponent2D)
 
 ## Gurantee that a DragAndDropComponent2D is being dropped on this slot!
