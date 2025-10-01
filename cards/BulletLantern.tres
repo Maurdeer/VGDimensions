@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=4 format=3 uid="uid://dupxrk8ncmqe4"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_bijci"]
+[ext_resource type="Texture2D" uid="uid://tf162gxo2o30" path="res://art/card_art/Willow/BulletLantern.png" id="2_7kn37"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_wd5mm"]
+
+[resource]
+script = ExtResource("2_wd5mm")
+title = "Bullet Lantern"
+type = 4
+game_origin = 30
+card_art = ExtResource("2_7kn37")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

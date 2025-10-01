@@ -6,7 +6,7 @@ class_name GridPositionSelector
 static var Instance: GridPositionSelector
 
 var _first: bool
-var selected_pos: Vector2i
+var _selected_pos: Vector2i
 signal selected
 
 func _ready() -> void:
@@ -16,7 +16,7 @@ func _ready() -> void:
 		return
 	Instance = self
 	
-func player_select_card_adj_to_position(pos: Vector2i) -> void:
+func player_select_card_adj_to_position(pos: Vector2i) -> Vector2i:
 	_first = true
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
@@ -27,9 +27,10 @@ func player_select_card_adj_to_position(pos: Vector2i) -> void:
 				card.card_sm.transition_to_state(CardStateMachine.StateType.UNSELECTABLE)
 			card.selected.connect(on_card_clicked)
 			
-	# TODO: Some kind of highlight vfx over each RiftGridSlot would be nice
+	await selected
+	return _selected_pos
 
-func player_select_card() -> void:
+func player_select_card() -> Vector2i:
 	_first = true
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
@@ -37,8 +38,9 @@ func player_select_card() -> void:
 			
 			card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
 			card.selected.connect(on_card_clicked)
-	
-	# TODO: Some kind of highlight vfx over each RiftGridSlot would be nice
+			
+	await selected
+	return _selected_pos
 
 func on_card_clicked(grid_pos: Vector2i):
 	if not _first: return
@@ -55,5 +57,5 @@ func on_card_clicked(grid_pos: Vector2i):
 			# TODO: Replace with State Swapping
 			card.card_sm.transition_to_prev_state()
 			card.selected.disconnect(on_card_clicked)
-	selected_pos = grid_pos
+	_selected_pos = grid_pos
 	selected.emit()
