@@ -45,19 +45,22 @@ func draw_card_to_hand() -> void:
 	
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
-	card.flip_reveal()
-	card.playable = true
+	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
 	var on_played: Callable
 	match(card.resource.type):
 		CardResource.CardType.FEATURE:
 			on_played = discard_card
 		CardResource.CardType.ASSET:
 			pass
-	card.played.connect(on_played)
+	if on_played: card.played.connect(on_played)
 	# Acquire a slot from the slot queue to hold the card
 	var slot: Control = slot_queue.pop_back()
 	slot.add_child(card)
 	slots.add_child(slot)
+	
+	# When card in tree do the following:
+	card.flip_reveal()
+	
 	cards_in_hand[card] = slot
 	
 func reshuffle_draw_pile() -> void:
@@ -66,10 +69,6 @@ func reshuffle_draw_pile() -> void:
 	
 func discard_card(card: Card) -> void:
 	remove_card_from_hand(card)
-	
-	# TODO: Replace these with the state system variant of cards
-	card.playable = false
-	card.interactable = false
 	
 	discard_pile.addCard(card)
 	

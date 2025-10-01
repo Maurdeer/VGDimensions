@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=16 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_r36b4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
 [ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
 [ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
+[ext_resource type="Script" uid="uid://d1y23uhkdag2" path="res://external_work/ryan/card_states/card_state_machine.gd" id="9_uhl3e"]
 
 [sub_resource type="Resource" id="Resource_u8xt1"]
 script = ExtResource("3_uhl3e")
@@ -18,7 +19,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("card_front:scale")
+tracks/0/path = NodePath("card_visualizer:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -58,7 +59,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("card_front:scale")
+tracks/1/path = NodePath("card_visualizer:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -74,7 +75,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("card_front:scale")
+tracks/0/path = NodePath("card_visualizer:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -111,7 +112,7 @@ scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
 resource = SubResource("Resource_u8xt1")
 
-[node name="card_front" parent="." node_paths=PackedStringArray("card") instance=ExtResource("4_pots7")]
+[node name="card_visualizer" parent="." node_paths=PackedStringArray("card") instance=ExtResource("4_pots7")]
 card = NodePath("..")
 card_resource = SubResource("Resource_u8xt1")
 
@@ -148,6 +149,9 @@ script = ExtResource("4_f61jr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drag_and_drop_component2D"]
 position = Vector2(-8.66977e-07, -1.73395e-06)
 shape = SubResource("RectangleShape2D_f61jr")
+
+[node name="CardSM" type="Node" parent="."]
+script = ExtResource("9_uhl3e")
 
 [connection signal="area_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_entered"]
 [connection signal="area_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_exited"]

@@ -18,11 +18,17 @@ func setup_play_selections(resource: CardResource) -> void:
 			create_button_by_bullet(resource, bullet)
 
 func setup_interaction_selections(resource: CardResource) -> void:
+	var selection_was_created: bool = false
 	for bullet in resource.bullets:
 		if bullet.bullet_type == BulletResource.BulletType.SOCIAL \
 		or bullet.bullet_type == BulletResource.BulletType.ACTION:
 			create_button_by_bullet(resource, bullet)
+			selection_was_created = true
 			
+	if not selection_was_created:
+		printerr("Interactable Card has no interactable bullets!")
+		make_selection()
+
 func create_button_by_bullet(resource: CardResource, bullet: BulletResource):
 	var new_button: Button = Button.new()
 	

@@ -76,15 +76,17 @@ func draw_card(draw_to: Vector2i) -> void:
 	else:
 		new_card = CARD.instantiate()
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
-	placeCard(draw_to, new_card)
+	place_card(draw_to, new_card)
  
-func placeCard(place_at: Vector2i, newCard: Card) -> void:
+func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	newCard.grid_pos = place_at
 	grid[place_at.y][place_at.x].addCard(newCard)
 
-func moveCardOff(move_off: Vector2i) -> Card:
-	return grid[move_off.y][move_off.x].pop_back()
+func move_card_off(move_off: Vector2i) -> Card:
+	var card: Card = grid[move_off.y][move_off.x].remove_top_card()
+	card.grid_pos = Vector2i(-1, -1)
+	return card
 
 func discardCard(discard_from: Vector2i, target_deck: Deck):
 	target_deck.addCard(grid[discard_from.y][discard_from.x].removeCardFromGrid())
@@ -98,11 +100,11 @@ func mutateCardStat():
 func setCardPosition():
 	pass
 
-func swapCards(card_a: Vector2i, card_b: Vector2i):
-	var tempCard: Card = grid[card_a.y][card_a.x].removeCard()
-	grid[card_a.y][card_a.x].addCard(grid[card_b.y][card_b.x].removeCard())
-	grid[card_b.y][card_b.x].addCard(tempCard)
-
+func swap_cards(card_a_pos: Vector2i, card_b_pos: Vector2i):
+	var card_a: Card =  move_card_off(card_a_pos)
+	place_card(card_a_pos, move_card_off(card_b_pos))
+	place_card(card_b_pos, card_a)
+	
 func swapDecks(deck_a: Vector2i, deck_b: Vector2i):
 	var tempDeck: Deck = grid[deck_a.y][deck_a.x]
 	grid[deck_a.x][deck_a.y] = grid[deck_b.y][deck_b.x]

@@ -15,6 +15,19 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
+	
+func player_select_card_adj_to_position(pos: Vector2i) -> void:
+	_first = true
+	for i in rift_grid.rift_grid_height:
+		for deck: Deck in rift_grid.grid[i]:
+			var card: Card = deck.get_top_card()
+			if (card.grid_pos - pos).length() == 1:
+				card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
+			else:
+				card.card_sm.transition_to_state(CardStateMachine.StateType.UNINTERACTABLE)
+			card.selected.connect(on_card_clicked)
+			
+	# TODO: Some kind of highlight vfx over each RiftGridSlot would be nice
 
 func player_select_card() -> void:
 	_first = true
@@ -22,9 +35,7 @@ func player_select_card() -> void:
 		for deck: Deck in rift_grid.grid[i]:
 			var card: Card = deck.get_top_card()
 			
-			# TODO: Replace with State Swapping
-			card.selectable = true
-			card.interactable = false
+			card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
 			card.selected.connect(on_card_clicked)
 	
 	# TODO: Some kind of highlight vfx over each RiftGridSlot would be nice
@@ -42,8 +53,7 @@ func on_card_clicked(grid_pos: Vector2i):
 			var card: Card = deck.get_top_card()
 			
 			# TODO: Replace with State Swapping
-			card.selectable = false
-			card.interactable = true
+			card.card_sm.transition_to_prev_state()
 			card.selected.disconnect(on_card_clicked)
 	selected_pos = grid_pos
 	selected.emit()
