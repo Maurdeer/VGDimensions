@@ -21,6 +21,7 @@ var rift_card_pack: CardPackResource:
 				_card_refs.append(card)
 var _card_refs: Array[Card]
 var _rift_deck: Deck = Deck.new()
+var _rift_discard_pile: Deck = Deck.new()
 
 func _ready() -> void:
 	# Initialize Singleton
@@ -37,6 +38,7 @@ func clear_grid() -> void:
 		child.queue_free()
 	grid.clear()
 	_rift_deck.clear_deck()
+	_rift_discard_pile.clear_deck()
 
 func draw_initial_grid():
 	if not grid.is_empty() or not _rift_deck.is_empty(): clear_grid()
@@ -89,7 +91,7 @@ func move_card_off(move_off: Vector2i) -> Card:
 	return card
 
 func discardCard(discard_from: Vector2i, target_deck: Deck):
-	target_deck.addCard(grid[discard_from.y][discard_from.x].removeCardFromGrid())
+	target_deck.addCard(grid[discard_from.y][discard_from.x].remove_top_card())
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
 	return grid[remove_from.y][remove_from.x].removeCard()
@@ -115,8 +117,7 @@ func shuffleCardBackInDeck(shuffleCard: Card, targetDeck: Deck):
 	targetDeck.shuffleDeck()
 	return
 
-func shiftCardsHorizontal(start_pos: Vector2i, leftNotRight: bool, amount: int):
-	var discardPile: Deck = Deck.new()
+func shift_decks_horizontally(start_pos: Vector2i, leftNotRight: bool, amount: int):
 	if leftNotRight:
 		while amount > 0:
 			var i: int = start_pos.x
@@ -129,8 +130,8 @@ func shiftCardsHorizontal(start_pos: Vector2i, leftNotRight: bool, amount: int):
 					grid[start_pos.y][i] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in grid[start_pos.y][i].size():
-						discardCard(Vector2i(i, start_pos.y), discardPile)
+					for deadCard in grid[start_pos.y][i].deck_size:
+						discardCard(Vector2i(i, start_pos.y), _rift_discard_pile)
 					grid[start_pos.y][i] = tempDeck2
 				i -= 1
 			draw_card(start_pos)
@@ -147,15 +148,14 @@ func shiftCardsHorizontal(start_pos: Vector2i, leftNotRight: bool, amount: int):
 					grid[start_pos.y][i] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in grid[start_pos.y][i].size():
-						discardCard(Vector2i(i, start_pos.y), discardPile)
+					for deadCard in grid[start_pos.y][i].deck_size:
+						discardCard(Vector2i(i, start_pos.y), _rift_discard_pile)
 					grid[start_pos.y][i] = tempDeck2
 				i += 1
 			draw_card(start_pos)
 			amount -= 1
 
 func shiftCardsVertical(start_pos: Vector2i, upNotDown: bool, amount: int):
-	var discardPile: Deck = Deck.new()
 	if upNotDown:
 		while amount > 0:
 			var i: int = start_pos.y
@@ -168,8 +168,8 @@ func shiftCardsVertical(start_pos: Vector2i, upNotDown: bool, amount: int):
 					grid[i][start_pos.x] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in grid[i][start_pos.x].size():
-						discardCard(Vector2i(start_pos.x, i), discardPile)
+					for deadCard in grid[i][start_pos.x].deck_size:
+						discardCard(Vector2i(start_pos.x, i), _rift_discard_pile)
 					grid[i][start_pos.x] = tempDeck2
 				i -= 1
 			draw_card(start_pos)
@@ -186,8 +186,8 @@ func shiftCardsVertical(start_pos: Vector2i, upNotDown: bool, amount: int):
 					grid[i][start_pos.x] = tempDeck2
 					tempDeck2 = tempDeck
 				else:
-					for deadCard in grid[i][start_pos.x].size():
-						discardCard(Vector2(start_pos.x, i), discardPile)
+					for deadCard in grid[i][start_pos.x].deck_size:
+						discardCard(Vector2(start_pos.x, i), _rift_discard_pile)
 					grid[i][start_pos.x] = tempDeck2
 				i += 1
 			draw_card(start_pos)

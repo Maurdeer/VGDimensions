@@ -3,6 +3,7 @@ class_name InHandCardState
 
 func enter() -> void:
 	card.flip_reveal()
+	#card.draggable = true
 	
 func clicked_on() -> void:
 	if card._play_bullets.size() == 1:
@@ -18,4 +19,8 @@ func clicked_on() -> void:
 	# Passive Call Now
 	card.played.emit(card)
 	card.resource.on_play()
+	
+func exit() -> void:
+	pass
+	#card.draggable = false
 	
