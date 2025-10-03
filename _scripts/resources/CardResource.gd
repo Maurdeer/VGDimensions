@@ -92,91 +92,40 @@ enum GameOrigin {
 # Description Area
 @export_group("Bullet Descriptions")
 @export var bullets: Array[BulletResource]
+@export var description_textures: Array[Texture]
 @export_multiline var quip_description: String
+
+# Passive Events
+@export_group("Passive Events")
+@export var _passive_events: Array[PassiveEventResource]
+var _events: Array[Array]
 
 # Visuals
 @export_group("Visuals")
 @export var card_art: Texture
 @export var background_art: Texture # By Default base it off of the game
 
-# Passive Events
-@export_group("Passive Events")
-@export var _on_play: EventResource
-@export var _on_action: EventResource
-@export var _on_social: EventResource
-@export var _on_enter_tree: EventResource
-@export var _on_state_of_grid_change: EventResource
-@export var _on_end_of_turn: EventResource
-@export var _on_start_of_turn: EventResource
-@export var _on_damage: EventResource
-@export var _on_discard: EventResource
-@export var _on_burn: EventResource
-@export var _on_stack: EventResource
-@export var _on_flip_hide: EventResource
-@export var _on_flip_reveal: EventResource
-@export var _on_move: EventResource
-@export var _on_replace: EventResource
 	
 func set_up_event_resources(card_ref: Card):
-	if _on_play: _on_play.card_ref = card_ref
-	if _on_action: _on_action.card_ref = card_ref
-	if _on_social: _on_social.card_ref = card_ref
-	if _on_enter_tree: _on_enter_tree.card_ref = card_ref
-	if _on_state_of_grid_change: _on_state_of_grid_change.card_ref = card_ref
-	if _on_end_of_turn: _on_end_of_turn.card_ref = card_ref
-	if _on_start_of_turn: _on_start_of_turn.card_ref = card_ref
-	if _on_damage: _on_damage.card_ref = card_ref
-	if _on_discard: _on_discard.card_ref = card_ref 
-	if _on_burn: _on_burn.card_ref = card_ref
-	if _on_stack: _on_stack.card_ref = card_ref
-	if _on_flip_hide: _on_flip_hide.card_ref = card_ref
-	if _on_flip_reveal: _on_flip_reveal.card_ref = card_ref
-	if _on_move: _on_move.card_ref = card_ref 
-	if _on_replace: _on_replace.card_ref = card_ref
+	_events.clear()
+	_events.resize(PassiveEventResource.PassiveEvent.size())
+	for passive_event in _passive_events:
+		passive_event.event.card_ref = card_ref
+		_events[passive_event.event_type].append(passive_event.event)
 	
 # Passive Functions
-func on_play() -> void:
-	if not _on_play: return
-	_on_play.execute()
-func on_action() -> void:
-	if not _on_action: return
-	_on_action.execute()
-func on_social() -> void:
-	if not _on_social: return
-	_on_social.execute()
-func on_enter_tree() -> void:
-	if not _on_enter_tree: return
-	_on_enter_tree.execute()
-func on_state_of_grid_change() -> void:
-	if not _on_state_of_grid_change: return
-	_on_state_of_grid_change.execute()
-func on_end_of_turn() -> void:
-	if not _on_end_of_turn: return
-	_on_end_of_turn.execute()
-func on_start_of_turn() -> void:
-	if not _on_start_of_turn: return
-	_on_start_of_turn.execute()
-func on_damage() -> void:
-	if not _on_damage: return
-	_on_damage.execute()
-func on_discard() -> void:
-	if not _on_discard: return
-	_on_discard.execute()
-func on_burn() -> void:
-	if not _on_burn: return
-	_on_burn.exectue()
-func on_stack() -> void:
-	if not _on_stack: return
-	_on_stack.exectue()
-func on_flip_hide() -> void:
-	if not _on_flip_hide: return
-	_on_flip_hide.exectue()
-func on_flip_reveal() -> void:
-	if not _on_flip_reveal: return
-	_on_flip_reveal.exectue()
-func on_move() -> void:
-	if not _on_move: return
-	_on_move.exectue()
-func on_replace() -> void:
-	if not _on_replace: return
-	_on_replace.exectue()
+func on_play(): for event in _events[PassiveEventResource.PassiveEvent.ON_PLAY]: event.execute()
+func on_action(): for event in _events[PassiveEventResource.PassiveEvent.ON_ACTION]: event.execute()
+func on_social(): for event in _events[PassiveEventResource.PassiveEvent.ON_SOCIAL]: event.execute()
+func on_enter_tree(): for event in _events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE]: event.execute()
+func on_state_of_grid_change(): for event in _events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE]: event.execute()
+func on_end_of_turn(): for event in _events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN]: event.execute()
+func on_start_of_turn(): for event in _events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: event.execute()
+func on_damage(): for event in _events[PassiveEventResource.PassiveEvent.ON_DAMAGE]: event.execute()
+func on_discard(): for event in _events[PassiveEventResource.PassiveEvent.ON_DISCARD]: event.execute()
+func on_burn(): for event in _events[PassiveEventResource.PassiveEvent.ON_BURN]: event.execute()
+func on_stack(): for event in _events[PassiveEventResource.PassiveEvent.ON_STACK]: event.execute()
+func on_flip_hide(): for event in _events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE]: event.execute()
+func on_flip_reveal(): for event in _events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL]: event.execute()
+func on_move(): for event in _events[PassiveEventResource.PassiveEvent.ON_MOVE]: event.execute()
+func on_replace(): for event in _events[PassiveEventResource.PassiveEvent.ON_REPLACE]: event.execute()

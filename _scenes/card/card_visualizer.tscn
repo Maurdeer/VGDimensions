@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://bufxhut03l01j"]
+[gd_scene load_steps=26 format=3 uid="uid://bufxhut03l01j"]
 
 [ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/card_visualizer.gd" id="1_51wi6"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_8lnxd"]
 [ext_resource type="PackedScene" uid="uid://duo3p8powrn74" path="res://_scenes/card/bullet_visualizer.tscn" id="2_dkm5d"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_m0jti"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_r8tiv"]
 [ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="4_dkm5d"]
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="6_8lnxd"]
@@ -19,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bqqkvq20w5r7w" path="res://art/card_ui/stack_icon copy.png" id="14_r8tiv"]
 [ext_resource type="Texture2D" uid="uid://um134rv7t03" path="res://art/card_ui/discard_icon copy.png" id="15_m0jti"]
 
-[sub_resource type="Resource" id="Resource_8lnxd"]
+[sub_resource type="Resource" id="Resource_r8tiv"]
 script = ExtResource("3_r8tiv")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
@@ -59,7 +60,7 @@ font_color = Color(0, 0, 0, 1)
 [node name="card_visualizer" type="Sprite2D"]
 scale = Vector2(0.177, 0.177)
 script = ExtResource("1_51wi6")
-card_resource = SubResource("Resource_8lnxd")
+card_resource = SubResource("Resource_r8tiv")
 bullet_scene = ExtResource("2_dkm5d")
 
 [node name="card_background" type="Sprite2D" parent="."]
@@ -372,25 +373,33 @@ label_settings = SubResource("LabelSettings_l8rp0")
 position = Vector2(-2.09808e-05, 711.864)
 texture = ExtResource("12_hdudp")
 
-[node name="bullet_list" type="VBoxContainer" parent="description_frame"]
-offset_left = -904.0
-offset_top = -514.0
-offset_right = 842.0
-offset_bottom = 554.0
-
-[node name="fun_description" type="Label" parent="description_frame"]
-anchors_preset = 7
+[node name="DescriptorContainer" type="VBoxContainer" parent="description_frame"]
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -1663.0
-offset_top = -748.0
-offset_right = -64.0
-offset_bottom = -607.0
+anchor_bottom = 0.5
+offset_left = -1714.1074
+offset_top = -1097.2737
+offset_right = -7.8927
+offset_bottom = -29.47705
 grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 8
+grow_vertical = 2
+
+[node name="bullet_list" type="VBoxContainer" parent="description_frame/DescriptorContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="texture_list" type="VBoxContainer" parent="description_frame/DescriptorContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="fun_quip" type="Label" parent="description_frame/DescriptorContainer"]
+layout_mode = 2
+size_flags_vertical = 10
 text = "\"\""
 label_settings = SubResource("LabelSettings_0tfah")
 horizontal_alignment = 1

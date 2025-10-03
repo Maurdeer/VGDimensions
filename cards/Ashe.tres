@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://cgc6j288lco7g"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://cgc6j288lco7g"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_gdfbu"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_oe36o"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_woeob"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_2258d"]
 [ext_resource type="Texture2D" uid="uid://dxsicibt8xu3t" path="res://art/card_art/Outcasts/Ashe.png" id="3_woeob"]
 

@@ -50,6 +50,7 @@ func _on_values_change() -> void:
 	
 	# Bullet Description Updates:
 	call_deferred("_on_bullet_description_change")
+	call_deferred("_on_texture_list_change")
 	call_deferred("_on_funny_quip_change")
 	
 func _on_title_change() -> void:
@@ -101,7 +102,7 @@ func _on_background_art_change() -> void:
 func _on_bullet_description_change() -> void:
 	# Running this more than once is kinda a nightmare ngl
 	if not bullet_scene: return
-	var bullet_list = $"description_frame/bullet_list"
+	var bullet_list = $description_frame/DescriptorContainer/bullet_list
 	if not bullet_list: return
 	var child_count: int = bullet_list.get_child_count()
 	
@@ -123,7 +124,7 @@ func _on_bullet_description_change() -> void:
 				bullet_list.add_child(bullet_node)
 				
 				# It woudln't add it to the edited scene root without it.
-				# But would that work during runtime?
+				# But would that work during runtime? --> Answer Is yes it seems!
 				if Engine.is_editor_hint():
 					bullet_node.owner = get_tree().edited_scene_root
 			
@@ -136,9 +137,20 @@ func _on_bullet_description_change() -> void:
 	# (Ryan) Turn this into a pooling mechanism instead!!!
 	for j in range(child_idx, child_count):
 		bullet_list.get_child(j).queue_free()
+		
+func _on_texture_list_change() -> void:
+	var texture_list = $description_frame/DescriptorContainer/texture_list
+	if not texture_list: return
+	for child in texture_list.get_children(true): child.queue_free()
+	if card_resource.description_textures.is_empty(): return
+	for desc_texture in card_resource.description_textures:
+		var rect_texture: TextureRect = TextureRect.new()
+		texture_list.add_child(rect_texture)
+		rect_texture.texture = desc_texture
+		rect_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	
 func _on_funny_quip_change() -> void:
-	var funny_quip = $description_frame/fun_description
+	var funny_quip = $description_frame/DescriptorContainer/fun_quip
 	if not funny_quip: return
 	funny_quip.text = "\"%s\"" % card_resource.quip_description
 func _notification(what: int) -> void:
