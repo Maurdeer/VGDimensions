@@ -110,6 +110,7 @@ func set_up_event_resources(card_ref: Card):
 	_events.clear()
 	_events.resize(PassiveEventResource.PassiveEvent.size())
 	for passive_event in _passive_events:
+		if not passive_event or not passive_event.event: continue
 		passive_event.event.card_ref = card_ref
 		_events[passive_event.event_type].append(passive_event.event)
 	
