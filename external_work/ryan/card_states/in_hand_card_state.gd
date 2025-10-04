@@ -2,8 +2,11 @@ extends CardState
 class_name InHandCardState
 
 func enter() -> void:
+	gridcard_visualizer.visible = false
+	gridcard_back.visible = false
+	card_visualizer.visible = true
+	card_back.visible = true
 	card.flip_reveal()
-	#card.draggable = true
 	
 func clicked_on() -> void:
 	if card._play_bullets.size() == 1:

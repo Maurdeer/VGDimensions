@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=18 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_u8xt1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
 [ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
 [ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="8_2ol5b"]
 [ext_resource type="Script" uid="uid://d1y23uhkdag2" path="res://external_work/ryan/card_states/card_state_machine.gd" id="9_uhl3e"]
 
 [sub_resource type="Resource" id="Resource_u8xt1"]
@@ -69,6 +70,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.177, 0.177), Vector2(0, 0.177)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("gridcard_back:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(1e-05, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("gridcard_visualizer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177, 0.177), Vector2(0, 0.177)]
+}
 
 [sub_resource type="Animation" id="Animation_wb4pw"]
 resource_name = "flip_reveal"
@@ -97,6 +122,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.177352, 0.177352), Vector2(0, 0.177)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("gridcard_visualizer:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(0, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("gridcard_back:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177352, 0.177352), Vector2(0, 0.177)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51bko"]
 _data = {
@@ -115,8 +164,8 @@ resource = SubResource("Resource_u8xt1")
 
 [node name="card_visualizer" parent="." node_paths=PackedStringArray("card") instance=ExtResource("4_pots7")]
 use_parent_material = true
-card_resource = SubResource("Resource_u8xt1")
 card = NodePath("..")
+card_resource = SubResource("Resource_u8xt1")
 
 [node name="card_back" type="Sprite2D" parent="."]
 clip_children = 2
@@ -141,8 +190,25 @@ libraries = {
 }
 speed_scale = 3.0
 
+[node name="gridcard_back" type="Sprite2D" parent="."]
+visible = false
+clip_children = 2
+position = Vector2(4.76837e-06, 0)
+scale = Vector2(0.177352, 0.177352)
+
+[node name="background" type="Sprite2D" parent="gridcard_back"]
+clip_children = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_2ol5b")
+
+[node name="image" type="Sprite2D" parent="gridcard_back/background"]
+position = Vector2(-29.290972, 248.97292)
+scale = Vector2(4.5153637, 4.5153637)
+texture = ExtResource("4_7ystx")
+
 [node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
 visible = false
+scale = Vector2(1e-05, 0.177)
 card_resource = SubResource("Resource_u8xt1")
 
 [node name="drag_and_drop_component2D" type="Area2D" parent="."]

@@ -82,8 +82,9 @@ func draw_card(draw_to: Vector2i) -> void:
  
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
-	newCard.grid_pos = place_at
 	grid[place_at.y][place_at.x].addCard(newCard)
+	newCard.grid_pos = place_at
+	newCard.card_sm.transition_to_state(CardStateMachine.StateType.ON_RIFT)
 
 func move_card_off(move_off: Vector2i) -> Card:
 	var card: Card = grid[move_off.y][move_off.x].remove_top_card()

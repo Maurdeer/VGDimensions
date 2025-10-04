@@ -3,7 +3,7 @@ class_name UnselectableCardState
 
 
 func enter() -> void:
-	card_visualizer.modulate.a = 0.5
+	card.modulate.a = 0.5
 	
 func exit() -> void:
-	card_visualizer.modulate.a = 1
+	card.modulate.a = 1
