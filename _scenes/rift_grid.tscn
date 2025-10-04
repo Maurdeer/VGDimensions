@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgrqj32tibok0"]
+[gd_scene load_steps=4 format=3 uid="uid://bgrqj32tibok0"]
 
 [ext_resource type="Script" uid="uid://dnu2i04hrhd01" path="res://_scripts/RiftGrid.gd" id="1_exr2v"]
 [ext_resource type="Script" uid="uid://dm44e4xnwpkd1" path="res://external_work/ryan/grid_position_selector.gd" id="2_exr2v"]
+[ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="3_l8qsw"]
 
 [node name="RiftGrid" type="Control"]
 layout_mode = 3
@@ -18,19 +19,44 @@ script = ExtResource("1_exr2v")
 [node name="GridPositionSelector" type="Node" parent="."]
 script = ExtResource("2_exr2v")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -275.0
-offset_right = 200.0
-offset_bottom = 275.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 160
-theme_override_constants/v_separation = 160
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="DiscardPile" type="Node2D" parent="HBoxContainer/Control"]
+script = ExtResource("3_l8qsw")
+flipped = true
+metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 150
+theme_override_constants/v_separation = 150
 columns = 3
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="DrawPile" type="Node2D" parent="HBoxContainer/Control2"]
+script = ExtResource("3_l8qsw")
+metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"

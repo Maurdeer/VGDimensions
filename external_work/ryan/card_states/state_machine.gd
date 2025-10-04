@@ -12,7 +12,7 @@ func _physics_process(_delta: float) -> void:
 	if not current_state: return
 	current_state.fixed_update()
 	
-func _transition_to_state(new_state: State) -> void:
+func transition_to_state(new_state: State) -> void:
 	if not new_state: 
 		printerr("Cannot Transition to Null State")
 		return
@@ -23,4 +23,4 @@ func _transition_to_state(new_state: State) -> void:
 	
 func transition_to_prev_state() -> void:
 	if not prev_state: return
-	_transition_to_state(prev_state)
+	transition_to_state(prev_state)

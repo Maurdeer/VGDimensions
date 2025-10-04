@@ -9,7 +9,7 @@ func enter() -> void:
 	card_visualizer.visible = false
 	card_back.visible = false
 	card_shape.disabled = true
-	
+	card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)
 	card.flip_reveal()
 	
 func clicked_on() -> void:
@@ -19,3 +19,11 @@ func clicked_on() -> void:
 	await select_ui.selection_complete
 	card.interacted.emit(card)
 	
+func exit() -> void:
+	gridcard_visualizer.visible = false
+	gridcard_back.visible = false
+	gridcard_shape.disabled = true
+	
+	card_visualizer.visible = true
+	card_back.visible = true
+	card_shape.disabled = false

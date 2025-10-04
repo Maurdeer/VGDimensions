@@ -2,7 +2,7 @@ extends Control
 class_name RiftGrid
 
 static var Instance: RiftGrid
-@onready var grid_container: GridContainer = $GridContainer
+@onready var grid_container: GridContainer = $HBoxContainer/GridContainer
 const CARD = preload("uid://c3e8058lwu0a")
 
 var grid: Array[Array]
@@ -20,8 +20,8 @@ var rift_card_pack: CardPackResource:
 				card.resource = card_res
 				_card_refs.append(card)
 var _card_refs: Array[Card]
-var _rift_deck: Deck = Deck.new()
-var _rift_discard_pile: Deck = Deck.new()
+@onready var _rift_deck: Deck =  $HBoxContainer/Control2/DrawPile
+@onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
 
 func _ready() -> void:
 	# Initialize Singleton
