@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=19 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_u8xt1"]
@@ -154,8 +154,11 @@ _data = {
 &"flip_reveal": SubResource("Animation_wb4pw")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ol5b"]
+size = Vector2(341.81818, 478.18176)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f61jr"]
-size = Vector2(341.818, 476.364)
+size = Vector2(218.18181, 218.1818)
 
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
@@ -191,7 +194,6 @@ libraries = {
 speed_scale = 3.0
 
 [node name="gridcard_back" type="Sprite2D" parent="."]
-visible = false
 clip_children = 2
 position = Vector2(4.76837e-06, 0)
 scale = Vector2(0.177352, 0.177352)
@@ -207,15 +209,18 @@ scale = Vector2(4.5153637, 4.5153637)
 texture = ExtResource("4_7ystx")
 
 [node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
-visible = false
 scale = Vector2(1e-05, 0.177)
 card_resource = SubResource("Resource_u8xt1")
 
 [node name="drag_and_drop_component2D" type="Area2D" parent="."]
 script = ExtResource("4_f61jr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="drag_and_drop_component2D"]
-position = Vector2(-8.66977e-07, -1.73395e-06)
+[node name="card_shape" type="CollisionShape2D" parent="drag_and_drop_component2D"]
+position = Vector2(0, 0.9090769)
+shape = SubResource("RectangleShape2D_2ol5b")
+
+[node name="gridcard_shape" type="CollisionShape2D" parent="drag_and_drop_component2D"]
+position = Vector2(-3.196976e-06, -2.8176737e-06)
 shape = SubResource("RectangleShape2D_f61jr")
 
 [node name="CardSM" type="Node" parent="."]

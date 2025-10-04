@@ -4,8 +4,12 @@ class_name OnRiftCardState
 func enter() -> void:
 	gridcard_visualizer.visible = true
 	gridcard_back.visible = true
+	gridcard_shape.disabled = false
+	
 	card_visualizer.visible = false
 	card_back.visible = false
+	card_shape.disabled = true
+	
 	card.flip_reveal()
 	
 func clicked_on() -> void:

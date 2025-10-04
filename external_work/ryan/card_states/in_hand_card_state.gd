@@ -4,8 +4,11 @@ class_name InHandCardState
 func enter() -> void:
 	gridcard_visualizer.visible = false
 	gridcard_back.visible = false
+	gridcard_shape.disabled = true
+	
 	card_visualizer.visible = true
 	card_back.visible = true
+	card_shape.disabled = false
 	card.flip_reveal()
 	
 func clicked_on() -> void:
