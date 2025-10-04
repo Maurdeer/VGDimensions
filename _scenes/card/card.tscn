@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=19 format=3 uid="uid://c3e8058lwu0a"]
+=======
+[gd_scene load_steps=18 format=3 uid="uid://c3e8058lwu0a"]
+>>>>>>> 7cfb420 (ryan's wacky world of gridvisualizers)
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_u8xt1"]
@@ -10,7 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
 [ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="8_2ol5b"]
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://d1y23uhkdag2" path="res://_scripts/card/card_state_machine.gd" id="9_uhl3e"]
+=======
+[ext_resource type="Script" uid="uid://d1y23uhkdag2" path="res://external_work/ryan/card_states/card_state_machine.gd" id="9_uhl3e"]
+>>>>>>> 7cfb420 (ryan's wacky world of gridvisualizers)
 
 [sub_resource type="Resource" id="Resource_u8xt1"]
 script = ExtResource("3_uhl3e")

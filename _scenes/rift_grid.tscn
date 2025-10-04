@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgrqj32tibok0"]
+
+[ext_resource type="Script" uid="uid://dnu2i04hrhd01" path="res://_scripts/RiftGrid.gd" id="1_exr2v"]
+[ext_resource type="Script" uid="uid://dm44e4xnwpkd1" path="res://external_work/ryan/grid_position_selector.gd" id="2_exr2v"]
+
+[node name="RiftGrid" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_exr2v")
+
+[node name="GridPositionSelector" type="Node" parent="."]
+script = ExtResource("2_exr2v")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -275.0
+offset_right = 200.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 160
+theme_override_constants/v_separation = 160
+columns = 3

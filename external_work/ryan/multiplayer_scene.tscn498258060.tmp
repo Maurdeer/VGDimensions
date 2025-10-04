@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c57bmxyf3rgq6"]
+[gd_scene load_steps=9 format=3 uid="uid://c57bmxyf3rgq6"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://external_work/ryan/game_manager.gd" id="1_ay0ix"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_q84rm"]
@@ -50,6 +50,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
+<<<<<<< HEAD:external_work/ryan/multiplayer_scene.tscn498258060.tmp
 [node name="Label" type="Label" parent="PlayerHandUI"]
 layout_mode = 0
 offset_left = -662.0
@@ -62,6 +63,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+=======
+>>>>>>> 7cfb420 (ryan's wacky world of gridvisualizers):external_work/ryan/multiplayer_scene.tscn
 [node name="TextureRect" type="TextureRect" parent="PlayerHandUI"]
 layout_mode = 1
 anchors_preset = 8
