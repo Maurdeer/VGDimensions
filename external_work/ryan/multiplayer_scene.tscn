@@ -36,7 +36,6 @@ anchor_bottom = 0.0
 offset_top = 489.0
 offset_bottom = 489.0
 grow_vertical = 1
-scale = Vector2(0.95, 0.95)
 
 [node name="PlayerHandUI" type="Control" parent="."]
 layout_mode = 1

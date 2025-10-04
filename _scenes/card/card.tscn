@@ -194,6 +194,7 @@ libraries = {
 speed_scale = 3.0
 
 [node name="gridcard_back" type="Sprite2D" parent="."]
+visible = false
 clip_children = 2
 position = Vector2(4.76837e-06, 0)
 scale = Vector2(0.177352, 0.177352)
@@ -209,6 +210,7 @@ scale = Vector2(4.5153637, 4.5153637)
 texture = ExtResource("4_7ystx")
 
 [node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
+visible = false
 scale = Vector2(1e-05, 0.177)
 card_resource = SubResource("Resource_u8xt1")
 
