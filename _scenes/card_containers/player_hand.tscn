@@ -1,14 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1b1m0y144lgx"]
 
-<<<<<<< HEAD
-<<<<<<< HEAD:_scenes/card_containers/player_hand.tscn
 [ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player/player_hand.gd" id="1_2yr0q"]
-=======
-[ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player_hand.gd" id="1_2yr0q"]
->>>>>>> 7cfb420 (ryan's wacky world of gridvisualizers):_scenes/player_hand.tscn
-=======
-[ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player/player_hand.gd" id="1_2yr0q"]
->>>>>>> 2820326 (My Changes)
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="2_iyo8l"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="2_l6uod"]
 

@@ -45,16 +45,22 @@ func addCard(card: Card):
 	else: 
 		card_dict[card_id] = [card]
 		
-		
+	# If Card is attached to a parent previously, then remove it from that parent
 	if card.get_parent(): card.get_parent().remove_child(card)
-	add_child(card)
-	
+	display_card(card)
 	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
-	
-	if flipped: 
-		card.flip_reveal()
+		
+func add_card_under(card: Card) -> void:
+	if card in deck_array: return
+	if deck_size == 0: 
+		addCard(card)
+		return
+	var card_id: String = Card.construct_card_id(card.resource.title, card.resource.game_origin)
+	deck_array.push_front(card)
+	if card_dict.has(card_id): 
+		card_dict[card_id].append(card)
 	else: 
-		card.flip_hide()
+		card_dict[card_id] = [card]
 		
 func get_top_card() -> Card:
 	if deck_size <= 0: return null
@@ -66,7 +72,8 @@ func remove_top_card() -> Card:
 	card_dict[removed_card.card_id].pop_back()
 	
 	remove_child(removed_card)
-	if deck_size > 0: add_child(deck_array[deck_size - 1])
+	
+	if deck_size > 0: display_card(deck_array[deck_size - 1])
 		
 	return removed_card
 
@@ -102,3 +109,14 @@ func mergeDeck(merging_deck : Deck):
 func is_empty() -> bool:
 	return deck_size == 0
 	
+func display_card(card: Card) -> void:
+	if not card in deck_array: return
+	add_child(card)
+	if flipped: 
+		card.flip_reveal()
+	else: 
+		card.flip_hide()
+		
+func undisplay_card(card: Card) -> void:
+	if not card in deck_array: return
+	remove_child(card)

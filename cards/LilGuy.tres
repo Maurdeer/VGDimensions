@@ -8,6 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_xa7xj"]
 script = ExtResource("3_oqkso")
+inverse = true
 metadata/_custom_type_script = "uid://db1qnsvwn0mg"
 
 [sub_resource type="Resource" id="Resource_0dcse"]

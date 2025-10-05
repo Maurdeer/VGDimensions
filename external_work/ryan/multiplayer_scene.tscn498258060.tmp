@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://c57bmxyf3rgq6"]
-=======
-[gd_scene load_steps=10 format=3 uid="uid://c57bmxyf3rgq6"]
->>>>>>> 2820326 (My Changes)
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://external_work/ryan/game_manager.gd" id="1_ay0ix"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_q84rm"]
