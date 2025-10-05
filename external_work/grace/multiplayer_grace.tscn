@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dlvudfcojdl6"]
+
+[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://external_work/ryan/game_manager.gd" id="1_rbc2s"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_g7jej"]
+[ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_hrdlf"]
+[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/RockBlock.tres" id="4_b7kiy"]
+[ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_q6vt0"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://external_work/ryan/CardPackResource.gd" id="6_fj6jc"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/rift_grid.tscn" id="8_wkkp3"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="9_yq2lg"]
+[ext_resource type="PackedScene" uid="uid://b2ygkqp3wer5l" path="res://_scenes/card_shop_ui.tscn" id="10_vlbaj"]
+
+[node name="MultiplayerScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_rbc2s")
+cards = Array[ExtResource("2_g7jej")]([ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("4_b7kiy")])
+card_pack = ExtResource("5_q6vt0")
+shop_initial_packs = Array[ExtResource("6_fj6jc")]([ExtResource("5_q6vt0"), ExtResource("5_q6vt0")])
+
+[node name="RiftGrid" parent="." instance=ExtResource("8_wkkp3")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 377.99997
+offset_bottom = 377.99997
+grow_vertical = 1
+scale = Vector2(0.95, 0.95)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera2D" type="Camera2D" parent="Control"]
+
+[node name="player_hand" parent="Control" instance=ExtResource("9_yq2lg")]
+position = Vector2(0, 408)
+scale = Vector2(0.9, 0.9)
+
+[node name="next_turn_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Next Turn"
+
+[node name="CardShop" parent="." instance=ExtResource("10_vlbaj")]
+position = Vector2(93, 242)
+
+[connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

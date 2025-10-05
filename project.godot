@@ -20,11 +20,7 @@ config/icon="res://icon.svg"
 GNM="*res://_scripts/managers/network_manager.gd"
 Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
-
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+CardShop="*res://_scripts/card_shop.gd"
 
 [dotnet]
 
