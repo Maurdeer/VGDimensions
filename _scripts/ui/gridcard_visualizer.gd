@@ -1,4 +1,3 @@
-@tool
 extends Node
 class_name GridCardVisualizer
 
@@ -15,15 +14,17 @@ class_name GridCardVisualizer
 # during runtime.
 
 func _ready() -> void:
-	if not Engine.is_editor_hint() and (card_resource or (card and card.resource)):
-		_on_values_change()
-
-func _process(_delta) -> void:
-	# Polling BS technically ok because its just in the editor,
-	# But would be better if its event handeled
-	if Engine.is_editor_hint() and (card_resource or (card and card.resource)):
+	if card and (card.resource or card_resource):
 		_on_values_change()
 		
 func _on_values_change() -> void:
 	$background_container/card_background.texture = card_resource.background_art
 	$card_art_container/card_art.texture = card_resource.card_art
+	if card.hp < 0: $GUI/Icons/HP.visible = false
+	else:
+		$GUI/Icons/HP.visible = true
+		$GUI/Icons/HP/Label.text = "%s" % card.hp
+	
+	$GUI/Icons/ACTION.visible = not card._action_bullets.is_empty()
+	$GUI/Icons/SOCIAL.visible = not card._social_bullets.is_empty()
+	$GUI/Icons/PASSIVE.visible = false

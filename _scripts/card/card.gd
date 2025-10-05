@@ -21,7 +21,7 @@ signal selected(Vector2i)
 
 # Physical Card Properities
 @export_group("Physical Properities")
-@export var draggable: bool = true:
+@export var draggable: bool = false:
 	set(value):
 		draggable = value
 		$drag_and_drop_component2D.draggable = value
@@ -107,7 +107,7 @@ func _on_double_click() -> void:
 
 func _on_single_click() -> void:
 	if CardInspector.Instance: CardInspector.Instance.set_card(self)
-	if card_sm.current_state is CardState: card_sm.current_state.clicked_on()
+	card_sm.clicked_on()
 
 func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not event is InputEventMouseButton: return

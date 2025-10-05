@@ -1,11 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://vei3yr63fqcj"]
 
-[ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="1_1lfx8"]
-[ext_resource type="Script" uid="uid://bp3nke55nden7" path="res://external_work/ryan/selection_ui.gd" id="1_s1l1j"]
+[ext_resource type="Script" uid="uid://bp3nke55nden7" path="res://_scripts/ui/selection_ui.gd" id="1_w8cfd"]
+[ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="2_4hjkv"]
 
 [node name="SelectionUi" type="Control"]
 z_index = 1
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 960.0
@@ -14,7 +15,7 @@ offset_right = -960.0
 offset_bottom = -540.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_s1l1j")
+script = ExtResource("1_w8cfd")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -29,7 +30,7 @@ offset_right = 234.0
 offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_1lfx8")
+texture = ExtResource("2_4hjkv")
 expand_mode = 1
 
 [node name="Buttons" type="HBoxContainer" parent="TextureRect"]

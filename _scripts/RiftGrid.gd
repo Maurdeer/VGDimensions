@@ -2,7 +2,7 @@ extends Control
 class_name RiftGrid
 
 static var Instance: RiftGrid
-@onready var grid_container: GridContainer = $GridContainer
+@onready var grid_container: GridContainer = $HBoxContainer/GridContainer
 const CARD = preload("uid://c3e8058lwu0a")
 
 var grid: Array[Array]
@@ -20,8 +20,8 @@ var rift_card_pack: CardPackResource:
 				card.resource = card_res
 				_card_refs.append(card)
 var _card_refs: Array[Card]
-var _rift_deck: Deck = Deck.new()
-var _rift_discard_pile: Deck = Deck.new()
+@onready var _rift_deck: Deck =  $HBoxContainer/Control2/DrawPile
+@onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
 
 func _ready() -> void:
 	# Initialize Singleton
@@ -82,8 +82,17 @@ func draw_card(draw_to: Vector2i) -> void:
  
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
-	newCard.grid_pos = place_at
 	grid[place_at.y][place_at.x].addCard(newCard)
+	newCard.grid_pos = place_at
+<<<<<<< HEAD
+<<<<<<< HEAD
+	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+=======
+	newCard.card_sm.transition_to_state(CardStateMachine.StateType.ON_RIFT)
+>>>>>>> 7cfb420 (ryan's wacky world of gridvisualizers)
+=======
+	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+>>>>>>> 2820326 (My Changes)
 
 func move_card_off(move_off: Vector2i) -> Card:
 	var card: Card = grid[move_off.y][move_off.x].remove_top_card()

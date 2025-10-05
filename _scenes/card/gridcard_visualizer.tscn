@@ -1,15 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://co6hom85w8oad"]
+[gd_scene load_steps=14 format=3 uid="uid://co6hom85w8oad"]
 
-[ext_resource type="Script" uid="uid://ba8jdf6qh78ff" path="res://_scripts/gridcard_visualizer.gd" id="1_7gw3y"]
+[ext_resource type="Script" uid="uid://ba8jdf6qh78ff" path="res://_scripts/ui/gridcard_visualizer.gd" id="1_7gw3y"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="2_1w2ab"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_bevij"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_tbwoo"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_jey1p"]
 [ext_resource type="Texture2D" uid="uid://clmoqxht57i46" path="res://art/card_ui/gridcard_img_background.png" id="3_tbwoo"]
 [ext_resource type="Texture2D" uid="uid://c4su30057qlh6" path="res://art/card_ui/gridcardimage_frame.png" id="4_jey1p"]
+[ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="9_foqle"]
+[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="9_u3h7p"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="10_77yom"]
+[ext_resource type="Texture2D" uid="uid://bi5onoqlrvjri" path="res://art/card_ui/passive.png" id="11_0pw3s"]
 
 [sub_resource type="Resource" id="Resource_tbwoo"]
 script = ExtResource("3_jey1p")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
+
+[sub_resource type="LabelSettings" id="LabelSettings_u3h7p"]
+font_size = 180
 
 [node name="gridcard_visualizer" type="Sprite2D"]
 scale = Vector2(0.177, 0.177)
@@ -35,3 +43,74 @@ texture = ExtResource("3_tbwoo")
 
 [node name="frame" type="Sprite2D" parent="."]
 texture = ExtResource("4_jey1p")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchor_left = -627.11865
+anchor_top = -621.46893
+anchor_right = 621.469
+anchor_bottom = 627.1187
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Icons" type="VBoxContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -242.93787
+offset_top = -163.8418
+offset_right = 158.19202
+offset_bottom = 1485.8757
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="HP" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_foqle")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/Icons/HP"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24000001
+anchor_top = 0.141
+anchor_right = 0.75100005
+anchor_bottom = 0.754
+offset_left = -0.19490051
+offset_top = -0.043815613
+offset_right = -0.10592651
+offset_bottom = 0.14318848
+grow_horizontal = 2
+grow_vertical = 2
+text = "99"
+label_settings = SubResource("LabelSettings_u3h7p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ACTION" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_u3h7p")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="SOCIAL" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("10_77yom")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="PASSIVE" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("11_0pw3s")
+expand_mode = 4
+stretch_mode = 5

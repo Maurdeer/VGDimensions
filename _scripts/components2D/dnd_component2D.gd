@@ -9,9 +9,13 @@ var is_dragging: bool = false
 signal on_drop
 var draggable: bool = true
 var pre_drag_pos: Vector2
+var interactable: bool = true
+
+var scale_due_to_hover: bool
 
 func _ready() -> void:
 	pre_drag_pos = _parent.global_position
+	scale_prior_to_hover = _parent.scale
 
 func _process(_delta):
 	_input_process()
@@ -42,13 +46,12 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 var scale_prior_to_hover: Vector2
 func _on_mouse_entered() -> void:
-	if is_dragging: return
-	scale_prior_to_hover = _parent.scale
-	_parent.scale *= 1.05
+	if not interactable or is_dragging: return
+	hover()
 	
 func _on_mouse_exited() -> void:
-	if is_dragging or not scale_prior_to_hover: return
-	_parent.scale = scale_prior_to_hover
+	if not interactable or is_dragging or not scale_prior_to_hover: return
+	unhover()
 
 var hovering_over_area_temp: DropSlot2D
 func _on_area_entered(area: Area2D) -> void:
@@ -61,3 +64,13 @@ func _on_area_exited(area: Area2D) -> void:
 	var dropslot: DropSlot2D = area as DropSlot2D
 	if not dropslot or dropslot != hovering_over_area_temp: return
 	hovering_over_area_temp = null
+	
+func hover() -> void:
+	if scale_due_to_hover: return
+	scale_due_to_hover = true
+	scale_prior_to_hover = _parent.scale
+	_parent.scale *= 1.05
+	
+func unhover() -> void:
+	scale_due_to_hover = false
+	_parent.scale = scale_prior_to_hover

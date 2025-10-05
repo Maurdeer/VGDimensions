@@ -3,3 +3,4 @@ class_name UninteractableCardState
 
 func enter() -> void:
 	card.flip_hide()
+	dnd.interactable = false

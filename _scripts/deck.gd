@@ -37,7 +37,6 @@ func addCards(cardArray: Array[Card]):
 func addCard(card: Card):
 	if card in deck_array: return
 	var card_id: String = Card.construct_card_id(card.resource.title, card.resource.game_origin)
-	card.draggable = draggable
 	if deck_size > 0: 
 		remove_child(deck_array[deck_size - 1])
 	deck_array.push_back(card)
@@ -49,6 +48,8 @@ func addCard(card: Card):
 		
 	if card.get_parent(): card.get_parent().remove_child(card)
 	add_child(card)
+	
+	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 	if flipped: 
 		card.flip_reveal()

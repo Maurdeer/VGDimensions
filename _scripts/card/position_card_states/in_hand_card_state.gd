@@ -2,8 +2,15 @@ extends CardState
 class_name InHandCardState
 
 func enter() -> void:
+<<<<<<< HEAD:_scripts/card/position_card_states/in_hand_card_state.gd
+	card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)
+=======
+	gridcard_visualizer.visible = false
+	gridcard_back.visible = false
+	card_visualizer.visible = true
+	card_back.visible = true
+>>>>>>> 7cfb420 (ryan's wacky world of gridvisualizers):external_work/ryan/card_states/in_hand_card_state.gd
 	card.flip_reveal()
-	#card.draggable = true
 	
 func clicked_on() -> void:
 	if card._play_bullets.size() == 1:
@@ -21,6 +28,6 @@ func clicked_on() -> void:
 	card.resource.on_play()
 	
 func exit() -> void:
-	pass
+	super.exit()
 	#card.draggable = false
 	
