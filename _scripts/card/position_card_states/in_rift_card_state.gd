@@ -1,5 +1,5 @@
 extends CardState
-class_name OnRiftCardState
+class_name InRiftCardState
 
 func enter() -> void:
 	gridcard_visualizer.visible = true

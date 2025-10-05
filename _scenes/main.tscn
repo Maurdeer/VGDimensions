@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://ckef5ss54helk"]
+[gd_scene load_steps=13 format=3 uid="uid://ckef5ss54helk"]
 
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="1_7kglf"]
 [ext_resource type="PackedScene" uid="uid://b3s1nb5elpdfk" path="res://external_work/chrizz/balatro.tscn" id="1_owtmn"]
-[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="2_ce27d"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="2_ce27d"]
 [ext_resource type="Resource" uid="uid://dupxrk8ncmqe4" path="res://cards/BulletLantern.tres" id="2_g15ir"]
-[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/rift_grid.tscn" id="4_lavtb"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="4_lavtb"]
 [ext_resource type="Script" uid="uid://bwkue74uh1m7y" path="res://_scripts/ui/card_inspector.gd" id="7_hi6yo"]
 [ext_resource type="PackedScene" uid="uid://b6kr78hmw6jcw" path="res://_scenes/card/clickable_card_visualizer.tscn" id="7_urak4"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="8_44f6i"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="8_g15ir"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="9_eulei"]
-[ext_resource type="PackedScene" uid="uid://cc70mp6vbhwht" path="res://_scenes/CardSlot.tscn" id="10_7kglf"]
+[ext_resource type="PackedScene" uid="uid://cc70mp6vbhwht" path="res://_scenes/ui/CardSlot.tscn" id="10_7kglf"]
 
 [sub_resource type="Resource" id="Resource_8lnxd"]
 script = ExtResource("9_eulei")

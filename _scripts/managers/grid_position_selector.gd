@@ -55,7 +55,7 @@ func on_card_clicked(grid_pos: Vector2i):
 			var card: Card = deck.get_top_card()
 			
 			# TODO: Replace with State Swapping
-			card.card_sm.transition_to_prev_state()
+			card.card_sm.interaction_sm.transition_to_prev_state()
 			card.selected.disconnect(on_card_clicked)
 	_selected_pos = grid_pos
 	selected.emit()

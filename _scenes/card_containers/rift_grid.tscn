@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgrqj32tibok0"]
 
 [ext_resource type="Script" uid="uid://dnu2i04hrhd01" path="res://_scripts/RiftGrid.gd" id="1_exr2v"]
-[ext_resource type="Script" uid="uid://dm44e4xnwpkd1" path="res://external_work/ryan/grid_position_selector.gd" id="2_exr2v"]
+[ext_resource type="Script" uid="uid://dm44e4xnwpkd1" path="res://_scripts/managers/grid_position_selector.gd" id="2_exr2v"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="3_l8qsw"]
 
 [node name="RiftGrid" type="Control"]

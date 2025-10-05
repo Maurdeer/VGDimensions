@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://co6hom85w8oad"]
 
-[ext_resource type="Script" uid="uid://ba8jdf6qh78ff" path="res://_scripts/gridcard_visualizer.gd" id="1_7gw3y"]
+[ext_resource type="Script" uid="uid://ba8jdf6qh78ff" path="res://_scripts/ui/gridcard_visualizer.gd" id="1_7gw3y"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="2_1w2ab"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_bevij"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_tbwoo"]

@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GNM="*res://external_work/ryan/network_manager.gd"
+GNM="*res://_scripts/managers/network_manager.gd"
 Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 
