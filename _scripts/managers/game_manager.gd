@@ -4,7 +4,11 @@ class_name GameManager
 @export var cards: Array[CardResource]
 @export var card_pack: CardPackResource
 @export var shop_initial_packs: Array[CardPackResource]
+<<<<<<< HEAD:_scripts/managers/game_manager.gd
 @onready var player_hand: PlayerHand = $PlayerHandUI/player_hand
+=======
+@onready var player_hand: PlayerHand = $Control/player_hand
+>>>>>>> main:external_work/ryan/game_manager.gd
 @onready var rift_grid: RiftGrid = $RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")
 
