@@ -3,13 +3,14 @@ class_name GameManager
 
 @export var cards: Array[CardResource]
 @export var card_pack: CardPackResource
-
+@export var shop_initial_packs: Array[CardPackResource]
 @onready var player_hand: PlayerHand = $Control/player_hand
 @onready var rift_grid: RiftGrid = $RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")
 
 
 func _ready() -> void:
+	CardShop.fill_shop_deck(shop_initial_packs)
 	call_deferred("_after_ready")
 
 func _after_ready() -> void:
