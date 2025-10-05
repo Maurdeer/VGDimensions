@@ -8,9 +8,6 @@ class_name GameManager
 @onready var rift_grid: RiftGrid = $RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")
 
-
-
-
 func _ready() -> void:
 	CardShop.fill_shop_deck(shop_initial_packs)
 	call_deferred("_after_ready")
@@ -18,6 +15,8 @@ func _ready() -> void:
 func _after_ready() -> void:
 	create_cards_for_player_hand()
 	rift_grid.rift_card_pack = card_pack
+	rift_grid.rift_grid_height = 4
+	rift_grid.rift_grid_width = 4
 	rift_grid.draw_initial_grid()
 	
 func create_cards_for_player_hand():

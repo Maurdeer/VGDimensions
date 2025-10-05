@@ -11,4 +11,4 @@ func execute() -> void:
 		Direction.HORIZONTAL:
 			RiftGrid.Instance.shift_decks_horizontally(shift_from, amount)
 		Direction.VERTICAL:
-			RiftGrid.Instance.shiftCardsVertical(shift_from, false, amount)
+			RiftGrid.Instance.shift_decks_vertically(shift_from, amount)

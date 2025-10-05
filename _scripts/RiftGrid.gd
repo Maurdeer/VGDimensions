@@ -86,19 +86,30 @@ func place_card(place_at: Vector2i, newCard: Card) -> void:
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+	
+func place_card_under(place_at: Vector2i, newCard: Card) -> void:
+	grid[place_at.y][place_at.x].add_card_under(newCard)
+	newCard.grid_pos = place_at
+	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
 
-func move_card_off(move_off: Vector2i) -> Card:
-	var card: Card = grid[move_off.y][move_off.x].remove_top_card()
+func place_deck_from_rift(place_at: Vector2i, from_deck_pos: Vector2i) -> void:
+	var deck: Deck = grid[from_deck_pos.y][from_deck_pos.x];
+	while not deck.is_empty():
+		place_card_under(place_at, discard_card(from_deck_pos))
+	
+func place_cards(place_at: Vector2i, cards: Array[Card]) -> void:
+	for card in cards:
+		place_card(place_at, card)
+
+func discard_card(discard_from: Vector2i) -> Card:
+	var card: Card = grid[discard_from.y][discard_from.x].remove_top_card()
 	card.grid_pos = Vector2i(-1, -1)
 	return card
-
-func discardCard(discard_from: Vector2i, target_deck: Deck):
-	target_deck.addCard(grid[discard_from.y][discard_from.x].remove_top_card())
 	
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
 	while not deck.is_empty():
-		discardCard(discard_from, _rift_discard_pile)
+		_rift_discard_pile.addCard(discard_card(discard_from))
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
 	return grid[remove_from.y][remove_from.x].removeCard()
@@ -110,8 +121,8 @@ func setCardPosition():
 	pass
 
 func swap_cards(card_a_pos: Vector2i, card_b_pos: Vector2i):
-	var card_a: Card =  move_card_off(card_a_pos)
-	place_card(card_a_pos, move_card_off(card_b_pos))
+	var card_a: Card =  discard_card(card_a_pos)
+	place_card(card_a_pos, discard_card(card_b_pos))
 	place_card(card_b_pos, card_a)
 	
 func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
@@ -123,13 +134,13 @@ func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
 	var deck_a: Deck = grid[deck_pos_a.y][deck_pos_a.x]
 	var deck_b: Deck = grid[deck_pos_b.y][deck_pos_b.x]
 	while not deck_a.is_empty():
-		temp_deck.addCard(deck_a.remove_top_card())
+		temp_deck.addCard(discard_card(deck_pos_a))
 		
 	while not deck_b.is_empty():
-		deck_a.add_card_under(deck_b.remove_top_card())
+		place_card_under(deck_pos_a, discard_card(deck_pos_b))
 	
 	while not temp_deck.is_empty():
-		deck_b.addCard(temp_deck.remove_top_card())
+		place_card(deck_pos_b, temp_deck.remove_top_card())
 
 func shuffle_card_back_in_deck(shuffleCard: Card, targetDeck: Deck):
 	targetDeck.addCard(shuffleCard)
@@ -137,57 +148,41 @@ func shuffle_card_back_in_deck(shuffleCard: Card, targetDeck: Deck):
 	return
 
 func shift_decks_horizontally(start_pos: Vector2i, offset: int):
-	if start_pos.x > rift_grid_width or start_pos.y > rift_grid_height:
-		printerr("(%s, %s) is Out of Rift Grid bounds [%s, %s]" % [start_pos, rift_grid_width, rift_grid_height])
-	var row: int = start_pos.y
-	for column in range(start_pos.x, rift_grid_width):
-		var deck_swap_column = column + offset
-		var curr_pos = Vector2i(row, column)
-		if deck_swap_column >= rift_grid_width or deck_swap_column < 0:
-			discard_entire_deck(curr_pos)
-			draw_card(curr_pos)
-		else:
-			swap_decks(curr_pos, Vector2i(row, deck_swap_column))
+	if not is_valid_pos(start_pos):
+		printerr("(%s, %s) is Out of Rift Grid bounds [%s, %s]" % [start_pos, rift_grid_width, rift_grid_height]) 
+	var shift_spots
+	if offset > 0: shift_spots = range(rift_grid_width - 1, start_pos.x - 1, -1)
+	elif offset < 0: shift_spots = range(0, start_pos.x + 1)
+	else: return
 	
+	for x in shift_spots:
+		var curr_pos = Vector2i(x, start_pos.y)
+		var place_pos = Vector2i(x + offset, start_pos.y)
+		if place_pos.x >= rift_grid_width:
+			discard_entire_deck(curr_pos)
+		else:
+			place_deck_from_rift(place_pos, curr_pos)
+		
+	fill_empty_decks()
 
-func shiftCardsVertical(start_pos: Vector2i, upNotDown: bool, amount: int):
-	if upNotDown:
-		while amount > 0:
-			var i: int = start_pos.y
-			var tempDeck: Deck = Deck.new()
-			var tempDeck2: Deck = Deck.new()
-			while i >= 0:
-				if i - 1 >= 0:
-					tempDeck = grid[i - 1][start_pos.x]
-					grid[i - 1][start_pos.x] = grid[i][start_pos.x]
-					grid[i][start_pos.x] = tempDeck2
-					tempDeck2 = tempDeck
-				else:
-					for deadCard in grid[i][start_pos.x].deck_size:
-						discardCard(Vector2i(start_pos.x, i), _rift_discard_pile)
-					grid[i][start_pos.x] = tempDeck2
-				i -= 1
-			draw_card(start_pos)
-			amount -= 1
-	else:
-		while amount > 0:
-			var i: int = start_pos.y
-			var tempDeck: Deck = Deck.new()
-			var tempDeck2: Deck = Deck.new()
-			while i < rift_grid_height:
-				if i + 1 < rift_grid_height:
-					tempDeck = grid[i + 1][start_pos.x]
-					grid[i + 1][start_pos.x] = grid[i][start_pos.x]
-					grid[i][start_pos.x] = tempDeck2
-					tempDeck2 = tempDeck
-				else:
-					for deadCard in grid[i][start_pos.x].deck_size:
-						discardCard(Vector2(start_pos.x, i), _rift_discard_pile)
-					grid[i][start_pos.x] = tempDeck2
-				i += 1
-			draw_card(start_pos)
-			amount -= 1
-
+func shift_decks_vertically(start_pos: Vector2i, offset: int):
+	if not is_valid_pos(start_pos):
+		printerr("(%s, %s) is Out of Rift Grid bounds [%s, %s]" % [start_pos, rift_grid_width, rift_grid_height]) 
+	var shift_spots
+	if offset > 0: shift_spots = range(rift_grid_height - 1, start_pos.y - 1, -1)
+	elif offset < 0: shift_spots = range(0, start_pos.y + 1)
+	else: return
+	
+	for y in shift_spots:
+		var curr_pos = Vector2i(start_pos.x, y)
+		var place_pos = Vector2i(start_pos.x, y + offset)
+		if place_pos.y >= rift_grid_height:
+			discard_entire_deck(curr_pos)
+		else:
+			place_deck_from_rift(place_pos, curr_pos)
+		
+	fill_empty_decks()
+	
 func loopCardsHorizontal(startY: int, leftNotRight: bool, amount: int):
 	if leftNotRight:
 		while amount > 0:
@@ -228,3 +223,8 @@ func exchangeCard():
 func is_valid_pos(pos: Vector2i) -> bool:
 	return 0 <= pos.x and pos.x < rift_grid_width \
 		and 0 <= pos.y and pos.y < rift_grid_height
+		
+func fill_empty_decks() -> void:
+	for y in rift_grid_height:
+		for x in rift_grid_width:
+			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
