@@ -16,30 +16,32 @@ enum StateType {
 	IN_DECK,
 }
 
-var interaction_states: Array[CardState]
-var position_states: Array[CardState]
-var interaction_sm: StateMachine
-var position_sm: StateMachine
+var interaction_states: Array[CardState] = [
+		UninteractableCardState.new(),
+		UnselectableCardState.new(),
+		InteractableCardState.new(),
+		SelectableCardState.new()
+	]
+var position_states: Array[CardState] = [
+		UndefinedCardState.new(),
+		InHandCardState.new(),
+		InRiftCardState.new(),
+	]
+var interaction_sm: StateMachine = StateMachine.new()
+var position_sm: StateMachine = StateMachine.new()
+
+# Since we don't want this called muliple
+var _initialized: bool = false
 
 func _ready() -> void:
-	position_sm = StateMachine.new()
-	interaction_sm = StateMachine.new()
+	if _initialized: return
+	_initialized = true
 	
 	add_child(position_sm)
 	add_child(interaction_sm)
 	
-	interaction_states.append(UninteractableCardState.new())
-	interaction_states.append(UnselectableCardState.new())
-	interaction_states.append(InteractableCardState.new())
-	interaction_states.append(SelectableCardState.new())
-	
 	for state in interaction_states:
 		interaction_sm.add_child(state)
-	
-	position_states.append(UndefinedCardState.new())
-	position_states.append(InHandCardState.new())
-	position_states.append(InRiftCardState.new())
-	
 	
 	for state in position_states:
 		position_sm.add_child(state)

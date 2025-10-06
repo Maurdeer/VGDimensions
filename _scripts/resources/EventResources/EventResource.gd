@@ -2,7 +2,5 @@
 extends Resource
 class_name EventResource
 
-var card_ref: Card
-
 @abstract
-func execute() -> void
+func execute(card_ref: Card) -> void

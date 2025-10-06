@@ -16,7 +16,7 @@ func get_play_selection(resource: CardResource) -> BulletResource:
 	var selection_was_created: bool = false
 	for bullet in resource.bullets:
 		if bullet.bullet_type == BulletResource.BulletType.PLAY:
-			create_button_by_bullet(resource, bullet)
+			create_button_by_bullet(bullet)
 			selection_was_created = true
 			
 	if not selection_was_created:
@@ -31,7 +31,7 @@ func get_interaction_selection(resource: CardResource) -> BulletResource:
 	for bullet in resource.bullets:
 		if bullet.bullet_type == BulletResource.BulletType.SOCIAL \
 		or bullet.bullet_type == BulletResource.BulletType.ACTION:
-			create_button_by_bullet(resource, bullet)
+			create_button_by_bullet(bullet)
 			selection_was_created = true
 			
 	if not selection_was_created:
@@ -41,7 +41,7 @@ func get_interaction_selection(resource: CardResource) -> BulletResource:
 	await selection_complete
 	return _bullet_selected
 
-func create_button_by_bullet(resource: CardResource, bullet: BulletResource):
+func create_button_by_bullet(bullet: BulletResource):
 	var new_button: Button = Button.new()
 	
 	match(bullet.bullet_type):
@@ -49,10 +49,8 @@ func create_button_by_bullet(resource: CardResource, bullet: BulletResource):
 			new_button.icon = PLAY_ICON
 		BulletResource.BulletType.SOCIAL:
 			new_button.icon = SOCIAL_ICON
-			new_button.pressed.connect(resource.on_social)
 		BulletResource.BulletType.ACTION:
 			new_button.icon = ACTION_ICON
-			new_button.pressed.connect(resource.on_action)
 
 	new_button.pressed.connect(func(): make_selection(bullet))
 	buttons.add_child(new_button)

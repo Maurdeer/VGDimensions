@@ -5,7 +5,7 @@ enum Direction {HORIZONTAL, VERTICAL}
 @export var shift_direction: Direction
 @export var amount: int = 1
 
-func execute() -> void:
+func execute(_card_ref: Card) -> void:
 	var shift_from: Vector2i = await GridPositionSelector.Instance.player_select_card()
 	match(shift_direction):
 		Direction.HORIZONTAL:

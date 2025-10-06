@@ -41,7 +41,7 @@ var hp: int:
 		hp = value
 		on_stats_change.emit()
 		
-var grid_pos: Vector2i
+var grid_pos: Vector2i = Vector2i(-1, -1)
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
 var interactable: bool = false:
@@ -60,7 +60,8 @@ var _action_bullets: Array[BulletResource]
 var _social_bullets: Array[BulletResource]
 
 func _enter_tree() -> void:
-	refresh_stats()
+	#refresh_stats()
+	on_enter_tree()
 	call_deferred("_setup")
 	
 func _setup() -> void:
@@ -73,7 +74,6 @@ func _setup() -> void:
 	
 func _on_resource_change() -> void:
 	for bullet in resource.bullets:
-		bullet.set_event_card_ref(self)
 		match(bullet.bullet_type):
 			BulletResource.BulletType.PLAY:
 				_play_bullets.append(bullet)
@@ -82,7 +82,7 @@ func _on_resource_change() -> void:
 			BulletResource.BulletType.SOCIAL:
 				_social_bullets.append(bullet)
 				
-	resource.set_up_event_resources(self)
+	resource.set_up_event_resources()
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
@@ -91,10 +91,9 @@ func refresh_stats() -> void:
 # Return whether or not the card reach zero hp
 func damage(amount: int) -> bool:
 	hp -= amount
-	resource.on_damage()
+	on_damage()
 	if hp < 0: hp = 0
 	return hp == 0
-	
 
 func flip() -> void:
 	if revealed: flip_hide()
@@ -104,14 +103,14 @@ func flip_reveal() -> void:
 	if revealed: return
 	if is_visible_in_tree(): 
 		animation_player.play("flip_reveal")
-		resource.on_flip_reveal() # (Ryan) May want to remove, this is kinda not good
+		on_flip_reveal() # (Ryan) May want to remove, this is kinda not good
 	revealed = true
 
 func flip_hide() -> void:
 	if not revealed: return
 	if is_visible_in_tree(): 
 		animation_player.play("flip_hide")
-		resource.on_flip_hide() # (Ryan) May want to remove, this is kinda not good
+		on_flip_hide() # (Ryan) May want to remove, this is kinda not good
 	revealed = false
 
 # Card Input Functions
@@ -141,3 +140,20 @@ func _on_drag_and_drop_component_2d_on_drop() -> void:
 
 static func construct_card_id(title: String, game_origin: CardResource.GameOrigin) -> String:
 	return "%s-%s" % [title, CardResource.GameOrigin.keys()[game_origin]]
+	
+# Passive Functions
+func on_play(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY]: event.execute(self)
+func on_action(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ACTION]: event.execute(self)
+func on_social(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL]: event.execute(self)
+func on_enter_tree(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE]: event.execute(self)
+func on_state_of_grid_change(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE]: event.execute(self)
+func on_end_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN]: event.execute(self)
+func on_start_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: event.execute(self)
+func on_damage(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE]: event.execute(self)
+func on_discard(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD]: event.execute(self)
+func on_burn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN]: event.execute(self)
+func on_stack(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK]: event.execute(self)
+func on_flip_hide(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE]: event.execute(self)
+func on_flip_reveal(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL]: event.execute(self)
+func on_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_MOVE]: event.execute(self)
+func on_replace(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE]: event.execute(self)

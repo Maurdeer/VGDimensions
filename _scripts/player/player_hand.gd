@@ -45,6 +45,7 @@ func draw_card_to_hand() -> void:
 	
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
+	card.grid_pos = Vector2i(-1, -1)
 	card.player_owner = "Player" # When we add netcoding do this -> GNM.player_info['name']
 	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
 	
@@ -77,7 +78,9 @@ func reshuffle_draw_pile() -> void:
 	
 func discard_card(card: Card) -> void:
 	remove_card_from_hand(card)
+	card.grid_pos = Vector2i(-1, -1)
 	discard_pile.addCard(card)
+	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 func remove_card_from_hand(card: Card) -> void:
 	if not cards_in_hand.has(card): return

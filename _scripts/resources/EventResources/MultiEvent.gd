@@ -3,6 +3,6 @@ class_name MultiEvent
 
 var events: Array[EventResource]
 
-func execute() -> void:
+func execute(card_ref: Card) -> void:
 	for event in events:
-		event.execute()
+		event.execute(card_ref)

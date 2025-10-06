@@ -30,6 +30,11 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
+	call_deferred("_after_ready")
+	
+func _after_ready() -> void:
+	GameManager.Instance.on_start_of_turn.connect(_on_start_of_new_turn)
+	GameManager.Instance.on_end_of_turn.connect(_on_end_of_new_turn)
 
 #Add functionality for border cards, a la Bullet spawning locations in Willow
 
@@ -111,10 +116,13 @@ func discard_card(discard_from: Vector2i) -> void:
 	card.grid_pos = Vector2i(-1, -1)
 	
 	# (Ryan) When we add netcoding, do a more explicit player check in the networked version
-	if card.player_owner == "": _rift_discard_pile.addCard(card)
-	else: PlayerHand.Instance.discard_card(card)
+	if card.player_owner == "": 
+		_rift_discard_pile.addCard(card)
+		card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
+	else:
+		PlayerHand.Instance.discard_card(card)
 	
-	card.resource.on_discard()
+	card.on_discard()
 	draw_card(discard_from)
 	
 func move_card(move_from: Vector2i) -> Card:
@@ -247,13 +255,32 @@ func exchangeCard():
 func is_valid_pos(pos: Vector2i) -> bool:
 	return 0 <= pos.x and pos.x < rift_grid_width \
 		and 0 <= pos.y and pos.y < rift_grid_height
-		
-func fill_empty_decks() -> void:
-	for y in rift_grid_height:
-		for x in rift_grid_width:
-			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
 			
 func get_top_card(pos: Vector2i) -> Card:
 	assert(is_valid_pos(pos), "Incorrect position: (%s, %s)" % [pos.x, pos.y]) 
 	return grid[pos.y][pos.x].get_top_card()
 	
+#====================== Section of iterating over the entire grid =====================
+# O(n * m) land bruh, but luckily n and m are small. Max size is n*m = 25 for this game hopefully
+
+# Use this function seldomly, 
+# if there are better ways to fill empty slots, then do that instead!
+func fill_empty_decks() -> void:
+	for y in rift_grid_height:
+		for x in rift_grid_width:
+			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
+	
+func _on_start_of_new_turn() -> void:
+	for y in rift_grid_height:
+		for x in rift_grid_width:
+			grid[y][x].get_top_card().on_start_of_turn()
+
+func _on_end_of_new_turn() -> void:
+	for y in rift_grid_height:
+		for x in rift_grid_width:
+			grid[y][x].get_top_card().on_end_of_turn()
+			
+func _on_state_of_grid_change() -> void:
+	for y in rift_grid_height:
+		for x in rift_grid_width:
+			grid[y][x].get_top_card().on_state_of_grid_change()

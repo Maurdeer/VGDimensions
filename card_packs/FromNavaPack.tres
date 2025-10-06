@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=7 format=3 uid="uid://b66r18jp8ponq"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=6 format=3 uid="uid://b66r18jp8ponq"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_xuuq2"]
 [ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/BreakableWall.tres" id="2_21din"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="2_ho1ha"]
 [ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_21din"]
 [ext_resource type="Resource" uid="uid://dupxrk8ncmqe4" path="res://cards/BulletLantern.tres" id="4_gkc6p"]
-[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/RockBlock.tres" id="5_0k5uu"]
 
 [resource]
 script = ExtResource("2_ho1ha")
 card_resources = Dictionary[ExtResource("1_xuuq2"), int]({
 ExtResource("2_21din"): 8,
 ExtResource("3_21din"): 5,
-ExtResource("4_gkc6p"): 5,
-ExtResource("5_0k5uu"): 6
+ExtResource("4_gkc6p"): 5
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"

@@ -4,7 +4,7 @@ class_name DamageEvent
 @export var amount: int
 @export var damage_self: bool = false
 
-func execute() -> void:
+func execute(card_ref: Card) -> void:
 	var selected_card_pos: Vector2i 
 	if damage_self:
 		selected_card_pos = card_ref.grid_pos

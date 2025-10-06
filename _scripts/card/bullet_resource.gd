@@ -16,18 +16,19 @@ enum BulletType {
 @export var _bullet_event: EventResource
 @export_multiline var bullet_description: String = ""
 
-func try_execute() -> void:
+func try_execute(card_ref: Card) -> void:
 	# (Ryan) This is currently where cost is being spent, not sure if that is a good idea?
 	if not _bullet_event: return
 	
 	# Currently only action and social have a cost for bullet activativations
-	if bullet_type == BulletType.ACTION \
-	and not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet_cost): return
+	match(bullet_type):
+		BulletType.PLAY:
+			card_ref.on_play()
+		BulletType.ACTION:
+			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet_cost): return
+			card_ref.on_action()
+		BulletType.SOCIAL:
+			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return
+			card_ref.on_social()
 	
-	if bullet_type == BulletType.SOCIAL \
-	and not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return
-	
-	await _bullet_event.execute()
-func set_event_card_ref(card: Card) -> void:
-	if not _bullet_event: return
-	_bullet_event.card_ref = card
+	await _bullet_event.execute(card_ref)

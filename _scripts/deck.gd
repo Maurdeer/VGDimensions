@@ -48,7 +48,6 @@ func addCard(card: Card):
 	# If Card is attached to a parent previously, then remove it from that parent
 	if card.get_parent(): card.get_parent().remove_child(card)
 	display_card(card)
-	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 		
 func add_card_under(card: Card) -> void:
 	if card in deck_array: return

@@ -2,6 +2,7 @@ extends CardState
 class_name InRiftCardState
 
 func enter() -> void:
+	card.refresh_stats()
 	gridcard_visualizer.visible = true
 	gridcard_back.visible = true
 	gridcard_shape.disabled = false
@@ -18,7 +19,7 @@ func clicked_on() -> void:
 	var bullet: BulletResource = await select_ui.get_interaction_selection(card.resource)
 	select_ui.queue_free()
 	if not bullet: return
-	await bullet.try_execute()
+	await bullet.try_execute(card)
 	card.interacted.emit(card)
 	
 func exit() -> void:

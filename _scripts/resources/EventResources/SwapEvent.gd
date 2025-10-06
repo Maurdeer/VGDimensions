@@ -4,7 +4,7 @@ class_name SwapEvent
 @export var first_card_is_calling_card: bool
 @export var adjacent_only: bool
 
-func execute() -> void:
+func execute(card_ref: Card) -> void:
 	var first_card_pos: Vector2i
 	var second_card_pos: Vector2i
 	if first_card_is_calling_card:
