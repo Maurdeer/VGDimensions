@@ -9,6 +9,8 @@ signal interacted(Card)
 @warning_ignore("unused_signal")
 signal selected(Vector2i)
 
+signal on_stats_change
+
 @export var resource: CardResource:
 	set(value):
 		resource = value
@@ -34,7 +36,11 @@ const SELECTION_UI = preload("uid://vei3yr63fqcj")
 @onready var dnd_2d: DragAndDropComponent2D = $drag_and_drop_component2D
 
 # Dynamic Stats
-var hp: int
+var hp: int:
+	set(value):
+		hp = value
+		on_stats_change.emit()
+		
 var grid_pos: Vector2i
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
@@ -63,7 +69,7 @@ func _setup() -> void:
 	
 func _on_resource_change() -> void:
 	for bullet in resource.bullets:
-		if bullet.bullet_event: bullet.bullet_event.card_ref = self
+		bullet.set_event_card_ref(self)
 		match(bullet.bullet_type):
 			BulletResource.BulletType.PLAY:
 				_play_bullets.append(bullet)

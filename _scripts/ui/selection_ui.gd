@@ -43,6 +43,6 @@ func create_button_by_bullet(resource: CardResource, bullet: BulletResource):
 			new_button.pressed.connect(resource.on_action)
 			
 		
-	new_button.pressed.connect(func(): if bullet.bullet_event: bullet.bullet_event.execute())
+	new_button.pressed.connect(func(): bullet.try_execute())
 	new_button.pressed.connect(make_selection)
 	buttons.add_child(new_button)

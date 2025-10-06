@@ -12,7 +12,7 @@ func enter() -> void:
 func clicked_on() -> void:
 	if card._play_bullets.size() == 1:
 		# Execute function right way, no selection needed!
-		if card._play_bullets[0].bullet_event: card._play_bullets[0].bullet_event.execute()
+		card._play_bullets[0].try_execute()
 	elif card._play_bullets.size() > 1:
 		# TODO: Pull Up Play Selection UI to pick an event to do.
 		# Let the function call poll until that option was picked

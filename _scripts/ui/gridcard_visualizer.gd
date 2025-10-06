@@ -15,16 +15,21 @@ class_name GridCardVisualizer
 
 func _ready() -> void:
 	if card and (card.resource or card_resource):
+		card.on_stats_change.connect(_on_stat_change)
 		_on_values_change()
 		
 func _on_values_change() -> void:
 	$background_container/card_background.texture = card_resource.background_art
 	$card_art_container/card_art.texture = card_resource.card_art
-	if card.hp < 0: $GUI/Icons/HP.visible = false
-	else:
-		$GUI/Icons/HP.visible = true
-		$GUI/Icons/HP/Label.text = "%s" % card.hp
+	
+	_on_stat_change()
 	
 	$GUI/Icons/ACTION.visible = not card._action_bullets.is_empty()
 	$GUI/Icons/SOCIAL.visible = not card._social_bullets.is_empty()
 	$GUI/Icons/PASSIVE.visible = false
+	
+func _on_stat_change() -> void:
+	if card.hp < 0: $GUI/Icons/HP.visible = false
+	else:
+		$GUI/Icons/HP.visible = true
+		$GUI/Icons/HP/Label.text = "%s" % card.hp

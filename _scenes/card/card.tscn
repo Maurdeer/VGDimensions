@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=19 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_u8xt1"]

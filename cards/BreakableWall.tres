@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://doj57pqlx14mt"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://doj57pqlx14mt"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_1d4nq"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_1rnrp"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_4siri"]
+[ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="2_lu05x"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_plkjb"]
 [ext_resource type="Texture2D" uid="uid://cqtl56byt7dgk" path="res://art/card_art/Outcasts/AirDungeon.png" id="4_4siri"]
 
+[sub_resource type="Resource" id="Resource_1sf21"]
+script = ExtResource("2_lu05x")
+metadata/_custom_type_script = "uid://bfa0ox70sgb47"
+
 [sub_resource type="Resource" id="Resource_1d4nq"]
 script = ExtResource("1_1d4nq")
+event = SubResource("Resource_1sf21")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_4siri"]

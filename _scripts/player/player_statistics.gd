@@ -1,9 +1,10 @@
 extends Node
-class_name player_statistics
 
 #defining variables
-@export var action: int
-@export var social: int
+signal on_stats_change
+
+@export var actions: int
+@export var socials: int
 @export var deleons: int
 @export var attack: int
 @export var tetra_city_coins: int
@@ -12,28 +13,43 @@ class_name player_statistics
 
 
 #amount is the amount we are adding or subtracting
-func change_action(amount):
-	action += amount
-
-func change_social(amount):
-	social += amount
-
-func change_deleons(amount):
-	deleons += amount
+func modify_base_resource(type: ResourceType, amount: int):
+	match (type):
+		ResourceType.DELEON:
+			deleons += amount
+		ResourceType.ACTION:
+			actions += amount
+		ResourceType.SOCIAL:
+			socials += amount
+			
+	on_stats_change.emit()
+	
+func replace_base_resource(type: ResourceType, value: int):
+	match (type):
+		ResourceType.DELEON:
+			deleons = value
+		ResourceType.ACTION:
+			actions = value
+		ResourceType.SOCIAL:
+			socials = value
+			
+	on_stats_change.emit()
 	
 func change_attack(amount):
 	attack += amount
+	on_stats_change.emit()
 
 func change_tetra_city_coins(amount):
 	tetra_city_coins += amount
+	on_stats_change.emit()
 	
 func change_from_nava_polaroids(amount):
 	from_nava_polaroids += amount
+	on_stats_change.emit()
 	
 func change_quests_completed(amount):
 	quests_completed += amount
-	
-	
+	on_stats_change.emit()
 	
 #boolean statistics
 @export var tetra_city_coins_status: bool
@@ -45,5 +61,8 @@ func enable_tetra_city_coins(status):
 func enable_from_nava_polaroids(status):
 	from_nava_polaroids_status = status
 
-
-	
+enum ResourceType {
+	DELEON,
+	ACTION,
+	SOCIAL
+}

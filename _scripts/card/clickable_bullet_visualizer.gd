@@ -30,6 +30,5 @@ func _on_bullet_type_social():
 	$TextureButton.disabled = interact_active
 
 func _on_texture_button_button_up() -> void:
-	if not bullet_resource.bullet_event: return
-	bullet_resource.bullet_event.execute()
+	bullet_resource.try_execute()
 	# TODO: Add Meditaor Complete Function or something here
