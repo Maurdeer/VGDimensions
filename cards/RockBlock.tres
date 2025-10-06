@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 [resource]
 script = ExtResource("2_cmp8r")
 title = "Rock Block"
-type = 1
+type = 2
 game_origin = 25
 bullets = Array[ExtResource("1_n6tfm")]([SubResource("Resource_n6tfm"), SubResource("Resource_yne7s")])
 quip_description = "hehehehheh dude"

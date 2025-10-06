@@ -83,11 +83,13 @@ func draw_card(draw_to: Vector2i) -> void:
  
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
+	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
 	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
+	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
 	grid[place_at.y][place_at.x].add_card_under(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
@@ -95,21 +97,28 @@ func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 func place_deck_from_rift(place_at: Vector2i, from_deck_pos: Vector2i) -> void:
 	var deck: Deck = grid[from_deck_pos.y][from_deck_pos.x];
 	while not deck.is_empty():
-		place_card_under(place_at, discard_card(from_deck_pos))
+		place_card_under(place_at, move_card(from_deck_pos))
 	
 func place_cards(place_at: Vector2i, cards: Array[Card]) -> void:
 	for card in cards:
 		place_card(place_at, card)
 
-func discard_card(discard_from: Vector2i) -> Card:
+func discard_card(discard_from: Vector2i) -> void:
+	assert(is_valid_pos(discard_from), "Cannot discard card from position (%s, %s)" % [discard_from.x, discard_from.y])
 	var card: Card = grid[discard_from.y][discard_from.x].remove_top_card()
+	card.grid_pos = Vector2i(-1, -1)
+	_rift_discard_pile.addCard(card)
+	card.resource.on_discard()
+	
+func move_card(move_from: Vector2i) -> Card:
+	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
 	card.grid_pos = Vector2i(-1, -1)
 	return card
 	
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
 	while not deck.is_empty():
-		_rift_discard_pile.addCard(discard_card(discard_from))
+		discard_card(discard_from)
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
 	return grid[remove_from.y][remove_from.x].removeCard()
@@ -121,8 +130,8 @@ func setCardPosition():
 	pass
 
 func swap_cards(card_a_pos: Vector2i, card_b_pos: Vector2i):
-	var card_a: Card =  discard_card(card_a_pos)
-	place_card(card_a_pos, discard_card(card_b_pos))
+	var card_a: Card =  move_card(card_a_pos)
+	place_card(card_a_pos, move_card(card_b_pos))
 	place_card(card_b_pos, card_a)
 	
 func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
@@ -134,10 +143,10 @@ func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
 	var deck_a: Deck = grid[deck_pos_a.y][deck_pos_a.x]
 	var deck_b: Deck = grid[deck_pos_b.y][deck_pos_b.x]
 	while not deck_a.is_empty():
-		temp_deck.addCard(discard_card(deck_pos_a))
+		temp_deck.addCard(move_card(deck_pos_a))
 		
 	while not deck_b.is_empty():
-		place_card_under(deck_pos_a, discard_card(deck_pos_b))
+		place_card_under(deck_pos_a, move_card(deck_pos_b))
 	
 	while not temp_deck.is_empty():
 		place_card(deck_pos_b, temp_deck.remove_top_card())
@@ -183,7 +192,7 @@ func shift_decks_vertically(start_pos: Vector2i, offset: int):
 		
 	fill_empty_decks()
 	
-func loopCardsHorizontal(startY: int, leftNotRight: bool, amount: int):
+func loop_cards_horizontally(startY: int, leftNotRight: bool, amount: int):
 	if leftNotRight:
 		while amount > 0:
 			var tempDeck: Deck = grid[startY].pop_front()
@@ -193,7 +202,7 @@ func loopCardsHorizontal(startY: int, leftNotRight: bool, amount: int):
 			var tempDeck: Deck = grid[startY].pop_back()
 			grid[startY].push_front(tempDeck)
 
-func loopCardsVertical(startX: int, upNotDown: bool, amount: int):
+func loop_cards_vertically(startX: int, upNotDown: bool, amount: int):
 	if upNotDown:
 		while amount > 0:
 			var tempDeck: Deck = grid[0][startX]
@@ -210,6 +219,14 @@ func loopCardsVertical(startX: int, upNotDown: bool, amount: int):
 				grid[i + 1][startX] = grid[i][startX]
 				i -= 1
 			grid[0][startX] = tempDeck
+			
+# Returns whether or not the card was discarded
+func damage_card(card_pos: Vector2i, amount: int) -> bool:
+	var card: Card = get_top_card(card_pos)
+	if card.damage(amount):
+		discard_card(card_pos)
+		return true
+	return false
 
 func revolveCards():
 	pass
@@ -228,3 +245,8 @@ func fill_empty_decks() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
 			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
+			
+func get_top_card(pos: Vector2i) -> Card:
+	assert(is_valid_pos(pos), "Incorrect position: (%s, %s)" % [pos.x, pos.y]) 
+	return grid[pos.y][pos.x].get_top_card()
+	

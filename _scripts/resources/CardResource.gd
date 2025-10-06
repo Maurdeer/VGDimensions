@@ -8,6 +8,7 @@ class_name CardResource
 @export var game_origin: GameOrigin
 enum CardType {
 	FEATURE, 
+	ALLY,
 	ASSET, 
 	LOCATION, 
 	QUEST, 
@@ -88,6 +89,7 @@ enum GameOrigin {
 @export var refreshable: bool = false
 @export var stunnable: bool = true
 @export var flippable: bool = true
+var damagable: bool = starting_hp > -1
 
 # Description Area
 @export_group("Bullet Descriptions")

@@ -1,0 +1,195 @@
+[gd_scene load_steps=16 format=3 uid="uid://c57bmxyf3rgq6"]
+
+[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_em4v1"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cs1dx"]
+[ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_5h11k"]
+[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/RockBlock.tres" id="4_styrd"]
+[ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_dy7xj"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_lfpty"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_gmu8c"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_fje6v"]
+[ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="9_cs1dx"]
+[ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="10_styrd"]
+[ext_resource type="FontFile" uid="uid://bcwkqrkgs1rci" path="res://font/Abel-Regular.ttf" id="11_dy7xj"]
+[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="12_lfpty"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="13_gmu8c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ccn5w"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lfpty"]
+font = ExtResource("11_dy7xj")
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[node name="sandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_em4v1")
+cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("4_styrd")])
+card_pack = ExtResource("5_dy7xj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="RiftGrid" parent="." instance=ExtResource("6_lfpty")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 248.0
+offset_top = 344.0
+offset_right = 248.0
+offset_bottom = 344.0
+grow_vertical = 1
+
+[node name="PlayerHandUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -713.0
+offset_top = -148.0
+offset_right = -713.0
+offset_bottom = -148.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PlayerHandUI"]
+layout_mode = 0
+offset_left = -662.0
+offset_top = -186.0
+offset_right = -315.0
+offset_bottom = -134.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_ccn5w")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.5
+offset_top = -39.0
+offset_right = 179.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_gmu8c")
+expand_mode = 1
+
+[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("8_fje6v")]
+scale = Vector2(0.9, 0.9)
+
+[node name="next_turn_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Next Turn"
+
+[node name="PlayerStatsUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -343.0
+offset_right = 425.0
+offset_bottom = -14.0
+grow_vertical = 0
+script = ExtResource("9_cs1dx")
+
+[node name="TextureRect" type="TextureRect" parent="PlayerStatsUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_gmu8c")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerStatsUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -158.5
+offset_right = 127.5
+offset_bottom = 158.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Deleon" type="HBoxContainer" parent="PlayerStatsUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="PlayerStatsUI/VBoxContainer/Deleon"]
+layout_mode = 2
+texture = ExtResource("10_styrd")
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="PlayerStatsUI/VBoxContainer/Deleon"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_lfpty")
+
+[node name="Action" type="HBoxContainer" parent="PlayerStatsUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 69
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="PlayerStatsUI/VBoxContainer/Action"]
+layout_mode = 2
+texture = ExtResource("12_lfpty")
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="PlayerStatsUI/VBoxContainer/Action"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_lfpty")
+
+[node name="Deleon3" type="HBoxContainer" parent="PlayerStatsUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 69
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="PlayerStatsUI/VBoxContainer/Deleon3"]
+layout_mode = 2
+texture = ExtResource("13_gmu8c")
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="PlayerStatsUI/VBoxContainer/Deleon3"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_lfpty")
+
+[connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

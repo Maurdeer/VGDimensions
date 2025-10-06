@@ -46,13 +46,19 @@ func draw_card_to_hand() -> void:
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
 	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
+	
+	# =================I'm not a big fan of this====================
+	# Vortex code might change this hopefully?
 	var on_played: Callable
 	match(card.resource.type):
 		CardResource.CardType.FEATURE:
 			on_played = discard_card
+		CardResource.CardType.ALLY:
+			on_played = discard_card
 		CardResource.CardType.ASSET:
 			pass
 	if on_played: card.played.connect(on_played)
+	# ===============================================================
 	# Acquire a slot from the slot queue to hold the card
 	var slot: Control = slot_queue.pop_back()
 	slot.add_child(card)

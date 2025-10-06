@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 [resource]
 script = ExtResource("2_jf1k8")
 title = "Lil Guy"
+type = 1
 deleon_value = 1
 bullets = Array[ExtResource("1_0dcse")]([SubResource("Resource_0dcse")])
 card_art = ExtResource("2_5gc1e")

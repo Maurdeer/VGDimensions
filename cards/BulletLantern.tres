@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 [resource]
 script = ExtResource("2_wd5mm")
 title = "Bullet Lantern"
-type = 4
+type = 5
 game_origin = 30
 bullets = Array[ExtResource("1_bijci")]([SubResource("Resource_pxc3g"), SubResource("Resource_abgaf")])
 description_textures = Array[Texture]([ExtResource("5_omcjo")])

@@ -7,6 +7,7 @@ static var Instance: GridPositionSelector
 
 var _first: bool
 var _selected_pos: Vector2i
+var _is_selection_active: bool = false
 signal selected
 
 func _ready() -> void:
@@ -28,9 +29,13 @@ func player_select_card_adj_to_position(pos: Vector2i) -> Vector2i:
 			card.selected.connect(on_card_clicked)
 			
 	await selected
+	_is_selection_active = false
 	return _selected_pos
 
 func player_select_card() -> Vector2i:
+	if _is_selection_active: 
+		return Vector2i(-1, -1)
+	_is_selection_active = true
 	_first = true
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
@@ -40,22 +45,44 @@ func player_select_card() -> Vector2i:
 			card.selected.connect(on_card_clicked)
 			
 	await selected
+	_is_selection_active = false
 	return _selected_pos
-
-func on_card_clicked(grid_pos: Vector2i):
-	if not _first: return
-	_first = false
 	
-	# TODO: Swap back to the original state of all the cards
-	# Handle this in the state machine of card instead of here
-	# For now just set them to interactable since we know they are cards on
-	# the grid.
+func player_select_card_filter(filter: Callable) -> Vector2i:
+	if _is_selection_active: return Vector2i(-1, -1)
+	_is_selection_active = true
+	_first = true
+	var no_cards_connected: bool = true
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
 			var card: Card = deck.get_top_card()
+			if filter.call(card):
+				card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
+				no_cards_connected = false
+			else:
+				card.card_sm.transition_to_state(CardStateMachine.StateType.UNSELECTABLE)
+			card.selected.connect(on_card_clicked)
 			
-			# TODO: Replace with State Swapping
+	if no_cards_connected:
+		revert_card_states()
+		_is_selection_active = false
+		return Vector2i(-1, -1)
+		
+	await selected
+	_is_selection_active = false
+	return _selected_pos
+	
+		
+func revert_card_states() -> void:
+	for i in rift_grid.rift_grid_height:
+		for deck: Deck in rift_grid.grid[i]:
+			var card: Card = deck.get_top_card()
 			card.card_sm.interaction_sm.transition_to_prev_state()
 			card.selected.disconnect(on_card_clicked)
+			
+func on_card_clicked(grid_pos: Vector2i):
+	if not _first: return
+	_first = false
+	revert_card_states()
 	_selected_pos = grid_pos
 	selected.emit()

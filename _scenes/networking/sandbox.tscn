@@ -23,7 +23,7 @@ font = ExtResource("11_dy7xj")
 font_size = 80
 font_color = Color(0, 0, 0, 1)
 
-[node name="MultiplayerScene" type="Control"]
+[node name="sandbox" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

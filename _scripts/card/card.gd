@@ -84,9 +84,13 @@ func refresh_stats() -> void:
 	hp = resource.starting_hp
 	#call_deferred("_on_values_change")
 
-func damage(amount: int) -> void:
+# Return whether or not the card reach zero hp
+func damage(amount: int) -> bool:
 	hp -= amount
 	resource.on_damage()
+	if hp < 0: hp = 0
+	return hp == 0
+	
 
 func flip() -> void:
 	if revealed: flip_hide()
@@ -115,15 +119,18 @@ func _on_single_click() -> void:
 	if CardInspector.Instance: CardInspector.Instance.set_card(self)
 	card_sm.clicked_on()
 
+var _pressed_previously: bool = false
 func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not event is InputEventMouseButton: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
-		if mouse_button_event.pressed:
+		if mouse_button_event.pressed and not _pressed_previously:
+			_pressed_previously = true
 			if mouse_button_event.double_click:
 				_on_double_click()
 			else:
 				_on_single_click()
+		_pressed_previously = mouse_button_event.pressed
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.

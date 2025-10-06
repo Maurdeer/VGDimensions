@@ -4,6 +4,7 @@ class_name SwapEvent
 @export var first_card_is_calling_card: bool
 @export var adjacent_only: bool
 
+
 func execute() -> void:
 	var first_card_pos: Vector2i
 	var second_card_pos: Vector2i
@@ -13,7 +14,9 @@ func execute() -> void:
 		first_card_pos = await GridPositionSelector.Instance.player_select_card()
 		
 	if adjacent_only:
-		second_card_pos = await GridPositionSelector.Instance.player_select_card_adj_to_position(first_card_pos)
+		var filter: Callable = func(card):
+			return (card.grid_pos - first_card_pos).length() == 1
+		second_card_pos = await GridPositionSelector.Instance.player_select_card_filter(filter)
 	else:
 		second_card_pos = await GridPositionSelector.Instance.player_select_card()
 		
