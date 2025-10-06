@@ -10,6 +10,8 @@ func enter() -> void:
 	card_visualizer.visible = false
 	card_back.visible = false
 	card_shape.disabled = true
+	
+	card.interactable = true
 	card.flip_reveal()
 
 func clicked_on() -> void:

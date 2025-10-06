@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxikkksmdeeo0"]
+
+[ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="1_dbsb7"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="2_bpfsq"]
+[ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="3_p0hud"]
+[ext_resource type="FontFile" uid="uid://bcwkqrkgs1rci" path="res://font/Abel-Regular.ttf" id="4_irl3v"]
+[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="5_aglgy"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="6_me5x1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbsb7"]
+font = ExtResource("4_irl3v")
+font_size = 35
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lfpty"]
+font = ExtResource("4_irl3v")
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[node name="PlayerStatsUI" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -448.0
+offset_right = 425.0
+offset_bottom = -14.0
+grow_vertical = 0
+script = ExtResource("1_dbsb7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bpfsq")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -158.5
+offset_right = 127.5
+offset_bottom = 158.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="message" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Not Sufficent Resources!!"
+label_settings = SubResource("LabelSettings_dbsb7")
+
+[node name="Deleon" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Deleon"]
+layout_mode = 2
+texture = ExtResource("3_p0hud")
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="VBoxContainer/Deleon"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_lfpty")
+
+[node name="Action" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 69
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Action"]
+layout_mode = 2
+texture = ExtResource("5_aglgy")
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="VBoxContainer/Action"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_lfpty")
+
+[node name="Deleon3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 69
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Deleon3"]
+layout_mode = 2
+texture = ExtResource("6_me5x1")
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="VBoxContainer/Deleon3"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_lfpty")

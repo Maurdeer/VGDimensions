@@ -85,3 +85,11 @@ func remove_card_from_hand(card: Card) -> void:
 	slots.remove_child(cards_in_hand[card])
 	slot_queue.append(cards_in_hand[card])
 	cards_in_hand.erase(card)
+	
+func disable_player_hand() -> void:
+	for card in cards_in_hand:
+		card.card_sm.transition_to_state(CardStateMachine.StateType.UNSELECTABLE)
+		
+func enable_player_hand() -> void:
+	for card in cards_in_hand:
+		card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)

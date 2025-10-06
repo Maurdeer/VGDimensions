@@ -32,13 +32,13 @@ func create_cards_for_player_hand():
 	player_hand.fill_hand()
 	
 func initial_player_stats():
-	PlayerStatistics.replace_base_resource(PlayerStatistics.ResourceType.DELEON, 10)
-	PlayerStatistics.replace_base_resource(PlayerStatistics.ResourceType.ACTION, 0)
-	PlayerStatistics.replace_base_resource(PlayerStatistics.ResourceType.SOCIAL, 0)
+	PlayerStatistics.deleons = 10
+	PlayerStatistics.actions = 0
+	PlayerStatistics.socials = 0
 	
 func reset_temporary_resources():
-	PlayerStatistics.replace_base_resource(PlayerStatistics.ResourceType.ACTION, 0)
-	PlayerStatistics.replace_base_resource(PlayerStatistics.ResourceType.SOCIAL, 0)
+	PlayerStatistics.actions = 0
+	PlayerStatistics.actions = 0
 
 func _on_next_turn_button_pressed() -> void:
 	player_hand.clear_hand()

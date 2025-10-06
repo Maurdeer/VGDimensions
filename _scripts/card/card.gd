@@ -45,6 +45,11 @@ var grid_pos: Vector2i
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
 var on_player_hand: bool
+var interactable: bool = false:
+	set(value):
+		dnd_2d.interactable = value
+		interactable = value
+		
 var card_id: String:
 	get:
 		if not resource: return ""
@@ -121,7 +126,7 @@ func _on_single_click() -> void:
 
 var _pressed_previously: bool = false
 func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if not event is InputEventMouseButton: return
+	if not interactable or not event is InputEventMouseButton: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 		if mouse_button_event.pressed and not _pressed_previously:

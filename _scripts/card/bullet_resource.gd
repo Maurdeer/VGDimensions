@@ -21,12 +21,11 @@ func try_execute() -> void:
 	if not _bullet_event: return
 	
 	# Currently only action and social have a cost for bullet activativations
-	if bullet_type == BulletType.ACTION:
-		if PlayerStatistics.actions < bullet_cost: return
-		PlayerStatistics.modify_base_resource(PlayerStatistics.ResourceType.ACTION, -bullet_cost)
-	if bullet_type == BulletType.SOCIAL:
-		if PlayerStatistics.socials < bullet_cost: return
-		PlayerStatistics.modify_base_resource(PlayerStatistics.ResourceType.SOCIAL, -bullet_cost)
+	if bullet_type == BulletType.ACTION \
+	and not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet_cost): return
+	
+	if bullet_type == BulletType.SOCIAL \
+	and not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return
 	
 	_bullet_event.execute()
 func set_event_card_ref(card: Card) -> void:

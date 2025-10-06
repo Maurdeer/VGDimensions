@@ -5,4 +5,4 @@ class_name GainResourceEvent
 @export var amount: int
 
 func execute() -> void:
-	PlayerStatistics.modify_base_resource(type, amount)
+	PlayerStatistics.modify_resource(type, amount)
