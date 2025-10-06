@@ -19,5 +19,6 @@ metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 script = ExtResource("3_0dbhp")
 title = "Buff Guy"
 type = 1
+deleon_value = 1
 bullets = Array[ExtResource("2_pqhu8")]([SubResource("Resource_63hgc")])
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

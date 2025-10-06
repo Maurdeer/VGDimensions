@@ -12,14 +12,20 @@ func enter() -> void:
 func clicked_on() -> void:
 	if card._play_bullets.size() == 1:
 		# Execute function right way, no selection needed!
-		card._play_bullets[0].try_execute()
+		await card._play_bullets[0].try_execute()
 	elif card._play_bullets.size() > 1:
 		# TODO: Pull Up Play Selection UI to pick an event to do.
 		# Let the function call poll until that option was picked
 		var select_ui: SelectionUI = card.SELECTION_UI.instantiate()
 		get_tree().root.add_child(select_ui)
-		select_ui.setup_play_selections(card.resource)
-		await select_ui.selection_complete
+		var bullet = await select_ui.get_play_selection(card.resource)
+		select_ui.queue_free()
+		
+		await bullet.try_execute()
+	else:
+		printerr("Card is unplayable!! That shouldn't be the case!")
+		return
+		
 	# Passive Call Now
 	card.played.emit(card)
 	card.resource.on_play()

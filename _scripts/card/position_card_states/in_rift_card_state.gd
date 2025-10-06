@@ -15,8 +15,10 @@ func enter() -> void:
 func clicked_on() -> void:
 	var select_ui: SelectionUI = card.SELECTION_UI.instantiate()
 	get_tree().root.add_child(select_ui)
-	select_ui.setup_interaction_selections(card.resource)
-	await select_ui.selection_complete
+	var bullet: BulletResource = await select_ui.get_interaction_selection(card.resource)
+	select_ui.queue_free()
+	if not bullet: return
+	await bullet.try_execute()
 	card.interacted.emit(card)
 	
 func exit() -> void:

@@ -45,6 +45,7 @@ func draw_card_to_hand() -> void:
 	
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
+	card.player_owner = "Player" # When we add netcoding do this -> GNM.player_info['name']
 	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
 	
 	# =================I'm not a big fan of this====================
@@ -56,7 +57,8 @@ func draw_card_to_hand() -> void:
 		CardResource.CardType.ALLY:
 			on_played = discard_card
 		CardResource.CardType.ASSET:
-			pass
+			on_played = remove_card_from_hand
+			
 	if on_played: card.played.connect(on_played)
 	# ===============================================================
 	# Acquire a slot from the slot queue to hold the card
@@ -75,7 +77,6 @@ func reshuffle_draw_pile() -> void:
 	
 func discard_card(card: Card) -> void:
 	remove_card_from_hand(card)
-	
 	discard_pile.addCard(card)
 	
 func remove_card_from_hand(card: Card) -> void:

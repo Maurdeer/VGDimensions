@@ -27,7 +27,7 @@ func try_execute() -> void:
 	if bullet_type == BulletType.SOCIAL \
 	and not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return
 	
-	_bullet_event.execute()
+	await _bullet_event.execute()
 func set_event_card_ref(card: Card) -> void:
 	if not _bullet_event: return
 	_bullet_event.card_ref = card

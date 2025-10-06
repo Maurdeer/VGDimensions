@@ -74,10 +74,12 @@ func getCardPosition():
 func draw_card(draw_to: Vector2i) -> void:
 	#get card from deck
 	var new_card: Card
-	if not _rift_deck.is_empty():
-		new_card = _rift_deck.remove_top_card()
-	else:
-		new_card = CARD.instantiate()
+	if _rift_deck.is_empty():
+		_rift_deck.mergeDeck(_rift_discard_pile)
+		_rift_deck.shuffleDeck()
+		
+	new_card = _rift_deck.remove_top_card()
+		
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	place_card(draw_to, new_card)
  
@@ -107,8 +109,13 @@ func discard_card(discard_from: Vector2i) -> void:
 	assert(is_valid_pos(discard_from), "Cannot discard card from position (%s, %s)" % [discard_from.x, discard_from.y])
 	var card: Card = grid[discard_from.y][discard_from.x].remove_top_card()
 	card.grid_pos = Vector2i(-1, -1)
-	_rift_discard_pile.addCard(card)
+	
+	# (Ryan) When we add netcoding, do a more explicit player check in the networked version
+	if card.player_owner == "": _rift_discard_pile.addCard(card)
+	else: PlayerHand.Instance.discard_card(card)
+	
 	card.resource.on_discard()
+	draw_card(discard_from)
 	
 func move_card(move_from: Vector2i) -> Card:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()

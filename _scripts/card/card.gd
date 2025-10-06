@@ -44,7 +44,6 @@ var hp: int:
 var grid_pos: Vector2i
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
-var on_player_hand: bool
 var interactable: bool = false:
 	set(value):
 		dnd_2d.interactable = value
