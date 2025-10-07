@@ -35,7 +35,7 @@ func player_select_card() -> Vector2i:
 	_is_selection_active = false
 	return _selected_pos
 	
-func player_select_card_filter(filter: Callable) -> Vector2i:
+func player_select_card_filter(filter: Callable = func(card: Card): return true) -> Vector2i:
 	if _is_selection_active: return Vector2i(-1, -1)
 	_is_selection_active = true
 	_first = true

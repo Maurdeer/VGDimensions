@@ -25,3 +25,6 @@ func transition_to_state(new_state: State) -> void:
 func transition_to_prev_state() -> void:
 	if not prev_state or current_state.get_script() == prev_state.get_script(): return
 	transition_to_state(prev_state)
+	
+func is_state(state: State) -> bool:
+	return current_state == state

@@ -56,3 +56,7 @@ func transition_to_state(type: StateType) -> void:
 	if int(type) < interaction_states.size() : interaction_sm.transition_to_state(interaction_states[type])
 	else: position_sm.transition_to_state(position_states[type - interaction_states.size()])
 	
+func is_state(type: StateType) -> bool:
+	if int(type) < interaction_states.size() : return interaction_sm.is_state(interaction_states[type])
+	return position_sm.is_state(position_states[type - interaction_states.size()])
+	

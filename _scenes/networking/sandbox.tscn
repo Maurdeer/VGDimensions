@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c57bmxyf3rgq6"]
+[gd_scene load_steps=13 format=3 uid="uid://c57bmxyf3rgq6"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_em4v1"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cs1dx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_dy7xj"]
 [ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/RockBlock.tres" id="5_timxm"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_lfpty"]
+[ext_resource type="Resource" uid="uid://df2yhxk3csdhh" path="res://cards/RollingStone.tres" id="6_timxm"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_gmu8c"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_fje6v"]
 [ext_resource type="PackedScene" uid="uid://cxikkksmdeeo0" path="res://_scenes/ui/player_stats_ui.tscn" id="9_kl2am"]
@@ -26,10 +27,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_em4v1")
-cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm")])
+cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm")])
 card_pack = ExtResource("5_dy7xj")
-initial_grid_size = Vector2i(5, 5)
-infinite_resources = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

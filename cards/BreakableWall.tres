@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="2_lu05x"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_plkjb"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_1sf21"]
-[ext_resource type="Texture2D" uid="uid://cqtl56byt7dgk" path="res://art/card_art/Outcasts/AirDungeon.png" id="4_4siri"]
+[ext_resource type="Texture2D" uid="uid://b1ib5ux1y6l4c" path="res://art/card_art/Outcasts/Cave Breakable Tiles.png" id="6_1sf21"]
 
 [sub_resource type="Resource" id="Resource_lu05x"]
 script = ExtResource("2_lu05x")
@@ -49,6 +49,6 @@ burnable = false
 bullets = Array[ExtResource("1_1rnrp")]([SubResource("Resource_4siri")])
 quip_description = "Crunchy Walls"
 _passive_event_resources = Array[ExtResource("1_1d4nq")]([SubResource("Resource_1sf21"), SubResource("Resource_cnumb")])
-card_art = ExtResource("4_4siri")
+card_art = ExtResource("6_1sf21")
 background_art = ExtResource("2_4siri")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

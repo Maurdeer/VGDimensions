@@ -115,6 +115,10 @@ func place_cards(place_at: Vector2i, cards: Array[Card]) -> void:
 	for card in cards:
 		place_card(place_at, card)
 
+func discard_card_and_draw(discard_from: Vector2i) -> void:
+	discard_card(discard_from)
+	draw_card(discard_from)
+	
 func discard_card(discard_from: Vector2i) -> void:
 	assert(is_valid_pos(discard_from), "Cannot discard card from position (%s, %s)" % [discard_from.x, discard_from.y])
 	var card: Card = grid[discard_from.y][discard_from.x].remove_top_card()
@@ -128,7 +132,6 @@ func discard_card(discard_from: Vector2i) -> void:
 		PlayerHand.Instance.discard_card(card)
 	
 	card.on_discard()
-	draw_card(discard_from)
 	
 func move_card(move_from: Vector2i) -> Card:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
