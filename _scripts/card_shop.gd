@@ -39,17 +39,24 @@ func return_six_cards() -> Array[Card]:
 	return current_grid_cards
 
 func process_purchase(card_to_purchase: Card) -> void:
-	var index = current_grid_cards.find(card_to_purchase)
-	if index == -1:
-		printerr("CardShop: ERROR! Attempted to purchase card not found in grid array.")	
-	current_grid_cards.remove_at(index)
-	print("CardShop: Card removed from grid array. Remaining:", current_grid_cards.size())
-	
-	# Emit the signal to tell the UI to update
-	emit_signal("card_purchased", card_to_purchase)
-	
+	var purchase_price: int = card_to_purchase.resource.deleon_value
+	if PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.DELEON, purchase_price):
+		var index = current_grid_cards.find(card_to_purchase)
+		if index == -1:
+			printerr("CardShop: ERROR! Attempted to purchase card not found in grid array.")	
+		current_grid_cards.remove_at(index)
+		print("CardShop: Card removed from grid array. Remaining:", current_grid_cards.size())
+			
+		#Emit the signal to tell the UI to update
+		print("price ", purchase_price, "delons", PlayerStatistics.deleons)
+		emit_signal("card_purchased", card_to_purchase)
+	else:
+		print("CardShop: Purchase failed! Player cannot afford ", PlayerStatistics.deleons, " deleons (Have: ", PlayerStatistics.deleons, ").")
+	#
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# connect to game manager onstartOfEveryTurn
+	
 	pass # Replace with function body.
 
 
