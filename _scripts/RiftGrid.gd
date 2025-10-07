@@ -109,11 +109,15 @@ func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 func place_deck_from_rift(place_at: Vector2i, from_deck_pos: Vector2i) -> void:
 	var deck: Deck = grid[from_deck_pos.y][from_deck_pos.x];
 	while not deck.is_empty():
-		place_card_under(place_at, move_card(from_deck_pos))
+		move_card_to_under(place_at, from_deck_pos)
 	
 func place_cards(place_at: Vector2i, cards: Array[Card]) -> void:
 	for card in cards:
 		place_card(place_at, card)
+		
+func place_cards_under(place_under: Vector2i, cards: Array[Card]) -> void:
+	for card in cards:
+		place_card_under(place_under, card)
 
 func discard_card_and_draw(discard_from: Vector2i) -> void:
 	discard_card(discard_from)
@@ -133,10 +137,13 @@ func discard_card(discard_from: Vector2i) -> void:
 	
 	card.on_discard()
 	
-func move_card(move_from: Vector2i) -> Card:
+func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
-	card.grid_pos = Vector2i(-1, -1)
-	return card
+	place_card(move_to, card)
+	
+func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
+	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
+	place_card_under(move_to, card)
 	
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
@@ -153,8 +160,8 @@ func setCardPosition():
 	pass
 
 func swap_cards(card_a_pos: Vector2i, card_b_pos: Vector2i):
-	var card_a: Card =  move_card(card_a_pos)
-	place_card(card_a_pos, move_card(card_b_pos))
+	var card_a: Card =  grid[card_a_pos.y][card_a_pos.x].remove_top_card()
+	move_card_to(card_a_pos, card_b_pos)
 	place_card(card_b_pos, card_a)
 	
 func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
@@ -166,10 +173,11 @@ func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
 	var deck_a: Deck = grid[deck_pos_a.y][deck_pos_a.x]
 	var deck_b: Deck = grid[deck_pos_b.y][deck_pos_b.x]
 	while not deck_a.is_empty():
-		temp_deck.addCard(move_card(deck_pos_a))
+		var card_a: Card = grid[deck_pos_a.y][deck_pos_a.x].remove_top_card()
+		temp_deck.addCard(card_a)
 		
 	while not deck_b.is_empty():
-		place_card_under(deck_pos_a, move_card(deck_pos_b))
+		move_card_to_under(deck_pos_a, deck_pos_b)
 	
 	while not temp_deck.is_empty():
 		place_card(deck_pos_b, temp_deck.remove_top_card())

@@ -19,9 +19,8 @@ func execute(card_ref: Card) -> bool:
 	if card_ref.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
 		if defeated:
 			var card_pos: Vector2i = card_ref.grid_pos
-			RiftGrid.Instance.move_card(card_ref.grid_pos)
+			RiftGrid.Instance.move_card_to(selected_pos, card_ref.grid_pos)
 			RiftGrid.Instance.draw_card(card_pos)
-			RiftGrid.Instance.place_card(selected_pos, card_ref)
 	else:
 		if defeated:
 			RiftGrid.Instance.place_card(selected_pos, card_ref)

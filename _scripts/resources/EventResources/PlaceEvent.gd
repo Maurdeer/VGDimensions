@@ -17,7 +17,7 @@ func execute(card_ref: Card) -> bool:
 			selected_card_pos = await GridPositionSelector.Instance.player_select_card_filter(filter)
 		else:
 			selected_card_pos = await GridPositionSelector.Instance.player_select_card()
-		RiftGrid.Instance.place_card(selected_card_pos, RiftGrid.Instance.move_card(card_ref.grid_pos))
+		RiftGrid.Instance.move_card_to(selected_card_pos, card_ref.grid_pos)
 		RiftGrid.Instance.fill_empty_decks()
 	return true
 		
