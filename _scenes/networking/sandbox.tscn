@@ -28,6 +28,7 @@ mouse_filter = 2
 script = ExtResource("1_em4v1")
 cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm")])
 card_pack = ExtResource("5_dy7xj")
+initial_grid_size = Vector2i(5, 5)
 infinite_resources = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

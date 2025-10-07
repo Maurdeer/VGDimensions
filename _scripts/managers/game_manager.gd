@@ -8,6 +8,7 @@ signal on_end_of_turn
 @export var cards: Array[CardResource]
 @export var card_pack: CardPackResource
 @export var shop_initial_packs: Array[CardPackResource]
+@export var initial_grid_size: Vector2i = Vector2i(3, 3)
 
 @export_category("Developer Tests")
 @export var infinite_resources: bool = false
@@ -36,8 +37,8 @@ func _after_ready() -> void:
 	
 func setup_rift_grid():
 	rift_grid.rift_card_pack = card_pack
-	rift_grid.rift_grid_height = 4
-	rift_grid.rift_grid_width = 4
+	rift_grid.rift_grid_height = initial_grid_size.y
+	rift_grid.rift_grid_width = initial_grid_size.x
 	rift_grid.draw_initial_grid()
 	
 func create_cards_for_player_hand():

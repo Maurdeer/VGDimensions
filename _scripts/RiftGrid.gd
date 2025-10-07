@@ -80,8 +80,13 @@ func draw_card(draw_to: Vector2i) -> void:
 	#get card from deck
 	var new_card: Card
 	if _rift_deck.is_empty():
+		# Must have cards in discard pile to shuffle in
 		_rift_deck.mergeDeck(_rift_discard_pile)
 		_rift_deck.shuffleDeck()
+	
+	if _rift_deck.is_empty():
+		# Holy bananza bro, time to double this deck I guess
+		_double_rift_deck()
 		
 	new_card = _rift_deck.remove_top_card()
 		
@@ -167,9 +172,9 @@ func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
 		place_card(deck_pos_b, temp_deck.remove_top_card())
 
 func shuffle_card_back_in_deck(shuffleCard: Card, targetDeck: Deck):
+	shuffleCard.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	targetDeck.addCard(shuffleCard)
 	targetDeck.shuffleDeck()
-	return
 
 func shift_decks_horizontally(start_pos: Vector2i, offset: int):
 	if not is_valid_pos(start_pos):
@@ -284,3 +289,12 @@ func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
 			grid[y][x].get_top_card().on_state_of_grid_change()
+			
+# Only when things get CRAAAAZZZZZYYY
+# This should hopefully not happen, unless the deck isn't created that well
+func _double_rift_deck() -> void:
+	for card_ref in _card_refs:
+		var card: Card = card_ref.duplicate() as Card
+		_rift_deck.addCard(card) 
+		card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
+	_rift_deck.shuffleDeck()
