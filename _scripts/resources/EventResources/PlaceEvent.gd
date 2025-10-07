@@ -3,7 +3,7 @@ class_name PlaceEvent
 
 @export var only_adjacent_cards: bool = false
 
-func execute(card_ref: Card) -> void:
+func execute(card_ref: Card) -> bool:
 	var in_hand: bool = card_ref.grid_pos.x < 0 or card_ref.grid_pos.y < 0
 	var selected_card_pos: Vector2i
 	if in_hand:
@@ -19,4 +19,5 @@ func execute(card_ref: Card) -> void:
 			selected_card_pos = await GridPositionSelector.Instance.player_select_card()
 		RiftGrid.Instance.place_card(selected_card_pos, RiftGrid.Instance.move_card(card_ref.grid_pos))
 		RiftGrid.Instance.fill_empty_decks()
+	return true
 		

@@ -43,6 +43,21 @@ func modify_resource(type: ResourceType, amount: int) -> void:
 		ResourceType.SOCIAL:
 			socials += amount
 			
+func can_afford(type: ResourceType, required_amount: int) -> bool:
+	var affordable = false
+	match(type):
+		ResourceType.DELEON:
+			affordable = deleons >= required_amount
+		ResourceType.ACTION:
+			affordable = actions >= required_amount
+		ResourceType.SOCIAL:
+			affordable = socials >= required_amount
+			
+	if not affordable:
+		on_resource_spend_fail.emit(type)
+		
+	return affordable
+			
 func purchase_attempt(type: ResourceType, required_amount: int) -> bool:
 	var success = false
 	match(type):

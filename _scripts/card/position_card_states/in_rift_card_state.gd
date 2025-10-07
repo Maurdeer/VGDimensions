@@ -19,7 +19,8 @@ func clicked_on() -> void:
 	var bullet: BulletResource = await select_ui.get_interaction_selection(card.resource)
 	select_ui.queue_free()
 	if not bullet: return
-	await bullet.try_execute(card)
+	var success: bool = await bullet.try_execute(card)
+	if not success: return
 	card.interacted.emit(card)
 	
 func exit() -> void:

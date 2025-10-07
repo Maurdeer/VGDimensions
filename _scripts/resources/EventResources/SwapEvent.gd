@@ -4,7 +4,7 @@ class_name SwapEvent
 @export var first_card_is_calling_card: bool
 @export var adjacent_only: bool
 
-func execute(card_ref: Card) -> void:
+func execute(card_ref: Card) -> bool:
 	var first_card_pos: Vector2i
 	var second_card_pos: Vector2i
 	if first_card_is_calling_card:
@@ -19,5 +19,7 @@ func execute(card_ref: Card) -> void:
 	else:
 		second_card_pos = await GridPositionSelector.Instance.player_select_card()
 		
-	if first_card_pos == second_card_pos: return
+	if first_card_pos == second_card_pos: return false
 	RiftGrid.Instance.swap_cards(first_card_pos, second_card_pos)
+	
+	return true
