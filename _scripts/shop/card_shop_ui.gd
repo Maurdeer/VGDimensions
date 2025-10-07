@@ -8,9 +8,8 @@ func display_cards(cards_to_display: Array[Card]) -> void:
 		child.queue_free()
 		
 	for card_instance in cards_to_display:
-		var card_slot_wrapper = Control.new()
+		var card_slot_wrapper = CenterContainer.new()
 		card_slot_wrapper.name = "CardSlot_" + str(grid_container.get_child_count())
-		# Change to not ignore when users buy the card
 		card_slot_wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		card_slot_wrapper.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		card_slot_wrapper.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -23,7 +22,6 @@ func display_cards(cards_to_display: Array[Card]) -> void:
 		grid_container.add_child(card_slot_wrapper)
 		# only when card is added as a child of obj, then card_sm is created so we can transition to IN_SHOP state
 		card_instance.card_sm.transition_to_state(CardStateMachine.StateType.IN_SHOP)
-
 	print("CardShopUI: Grid display updated with ", grid_container.get_child_count(), " cards.")
 
 func on_card_purchased(card_node_to_remove: Card) -> void:

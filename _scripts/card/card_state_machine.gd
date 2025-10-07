@@ -26,6 +26,7 @@ var position_states: Array[CardState] = [
 		UndefinedCardState.new(),
 		InHandCardState.new(),
 		InRiftCardState.new(),
+		InShopCardState.new()
 	]
 var interaction_sm: StateMachine = StateMachine.new()
 var position_sm: StateMachine = StateMachine.new()

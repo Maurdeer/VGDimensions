@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpq3resdbwhsm"]
+[gd_scene load_steps=2 format=3 uid="uid://ci4fx82i1ab4n"]
 
 [ext_resource type="Script" uid="uid://bjtfugcp1ssx8" path="res://_scripts/shop/card_shop_ui.gd" id="1_yata5"]
 
@@ -17,10 +17,17 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_yata5")
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 400.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 7.2250004
+anchor_top = 1.45
+anchor_right = 22.925001
+anchor_bottom = 15.109001
+offset_right = -78.00006
+offset_bottom = 3.6399536
+mouse_filter = 2
 columns = 3
