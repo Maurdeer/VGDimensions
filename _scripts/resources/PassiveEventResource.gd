@@ -15,7 +15,8 @@ enum PassiveEvent {
 	ON_STACK,
 	ON_FLIP_HIDE,
 	ON_FLIP_REVEAL,
-	ON_MOVE,
+	ON_BEFORE_MOVE,
+	ON_AFTER_MOVE,
 	ON_REPLACE,
 }
 @export var event_type: PassiveEvent
