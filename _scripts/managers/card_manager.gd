@@ -129,7 +129,7 @@ func _load_all_card_resources_from_folder(path: String) -> void:
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir(): # Check if its a file and not subdirectory
-				_load_all_card_resources_from_folder("%s/%s/" % [path, file_name])
+				_load_all_card_resources_from_folder("%s//%s/" % [path, file_name])
 			else:
 				var file_path: String = path + file_name
 				var resource: Resource = load(file_path)
