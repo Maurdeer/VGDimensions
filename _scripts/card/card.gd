@@ -42,6 +42,7 @@ var hp: int:
 		on_stats_change.emit()
 		
 var grid_pos: Vector2i = Vector2i(-1, -1)
+var deck_pos: int = -1
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
 var temporary: bool = false

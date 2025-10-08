@@ -18,7 +18,7 @@ func _after_ready() -> void:
 func drawCards(count : int):
 	var drawnCards = []
 	for i in range(count):
-		drawnCards.append(deck_array.pop_back())
+		drawnCards.append(deck_array.pop_front())
 	return drawnCards
 
 func addCards(cardArray: Array[Card]):
@@ -28,8 +28,8 @@ func addCards(cardArray: Array[Card]):
 func addCard(card: Card):
 	if card in deck_array: return
 	if deck_size > 0: 
-		remove_child(deck_array[deck_size - 1])
-	deck_array.push_back(card)
+		remove_child(deck_array[0])
+	deck_array.push_front(card)
 		
 	# If Card is attached to a parent previously, then remove it from that parent
 	if card.get_parent(): card.get_parent().remove_child(card)
@@ -40,43 +40,47 @@ func add_card_under(card: Card) -> void:
 	if deck_size == 0: 
 		addCard(card)
 		return
-	deck_array.push_front(card)
+	deck_array.push_back(card)
 		
 func get_top_card() -> Card:
 	if deck_size <= 0: return null
-	return deck_array[deck_size - 1]
+	return deck_array[0]
+	
+func get_card_at(idx: int) -> Card:
+	if idx >= deck_size or idx < 0: return null
+	return deck_array[idx]
 
 func remove_top_card() -> Card:
 	if deck_size <= 0: return
-	var removed_card = deck_array.pop_back()
+	var removed_card = deck_array.pop_front()
 	
 	remove_child(removed_card)
 	
-	if deck_size > 0: display_card(deck_array[deck_size - 1])
+	if deck_size > 0: display_card(deck_array[0])
 		
 	return removed_card
 
 func clear_deck() -> void:
 	if deck_size <= 0: return
-	remove_child(deck_array[deck_size - 1])
+	remove_child(deck_array[0])
 	deck_array.clear()
 
 func shuffleDeck():
 	if deck_size <= 0: return
-	remove_child(deck_array[deck_size - 1])
+	remove_child(deck_array[0])
 	deck_array.shuffle()
-	add_child(deck_array[deck_size - 1])
+	add_child(deck_array[0])
 
 func mergeDeck(merging_deck : Deck):
 	if merging_deck.deck_size <= 0: return
-	if deck_size > 0: remove_child(deck_array[deck_size - 1])
+	if deck_size > 0: remove_child(deck_array[0])
 	deck_array.append_array(merging_deck.deck_array)
 	merging_deck.clear_deck()
 	
 	if deck_size > 0:
-		add_child(deck_array[deck_size - 1])
-		if flipped: deck_array[deck_size - 1].flip_reveal()
-		else: deck_array[deck_size - 1].flip_hide()
+		add_child(deck_array[0])
+		if flipped: deck_array[0].flip_reveal()
+		else: deck_array[0].flip_hide()
 
 func is_empty() -> bool:
 	return deck_size == 0
@@ -92,5 +96,3 @@ func display_card(card: Card) -> void:
 func undisplay_card(card: Card) -> void:
 	if not card in deck_array: return
 	remove_child(card)
-	
-# TODO: Be able to access internal cards within a deck, instead of just the top
