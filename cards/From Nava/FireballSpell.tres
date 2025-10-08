@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://dwkdhtd2hc5xo"]
+
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_c71t1"]
+[ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_iieos"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_mi7rg"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="3_iieos"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_hpcky"]
+[ext_resource type="Texture2D" uid="uid://dg623aalbeqda" path="res://art/card_art/FromNava/-e Fire -e.png" id="5_hpcky"]
+
+[sub_resource type="Resource" id="Resource_e4jcp"]
+script = ExtResource("3_iieos")
+amount = 3
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_exm1x"]
+script = ExtResource("2_mi7rg")
+_bullet_event = SubResource("Resource_e4jcp")
+bullet_description = "Deal 3 Damage.		"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("4_hpcky")
+title = "Fireball Spell"
+game_origin = 26
+deleon_value = 4
+bullets = Array[ExtResource("2_mi7rg")]([SubResource("Resource_exm1x")])
+card_art = ExtResource("5_hpcky")
+background_art = ExtResource("2_iieos")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

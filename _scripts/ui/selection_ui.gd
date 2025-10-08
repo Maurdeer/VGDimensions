@@ -46,8 +46,10 @@ func create_button_by_bullet(bullet: BulletResource):
 	var new_button: Button = Button.new()
 	var new_label: Label = Label.new()
 	
-	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	# TODO Make the text look a lot better; holy
+	#new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	new_label.text = bullet.bullet_description
+	new_label.set("theme_override_colors/font_color", Color.BLACK)
 	
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
@@ -56,7 +58,7 @@ func create_button_by_bullet(bullet: BulletResource):
 			new_button.icon = SOCIAL_ICON
 			new_button.text = "%s" % bullet.bullet_cost
 		BulletResource.BulletType.ACTION:
-			new_button.icon = ACTION_ICON
+			new_button.icon = ACTION_ICON 
 
 	new_button.pressed.connect(func(): make_selection(bullet))
 	buttons.add_child(new_hbox)

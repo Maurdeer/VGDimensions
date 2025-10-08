@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://cq0fxsd14wyjf"]
+
+[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_wnqdp"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_qdd1j"]
+[ext_resource type="Resource" uid="uid://cjxbahb6jejem" path="res://cards/From Nava/ChairSpell.tres" id="6_8vm57"]
+[ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="7_6y4ty"]
+[ext_resource type="Resource" uid="uid://dpo8g2rb6alvf" path="res://cards/From Nava/WindblastSpell.tres" id="8_3ddxp"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="8_fcifr"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="9_c6bee"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="10_5pf0p"]
+[ext_resource type="PackedScene" uid="uid://cxikkksmdeeo0" path="res://_scenes/ui/player_stats_ui.tscn" id="11_bkhhe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ccn5w"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="sandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_wnqdp")
+cards = Array[ExtResource("2_qdd1j")]([ExtResource("8_3ddxp"), ExtResource("6_8vm57"), ExtResource("8_3ddxp"), ExtResource("8_3ddxp"), ExtResource("8_3ddxp")])
+card_pack = ExtResource("7_6y4ty")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="RiftGrid" parent="." instance=ExtResource("8_fcifr")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 248.0
+offset_top = 344.0
+offset_right = 248.0
+offset_bottom = 344.0
+grow_vertical = 1
+
+[node name="PlayerHandUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -713.0
+offset_top = -148.0
+offset_right = -713.0
+offset_bottom = -148.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PlayerHandUI"]
+layout_mode = 0
+offset_left = -662.0
+offset_top = -186.0
+offset_right = -315.0
+offset_bottom = -134.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_ccn5w")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.5
+offset_top = -39.0
+offset_right = 179.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_c6bee")
+expand_mode = 1
+
+[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("10_5pf0p")]
+scale = Vector2(0.9, 0.9)
+
+[node name="next_turn_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Next Turn"
+
+[node name="PlayerStatsUI" parent="." instance=ExtResource("11_bkhhe")]
+layout_mode = 1
+
+[connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

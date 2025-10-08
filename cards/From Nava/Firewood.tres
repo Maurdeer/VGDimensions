@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=4 format=3 uid="uid://yoeovssgnxf0"]
+
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_nqwmh"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_m3xws"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_ngxhq"]
+
+[resource]
+script = ExtResource("3_ngxhq")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
