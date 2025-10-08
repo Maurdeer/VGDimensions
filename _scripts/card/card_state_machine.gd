@@ -7,6 +7,7 @@ enum StateType {
 	UNSELECTABLE,
 	INTERACTABLE,
 	SELECTABLE,
+	DRAGGABLE,
 	
 	# Position States
 	UNDEFINED,
@@ -20,7 +21,8 @@ var interaction_states: Array[CardState] = [
 		UninteractableCardState.new(),
 		UnselectableCardState.new(),
 		InteractableCardState.new(),
-		SelectableCardState.new()
+		SelectableCardState.new(),
+		DraggableCardState.new(),
 	]
 var position_states: Array[CardState] = [
 		UndefinedCardState.new(),
