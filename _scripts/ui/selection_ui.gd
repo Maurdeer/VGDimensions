@@ -5,7 +5,7 @@ signal selection_complete
 const PLAY_ICON = preload("uid://cx5x8lcn1vfcy")
 const SOCIAL_ICON = preload("uid://tv4w2lagffrf")
 const ACTION_ICON = preload("uid://cn0xhk718r4iv")
-@onready var buttons: HBoxContainer = $TextureRect/Buttons
+@onready var buttons: VBoxContainer = $TextureRect/Buttons
 var _bullet_selected: BulletResource
 
 func make_selection(bullet: BulletResource) -> void:
@@ -42,15 +42,23 @@ func get_interaction_selection(resource: CardResource) -> BulletResource:
 	return _bullet_selected
 
 func create_button_by_bullet(bullet: BulletResource):
+	var new_hbox: HBoxContainer = HBoxContainer.new()
 	var new_button: Button = Button.new()
+	var new_label: Label = Label.new()
+	
+	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	new_label.text = bullet.bullet_description
 	
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
 			new_button.icon = PLAY_ICON
 		BulletResource.BulletType.SOCIAL:
 			new_button.icon = SOCIAL_ICON
+			new_button.text = "%s" % bullet.bullet_cost
 		BulletResource.BulletType.ACTION:
 			new_button.icon = ACTION_ICON
 
 	new_button.pressed.connect(func(): make_selection(bullet))
-	buttons.add_child(new_button)
+	buttons.add_child(new_hbox)
+	new_hbox.add_child(new_button)
+	new_hbox.add_child(new_label)

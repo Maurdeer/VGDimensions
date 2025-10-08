@@ -14,7 +14,7 @@ func execute(card_ref: Card) -> bool:
 	else:
 		selected_pos = await GridPositionSelector.Instance.player_select_card_filter()
 	
-	var defeated: bool = RiftGrid.Instance.damage_card(selected_pos, damage_amount)
+	var defeated: bool = await RiftGrid.Instance.damage_card(selected_pos, damage_amount)
 	
 	if card_ref.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
 		if defeated:

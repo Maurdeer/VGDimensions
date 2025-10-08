@@ -29,6 +29,9 @@ mouse_filter = 2
 script = ExtResource("1_em4v1")
 cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm")])
 card_pack = ExtResource("5_dy7xj")
+shop_initial_packs = null
+initial_grid_size = null
+infinite_resources = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

@@ -11,15 +11,6 @@ var grid: Array[Array]
 var rift_grid_width: int = 3
 var rift_grid_height: int = 3
 
-var rift_card_pack: CardPackResource:
-	set(value):
-		rift_card_pack = value
-		if not rift_card_pack: return
-		for card_res in rift_card_pack.card_resources.keys():
-			for i in rift_card_pack.card_resources[card_res]:
-				var card: Card = CARD.instantiate()
-				card.resource = card_res
-				_card_refs.append(card)
 var _card_refs: Array[Card]
 @onready var _rift_deck: Deck =  $HBoxContainer/Control2/DrawPile
 @onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
@@ -40,11 +31,54 @@ func _after_ready() -> void:
 
 #Create Grid
 func clear_grid() -> void:
+	if grid.is_empty() \
+	and _rift_deck.is_empty() \
+	and _rift_discard_pile.is_empty() \
+	and _card_refs.is_empty(): \
+		return
+		
 	for child in grid_container.get_children():
 		child.queue_free()
 	grid.clear()
 	_rift_deck.clear_deck()
 	_rift_discard_pile.clear_deck()
+	_card_refs.clear()
+	
+func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) -> void:
+	# Check validatity of parameters
+	if cards.is_empty(): 
+		printerr("You cannot generate the rift with an empty list of cards!")
+		return
+	if rift_height < 1 or rift_height > 5 or rift_width < 1 or rift_width > 5:
+		printerr("Invalid rift width and height settings")
+		return
+		
+	# Clean up rift if was prior in use
+	clear_grid()
+	
+	# Establish Rift deck and card refs
+	_card_refs = cards
+	for card in cards:
+		_rift_deck.addCard(card)
+	_rift_deck.shuffleDeck()
+	
+	# Generate the intial setup of the rift
+	grid_container.columns = rift_grid_width
+	for i in range(rift_grid_height):
+		grid.append([])
+		for j in range(rift_grid_width):
+			var deck: Deck = Deck.new()
+			deck.flipped = true
+			grid[i].append(deck)
+			
+			# Visual Element
+			var slot: RiftGridSlot = RiftGridSlot.new()
+			slot.grid_position = Vector2i(j,i)
+			slot.add_child(grid[i][j])
+			grid_container.add_child(slot)
+			
+			draw_card(Vector2i(j,i))
+	
 
 func draw_initial_grid():
 	if not grid.is_empty() or not _rift_deck.is_empty(): clear_grid()
@@ -97,10 +131,14 @@ func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
 	var card_underneath: Card = grid[place_at.y][place_at.x].get_top_card()
+	# TODO: THIS IS NOT RIGHT, PUT ON BOTTOM
+	# THEN SUPPORT VECTOR3i, to interface with internal card deck positions
+	# Only done for M2 to support stacking on buttons rn
+	if card_underneath: await card_underneath.on_stack()
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
-	if card_underneath: await card_underneath.on_stack()
+	
 	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])

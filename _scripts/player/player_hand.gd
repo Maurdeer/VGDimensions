@@ -66,7 +66,7 @@ func draw_card_to_hand() -> void:
 	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
 	
 	# =================I'm not a big fan of this====================
-	# Vortex code might change this hopefully?
+	# TODO: Vortex code might change this hopefully?
 	var on_played: Callable
 	match(card.resource.type):
 		CardResource.CardType.FEATURE:
