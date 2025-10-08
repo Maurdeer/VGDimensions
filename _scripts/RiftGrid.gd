@@ -96,7 +96,7 @@ func draw_card(draw_to: Vector2i) -> void:
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
-	grid[place_at.y][place_at.x].get_top_card().on_stack()
+	if not grid[place_at.y][place_at.x].is_empty(): grid[place_at.y][place_at.x].get_top_card().on_stack()
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
@@ -140,7 +140,9 @@ func discard_card(discard_from: Vector2i) -> void:
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
+	card.on_before_move()
 	place_card(move_to, card)
+	card.on_after_move()
 	
 func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
