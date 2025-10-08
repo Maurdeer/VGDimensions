@@ -139,7 +139,6 @@ func place_card(place_at: Vector2i, newCard: Card) -> void:
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
 	
-	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
 	grid[place_at.y][place_at.x].add_card_under(newCard)
