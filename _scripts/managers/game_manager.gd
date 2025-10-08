@@ -24,19 +24,28 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
-	#var shop_cards: Array[Card] = CardManager.create_cards_from_pack(shop_initial_packs)
-	CardShop.fill_shop_deck(shop_initial_packs)
+	
 	call_deferred("_after_ready")
 
 func _after_ready() -> void:
+	setup_card_shop()
 	setup_rift_grid()
 	create_cards_for_player_hand()
 	
 	if infinite_resources: dev_infinite_resources()
 	else: initial_player_stats()
 	
+	# TODO: Change the spot of this
+	start_local_play_turn()
+	on_start_of_turn.emit() 
+	
+func setup_card_shop():
+	var shop_cards: Array[Card] = CardManager.create_cards_from_packs(shop_initial_packs)
+	CardShop.fill_shop_deck(shop_cards)
+	
+	
 func setup_rift_grid():
-	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(card_pack)
+	var rift_cards: Array[Card] = CardManager.create_cards_from_packs([card_pack])
 	rift_grid.generate_new_grid(rift_cards,3,3)
 	
 func create_cards_for_player_hand():
@@ -53,7 +62,7 @@ func initial_player_stats():
 	
 func reset_temporary_resources():
 	PlayerStatistics.actions = 0
-	PlayerStatistics.actions = 0
+	PlayerStatistics.socials = 0
 
 func dev_infinite_resources():
 	PlayerStatistics.deleons = 9999

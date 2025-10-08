@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c57bmxyf3rgq6"]
+[gd_scene load_steps=22 format=3 uid="uid://c57bmxyf3rgq6"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_em4v1"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cs1dx"]
@@ -10,7 +10,25 @@
 [ext_resource type="Resource" uid="uid://df2yhxk3csdhh" path="res://cards/Outcasts/RollingStone.tres" id="6_timxm"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_gmu8c"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_fje6v"]
-[ext_resource type="PackedScene" uid="uid://cxikkksmdeeo0" path="res://_scenes/ui/player_stats_ui.tscn" id="9_kl2am"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="8_ku0we"]
+[ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="9_waucd"]
+[ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="11_u4bsf"]
+[ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="12_ksrum"]
+[ext_resource type="FontFile" uid="uid://bcwkqrkgs1rci" path="res://font/Abel-Regular.ttf" id="13_1htvk"]
+[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="14_u4bsf"]
+[ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="14_waucd"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="15_kgmkq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4bsf"]
+font = ExtResource("13_1htvk")
+font_size = 45
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kgmkq"]
+font = ExtResource("13_1htvk")
+font_size = 30
+font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ccn5w"]
 font_size = 30
@@ -21,14 +39,17 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 2.0
-offset_bottom = 2.0
+offset_left = -223.0
+offset_top = -14.0
+offset_right = -221.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_em4v1")
 cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm")])
 card_pack = ExtResource("5_dy7xj")
+shop_initial_packs = Array[ExtResource("8_ku0we")]([ExtResource("9_waucd")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -59,6 +80,191 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
+[node name="PlayerStatsUI" type="HBoxContainer" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "message")]
+layout_mode = 0
+offset_left = -159.0
+offset_top = -185.0
+offset_right = -119.0
+offset_bottom = -145.0
+theme_override_constants/separation = 204
+script = ExtResource("11_u4bsf")
+deleon_amount = NodePath("Deleon/TextureRect/HBoxContainer/Label")
+action_amount = NodePath("Action/TextureRect/HBoxContainer/Label")
+social_amount = NodePath("Social/TextureRect/HBoxContainer/Label")
+message = NodePath("Message/TextureRect/Label")
+
+[node name="Deleon" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_gmu8c")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("12_ksrum")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Action" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_gmu8c")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("14_u4bsf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Social" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_gmu8c")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("15_kgmkq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 221.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_gmu8c")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/TextureRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 353.0
+offset_bottom = 65.0
+label_settings = SubResource("LabelSettings_kgmkq")
+vertical_alignment = 1
+autowrap_mode = 1
+
 [node name="Label" type="Label" parent="PlayerHandUI"]
 layout_mode = 0
 offset_left = -662.0
@@ -70,23 +276,6 @@ label_settings = SubResource("LabelSettings_ccn5w")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -179.5
-offset_top = -39.0
-offset_right = 179.5
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("7_gmu8c")
-expand_mode = 1
 
 [node name="player_hand" parent="PlayerHandUI" instance=ExtResource("8_fje6v")]
 scale = Vector2(0.9, 0.9)
@@ -101,7 +290,7 @@ offset_bottom = 31.0
 grow_horizontal = 0
 text = "Next Turn"
 
-[node name="PlayerStatsUI" parent="." instance=ExtResource("9_kl2am")]
-layout_mode = 1
+[node name="CardShopUI" parent="." instance=ExtResource("14_waucd")]
+position = Vector2(0, 129)
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

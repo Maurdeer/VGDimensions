@@ -26,10 +26,13 @@ func display_cards(cards_to_display: Array[Card]) -> void:
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	call_deferred("_setup_shop_cards")
+	call_deferred("_after_ready")
 	
-func _setup_shop_cards() -> void:
-	var initial_cards: Array[Card] = CardShop.return_six_cards()
+func _after_ready() -> void:
+	GameManager.Instance.on_start_of_turn.connect(_fill_shop_with_cards)
+	
+func _fill_shop_with_cards() -> void:
+	var initial_cards: Array[Card] = CardShop.return_cards()
 	print("initial cards", initial_cards)
 	display_cards(initial_cards)
 	

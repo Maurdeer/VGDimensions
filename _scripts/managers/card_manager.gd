@@ -36,18 +36,17 @@ func create_cards(card_resources: Array[CardResource]) -> Array[Card]:
 	# Create the cards locally
 	return _create_cards_locally(card_resources)
 	
-func create_cards_from_packs(...card_pack_resources: Array) -> Array[Card]:
+func create_cards_from_packs(card_pack_resources: Array[CardPackResource]) -> Array[Card]:
 	var crpwa_dict: Dictionary[String, int]
 	var crp_dict: Dictionary[CardResource, int]
 	for pack in card_pack_resources:
-		if pack is CardPackResource:
-			for card_resource in pack.card_resources:
-				if crpwa_dict.has(card_resource.resource_path):
-					crp_dict[card_resource] += pack.card_resources[card_resource]
-					crpwa_dict[card_resource.resource_path] += pack.card_resources[card_resource]
-				else:
-					crp_dict[card_resource] = pack.card_resources[card_resource]
-					crpwa_dict[card_resource.resource_path] = pack.card_resources[card_resource]
+		for card_resource in pack.card_resources:
+			if crpwa_dict.has(card_resource.resource_path):
+				crp_dict[card_resource] += pack.card_resources[card_resource]
+				crpwa_dict[card_resource.resource_path] += pack.card_resources[card_resource]
+			else:
+				crp_dict[card_resource] = pack.card_resources[card_resource]
+				crpwa_dict[card_resource.resource_path] = pack.card_resources[card_resource]
 					
 	var json = JSON.stringify(crpwa_dict)
 	

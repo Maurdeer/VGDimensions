@@ -1,13 +1,14 @@
 extends Control
-@onready var deleon_amount: Label = $VBoxContainer/Deleon/Amount
-@onready var action_amount: Label = $VBoxContainer/Action/Amount
-@onready var social_amount: Label = $VBoxContainer/Deleon3/Amount
-@onready var message: Label = $VBoxContainer/message
+@export var deleon_amount: Label
+@export var action_amount: Label
+@export var social_amount: Label
+@export var message: Label
 
 
 func _ready() -> void:
 	PlayerStatistics.on_stats_change.connect(_update_ui)
 	PlayerStatistics.on_resource_spend_fail.connect(_on_player_stats_resource_spend_fail)
+	PlayerStatistics.on_resource_spend_success.connect(_on_player_stats_success)
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
@@ -26,7 +27,8 @@ func _on_player_stats_resource_spend_fail(type: PlayerStatistics.ResourceType):
 			message.text = "Not enough actions"
 		PlayerStatistics.ResourceType.SOCIAL:
 			message.text = "Not enough social"
-			
+	
 	message.visible = true
-	await get_tree().create_timer(3).timeout
+	
+func _on_player_stats_success(_type: PlayerStatistics.ResourceType):
 	message.visible = false
