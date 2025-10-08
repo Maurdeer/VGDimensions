@@ -92,3 +92,5 @@ func display_card(card: Card) -> void:
 func undisplay_card(card: Card) -> void:
 	if not card in deck_array: return
 	remove_child(card)
+	
+# TODO: Be able to access internal cards within a deck, instead of just the top

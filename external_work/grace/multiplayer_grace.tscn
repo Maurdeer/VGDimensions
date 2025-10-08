@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://dlvudfcojdl6"]
 
-[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://external_work/ryan/game_manager.gd" id="1_rbc2s"]
+[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_rbc2s"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_g7jej"]
 [ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_hrdlf"]
-[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/RockBlock.tres" id="4_b7kiy"]
+[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/Outcasts/RockBlock.tres" id="4_b7kiy"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_q6vt0"]
-[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://external_work/ryan/CardPackResource.gd" id="6_fj6jc"]
-[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/rift_grid.tscn" id="8_wkkp3"]
-[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/player_hand.tscn" id="9_yq2lg"]
-[ext_resource type="PackedScene" uid="uid://b2ygkqp3wer5l" path="res://_scenes/card_shop_ui.tscn" id="10_vlbaj"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="6_fj6jc"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="8_wkkp3"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="9_yq2lg"]
+[ext_resource type="PackedScene" uid="uid://b2ygkqp3wer5l" path="res://_scenes/card_shop_UI.tscn" id="10_vlbaj"]
 
 [node name="MultiplayerScene" type="Control"]
 layout_mode = 3

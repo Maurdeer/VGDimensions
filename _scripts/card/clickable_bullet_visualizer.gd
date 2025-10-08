@@ -5,6 +5,8 @@ class_name ClickableBulletVisualizer
 @export var play_active: bool = false
 @export var interact_active: bool = false
 
+#TODO: REMOVE THIS AND DECOUPLE IT FROM THE GAME
+
 func _on_bullet_type_change() -> void:
 	$bullet_frame.visible = true
 	$TextureButton.visible = false
@@ -31,4 +33,3 @@ func _on_bullet_type_social():
 
 func _on_texture_button_button_up() -> void:
 	pass
-	# TODO: Add Meditaor Complete Function or something here

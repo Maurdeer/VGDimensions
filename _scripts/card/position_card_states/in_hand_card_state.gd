@@ -18,8 +18,6 @@ func clicked_on() -> void:
 		var success: bool = await card._play_bullets[0].try_execute(card)
 		if not success: return
 	elif card._play_bullets.size() > 1:
-		# TODO: Pull Up Play Selection UI to pick an event to do.
-		# Let the function call poll until that option was picked
 		var select_ui: SelectionUI = card.SELECTION_UI.instantiate()
 		get_tree().root.add_child(select_ui)
 		var bullet = await select_ui.get_play_selection(card.resource)

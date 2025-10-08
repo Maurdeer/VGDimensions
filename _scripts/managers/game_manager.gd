@@ -24,7 +24,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
-	
+	#var shop_cards: Array[Card] = CardManager.create_cards_from_pack(shop_initial_packs)
 	CardShop.fill_shop_deck(shop_initial_packs)
 	call_deferred("_after_ready")
 
@@ -36,15 +36,12 @@ func _after_ready() -> void:
 	else: initial_player_stats()
 	
 func setup_rift_grid():
-	rift_grid.rift_card_pack = card_pack
-	rift_grid.rift_grid_height = initial_grid_size.y
-	rift_grid.rift_grid_width = initial_grid_size.x
-	rift_grid.draw_initial_grid()
+	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(card_pack)
+	rift_grid.generate_new_grid(rift_cards,3,3)
 	
 func create_cards_for_player_hand():
-	for card_res in cards:
-		var card: Card = CARD.instantiate()
-		card.resource = card_res
+	var player_hand_cards: Array[Card] = CardManager.create_cards(cards)
+	for card in player_hand_cards:
 		player_hand.discard_card(card)
 		
 	player_hand.fill_hand()
