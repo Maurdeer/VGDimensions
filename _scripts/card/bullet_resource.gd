@@ -24,16 +24,16 @@ func try_execute(card_ref: Card) -> bool:
 	match(bullet_type):
 		BulletType.PLAY:
 			if not await _bullet_event.execute(card_ref): return false
-			card_ref.on_play()
+			await card_ref.on_play()
 		BulletType.ACTION:
 			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.ACTION, bullet_cost): return false
 			if not await _bullet_event.execute(card_ref): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet_cost): return false
-			card_ref.on_action()
+			await card_ref.on_action()
 		BulletType.SOCIAL:
 			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return false
 			if not await _bullet_event.execute(card_ref): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return false
-			card_ref.on_social()
+			await card_ref.on_social()
 	return true
 	
