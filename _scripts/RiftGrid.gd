@@ -296,10 +296,22 @@ func loop_cards_vertically(startX: int, upNotDown: bool, amount: int):
 # Returns whether or not the card was discarded
 func damage_card(card_pos: Vector2i, amount: int) -> bool:
 	var card: Card = get_top_card(card_pos)
+	if card.hp == -1:
+		return false
 	if card.damage(amount):
 		await discard_card(card_pos)
 		return true
 	return false
+
+func burn_card(card_pos: Vector2i) -> bool:
+	var card: Card = get_top_card(card_pos)
+	card.on_burn()
+	return true
+	
+func freeze_card(card_pos: Vector2i) -> bool:
+	var card: Card = get_top_card(card_pos)
+	card.on_freeze()
+	return true
 
 func revolveCards():
 	pass
