@@ -24,8 +24,8 @@ func player_select_card() -> Vector2i:
 	_first = true
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
+			if deck.is_empty(): continue
 			var card: Card = deck.get_top_card()
-			
 			card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
 			card.selected.connect(on_card_clicked)
 	
