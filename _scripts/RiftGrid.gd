@@ -260,7 +260,7 @@ func loop_cards_vertically(startX: int, upNotDown: bool, amount: int):
 func damage_card(card_pos: Vector2i, amount: int) -> bool:
 	var card: Card = get_top_card(card_pos)
 	if card.damage(amount):
-		discard_card(card_pos)
+		await discard_card(card_pos)
 		return true
 	return false
 
