@@ -169,7 +169,9 @@ func discard_card(discard_from: Vector2i) -> void:
 	card.grid_pos = Vector2i(-1, -1)
 	
 	# (Ryan) When we add netcoding, do a more explicit player check in the networked version
-	if card.player_owner == "": 
+	if card.temporary:
+		CardManager.remove_card_by_id(card.card_id)
+	elif card.player_owner == "": 
 		_rift_discard_pile.addCard(card)
 		card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	else:
