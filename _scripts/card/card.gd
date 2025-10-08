@@ -49,15 +49,16 @@ var interactable: bool = false:
 		dnd_2d.interactable = value
 		interactable = value
 		
-var card_id: String:
-	get:
-		if not resource: return ""
-		return construct_card_id(resource.title, resource.game_origin)
+var card_id: int
 
 # Dynamic Bullet Functions
 var _play_bullets: Array[BulletResource]
 var _action_bullets: Array[BulletResource]
 var _social_bullets: Array[BulletResource]
+
+func set_up(p_card_id: int, p_resource: CardResource) -> void:
+	card_id = p_card_id
+	resource = p_resource
 
 func _enter_tree() -> void:
 	#refresh_stats()
@@ -119,7 +120,7 @@ func _on_double_click() -> void:
 	#flip()
 
 func _on_single_click() -> void:
-	if CardInspector.Instance: CardInspector.Instance.set_card(self)
+	#if CardInspector.Instance: CardInspector.Instance.set_card(self)
 	card_sm.clicked_on()
 
 var _pressed_previously: bool = false
@@ -137,9 +138,6 @@ func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEve
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.
-
-static func construct_card_id(title: String, game_origin: CardResource.GameOrigin) -> String:
-	return "%s-%s" % [title, CardResource.GameOrigin.keys()[game_origin]]
 	
 # Passive Functions
 func on_play(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY]: event.execute(self)
@@ -155,5 +153,6 @@ func on_burn(): for event in resource.passive_events[PassiveEventResource.Passiv
 func on_stack(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK]: event.execute(self)
 func on_flip_hide(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE]: event.execute(self)
 func on_flip_reveal(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL]: event.execute(self)
-func on_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_MOVE]: event.execute(self)
+func on_before_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE]: event.execute(self)
+func on_after_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE]: event.execute(self)
 func on_replace(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE]: event.execute(self)
