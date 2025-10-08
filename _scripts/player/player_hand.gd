@@ -37,7 +37,23 @@ func fill_hand() -> void:
 	while not slot_queue.is_empty():
 		draw_card_to_hand()
 		if draw_pile.is_empty(): break
-		
+
+# not used yet (use with caution)
+func add_card_to_hand(card: Card) -> void:
+	var slot: Control = slot_queue.pop_back()
+	if slot == null:
+		return
+	card.grid_pos = Vector2i(-1, -1)
+	card.player_owner = "Player"
+	if card.get_parent():
+		card.get_parent().remove_child(card)
+	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
+	
+	slot.add_child(card)
+	slots.add_child(slot)
+	card.flip_reveal()
+	cards_in_hand[card] = slot
+
 func draw_card_to_hand() -> void:
 	if slot_queue.is_empty(): return
 	if draw_pile.is_empty(): reshuffle_draw_pile()
@@ -75,6 +91,12 @@ func draw_card_to_hand() -> void:
 func reshuffle_draw_pile() -> void:
 	draw_pile.mergeDeck(discard_pile)
 	draw_pile.shuffleDeck()
+	
+# adds to discard pile ONLY
+func add_to_discard(card: Card) -> void:
+	card.grid_pos = Vector2i(-1, -1)
+	discard_pile.addCard(card)
+	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 func discard_card(card: Card) -> void:
 	remove_card_from_hand(card)

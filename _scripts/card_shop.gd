@@ -1,7 +1,5 @@
 extends Node
 
-signal card_purchased(card_node: Card)
-
 # The source deck used to draw cards to fill the shop grid.
 var shop_source_deck: Array[CardResource]
 
@@ -21,7 +19,6 @@ func fill_shop_deck(pack_resources: Array[CardPackResource]) -> void:
 				var count: int = card_map[card_resource]
 				for _i in range(count):
 					shop_source_deck.append(card_resource)
-	print("CardShop: Initialized deck with ", shop_source_deck, " card pack(s).")
 
 func set_input_active(is_active: bool) -> void:
 	input_active = is_active
@@ -41,22 +38,16 @@ func return_six_cards() -> Array[Card]:
 func process_purchase(card_to_purchase: Card) -> void:
 	var purchase_price: int = card_to_purchase.resource.deleon_value
 	if PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.DELEON, purchase_price):
-		var index = current_grid_cards.find(card_to_purchase)
-		if index == -1:
-			printerr("CardShop: ERROR! Attempted to purchase card not found in grid array.")	
-		current_grid_cards.remove_at(index)
-		print("CardShop: Card removed from grid array. Remaining:", current_grid_cards.size())
-			
-		#Emit the signal to tell the UI to update
+		# Add card to discard pile without adding to hand
+		PlayerHand.Instance.add_to_discard(card_to_purchase)
+		print("CardShop: Card6 removed from grid array. Remaining:", current_grid_cards.size())
 		print("price ", purchase_price, "delons", PlayerStatistics.deleons)
-		emit_signal("card_purchased", card_to_purchase)
 	else:
 		print("CardShop: Purchase failed! Player cannot afford ", PlayerStatistics.deleons, " deleons (Have: ", PlayerStatistics.deleons, ").")
-	#
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect to game manager onstartOfEveryTurn
-	
 	pass # Replace with function body.
 
 

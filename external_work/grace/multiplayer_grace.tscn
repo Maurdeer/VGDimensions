@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="8_vlbaj"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="8_wkkp3"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="9_yq2lg"]
-[ext_resource type="PackedScene" uid="uid://bce5akaj8bxfa" path="res://_scenes/card_shop_ui.tscn" id="10_vlbaj"]
+[ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_ui.tscn" id="10_vlbaj"]
 [ext_resource type="PackedScene" uid="uid://cxikkksmdeeo0" path="res://_scenes/ui/player_stats_ui.tscn" id="11_pi1ye"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pi1ye"]
@@ -27,7 +27,7 @@ mouse_filter = 2
 script = ExtResource("1_rbc2s")
 cards = Array[ExtResource("2_g7jej")]([ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("4_b7kiy")])
 card_pack = ExtResource("5_q6vt0")
-shop_initial_packs = Array[ExtResource("6_fj6jc")]([ExtResource("5_q6vt0"), ExtResource("5_q6vt0")])
+shop_initial_packs = Array[ExtResource("6_fj6jc")]([ExtResource("5_q6vt0")])
 
 [node name="RiftGrid" parent="." instance=ExtResource("8_wkkp3")]
 layout_mode = 1

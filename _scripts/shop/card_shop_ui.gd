@@ -23,14 +23,9 @@ func display_cards(cards_to_display: Array[Card]) -> void:
 		# only when card is added as a child of obj, then card_sm is created so we can transition to IN_SHOP state
 		card_instance.card_sm.transition_to_state(CardStateMachine.StateType.IN_SHOP)
 	print("CardShopUI: Grid display updated with ", grid_container.get_child_count(), " cards.")
-
-func on_card_purchased(card_node_to_remove: Card) -> void:
-	card_node_to_remove.queue_free()
-	print("CardShop_UI: Visually removed and freed card node.")
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	CardShop.card_purchased.connect(on_card_purchased)
 	call_deferred("_setup_shop_cards")
 	
 func _setup_shop_cards() -> void:
