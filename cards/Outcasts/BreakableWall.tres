@@ -43,6 +43,7 @@ script = ExtResource("2_plkjb")
 title = "Breakable Wall"
 type = 5
 game_origin = 25
+deleon_value = 5
 starting_hp = 2
 movable = false
 burnable = false

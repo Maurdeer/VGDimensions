@@ -28,6 +28,7 @@ var position_states: Array[CardState] = [
 		UndefinedCardState.new(),
 		InHandCardState.new(),
 		InRiftCardState.new(),
+		InShopCardState.new()
 	]
 var interaction_sm: StateMachine = StateMachine.new()
 var position_sm: StateMachine = StateMachine.new()
@@ -55,8 +56,10 @@ func clicked_on() -> void:
 		(position_sm.current_state as CardState).clicked_on()
 
 func transition_to_state(type: StateType) -> void:
-	if int(type) < interaction_states.size() : interaction_sm.transition_to_state(interaction_states[type])
-	else: position_sm.transition_to_state(position_states[type - interaction_states.size()])
+	if int(type) < interaction_states.size() : 
+		interaction_sm.transition_to_state(interaction_states[type])
+	else: 
+		position_sm.transition_to_state(position_states[type - interaction_states.size()])
 	
 func is_state(type: StateType) -> bool:
 	if int(type) < interaction_states.size() : return interaction_sm.is_state(interaction_states[type])

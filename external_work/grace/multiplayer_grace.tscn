@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dlvudfcojdl6"]
+[gd_scene load_steps=13 format=3 uid="uid://dlvudfcojdl6"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_rbc2s"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_g7jej"]
@@ -6,9 +6,15 @@
 [ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/Outcasts/RockBlock.tres" id="4_b7kiy"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_q6vt0"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="6_fj6jc"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="8_vlbaj"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="8_wkkp3"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="9_yq2lg"]
-[ext_resource type="PackedScene" uid="uid://b2ygkqp3wer5l" path="res://_scenes/card_shop_UI.tscn" id="10_vlbaj"]
+[ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_ui.tscn" id="10_vlbaj"]
+[ext_resource type="PackedScene" uid="uid://cxikkksmdeeo0" path="res://_scenes/ui/player_stats_ui.tscn" id="11_pi1ye"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pi1ye"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
 
 [node name="MultiplayerScene" type="Control"]
 layout_mode = 3
@@ -21,7 +27,7 @@ mouse_filter = 2
 script = ExtResource("1_rbc2s")
 cards = Array[ExtResource("2_g7jej")]([ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("3_hrdlf"), ExtResource("4_b7kiy")])
 card_pack = ExtResource("5_q6vt0")
-shop_initial_packs = Array[ExtResource("6_fj6jc")]([ExtResource("5_q6vt0"), ExtResource("5_q6vt0")])
+shop_initial_packs = Array[ExtResource("6_fj6jc")]([ExtResource("5_q6vt0")])
 
 [node name="RiftGrid" parent="." instance=ExtResource("8_wkkp3")]
 layout_mode = 1
@@ -33,20 +39,49 @@ offset_bottom = 377.99997
 grow_vertical = 1
 scale = Vector2(0.95, 0.95)
 
-[node name="Control" type="Control" parent="."]
+[node name="PlayerHandUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -137.0
+offset_bottom = -137.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PlayerHandUI"]
+layout_mode = 0
+offset_left = -662.0
+offset_top = -186.0
+offset_right = -315.0
+offset_bottom = -134.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_pi1ye")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -179.5
+offset_top = -39.0
+offset_right = 179.5
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_vlbaj")
+expand_mode = 1
 
-[node name="Camera2D" type="Camera2D" parent="Control"]
-
-[node name="player_hand" parent="Control" instance=ExtResource("9_yq2lg")]
-position = Vector2(0, 408)
+[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("9_yq2lg")]
 scale = Vector2(0.9, 0.9)
 
 [node name="next_turn_button" type="Button" parent="."]
@@ -59,7 +94,16 @@ offset_bottom = 31.0
 grow_horizontal = 0
 text = "Next Turn"
 
-[node name="CardShop" parent="." instance=ExtResource("10_vlbaj")]
-position = Vector2(93, 242)
+[node name="CardShopUI" parent="." instance=ExtResource("10_vlbaj")]
+z_index = 3
+position = Vector2(-73, 48)
+
+[node name="PlayerStatsUI" parent="." instance=ExtResource("11_pi1ye")]
+layout_mode = 1
+
+[node name="OpponentUI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]
