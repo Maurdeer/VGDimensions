@@ -44,6 +44,7 @@ var hp: int:
 var grid_pos: Vector2i = Vector2i(-1, -1)
 var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
 var revealed: bool
+var temporary: bool = false
 var interactable: bool = false:
 	set(value):
 		dnd_2d.interactable = value
@@ -140,19 +141,19 @@ func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.
 	
 # Passive Functions
-func on_play(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY]: event.execute(self)
-func on_action(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ACTION]: event.execute(self)
-func on_social(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL]: event.execute(self)
-func on_enter_tree(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE]: event.execute(self)
-func on_state_of_grid_change(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE]: event.execute(self)
-func on_end_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN]: event.execute(self)
-func on_start_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: event.execute(self)
-func on_damage(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE]: event.execute(self)
-func on_discard(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD]: event.execute(self)
-func on_burn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN]: event.execute(self)
-func on_stack(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK]: event.execute(self)
-func on_flip_hide(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE]: event.execute(self)
-func on_flip_reveal(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL]: event.execute(self)
-func on_before_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE]: event.execute(self)
-func on_after_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE]: event.execute(self)
-func on_replace(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE]: event.execute(self)
+func on_play(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY]: await event.execute(self)
+func on_action(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ACTION]: await event.execute(self)
+func on_social(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL]: await event.execute(self)
+func on_enter_tree(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE]: await event.execute(self)
+func on_state_of_grid_change(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE]: await event.execute(self)
+func on_end_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN]: await event.execute(self)
+func on_start_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: await event.execute(self)
+func on_damage(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE]: await event.execute(self)
+func on_discard(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD]: await event.execute(self)
+func on_burn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN]: await event.execute(self)
+func on_stack(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK]: await event.execute(self)
+func on_flip_hide(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE]: await event.execute(self)
+func on_flip_reveal(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL]: await event.execute(self)
+func on_before_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE]: await event.execute(self)
+func on_after_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE]: await event.execute(self)
+func on_replace(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE]: await event.execute(self)

@@ -96,10 +96,11 @@ func draw_card(draw_to: Vector2i) -> void:
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
-	if not grid[place_at.y][place_at.x].is_empty(): grid[place_at.y][place_at.x].get_top_card().on_stack()
+	var card_underneath: Card = grid[place_at.y][place_at.x].get_top_card()
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+	if card_underneath: await card_underneath.on_stack()
 	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
@@ -137,13 +138,13 @@ func discard_card(discard_from: Vector2i) -> void:
 	else:
 		PlayerHand.Instance.discard_card(card)
 	
-	card.on_discard()
+	await card.on_discard()
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
-	card.on_before_move()
+	await card.on_before_move()
 	place_card(move_to, card)
-	card.on_after_move()
+	await card.on_after_move()
 	
 func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
@@ -293,17 +294,17 @@ func fill_empty_decks() -> void:
 func _on_start_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			grid[y][x].get_top_card().on_start_of_turn()
+			await grid[y][x].get_top_card().on_start_of_turn()
 
 func _on_end_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			grid[y][x].get_top_card().on_end_of_turn()
+			await grid[y][x].get_top_card().on_end_of_turn()
 			
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			grid[y][x].get_top_card().on_state_of_grid_change()
+			await grid[y][x].get_top_card().on_state_of_grid_change()
 			
 # Only when things get CRAAAAZZZZZYYY
 # This should hopefully not happen, unless the deck isn't created that well
