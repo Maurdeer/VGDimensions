@@ -64,6 +64,7 @@ func player_select_card_filter(filter: Callable = func(card: Card): return true)
 func revert_card_states() -> void:
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
+			if deck.is_empty(): continue
 			var card: Card = deck.get_top_card()
 			card.card_sm.interaction_sm.transition_to_prev_state()
 			card.selected.disconnect(on_card_clicked)
