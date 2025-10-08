@@ -7,7 +7,6 @@ var current_grid_cards: Array[Card] = []
 var input_active: bool = false
 
 const CARD = preload("uid://c3e8058lwu0a")
-const SHOP_STATE_SCRIPT = preload("uid://cq7eng5b8vcys")
 
 func fill_shop_deck(pack_resources: Array[CardPackResource]) -> void:
 	for pack_res in pack_resources:
