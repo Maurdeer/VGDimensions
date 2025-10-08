@@ -96,6 +96,7 @@ func draw_card(draw_to: Vector2i) -> void:
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
+	grid[place_at.y][place_at.x].get_top_card().on_stack()
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
