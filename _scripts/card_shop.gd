@@ -31,12 +31,17 @@ func process_purchase(card_to_purchase: Card) -> void:
 	if PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.DELEON, purchase_price):
 		# Add card to discard pile without adding to hand
 		PlayerHand.Instance.add_to_discard(card_to_purchase)
-		current_grid_cards.erase(card_to_purchase)
+		_remove_card.rpc(card_to_purchase.card_id)
+		
 		print("CardShop: Card6 removed from grid array. Remaining:", current_grid_cards.size())
 		print("price ", purchase_price, "delons", PlayerStatistics.deleons)
 	else:
 		print("CardShop: Purchase failed! Player cannot afford ", PlayerStatistics.deleons, " deleons (Have: ", PlayerStatistics.deleons, ").")
 	
+@rpc("any_peer", "call_local", "reliable")
+func _remove_card(card_id: int) -> void:
+	current_grid_cards.erase(CardManager.get_card_by_id(card_id))
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# connect to game manager onstartOfEveryTurn

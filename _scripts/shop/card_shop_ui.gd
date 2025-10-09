@@ -29,13 +29,10 @@ func _ready() -> void:
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
-	GameManager.Instance.on_start_of_turn.connect(_fill_shop_with_cards)
-	
+	GameManager.Instance.on_start_of_turn.connect(_fill_shop_with_cards.rpc)
+
+@rpc("any_peer", "call_local", "reliable")
 func _fill_shop_with_cards() -> void:
 	var initial_cards: Array[Card] = CardShop.return_cards()
 	print("initial cards", initial_cards)
 	display_cards(initial_cards)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

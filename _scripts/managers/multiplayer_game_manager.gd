@@ -5,6 +5,7 @@ class_name MultiplayerGameManager
 
 var player_turn_queue: Array[int]
 var curr_turn: int
+var random_seed: int
 
 func _ready() -> void:
 	if multiplayer.is_server():
@@ -20,14 +21,10 @@ func _after_ready() -> void:
 func _start_game() -> void:
 	if not multiplayer.is_server(): return
 	chat.create_message.rpc("Game Will Start!")
+	setup_peers()
 	setup_card_shop()
 	setup_rift_grid()
 	create_cards_for_player_hand()
-	curr_turn = 0
-	player_turn_queue.append(multiplayer.get_unique_id())
-	for pid in multiplayer.get_peers():
-		player_turn_queue.push_back(pid)
-	_set_up_each_peer.rpc(curr_turn, player_turn_queue)
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 
 func start_next_turn() -> void:
@@ -38,9 +35,10 @@ func start_next_turn() -> void:
 	_start_next_turn.rpc()
 	
 @rpc("any_peer", "call_remote", "reliable")
-func _set_up_each_peer(p_curr_turn: int, p_player_turn_queue: Array[int]) -> void:
+func _set_up_each_peer(p_curr_turn: int, p_player_turn_queue: Array[int], p_random_seed: int) -> void:
 	curr_turn = p_curr_turn
 	player_turn_queue = p_player_turn_queue
+	seed(p_random_seed)
 	
 @rpc("any_peer", "call_local", "reliable")
 func _start_next_turn() -> void:
@@ -74,9 +72,25 @@ func start_local_play_turn() -> void:
 func end_local_play_turn() -> void:
 	$next_turn_button.visible = false
 	player_hand.clear_hand()
-	CardShop.set_input_active(false)
 	# Disable Rift Grid Manipulation as well
 	reset_temporary_resources()
 	
 func is_my_turn() -> bool:
 	return player_turn_queue.size() <= 0 or multiplayer.get_unique_id() == player_turn_queue[curr_turn]
+	
+func setup_card_shop():
+	var shop_cards: Array[Card] = CardManager.create_cards_from_packs(shop_initial_packs)
+	_setup_card_shop.rpc(CardManager.cards_to_ids(shop_cards))
+	
+func setup_peers():
+	curr_turn = 0
+	player_turn_queue.append(multiplayer.get_unique_id())
+	for pid in multiplayer.get_peers():
+		player_turn_queue.push_back(pid)
+	random_seed = randi()
+	seed(random_seed)
+	_set_up_each_peer.rpc(curr_turn, player_turn_queue, random_seed)
+
+@rpc("any_peer", "call_local", "reliable")
+func _setup_card_shop(shop_card_ids: Array[int]):
+	CardShop.fill_shop_deck(CardManager.ids_to_cards(shop_card_ids))
