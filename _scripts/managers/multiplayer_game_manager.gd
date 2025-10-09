@@ -61,9 +61,11 @@ func _on_next_turn_button_pressed() -> void:
 	start_next_turn()
 	
 func start_local_play_turn() -> void:
+	$next_turn_button.visible = true
 	player_hand.fill_hand()
 	
 func end_local_play_turn() -> void:
+	$next_turn_button.visible = false
 	player_hand.clear_hand()
 	CardShop.set_input_active(false)
 	# Disable Rift Grid Manipulation as well
