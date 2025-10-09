@@ -79,4 +79,4 @@ func end_local_play_turn() -> void:
 	reset_temporary_resources()
 	
 func is_my_turn() -> bool:
-	return multiplayer.get_unique_id() == player_turn_queue[curr_turn]
+	return player_turn_queue.size() <= 0 or multiplayer.get_unique_id() == player_turn_queue[curr_turn]
