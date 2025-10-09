@@ -14,10 +14,6 @@ func fill_shop_deck(cards: Array[Card]) -> void:
 		shop_source_deck.push_back(card)
 	print("CardShop: Filled ", shop_source_deck.size(), " to source deck.")
 	shop_source_deck.shuffle()
-
-func set_input_active(is_active: bool) -> void:
-	input_active = is_active
-	print("CardShop: Input is now active: ", input_active)
 	
 func return_cards() -> Array[Card]:
 	while not shop_source_deck.is_empty() and current_grid_cards.size() < max_shop_size:
@@ -30,8 +26,7 @@ func process_purchase(card_to_purchase: Card) -> void:
 	var purchase_price: int = card_to_purchase.resource.deleon_value
 	if PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.DELEON, purchase_price):
 		# Add card to discard pile without adding to hand
-		PlayerHand.Instance.add_to_discard(card_to_purchase)
-		_remove_card.rpc(card_to_purchase.card_id)
+		_on_card_purchase.rpc(card_to_purchase.card_id)
 		
 		print("CardShop: Card6 removed from grid array. Remaining:", current_grid_cards.size())
 		print("price ", purchase_price, "delons", PlayerStatistics.deleons)
@@ -39,15 +34,10 @@ func process_purchase(card_to_purchase: Card) -> void:
 		print("CardShop: Purchase failed! Player cannot afford ", PlayerStatistics.deleons, " deleons (Have: ", PlayerStatistics.deleons, ").")
 	
 @rpc("any_peer", "call_local", "reliable")
-func _remove_card(card_id: int) -> void:
-	current_grid_cards.erase(CardManager.get_card_by_id(card_id))
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	# connect to game manager onstartOfEveryTurn
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_card_purchase(card_id: int) -> void:
+	var card_to_purchase: Card = CardManager.get_card_by_id(card_id)
+	if multiplayer.get_remote_sender_id() == multiplayer.get_unique_id():
+		PlayerHand.Instance.add_to_discard(card_to_purchase)
+	else:
+		card_to_purchase.get_parent().remove_child(card_to_purchase)
+	current_grid_cards.erase(card_to_purchase)
