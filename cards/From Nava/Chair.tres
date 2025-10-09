@@ -9,7 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_neax4"]
 script = ExtResource("2_ees5j")
-replaceSelf = true
 metadata/_custom_type_script = "uid://e8vymu1ddkjw"
 
 [sub_resource type="Resource" id="Resource_deeim"]
