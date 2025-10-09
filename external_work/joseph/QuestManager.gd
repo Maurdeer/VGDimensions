@@ -11,7 +11,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
-	add_quest(CardManager.create_card(testingPurposeCard, false))
+	add_quest(await CardManager.create_card(testingPurposeCard, false))
 
 func add_quest(card : Card):
 	if (card == null):
