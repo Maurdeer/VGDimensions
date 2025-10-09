@@ -180,14 +180,21 @@ func discard_card(discard_from: Vector2i) -> void:
 	await card.on_discard()
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
-	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
+	var card: Card = grid[move_from.y][move_from.x].get_top_card()
 	await card.on_before_move()
+	card = grid[move_from.y][move_from.x].remove_top_card()
+	print(card.grid_pos)
 	place_card(move_to, card)
 	await card.on_after_move()
 	
 func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
-	var card: Card = grid[move_from.y][move_from.x].remove_top_card()
+	var card: Card = grid[move_from.y][move_from.x].get_top_card()
+	print(card.grid_pos)
+	await card.on_before_move()
+	card = grid[move_from.y][move_from.x].remove_top_card()
+	print(card.grid_pos)
 	place_card_under(move_to, card)
+	await card.on_after_move()
 	
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
@@ -305,14 +312,18 @@ func damage_card(card_pos: Vector2i, amount: int) -> bool:
 		return true
 	return false
 
-func burn_card(card_pos: Vector2i) -> bool:
+func burn_card(card_pos: Vector2i, passive_event : EventResource) -> bool:
 	var card: Card = get_top_card(card_pos)
 	card.on_burn()
+	card.add_to_events(passive_event)
+	print("Applied the Burn Status Effect to the given card.")
 	return true
 	
-func freeze_card(card_pos: Vector2i) -> bool:
+func freeze_card(card_pos: Vector2i, passive_event : EventResource) -> bool:
 	var card: Card = get_top_card(card_pos)
 	card.on_freeze()
+	card.interactable = false
+	card.add_to_events(passive_event)
 	return true
 
 func revolveCards():

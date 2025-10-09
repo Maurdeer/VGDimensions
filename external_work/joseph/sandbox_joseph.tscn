@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cq0fxsd14wyjf"]
+[gd_scene load_steps=25 format=3 uid="uid://cq0fxsd14wyjf"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_wnqdp"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_qdd1j"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://6ms4uldtlv8n" path="res://cards/Willow/BottledBlade.tres" id="8_wyrmk"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="9_4c2ar"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="9_c6bee"]
+[ext_resource type="Resource" uid="uid://d4kn40cwc2gjb" path="res://cards/From Nava/IceballSpell.tres" id="9_yxypm"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="10_5pf0p"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="10_wyrmk"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="12_yxypm"]
@@ -49,12 +50,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_wnqdp")
-cards = Array[ExtResource("2_qdd1j")]([ExtResource("6_wrj4d"), ExtResource("7_wrj4d"), ExtResource("5_lnihj"), ExtResource("8_3ddxp"), ExtResource("6_8vm57"), ExtResource("8_wyrmk")])
+cards = Array[ExtResource("2_qdd1j")]([ExtResource("6_wrj4d"), ExtResource("7_wrj4d"), ExtResource("5_lnihj"), ExtResource("8_3ddxp"), ExtResource("6_8vm57"), ExtResource("8_wyrmk"), ExtResource("9_yxypm")])
 card_pack = ExtResource("7_6y4ty")
 shop_initial_packs = Array[ExtResource("9_4c2ar")]([ExtResource("10_wyrmk")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
+offset = Vector2(0, -2)
+zoom = Vector2(0.8, 0.8)
 
 [node name="RiftGrid" parent="." instance=ExtResource("8_fcifr")]
 layout_mode = 1

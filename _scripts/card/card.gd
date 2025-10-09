@@ -34,6 +34,7 @@ const SELECTION_UI = preload("uid://vei3yr63fqcj")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var card_sm: CardStateMachine = $CardSM
 @onready var dnd_2d: DragAndDropComponent2D = $drag_and_drop_component2D
+var statusEffects: Array[EventResource]
 
 # Dynamic Stats
 var hp: int:
@@ -140,6 +141,15 @@ func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEve
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.
+
+func add_to_events(event : EventResource):
+	print("Appended")
+	#resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN].append(event)
+	statusEffects.append(event)
+	
+func remove(event : EventResource):
+	var index = statusEffects.find(event)
+	statusEffects.remove_at(index)
 	
 # Passive Functions
 func on_play(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY]: await event.execute(self)
@@ -148,7 +158,9 @@ func on_social(): for event in resource.passive_events[PassiveEventResource.Pass
 func on_enter_tree(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE]: await event.execute(self)
 func on_state_of_grid_change(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE]: await event.execute(self)
 func on_end_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN]: await event.execute(self)
-func on_start_of_turn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: await event.execute(self)
+func on_start_of_turn(): 
+	for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: await event.execute(self)
+	for event in statusEffects: await event.execute(self)
 func on_damage(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE]: await event.execute(self)
 func on_discard(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD]: await event.execute(self)
 func on_burn(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN]: await event.execute(self)
