@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://40v7v203k8px"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://40v7v203k8px"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_8vbsk"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_q2iq8"]
@@ -17,11 +17,18 @@ event_type = 10
 event = SubResource("Resource_50ect")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
+[sub_resource type="Resource" id="Resource_u4y71"]
+script = ExtResource("2_q2iq8")
+bullet_type = 5
+bullet_description = "When a card would be placed on top of this card, remove this card from the Rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
 [resource]
 script = ExtResource("3_yahf8")
 title = "Pressure Plate"
 type = 5
 game_origin = 26
+bullets = Array[ExtResource("2_q2iq8")]([SubResource("Resource_u4y71")])
 _passive_event_resources = Array[ExtResource("1_8vbsk")]([SubResource("Resource_ut5cq")])
 card_art = ExtResource("4_u4y71")
 background_art = ExtResource("2_yahf8")

@@ -1,5 +1,5 @@
 extends EventResource
-class_name BurnEvent
+class_name ApplyFreezeEvent
 
 @export var _passive_event : EventResource
 @export var amount : int
@@ -7,7 +7,7 @@ class_name BurnEvent
 func execute(card_ref: Card) -> bool:
 	var selected_card_pos = await GridPositionSelector.Instance.player_select_card()
 	
-	RiftGrid.Instance.burn_card(selected_card_pos, _passive_event)
+	RiftGrid.Instance.freeze_card(selected_card_pos, _passive_event)
 	
 	# Ideally we would decouple this damage from the actual event itself. Unfortunately, deadlines (M2) exists.
 	var defeated: bool = await RiftGrid.Instance.damage_card(selected_card_pos, amount)
