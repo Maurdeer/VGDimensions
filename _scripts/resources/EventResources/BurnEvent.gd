@@ -9,6 +9,9 @@ func execute(_card_ref: Card) -> bool:
 	
 	RiftGrid.Instance.burn_card(selected_card_pos)
 	
+	if (_card_ref == null):
+		print("Card reference is null")
+		return true
 	# Ideally we would decouple this damage from the actual event itself. Unfortunately, deadlines (M2) exists.
 	var defeated: bool = await RiftGrid.Instance.damage_card(selected_card_pos, amount)
 	if defeated: RiftGrid.Instance.draw_card(selected_card_pos)
