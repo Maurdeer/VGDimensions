@@ -27,7 +27,7 @@ func _start_game() -> void:
 	player_turn_queue.append(multiplayer.get_unique_id())
 	for pid in multiplayer.get_peers():
 		player_turn_queue.push_back(pid)
-	_set_up_each_peer.rpc()
+	_set_up_each_peer.rpc(curr_turn, player_turn_queue)
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 
 func start_next_turn() -> void:
