@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=30 format=3 uid="uid://dxnp8ire8svhn"]
 
 [ext_resource type="Script" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_f2c4h"]
@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="15_gibnw"]
 [ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="16_5f5da"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="18_hvy2v"]
+[ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="25_gibnw"]
+[ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="26_5f5da"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_u4bsf"]
 font = ExtResource("14_a3871")
@@ -320,5 +322,13 @@ offset_left = -0.53200054
 offset_top = 0.25793457
 offset_right = -0.3300171
 offset_bottom = -0.09802246
+
+[node name="QuestManager" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("25_gibnw")
+testingPurposeCard = ExtResource("26_5f5da")
+metadata/_custom_type_script = "uid://drhyp4uo8taws"
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]
