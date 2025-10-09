@@ -7,7 +7,6 @@ class_name NetworkedRiftGrid
 
 #region Generate New Cards
 func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) -> void:
-	cards.shuffle()
 	chat.create_message.rpc("[Server] Generate new Grid!")
 	_generate_new_grid.rpc(CardManager.cards_to_ids(cards), rift_width, rift_height)
 	

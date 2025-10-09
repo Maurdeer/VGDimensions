@@ -77,28 +77,6 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 			grid_container.add_child(slot)
 			
 			draw_card(Vector2i(j,i))
-	
-
-func draw_initial_grid():
-	if not grid.is_empty() or not _rift_deck.is_empty(): clear_grid()
-	for card in _card_refs:
-		_rift_deck.addCard(card)
-	_rift_deck.shuffleDeck()
-	grid_container.columns = rift_grid_width
-	for i in range(rift_grid_height):
-		grid.append([])
-		for j in range(rift_grid_width):
-			var deck: Deck = Deck.new()
-			deck.flipped = true
-			grid[i].append(deck)
-			
-			# Visual Element
-			var slot: RiftGridSlot = RiftGridSlot.new()
-			slot.grid_position = Vector2i(j,i)
-			slot.add_child(grid[i][j])
-			grid_container.add_child(slot)
-			
-			draw_card(Vector2i(j,i))
 
 #CARD INFORMATION
 func getCardAttribute():
