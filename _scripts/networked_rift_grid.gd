@@ -4,6 +4,7 @@ class_name NetworkedRiftGrid
 # I just turn every function in RiftGrid to an rpc call :p
 @export var local_rift_grid: LocalRiftGrid
 @onready var chat: Chat = $"../Chat"
+const PERM_SEED: int = 10000
 
 #region Generate New Cards
 func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) -> void:
@@ -12,7 +13,7 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 	
 @rpc("any_peer", "call_local", "reliable")
 func _generate_new_grid(card_ids: Array[int], rift_width: int, rift_height: int):
-	local_rift_grid.generate_new_grid(CardManager.ids_to_cards(card_ids), rift_width, rift_height)
+	local_rift_grid.generate_new_grid_2(CardManager.ids_to_cards(card_ids), rift_width, rift_height, PERM_SEED)
 #endregion
 #region Draw Card
 func draw_card(draw_to: Vector2i) -> void:
@@ -20,7 +21,7 @@ func draw_card(draw_to: Vector2i) -> void:
 	
 @rpc("any_peer", "call_local", "reliable")
 func _draw_card(draw_to: Vector2i) -> void:
-	local_rift_grid.draw_card(draw_to)
+	local_rift_grid.draw_card_2(draw_to, PERM_SEED)
 #endregion
 #region Place Card
 func place_card(place_at: Vector2i, new_card: Card) -> void:
