@@ -27,6 +27,7 @@ func _start_game() -> void:
 	player_turn_queue.append(multiplayer.get_unique_id())
 	for pid in multiplayer.get_peers():
 		player_turn_queue.push_back(pid)
+	_set_up_each_peer.rpc()
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 
 func start_next_turn() -> void:
@@ -36,10 +37,15 @@ func start_next_turn() -> void:
 	
 	_start_next_turn.rpc()
 	
+@rpc("any_peer", "call_remote", "reliable")
+func _set_up_each_peer(p_curr_turn: int, p_player_turn_queue: Array[int]) -> void:
+	curr_turn = p_curr_turn
+	player_turn_queue = p_player_turn_queue
+	
 @rpc("any_peer", "call_local", "reliable")
 func _start_next_turn() -> void:
-	if not multiplayer.is_server(): return
 	curr_turn = (curr_turn + 1) % player_turn_queue.size()
+	if not multiplayer.is_server(): return
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 	
 func create_cards_for_player_hand():
@@ -70,3 +76,6 @@ func end_local_play_turn() -> void:
 	CardShop.set_input_active(false)
 	# Disable Rift Grid Manipulation as well
 	reset_temporary_resources()
+	
+func is_my_turn() -> bool:
+	return true

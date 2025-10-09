@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://dxnp8ire8svhn"]
 
-[ext_resource type="Script" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
+[ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_f2c4h"]
 [ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_d51l6"]
 [ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="4_atenx"]
@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="8_u0f7i"]
 [ext_resource type="Resource" uid="uid://b7t0rerk5mn3d" path="res://cards/RizzGuy.tres" id="9_hvy2v"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="9_lkbpy"]
-[ext_resource type="Script" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
+[ext_resource type="Script" uid="uid://be71xoslflo7j" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="11_gdkaw"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="12_4glm7"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="13_fsr2k"]

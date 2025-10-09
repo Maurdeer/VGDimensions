@@ -85,3 +85,5 @@ func end_local_play_turn() -> void:
 	if infinite_resources: dev_infinite_resources()
 	else: reset_temporary_resources()
 	
+func is_my_turn() -> bool:
+	return true
