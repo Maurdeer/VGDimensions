@@ -14,7 +14,7 @@ signal on_end_of_turn
 @export var infinite_resources: bool = false
 
 @onready var player_hand: PlayerHand = $PlayerHandUI/player_hand
-@onready var rift_grid: RiftGrid = $RiftGrid
+@export var rift_grid: RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")
 static var Instance: GameManager
 
@@ -42,7 +42,6 @@ func _after_ready() -> void:
 func setup_card_shop():
 	var shop_cards: Array[Card] = CardManager.create_cards_from_packs(shop_initial_packs)
 	CardShop.fill_shop_deck(shop_cards)
-	
 	
 func setup_rift_grid():
 	var rift_cards: Array[Card] = CardManager.create_cards_from_packs([card_pack])

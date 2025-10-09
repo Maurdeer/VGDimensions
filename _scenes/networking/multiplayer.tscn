@@ -1,18 +1,19 @@
-[gd_scene load_steps=22 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=23 format=3 uid="uid://dxnp8ire8svhn"]
 
-[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_gethx"]
+[ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_f2c4h"]
 [ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_d51l6"]
-[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/Outcasts/RockBlock.tres" id="4_62nay"]
 [ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="4_atenx"]
+[ext_resource type="Script" uid="uid://dfckbjmx1ganv" path="res://_scripts/networked_rift_grid.gd" id="4_gethx"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_e1t0q"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_atenx"]
-[ext_resource type="Resource" uid="uid://df2yhxk3csdhh" path="res://cards/Outcasts/RollingStone.tres" id="6_ugm2g"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_ugm2g"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_6nxkk"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="8_u0f7i"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="9_lkbpy"]
+[ext_resource type="Script" uid="uid://be71xoslflo7j" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="11_gdkaw"]
+[ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="12_4glm7"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="13_fsr2k"]
 [ext_resource type="FontFile" uid="uid://bcwkqrkgs1rci" path="res://font/Abel-Regular.ttf" id="14_a3871"]
 [ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="15_gibnw"]
@@ -34,7 +35,7 @@ font_color = Color(1, 0, 0, 1)
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 
-[node name="sandbox" type="Control"]
+[node name="multiplayer" type="Control" node_paths=PackedStringArray("rift_grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,15 +47,25 @@ offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_gethx")
-cards = Array[ExtResource("2_f2c4h")]([ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_62nay"), ExtResource("4_62nay"), ExtResource("4_62nay"), ExtResource("6_ugm2g"), ExtResource("6_ugm2g"), ExtResource("6_ugm2g")])
+script = ExtResource("1_7aq5h")
+cards = Array[ExtResource("2_f2c4h")]([ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx")])
 card_pack = ExtResource("5_e1t0q")
 shop_initial_packs = Array[ExtResource("8_u0f7i")]([ExtResource("9_lkbpy")])
+rift_grid = NodePath("NetworkedRiftGrid")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 
-[node name="RiftGrid" parent="." instance=ExtResource("6_atenx")]
+[node name="NetworkedRiftGrid" type="Control" parent="." node_paths=PackedStringArray("local_rift_grid")]
+anchors_preset = 0
+offset_left = 1209.0
+offset_top = 344.0
+offset_right = 1249.0
+offset_bottom = 384.0
+script = ExtResource("4_gethx")
+local_rift_grid = NodePath("../LocalRiftGrid")
+
+[node name="LocalRiftGrid" parent="." instance=ExtResource("6_atenx")]
 layout_mode = 1
 anchors_preset = 5
 anchor_top = 0.0
@@ -64,6 +75,7 @@ offset_top = 344.0
 offset_right = 248.0
 offset_bottom = 344.0
 grow_vertical = 1
+script = ExtResource("10_ugm2g")
 
 [node name="PlayerHandUI" type="Control" parent="."]
 layout_mode = 1
@@ -265,7 +277,7 @@ label_settings = SubResource("LabelSettings_kgmkq")
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="Label" type="Label" parent="PlayerHandUI"]
+[node name="name_label" type="Label" parent="PlayerHandUI"]
 layout_mode = 0
 offset_left = -662.0
 offset_top = -186.0
@@ -292,5 +304,17 @@ text = "Next Turn"
 
 [node name="CardShopUI" parent="." instance=ExtResource("18_hvy2v")]
 position = Vector2(0, 129)
+
+[node name="Chat" parent="." instance=ExtResource("12_4glm7")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.63100004
+anchor_right = 0.26500002
+anchor_bottom = 0.989
+offset_left = -0.53200054
+offset_top = 0.25793457
+offset_right = -0.3300171
+offset_bottom = -0.09802246
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

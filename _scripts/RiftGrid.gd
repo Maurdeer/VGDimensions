@@ -3,8 +3,6 @@ class_name RiftGrid
 
 static var Instance: RiftGrid
 @onready var grid_container: GridContainer = $HBoxContainer/GridContainer
-const CARD = preload("res://_scenes/card/card.tscn")
-
 
 var grid: Array[Array]
 
@@ -57,6 +55,7 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 	clear_grid()
 	
 	# Establish Rift deck and card refs
+	# Assume cards are pre_shuffled
 	_card_refs = cards
 	for card in cards:
 		_rift_deck.addCard(card)

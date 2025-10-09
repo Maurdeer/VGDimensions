@@ -10,6 +10,6 @@ func execute(card_ref: Card) -> bool:
 	else: 
 		var selected_grid_pos = card_ref.grid_pos
 		RiftGrid.Instance.discard_card(selected_grid_pos)
-		var card = CardManager.create_card(other_card, true)
+		var card = await CardManager.create_card(other_card, true)
 		RiftGrid.Instance.place_card(selected_grid_pos, card)
 	return true

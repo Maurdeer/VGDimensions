@@ -109,6 +109,16 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 placeholder_text = "Join IP Address"
 
+[node name="start_game_button" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Start Game"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Waiting for host to start game...."
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
@@ -135,3 +145,4 @@ offset_right = 0.75994873
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/host_button" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/start_game_button" to="." method="_on_start_game_button_pressed"]

@@ -1,9 +1,9 @@
 extends Node
-class_name NetworkManager
 
 signal player_connected(pid, player_info)
 signal player_disconnected(pid)
 signal server_disconnected
+signal all_players_loaded
 
 var DEFAULT_IP_ADDRESS: String = "localhost"
 const DEFAULT_PORT: int = 12345
@@ -13,6 +13,7 @@ var players = {}
 
 # Local Player info
 var player_info = {'name' : "Name"}
+var players_loaded = 0
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -58,6 +59,21 @@ func remove_multiplayer_peer():
 	
 func _on_player_connected(id):
 	_register_player.rpc_id(id, player_info)
+	
+# When the server decides to start the game from a UI scene,
+# do Lobby.load_game.rpc(filepath)
+@rpc("call_local", "reliable")
+func load_game(game_scene_path):
+	get_tree().change_scene_to_file(game_scene_path)
+	
+# Every peer will call this when they have loaded the game scene.
+@rpc("any_peer", "call_local", "reliable")
+func player_loaded():
+	if multiplayer.is_server():
+		players_loaded += 1
+		if players_loaded == players.size():
+			all_players_loaded.emit()
+			players_loaded = 0
 
 
 @rpc("any_peer", "reliable")
