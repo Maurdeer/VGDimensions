@@ -1,17 +1,22 @@
-[gd_scene load_steps=23 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=28 format=3 uid="uid://dxnp8ire8svhn"]
 
-[ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
+[ext_resource type="Script" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_f2c4h"]
 [ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_d51l6"]
 [ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="4_atenx"]
 [ext_resource type="Script" uid="uid://dfckbjmx1ganv" path="res://_scripts/networked_rift_grid.gd" id="4_gethx"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_e1t0q"]
+[ext_resource type="Resource" uid="uid://dwkdhtd2hc5xo" path="res://cards/From Nava/FireballSpell.tres" id="5_fsr2k"]
+[ext_resource type="Resource" uid="uid://d4kn40cwc2gjb" path="res://cards/From Nava/IceballSpell.tres" id="6_a3871"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_atenx"]
+[ext_resource type="Resource" uid="uid://dpo8g2rb6alvf" path="res://cards/From Nava/WindblastSpell.tres" id="7_gibnw"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_ugm2g"]
+[ext_resource type="Resource" uid="uid://cjxbahb6jejem" path="res://cards/From Nava/ChairSpell.tres" id="8_5f5da"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_6nxkk"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="8_u0f7i"]
+[ext_resource type="Resource" uid="uid://b7t0rerk5mn3d" path="res://cards/RizzGuy.tres" id="9_hvy2v"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="9_lkbpy"]
-[ext_resource type="Script" uid="uid://be71xoslflo7j" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
+[ext_resource type="Script" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="11_gdkaw"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="12_4glm7"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="13_fsr2k"]
@@ -44,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_7aq5h")
-cards = Array[ExtResource("2_f2c4h")]([ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx"), ExtResource("4_atenx")])
+cards = Array[ExtResource("2_f2c4h")]([ExtResource("3_d51l6"), ExtResource("3_d51l6"), ExtResource("4_atenx"), ExtResource("5_fsr2k"), ExtResource("6_a3871"), ExtResource("7_gibnw"), ExtResource("8_5f5da"), ExtResource("9_hvy2v")])
 card_pack = ExtResource("5_e1t0q")
 shop_initial_packs = Array[ExtResource("8_u0f7i")]([ExtResource("9_lkbpy")])
 rift_grid = NodePath("NetworkedRiftGrid")
