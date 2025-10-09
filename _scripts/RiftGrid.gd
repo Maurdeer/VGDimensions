@@ -311,18 +311,18 @@ func damage_card(card_pos: Vector2i, amount: int) -> bool:
 		return true
 	return false
 
-func burn_card(card_pos: Vector2i, passive_event : EventResource) -> bool:
+func burn_card(card_pos: Vector2i) -> bool:
 	var card: Card = get_top_card(card_pos)
 	card.on_burn()
-	card.add_to_events(passive_event)
+	card.add_to_events(BurnStatusEvent.new())
 	print("Applied the Burn Status Effect to the given card.")
 	return true
 	
-func freeze_card(card_pos: Vector2i, passive_event : EventResource) -> bool:
+func freeze_card(card_pos: Vector2i) -> bool:
 	var card: Card = get_top_card(card_pos)
 	card.on_freeze()
 	card.interactable = false
-	card.add_to_events(passive_event)
+	card.add_to_events(FreezeStatusEvent.new())
 	return true
 
 func revolveCards():

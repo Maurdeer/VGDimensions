@@ -10,6 +10,7 @@ var next_card_id: int = 0
 var _cards: Array[Card]
 var _card_resources_dict: Dictionary[String, CardResource]
 const card_resources_folder: String = "res://cards/"
+var cards_loaded: int = 0
 
 func _ready() -> void:
 	_load_all_card_resources_from_folder(card_resources_folder)
@@ -22,11 +23,13 @@ func remove_card_by_id(id: int) -> void:
 
 signal create_card_ack
 func create_card(card_resource: CardResource, is_temporary: bool = false) -> Card:
+	cards_loaded = 0
 	_create_card_rpc.rpc(card_resource.resource_path, is_temporary)
 	var card: Card = _create_card_rpc(card_resource.resource_path, is_temporary)
 	
-	# Prolly need to change to account for multiple clients
-	await create_card_ack
+	cards_loaded += 1
+	if cards_loaded < GNM.players.size():
+		await create_card_ack
 	return card
 
 func create_cards(card_resources: Array[CardResource]) -> Array[Card]:
@@ -79,7 +82,7 @@ func _remove_card_by_id_rpc(id: int) -> void:
 	# This should be done when we reach a certain threshold of removing cards
 	# rather than doing it everytime we remove a card.
 	
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_remote", "reliable")
 func _create_card_rpc(resource_path: String, is_temporary: bool = false) -> Card:
 	var resource: CardResource = _card_resources_dict[resource_path]
 	var new_card: Card = CARD.instantiate()
@@ -87,12 +90,15 @@ func _create_card_rpc(resource_path: String, is_temporary: bool = false) -> Card
 	new_card.temporary = is_temporary
 	_cards.push_back(new_card)
 	next_card_id += 1
-	_acknowledge_create_card.rpc()
+	_acknowledge_create_card.rpc(multiplayer.get_remote_sender_id())
 	return new_card
 
-@rpc("any_peer", "call_remote", "reliable")
-func _acknowledge_create_card():
-	create_card_ack.emit()
+@rpc("any_peer", "call_local", "reliable")
+func _acknowledge_create_card(caller_id: int):
+	if multiplayer.get_unique_id() != caller_id: return
+	cards_loaded += 1
+	if cards_loaded >= GNM.players.size():
+		create_card_ack.emit()
 
 @rpc("any_peer", "call_remote", "reliable")
 func _create_cards_rpc(card_resource_paths: Array[String]) -> void:
