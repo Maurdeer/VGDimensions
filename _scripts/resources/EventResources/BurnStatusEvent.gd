@@ -9,7 +9,10 @@ func execute(card_ref: Card) -> bool:
 	# Do this.
 	#print("Burn Status Event Triggered Properly")
 	print(card_ref.grid_pos)
-	RiftGrid.Instance.damage_card(card_ref.grid_pos, 1)
+	var selected_card_pos = card_ref.grid_pos
+	var defeated: bool = await RiftGrid.Instance.damage_card(selected_card_pos, 1)
+	if defeated: RiftGrid.Instance.draw_card(selected_card_pos)
+	
 	count += 1
 	if (count >= 2):
 		card_ref.remove(self)
