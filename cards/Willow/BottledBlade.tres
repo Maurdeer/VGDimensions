@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://6ms4uldtlv8n"]
+
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_31rkp"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_1esg5"]
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_6qg02"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="3_1esg5"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_v5pch"]
+[ext_resource type="Texture2D" uid="uid://c3gwva1bmi8mi" path="res://art/card_art/Willow/bottledblade.png" id="5_bae3o"]
+
+[sub_resource type="Resource" id="Resource_v5pch"]
+script = ExtResource("3_1esg5")
+amount = 3
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_6qg02"]
+script = ExtResource("2_1esg5")
+_bullet_event = SubResource("Resource_v5pch")
+bullet_description = "Deal 3 Damage"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("3_v5pch")
+title = "Bottled Blade"
+game_origin = 30
+deleon_value = 5
+bullets = Array[ExtResource("2_1esg5")]([SubResource("Resource_6qg02")])
+card_art = ExtResource("5_bae3o")
+background_art = ExtResource("2_6qg02")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

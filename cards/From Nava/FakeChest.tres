@@ -5,20 +5,18 @@
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_xpoev"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_a04sf"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="4_d47hd"]
-[ext_resource type="Script" path="res://custom_event_resources/DiscardSelf.gd" id="5_d47hd"]
+[ext_resource type="Script" uid="uid://e8vymu1ddkjw" path="res://custom_event_resources/DiscardSelfEvent.gd" id="5_5twil"]
 [ext_resource type="Texture2D" uid="uid://cdwp11qf1rdit" path="res://art/card_art/FromNava/-e chest.png" id="7_5tvu8"]
 
-[sub_resource type="Resource" id="Resource_tg1uf"]
-script = ExtResource("5_d47hd")
-replaceSelfWithTarget = true
+[sub_resource type="Resource" id="Resource_d47hd"]
+script = ExtResource("5_5twil")
 other_card = ExtResource("2_acpwd")
 metadata/_custom_type_script = "uid://e8vymu1ddkjw"
 
-[sub_resource type="Resource" id="Resource_fayaw"]
+[sub_resource type="Resource" id="Resource_yh5as"]
 script = ExtResource("2_xpoev")
 bullet_type = 1
-bullet_cost = 1
-_bullet_event = SubResource("Resource_tg1uf")
+_bullet_event = SubResource("Resource_d47hd")
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -26,7 +24,7 @@ script = ExtResource("3_a04sf")
 title = "Fake Chest"
 type = 5
 game_origin = 26
-bullets = Array[ExtResource("2_xpoev")]([SubResource("Resource_fayaw")])
+bullets = Array[ExtResource("2_xpoev")]([SubResource("Resource_yh5as")])
 card_art = ExtResource("7_5tvu8")
 background_art = ExtResource("4_d47hd")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

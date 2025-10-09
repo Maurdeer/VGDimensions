@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://b7t0rerk5mn3d"]
+
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_21bua"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_pvuhx"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_8kc8w"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_pvuhx"]
+
+[sub_resource type="Resource" id="Resource_8kc8w"]
+script = ExtResource("3_pvuhx")
+type = 2
+amount = 4
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_cii6k"]
+script = ExtResource("2_pvuhx")
+bullet_cost = 1
+_bullet_event = SubResource("Resource_8kc8w")
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("3_8kc8w")
+title = "Rizz Guy"
+bullets = Array[ExtResource("2_pvuhx")]([SubResource("Resource_cii6k")])
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

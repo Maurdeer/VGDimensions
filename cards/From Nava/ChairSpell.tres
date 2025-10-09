@@ -5,13 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_af5si"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xyng2"]
 [ext_resource type="Resource" uid="uid://eq5vqnlsot7r" path="res://cards/From Nava/Chair.tres" id="4_fhbk1"]
-[ext_resource type="Script" uid="uid://dhg2vadb3k5sc" path="res://_scripts/resources/EventResources/PlaceGivenCardDown.gd" id="5_bwfa1"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="5_bwfa1"]
 [ext_resource type="Texture2D" uid="uid://c6snfbfeid2ax" path="res://art/card_art/FromNava/-e ChairSpell -e.png" id="5_fhbk1"]
 
 [sub_resource type="Resource" id="Resource_moox1"]
 script = ExtResource("5_bwfa1")
-other_card = ExtResource("4_fhbk1")
-metadata/_custom_type_script = "uid://dhg2vadb3k5sc"
+other_card_resource = ExtResource("4_fhbk1")
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_af5si"]
 script = ExtResource("2_2qb4m")
@@ -25,6 +25,7 @@ title = "Chair Spell"
 game_origin = 26
 deleon_value = 4
 starting_hp = 3
+movable = false
 bullets = Array[ExtResource("2_2qb4m")]([SubResource("Resource_af5si")])
 card_art = ExtResource("5_fhbk1")
 background_art = ExtResource("2_af5si")

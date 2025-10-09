@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=7 format=3 uid="uid://b66r18jp8ponq"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=9 format=3 uid="uid://b66r18jp8ponq"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_xuuq2"]
 [ext_resource type="Resource" uid="uid://crpp42hdxyxji" path="res://cards/From Nava/SmallGuy.tres" id="2_gkc6p"]
@@ -6,13 +6,17 @@
 [ext_resource type="Resource" uid="uid://cc1x4vm6hevcw" path="res://cards/From Nava/Box.tres" id="3_0k5uu"]
 [ext_resource type="Resource" uid="uid://40v7v203k8px" path="res://cards/From Nava/PressurePlate.tres" id="4_avhbb"]
 [ext_resource type="Resource" uid="uid://4rj7qq5ds01" path="res://cards/From Nava/FakeChest.tres" id="5_0k5uu"]
+[ext_resource type="Resource" uid="uid://yoeovssgnxf0" path="res://cards/From Nava/Firewood.tres" id="6_avhbb"]
+[ext_resource type="Resource" uid="uid://dorgbnjirif8v" path="res://cards/From Nava/TheSubject.tres" id="7_fig77"]
 
 [resource]
 script = ExtResource("2_ho1ha")
 card_resources = Dictionary[ExtResource("1_xuuq2"), int]({
-ExtResource("2_gkc6p"): 3,
-ExtResource("3_0k5uu"): 3,
-ExtResource("4_avhbb"): 3,
-ExtResource("5_0k5uu"): 5
+ExtResource("2_gkc6p"): 2,
+ExtResource("3_0k5uu"): 2,
+ExtResource("4_avhbb"): 2,
+ExtResource("5_0k5uu"): 2,
+ExtResource("6_avhbb"): 2,
+ExtResource("7_fig77"): 1
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"
