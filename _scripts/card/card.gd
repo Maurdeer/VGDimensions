@@ -171,3 +171,4 @@ func on_before_move(): for event in resource.passive_events[PassiveEventResource
 func on_after_move(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE]: await event.execute(self)
 func on_replace(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE]: await event.execute(self)
 func on_freeze(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE]: await event.execute(self)
+func on_quest_progress(): for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS]: await event.execute(self)

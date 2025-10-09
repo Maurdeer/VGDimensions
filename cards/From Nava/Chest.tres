@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://c1ftp2h4vrsy6"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://c1ftp2h4vrsy6"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_vinvw"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_1v6xg"]
@@ -15,13 +15,19 @@ script = ExtResource("3_4tbpa")
 amount = 2
 metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
+[sub_resource type="Resource" id="Resource_81ee8"]
+script = ExtResource("3_4tbpa")
+type = 3
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
 [sub_resource type="Resource" id="Resource_bbckg"]
 script = ExtResource("6_bbckg")
 metadata/_custom_type_script = "uid://e8vymu1ddkjw"
 
 [sub_resource type="Resource" id="Resource_0kas5"]
 script = ExtResource("7_81ee8")
-events = Array[ExtResource("4_lmt7w")]([SubResource("Resource_lmt7w"), SubResource("Resource_bbckg")])
+events = Array[ExtResource("4_lmt7w")]([SubResource("Resource_lmt7w"), SubResource("Resource_81ee8"), SubResource("Resource_bbckg")])
 metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_q0odr"]

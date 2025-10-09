@@ -42,6 +42,9 @@ func modify_resource(type: ResourceType, amount: int) -> void:
 			actions += amount
 		ResourceType.SOCIAL:
 			socials += amount
+		ResourceType.POLAROID:
+			from_nava_polaroids += amount
+			print(from_nava_polaroids)
 			
 func can_afford(type: ResourceType, required_amount: int) -> bool:
 	var affordable = false
@@ -94,5 +97,6 @@ func enable_from_nava_polaroids(status):
 enum ResourceType {
 	DELEON,
 	ACTION,
-	SOCIAL
+	SOCIAL,
+	POLAROID
 }

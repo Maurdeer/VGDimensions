@@ -19,6 +19,7 @@ enum PassiveEvent {
 	ON_AFTER_MOVE,
 	ON_REPLACE,
 	ON_FREEZE,
+	ON_QUEST_PROGRESS
 }
 @export var event_type: PassiveEvent
 @export var event: EventResource
