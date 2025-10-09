@@ -36,6 +36,7 @@ func clear_hand() -> void:
 func fill_hand() -> void:
 	while not slot_queue.is_empty():
 		draw_card_to_hand()
+		if draw_pile.is_empty(): reshuffle_draw_pile()
 		if draw_pile.is_empty(): break
 
 # not used yet (use with caution)
