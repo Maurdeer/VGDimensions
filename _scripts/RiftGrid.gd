@@ -12,6 +12,7 @@ var rift_grid_height: int = 3
 var _card_refs: Array[Card]
 @onready var _rift_deck: Deck =  $HBoxContainer/Control2/DrawPile
 @onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
+const PERM_SEED: int = 10000
 
 func _ready() -> void:
 	# Initialize Singleton
@@ -59,6 +60,7 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 	_card_refs = cards
 	for card in cards:
 		_rift_deck.addCard(card)
+	seed(PERM_SEED)
 	_rift_deck.shuffleDeck()
 	
 	# Generate the intial setup of the rift
@@ -93,6 +95,7 @@ func draw_card(draw_to: Vector2i) -> void:
 	if _rift_deck.is_empty():
 		# Must have cards in discard pile to shuffle in
 		_rift_deck.mergeDeck(_rift_discard_pile)
+		seed(PERM_SEED)
 		_rift_deck.shuffleDeck()
 	
 	if _rift_deck.is_empty():
@@ -213,6 +216,7 @@ func swap_decks(deck_pos_a: Vector2i, deck_pos_b: Vector2i):
 func shuffle_card_back_in_deck(shuffleCard: Card, targetDeck: Deck):
 	shuffleCard.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	targetDeck.addCard(shuffleCard)
+	seed(PERM_SEED)
 	targetDeck.shuffleDeck()
 
 func shift_decks_horizontally(start_pos: Vector2i, offset: int):
@@ -352,4 +356,6 @@ func _double_rift_deck() -> void:
 		var card: Card = card_ref.duplicate() as Card
 		_rift_deck.addCard(card) 
 		card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
+	
+	seed(PERM_SEED)
 	_rift_deck.shuffleDeck()

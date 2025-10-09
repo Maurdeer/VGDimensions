@@ -4,7 +4,6 @@ class_name NetworkedRiftGrid
 # I just turn every function in RiftGrid to an rpc call :p
 @export var local_rift_grid: LocalRiftGrid
 @onready var chat: Chat = $"../Chat"
-const PERM_SEED: int = 10000
 
 #region Generate New Cards
 func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) -> void:
@@ -13,15 +12,16 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 	
 @rpc("any_peer", "call_local", "reliable")
 func _generate_new_grid(card_ids: Array[int], rift_width: int, rift_height: int):
-	local_rift_grid.generate_new_grid_2(CardManager.ids_to_cards(card_ids), rift_width, rift_height, PERM_SEED)
+	local_rift_grid.generate_new_grid(CardManager.ids_to_cards(card_ids), rift_width, rift_height)
 #endregion
 #region Draw Card
 func draw_card(draw_to: Vector2i) -> void:
+	chat.create_message.rpc("[Server] %s Drew to %s" % [GNM.player_info['name'], draw_to])
 	_draw_card.rpc(draw_to)
 	
 @rpc("any_peer", "call_local", "reliable")
 func _draw_card(draw_to: Vector2i) -> void:
-	local_rift_grid.draw_card_2(draw_to, PERM_SEED)
+	local_rift_grid.draw_card(draw_to)
 #endregion
 #region Place Card
 func place_card(place_at: Vector2i, new_card: Card) -> void:
@@ -34,6 +34,7 @@ func _place_card(place_at: Vector2i, new_card_id: int) -> void:
 #endregion
 #region Place Card Under
 func place_card_under(place_at: Vector2i, new_card: Card) -> void:
+	chat.create_message.rpc("[Server] %s Placed %s under card at %s" % [GNM.player_info['name'], new_card.resource.title, place_at])
 	_place_card_under.rpc(place_at, new_card.card_id)
 @rpc("any_peer", "call_local", "reliable")
 func _place_card_under(place_at: Vector2i, new_card_id: int) -> void:
@@ -64,6 +65,7 @@ func _place_cards_under(place_at: Vector2i, card_ids: Array[int]) -> void:
 #endregion
 #region Discard Card
 func discard_card(discard_from: Vector2i) -> void:
+	chat.create_message.rpc("[Server] %s discarded card at %s" % [GNM.player_info['name'], discard_from])
 	_discard_card.rpc(discard_from)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -72,6 +74,7 @@ func _discard_card(discard_from: Vector2i) -> void:
 #endregion
 #region Discard Card and Draw
 func discard_card_and_draw(discard_from: Vector2i, draw_when_empty: bool = true) -> void:
+	chat.create_message.rpc("[Server] %s discarded card and drew at %s" % [GNM.player_info['name'], discard_from])
 	_discard_card_and_draw.rpc(discard_from, draw_when_empty)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -88,6 +91,7 @@ func _discard_entire_deck(discard_from: Vector2i):
 #endregion
 #region Move Card To
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
+	chat.create_message.rpc("[Server] %s Moved a card from %s to %s" % [GNM.player_info['name'], move_from, move_to])
 	_move_card_to.rpc(move_to, move_from)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -96,6 +100,7 @@ func _move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 #endregion
 #region Move Card To Under
 func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
+	chat.create_message.rpc("[Server] %s Moved a card from %s under a card at %s" % [GNM.player_info['name'], move_from, move_to])
 	_move_card_to.rpc(move_to, move_from)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -104,6 +109,7 @@ func _move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 #endregion
 #region Swap Cards
 func swap_cards(card_a_pos: Vector2i, card_b_pos: Vector2i):
+	chat.create_message.rpc("[Server] %s Swap a card from %s with a card from %s" % [GNM.player_info['name'], card_a_pos, card_b_pos])
 	_swap_cards.rpc(card_a_pos, card_b_pos)
 	
 @rpc("any_peer", "call_local", "reliable")
