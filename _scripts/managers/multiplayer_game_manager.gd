@@ -21,10 +21,10 @@ func _after_ready() -> void:
 func _start_game() -> void:
 	if not multiplayer.is_server(): return
 	chat.create_message.rpc("Game Will Start!")
-	create_cards_for_player_hand()
 	setup_peers()
 	setup_card_shop()
 	setup_rift_grid()
+	create_cards_for_player_hand()
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 
 func start_next_turn() -> void:

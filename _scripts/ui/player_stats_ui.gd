@@ -2,6 +2,7 @@ extends Control
 @export var deleon_amount: Label
 @export var action_amount: Label
 @export var social_amount: Label
+@export var polariod_amount: Label
 @export var message: Label
 
 
