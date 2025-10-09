@@ -67,6 +67,7 @@ func _on_next_turn_button_pressed() -> void:
 	start_next_turn()
 	
 func start_local_play_turn() -> void:
+	chat.create_message.rpc("[Server] Its %s's Turn!" % GNM.player_info['name'])
 	$next_turn_button.visible = true
 	player_hand.fill_hand()
 	

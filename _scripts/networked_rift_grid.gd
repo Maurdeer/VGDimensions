@@ -3,10 +3,12 @@ class_name NetworkedRiftGrid
 
 # I just turn every function in RiftGrid to an rpc call :p
 @export var local_rift_grid: LocalRiftGrid
+@onready var chat: Chat = $"../Chat"
 
 #region Generate New Cards
 func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) -> void:
 	cards.shuffle()
+	chat.create_message.rpc("[Server] Generate new Grid!")
 	_generate_new_grid.rpc(CardManager.cards_to_ids(cards), rift_width, rift_height)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -23,6 +25,7 @@ func _draw_card(draw_to: Vector2i) -> void:
 #endregion
 #region Place Card
 func place_card(place_at: Vector2i, new_card: Card) -> void:
+	chat.create_message.rpc("[Server] %s Placed %s at %s" % [GNM.player_info['name'], new_card.resource.title, place_at])
 	_place_card.rpc(place_at, new_card.card_id)
 	
 @rpc("any_peer", "call_local", "reliable")
