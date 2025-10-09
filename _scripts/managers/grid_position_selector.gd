@@ -28,6 +28,7 @@ func player_select_card_filter(filter: Callable = func(card: Card): return true)
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
 			var card: Card = deck.get_top_card()
+			if not card: continue
 			if card.card_sm.is_state(CardStateMachine.StateType.INTERACTABLE) and filter.call(card):
 				card.card_sm.transition_to_state(CardStateMachine.StateType.SELECTABLE)
 				no_cards_connected = false
