@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmcekbhb8edbr"]
+
+[ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="1_xxnm3"]
+[ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="2_nfgo7"]
+
+[node name="QuestManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xxnm3")
+testingPurposeCard = ExtResource("2_nfgo7")

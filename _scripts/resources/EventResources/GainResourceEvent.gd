@@ -6,4 +6,6 @@ class_name GainResourceEvent
 
 func execute(_card_ref: Card) -> bool:
 	PlayerStatistics.modify_resource(type, amount)
+	if (type == PlayerStatistics.ResourceType.POLAROID):
+		QuestManager.Instance.update_quest()
 	return true

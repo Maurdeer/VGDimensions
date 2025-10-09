@@ -13,6 +13,6 @@ func execute(card_ref: Card) -> bool:
 	var defeated: bool = await RiftGrid.Instance.damage_card(selected_card_pos, amount)
 	if defeated: RiftGrid.Instance.draw_card(selected_card_pos)
 
-	print("Selected card Position is %s "  % selected_card_pos)
+	#print("Selected card Position is %s "  % selected_card_pos)
 	
 	return true
