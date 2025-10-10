@@ -7,6 +7,8 @@ class_name DragAndDropComponent2D
 var is_dragging: bool = false
 @onready var _parent: Node2D = $".."
 signal on_drop
+signal on_hover_enter
+signal on_hover_left
 var draggable: bool = true
 var pre_drag_pos: Vector2
 var interactable: bool = true
@@ -70,7 +72,9 @@ func hover() -> void:
 	scale_due_to_hover = true
 	scale_prior_to_hover = _parent.scale
 	_parent.scale *= 1.05
+	on_hover_enter.emit()
 	
 func unhover() -> void:
 	scale_due_to_hover = false
 	_parent.scale = scale_prior_to_hover
+	on_hover_left.emit()

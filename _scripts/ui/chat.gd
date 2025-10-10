@@ -10,6 +10,7 @@ var message_strings: Array[String]
 func _ready() -> void:
 	scrollbar.changed.connect(_on_scrollbar_changed)
 	GNM.player_connected.connect(_on_player_join)
+	GNM.player_disconnected.connect(_on_player_leave)
 
 func send_message(msg: String) -> void:
 	var geared_msg = "(%s): %s" % [GNM.player_info['name'], msg]
@@ -49,3 +50,11 @@ func _on_player_join(pid, _player_info) -> void:
 		else:
 			rpc_id(pid, "create_messages", message_strings)
 			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])
+	
+func _on_player_leave(pid, _player_info) -> void:
+	if multiplayer.is_server():
+		if pid == 1: 
+			rpc("create_message", "%s has Left Session" % GNM.players[pid]['name'])
+		else:
+			rpc_id(pid, "create_messages", message_strings)
+			rpc("create_message", "%s has Left Session" % GNM.players[pid]['name'])

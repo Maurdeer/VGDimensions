@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtuxp875by1ca"]
+
+[ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="1_8kfxt"]
+[ext_resource type="Script" uid="uid://twmhene4le8k" path="res://_scripts/scene_transition.gd" id="1_tb78a"]
+[ext_resource type="FontFile" uid="uid://bcwkqrkgs1rci" path="res://font/Abel-Regular.ttf" id="2_jb6jg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jb6jg"]
+shader = ExtResource("1_8kfxt")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tb78a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8kfxt"]
+font_size = 216
+font_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+outline_size = 35
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tb78a"]
+font = ExtResource("2_jb6jg")
+font_size = 51
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tb78a")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_jb6jg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_tb78a")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -476.5
+offset_top = -292.0
+offset_right = 476.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN"
+label_settings = SubResource("LabelSettings_8kfxt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -671.0
+offset_top = -110.0
+offset_right = 671.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Thanks for playing VGDimenions! be sure to fill out the feedback form!"
+label_settings = SubResource("LabelSettings_tb78a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.35486
+offset_top = 144.0
+offset_right = 301.35486
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to Main Menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

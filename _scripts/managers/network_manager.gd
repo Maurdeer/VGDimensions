@@ -57,6 +57,15 @@ func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	players.clear()
 	
+func disconnect_self():
+	_disconnect_peer.rpc(multiplayer.multiplayer_peer)
+	remove_multiplayer_peer()
+	
+@rpc("call_local", "reliable")
+func _disconnect_peer(pid: int):
+	if multiplayer.is_server():
+		multiplayer.multiplayer_peer.disconnect_peer(pid, true)
+	
 func _on_player_connected(id):
 	_register_player.rpc_id(id, player_info)
 	
