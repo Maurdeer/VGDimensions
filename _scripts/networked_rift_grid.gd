@@ -64,13 +64,13 @@ func _place_cards_under(place_at: Vector2i, card_ids: Array[int]) -> void:
 	local_rift_grid.place_cards_under(place_at, CardManager.ids_to_cards(card_ids))
 #endregion
 #region Discard Card
-func discard_card(discard_from: Vector2i) -> void:
+func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
 	chat.create_message.rpc("[Server] %s discarded card at %s" % [GNM.player_info['name'], discard_from])
-	_discard_card.rpc(discard_from)
+	_discard_card.rpc(discard_from, deck_pos)
 	
 @rpc("any_peer", "call_local", "reliable")
-func _discard_card(discard_from: Vector2i) -> void:
-	local_rift_grid.discard_card(discard_from)
+func _discard_card(discard_from: Vector2i, deck_pos: int) -> void:
+	local_rift_grid.discard_card(discard_from, deck_pos)
 #endregion
 #region Discard Card and Draw
 func discard_card_and_draw(discard_from: Vector2i, draw_when_empty: bool = true) -> void:

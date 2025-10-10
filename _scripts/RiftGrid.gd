@@ -108,13 +108,10 @@ func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
 	var card_underneath: Card = grid[place_at.y][place_at.x].get_top_card()
-	# TODO: THIS IS NOT RIGHT, PUT ON BOTTOM
-	# THEN SUPPORT VECTOR3i, to interface with internal card deck positions
-	# Only done for M2 to support stacking on buttons rn
-	if card_underneath: await card_underneath.on_stack()
 	grid[place_at.y][place_at.x].addCard(newCard)
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+	if card_underneath: await card_underneath.on_stack()
 	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
@@ -140,12 +137,12 @@ func discard_card_and_draw(discard_from: Vector2i, draw_when_empty: bool = true)
 	#if draw_when_empty and not grid[discard_from.y][discard_from.x].is_empty(): return
 	draw_card(discard_from)
 	
-func discard_card(discard_from: Vector2i) -> void:
+func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
 	assert(is_valid_pos(discard_from), "Cannot discard card from position (%s, %s)" % [discard_from.x, discard_from.y])
-	var card: Card = grid[discard_from.y][discard_from.x].remove_top_card()
+	var card: Card = grid[discard_from.y][discard_from.x].remove_card_at(deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
 	
-	# (Ryan) When we add netcoding, do a more explicit player check in the networked version
+	# TODO: (Ryan) When we add netcoding, do a more explicit player check in the networked version
 	if card.temporary:
 		CardManager.remove_card_by_id(card.card_id)
 	elif card.player_owner == "": 

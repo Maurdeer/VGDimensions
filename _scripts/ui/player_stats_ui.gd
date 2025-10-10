@@ -19,6 +19,7 @@ func _update_ui() -> void:
 	deleon_amount.text = "%s" % PlayerStatistics.deleons
 	action_amount.text = "%s" % PlayerStatistics.actions
 	social_amount.text = "%s" % PlayerStatistics.socials
+	polariod_amount.text = "%s" % PlayerStatistics.from_nava_polaroids
 	
 func _on_player_stats_resource_spend_fail(type: PlayerStatistics.ResourceType):
 	match(type):
