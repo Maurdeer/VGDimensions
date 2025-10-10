@@ -8,5 +8,7 @@ func execute(card_ref: Card) -> bool:
 	print("We're in the From Nava Quest! Gonna check if the player has won...")
 	if (PlayerStatistics.from_nava_polaroids >= necessaryPolaroidAmount):
 		print("The player has won! Amazing!")
+		if GameManager.Instance is MultiplayerGameManager: 
+			(GameManager.Instance as MultiplayerGameManager).game_victory()
 		
 	return true

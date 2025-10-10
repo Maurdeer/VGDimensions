@@ -97,3 +97,17 @@ func setup_peers():
 @rpc("any_peer", "call_local", "reliable")
 func _setup_card_shop(shop_card_ids: Array[int]):
 	CardShop.fill_shop_deck(CardManager.ids_to_cards(shop_card_ids))
+	
+@rpc("any_peer", "call_local", "reliable")
+func _on_victory() -> void:
+	GNM.remove_multiplayer_peer()
+	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+		get_tree().change_scene_to_file("res://_scenes/win_screen.tscn")
+	#else:
+		#get_tree().change_scene_to_file(WIN_SCREEN)
+	
+	
+func game_victory() -> void:
+	# only the winner calls this, so 
+	_on_victory.rpc()
+	
