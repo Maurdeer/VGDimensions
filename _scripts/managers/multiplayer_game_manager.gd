@@ -38,6 +38,8 @@ func start_next_turn() -> void:
 func _set_up_each_peer(p_curr_turn: int, p_player_turn_queue: Array[int], p_random_seed: int) -> void:
 	curr_turn = p_curr_turn
 	player_turn_queue = p_player_turn_queue
+	random_seed = p_random_seed
+	rift_grid.pre_defined_seed = p_random_seed
 	seed(p_random_seed)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -51,7 +53,7 @@ func create_cards_for_player_hand():
 	
 @rpc("any_peer", "call_local", "reliable")
 func _create_cards_for_player_hand_rpc():
-	var player_hand_cards: Array[Card] = CardManager.create_cards(cards)
+	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
 	for card in player_hand_cards:
 		player_hand.discard_card(card)
 	player_hand.fill_hand()

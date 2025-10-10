@@ -5,8 +5,8 @@ signal on_start_of_turn
 signal on_end_of_turn
 
 @export_category("Initialization Specs")
-@export var cards: Array[CardResource]
-@export var card_pack: CardPackResource
+@export var initial_hand_card_pack: CardPackResource
+@export var rift_card_pack: Array[CardPackResource]
 @export var shop_initial_packs: Array[CardPackResource]
 @export var initial_grid_size: Vector2i = Vector2i(3, 3)
 
@@ -44,11 +44,11 @@ func setup_card_shop():
 	CardShop.fill_shop_deck(shop_cards)
 	
 func setup_rift_grid():
-	var rift_cards: Array[Card] = CardManager.create_cards_from_packs([card_pack])
+	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(rift_card_pack)
 	rift_grid.generate_new_grid(rift_cards,3,3)
 	
 func create_cards_for_player_hand():
-	var player_hand_cards: Array[Card] = CardManager.create_cards(cards)
+	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
 	for card in player_hand_cards:
 		player_hand.discard_card(card)
 		
