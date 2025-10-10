@@ -15,14 +15,14 @@
 [resource]
 script = ExtResource("2_ho1ha")
 card_resources = Dictionary[ExtResource("1_xuuq2"), int]({
-ExtResource("2_gkc6p"): 4,
-ExtResource("3_0k5uu"): 4,
-ExtResource("4_avhbb"): 4,
-ExtResource("5_0k5uu"): 4,
-ExtResource("6_avhbb"): 4,
+ExtResource("2_gkc6p"): 3,
+ExtResource("3_0k5uu"): 3,
+ExtResource("4_avhbb"): 3,
+ExtResource("5_0k5uu"): 3,
+ExtResource("6_avhbb"): 3,
 ExtResource("7_fig77"): 1,
-ExtResource("8_5bwb4"): 4,
-ExtResource("9_uhor1"): 4,
-ExtResource("10_0ro12"): 4
+ExtResource("8_5bwb4"): 3,
+ExtResource("9_uhor1"): 3,
+ExtResource("10_0ro12"): 3
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"
