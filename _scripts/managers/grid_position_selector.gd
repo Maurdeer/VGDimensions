@@ -56,6 +56,8 @@ func revert_card_states() -> void:
 			card.selected.disconnect(on_card_clicked)
 			
 func on_card_clicked(grid_pos: Vector2i):
+	if grid_pos.x < 0 and grid_pos.y < 0:
+		return
 	if not _first: return
 	_first = false
 	revert_card_states()
