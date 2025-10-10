@@ -109,15 +109,35 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 placeholder_text = "Join IP Address"
 
-[node name="start_game_button" type="Button" parent="VBoxContainer"]
+[node name="CLIENT_OPTIONS" type="HBoxContainer" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CLIENT_OPTIONS"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Waiting for host to start game...."
+
+[node name="client_leave_button" type="Button" parent="VBoxContainer/CLIENT_OPTIONS"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Leave"
+
+[node name="HOST_OPTIONS" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="start_game_button" type="Button" parent="VBoxContainer/HOST_OPTIONS"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Start Game"
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-visible = false
+[node name="host_leave_button" type="Button" parent="VBoxContainer/HOST_OPTIONS"]
 layout_mode = 2
-text = "Waiting for host to start game...."
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+text = "Leave"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -145,4 +165,6 @@ offset_right = 0.75994873
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/host_button" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/join_button" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CLIENT_OPTIONS/client_leave_button" to="." method="_on_client_leave_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HOST_OPTIONS/start_game_button" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HOST_OPTIONS/host_leave_button" to="." method="_on_host_leave_button_pressed"]
