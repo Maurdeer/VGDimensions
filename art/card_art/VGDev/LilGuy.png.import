@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b130sturhehrl"
-path="res://.godot/imported/lilguy.png-8d12cbc6563519585cb7932b693a6734.ctex"
+path="res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/VGDev/lilguy.png"
-dest_files=["res://.godot/imported/lilguy.png-8d12cbc6563519585cb7932b693a6734.ctex"]
+source_file="res://art/card_art/VGDev/LilGuy.png"
+dest_files=["res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"]
 
 [params]
 
