@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VGDimensions"
-run/main_scene="uid://c57bmxyf3rgq6"
+run/main_scene="uid://ci47eik7lfa7d"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
@@ -32,6 +32,10 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="VGDev Clash"
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
