@@ -44,7 +44,6 @@ func modify_resource(type: ResourceType, amount: int) -> void:
 			socials += amount
 		ResourceType.POLAROID:
 			from_nava_polaroids += amount
-			print(from_nava_polaroids)
 			
 func can_afford(type: ResourceType, required_amount: int) -> bool:
 	var affordable = false

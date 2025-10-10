@@ -22,7 +22,8 @@ func execute(card_ref: Card) -> bool:
 		for j in range(heightOfArea):
 			if (j + selected_card_pos.y >= RiftGrid.Instance.rift_grid_height):
 				break
-			var defeated: bool = await RiftGrid.Instance.damage_card(selected_card_pos + Vector2i(i, j), amount)
-			if defeated: RiftGrid.Instance.draw_card(selected_card_pos)
+			await RiftGrid.Instance.damage_card(selected_card_pos + Vector2i(i, j), amount)
+	
+	RiftGrid.Instance.fill_empty_decks()
 	
 	return true
