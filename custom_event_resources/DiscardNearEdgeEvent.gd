@@ -8,5 +8,5 @@ func execute(card_ref: Card) -> bool:
 	card_ref.grid_pos.x == 0
 	
 	if not on_edge: return false
-	RiftGrid.Instance.discard_card(card_ref.grid_pos)
+	RiftGrid.Instance.discard_card(card_ref.grid_pos, card_ref.deck_pos)
 	return true

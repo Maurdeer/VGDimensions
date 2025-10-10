@@ -73,13 +73,13 @@ func _discard_card(discard_from: Vector2i, deck_pos: int) -> void:
 	local_rift_grid.discard_card(discard_from, deck_pos)
 #endregion
 #region Discard Card and Draw
-func discard_card_and_draw(discard_from: Vector2i, draw_when_empty: bool = true) -> void:
+func discard_card_and_draw(discard_from: Vector2i, deck_pos: int = 0, draw_when_empty: bool = true) -> void:
 	chat.create_message.rpc("[Server] %s discarded card and drew at %s" % [GNM.player_info['name'], discard_from])
-	_discard_card_and_draw.rpc(discard_from, draw_when_empty)
+	_discard_card_and_draw.rpc(discard_from, deck_pos, draw_when_empty)
 	
 @rpc("any_peer", "call_local", "reliable")
-func _discard_card_and_draw(discard_from: Vector2i, draw_when_empty: bool) -> void:
-	local_rift_grid.discard_card_and_draw(discard_from, draw_when_empty)
+func _discard_card_and_draw(discard_from: Vector2i, deck_pos: int, draw_when_empty: bool) -> void:
+	local_rift_grid.discard_card_and_draw(discard_from, deck_pos, draw_when_empty)
 #endregion
 #region Discard Entire Deck
 func discard_entire_deck(discard_from: Vector2i):
