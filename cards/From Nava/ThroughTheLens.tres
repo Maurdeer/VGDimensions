@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://vlbi622x6nho"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://vlbi622x6nho"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_unvo3"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_ey6v6"]
@@ -18,11 +18,19 @@ event_type = 17
 event = SubResource("Resource_3llsh")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
+[sub_resource type="Resource" id="Resource_yifxq"]
+script = ExtResource("2_ey6v6")
+bullet_type = 5
+bullet_description = "Collect 9 Polaroids to win!
+Polaroids are awarded for killing enemies and solving various puzzles."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
 [resource]
 script = ExtResource("3_y1e8s")
 title = "Through the Lens"
 type = 4
 game_origin = 26
+bullets = Array[ExtResource("2_ey6v6")]([SubResource("Resource_yifxq")])
 _passive_event_resources = Array[ExtResource("1_unvo3")]([SubResource("Resource_unvo3")])
 card_art = ExtResource("5_yifxq")
 background_art = ExtResource("3_3llsh")
