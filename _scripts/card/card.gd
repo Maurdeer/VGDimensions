@@ -34,6 +34,7 @@ const SELECTION_UI = preload("uid://vei3yr63fqcj")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var card_sm: CardStateMachine = $CardSM
 @onready var dnd_2d: DragAndDropComponent2D = $drag_and_drop_component2D
+@onready var gridVisualizer: GridCardVisualizer = $gridcard_visualizer
 var statusEffects: Array[EventResource]
 
 # Dynamic Stats
@@ -151,7 +152,6 @@ func add_to_events(event : EventResource):
 func remove(event : EventResource):
 	var index = statusEffects.find(event)
 	statusEffects.remove_at(index)
-	
 
 # Barrier Implemenation for networking
 var players_processed_passive: int = 0

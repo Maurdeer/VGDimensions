@@ -156,3 +156,13 @@ func _on_funny_quip_change() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_EDITOR_POST_SAVE:
 		_on_values_change()
+
+func dissolve_shader() -> bool:
+	var timer = 1
+	while timer <= 5:
+		material.set_shader_parameter("dissolve_amount", 0.2 * timer)
+		await get_tree().create_timer(0.1).timeout
+		timer += 1
+	return true
+	
+	

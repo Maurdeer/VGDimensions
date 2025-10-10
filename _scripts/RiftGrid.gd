@@ -142,7 +142,9 @@ func discard_card_and_draw(discard_from: Vector2i, deck_pos: int = 0, draw_when_
 	
 func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
 	assert(is_valid_pos(discard_from), "Cannot discard card from position (%s, %s)" % [discard_from.x, discard_from.y])
-	var card: Card = grid[discard_from.y][discard_from.x].remove_card_at(deck_pos)
+	var card: Card = grid[discard_from.y][discard_from.x].get_card_at(deck_pos)
+	await card.gridVisualizer.dissolve_shader()
+	card = grid[discard_from.y][discard_from.x].remove_card_at(deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
 	
 	# TODO: (Ryan) When we add netcoding, do a more explicit player check in the networked version

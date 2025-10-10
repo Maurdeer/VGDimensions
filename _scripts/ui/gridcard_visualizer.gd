@@ -1,4 +1,4 @@
-extends Node
+extends Sprite2D
 class_name GridCardVisualizer
 
 # Exists to deal with editor based card updating
@@ -33,3 +33,14 @@ func _on_stat_change() -> void:
 	else:
 		$GUI/Icons/HP.visible = true
 		$GUI/Icons/HP/Label.text = "%s" % card.hp
+
+func dissolve_shader() -> bool:
+	var timer = 1
+	var shaderMaterial = $card_art_container/card_art.material
+	while timer <= 100:
+		#print("timer %d" % timer)
+		#print(shaderMaterial.get_shader_parameter("dissolve_amount"))
+		shaderMaterial.set_shader_parameter("dissolve_amount", 0.01 * timer)
+		await get_tree().create_timer(0.01).timeout
+		timer += 1
+	return true

@@ -1,18 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx4ucj44byfdx"]
+[gd_scene load_steps=5 format=3 uid="uid://dx4ucj44byfdx"]
 
 [ext_resource type="Shader" uid="uid://ck6ind8sfo6lq" path="res://_scenes/card/Dissolve.gdshader" id="1_6weth"]
-[ext_resource type="Texture2D" uid="uid://bvvvy7bwkk6jq" path="res://art/card_art/VGDev/LilGuy.png" id="2_kbfxi"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6weth"]
-seed = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kbfxi"]
-noise = SubResource("FastNoiseLite_6weth")
+[ext_resource type="Texture2D" uid="uid://b130sturhehrl" path="res://art/card_art/VGDev/LilGuy.png" id="2_kbfxi"]
+[ext_resource type="Texture2D" uid="uid://dvqpsnfi0kbk8" path="res://materials/Dissolve.tres" id="2_ovfvy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ovfvy"]
 shader = ExtResource("1_6weth")
 shader_parameter/dissolve_amount = 0.0
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_kbfxi")
+shader_parameter/noise_texture = ExtResource("2_ovfvy")
 shader_parameter/glow_color = Color(0, 1, 0, 1)
 shader_parameter/glow_thickness = 0.050000002375
 
