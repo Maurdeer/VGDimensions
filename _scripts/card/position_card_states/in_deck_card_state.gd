@@ -1,0 +1,2 @@
+extends CardState
+class_name InDeckCardState

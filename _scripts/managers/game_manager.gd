@@ -13,6 +13,7 @@ signal on_end_of_turn
 @export_category("Developer Tests")
 @export var infinite_resources: bool = false
 
+@onready var next_turn_button: Button = $next_turn_button
 @onready var player_hand: PlayerHand = $PlayerHandUI/player_hand
 @export var rift_grid: RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")

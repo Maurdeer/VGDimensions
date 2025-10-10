@@ -15,6 +15,7 @@ enum StateType {
 	IN_RIFT, 
 	IN_SHOP,
 	IN_DECK,
+	IN_QUEST,
 }
 
 var interaction_states: Array[CardState] = [
@@ -28,7 +29,9 @@ var position_states: Array[CardState] = [
 		UndefinedCardState.new(),
 		InHandCardState.new(),
 		InRiftCardState.new(),
-		InShopCardState.new()
+		InShopCardState.new(),
+		InDeckCardState.new(),
+		InQuestCardState.new()
 	]
 var interaction_sm: StateMachine = StateMachine.new()
 var position_sm: StateMachine = StateMachine.new()

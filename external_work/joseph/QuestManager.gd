@@ -25,7 +25,7 @@ func add_quest(card : Card):
 		return false
 	currentQuest = card
 	add_child(currentQuest)
-	currentQuest.card_sm.transition_to_state(CardStateMachine.StateType.UNINTERACTABLE)
+	currentQuest.card_sm.transition_to_state(CardStateMachine.StateType.IN_QUEST)
 	currentQuest.flip_reveal()
 	print("Quest added succesfully!")
 	return true

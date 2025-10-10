@@ -41,8 +41,10 @@ func player_select_card_filter(filter: Callable = func(card: Card): return true)
 		_is_selection_active = false
 		return Vector2i(-1, -1)
 	
+	GameManager.Instance.next_turn_button.visible = false
 	PlayerHand.Instance.disable_player_hand()
 	await selected
+	GameManager.Instance.next_turn_button.visible = true
 	PlayerHand.Instance.enable_player_hand()
 	_is_selection_active = false
 	return _selected_pos

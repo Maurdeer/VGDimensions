@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="15_gibnw"]
 [ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="16_5f5da"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="18_hvy2v"]
-[ext_resource type="PackedScene" path="res://_scenes/card/card_viewer.tscn" id="22_lkbpy"]
+[ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="22_lkbpy"]
 [ext_resource type="PackedScene" path="res://_scenes/ui/pause_menu.tscn" id="24_fsr2k"]
 [ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="25_gibnw"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="26_5f5da"]
@@ -92,6 +92,23 @@ offset_right = 248.0
 offset_bottom = 344.0
 grow_vertical = 1
 script = ExtResource("10_ugm2g")
+
+[node name="QuestManager" type="Control" parent="LocalRiftGrid"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 596.0
+offset_top = 9.0
+offset_right = 636.0
+offset_bottom = 49.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("25_gibnw")
+testingPurposeCard = ExtResource("26_5f5da")
+metadata/_custom_type_script = "uid://drhyp4uo8taws"
 
 [node name="PlayerHandUI" type="Control" parent="."]
 layout_mode = 1
@@ -387,14 +404,6 @@ offset_left = -0.53200054
 offset_top = 0.25793457
 offset_right = -0.3300171
 offset_bottom = -0.09802246
-
-[node name="QuestManager" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("25_gibnw")
-testingPurposeCard = ExtResource("26_5f5da")
-metadata/_custom_type_script = "uid://drhyp4uo8taws"
 
 [node name="CardViewer" parent="." instance=ExtResource("22_lkbpy")]
 visible = false

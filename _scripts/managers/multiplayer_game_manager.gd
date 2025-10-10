@@ -70,11 +70,11 @@ func _on_next_turn_button_pressed() -> void:
 	
 func start_local_play_turn() -> void:
 	chat.create_message.rpc("[Server] Its %s's Turn!" % GNM.player_info['name'])
-	$next_turn_button.visible = true
+	next_turn_button.visible = true
 	player_hand.fill_hand()
 	
 func end_local_play_turn() -> void:
-	$next_turn_button.visible = false
+	next_turn_button.visible = false
 	player_hand.clear_hand()
 	# Disable Rift Grid Manipulation as well
 	reset_temporary_resources()
