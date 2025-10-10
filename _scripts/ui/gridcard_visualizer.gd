@@ -13,6 +13,19 @@ class_name GridCardVisualizer
 # without needing to do it during runtime while also not needing to run this functionality
 # during runtime.
 
+signal dissolve_complete
+var dissolve_active: bool = false
+var dissolve_value: float = 0
+@onready var shaderMaterial = $card_art_container/card_art.material
+func _process(delta: float) -> void:
+	if not dissolve_active: return
+	dissolve_value += delta
+	shaderMaterial.set_shader_parameter("dissolve_amount", dissolve_value)
+	if dissolve_value >= 1:
+		dissolve_active = false
+		dissolve_value = 0
+		dissolve_complete.emit()
+
 func _ready() -> void:
 	if card and (card.resource or card_resource):
 		card.on_stats_change.connect(_on_stat_change)
@@ -35,12 +48,6 @@ func _on_stat_change() -> void:
 		$GUI/Icons/HP/Label.text = "%s" % card.hp
 
 func dissolve_shader() -> bool:
-	var timer = 1
-	var shaderMaterial = $card_art_container/card_art.material
-	while timer <= 100:
-		#print("timer %d" % timer)
-		#print(shaderMaterial.get_shader_parameter("dissolve_amount"))
-		shaderMaterial.set_shader_parameter("dissolve_amount", 0.01 * timer)
-		await get_tree().create_timer(0.01).timeout
-		timer += 1
+	dissolve_active = true
+	await dissolve_complete
 	return true

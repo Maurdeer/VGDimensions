@@ -1,8 +1,16 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=3 format=3 uid="uid://r50g8fx1bja5"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=6 format=3 uid="uid://r50g8fx1bja5"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_6f8pk"]
+[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/Outcasts/RockBlock.tres" id="2_04ggx"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="2_wjr48"]
+[ext_resource type="Resource" uid="uid://df2yhxk3csdhh" path="res://cards/Outcasts/RollingStone.tres" id="3_wav00"]
+[ext_resource type="Resource" uid="uid://vv40absiaurl" path="res://cards/Outcasts/Torch.tres" id="4_krse5"]
 
 [resource]
 script = ExtResource("2_wjr48")
+card_resources = Dictionary[ExtResource("1_6f8pk"), int]({
+ExtResource("2_04ggx"): 2,
+ExtResource("3_wav00"): 2,
+ExtResource("4_krse5"): 2
+})
 metadata/_custom_type_script = "uid://div70lvrir1m0"
