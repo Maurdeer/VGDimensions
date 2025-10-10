@@ -20,8 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="15_gibnw"]
 [ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="16_5f5da"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="18_hvy2v"]
-[ext_resource type="PackedScene" uid="uid://b0gicmy7ni7t3" path="res://_scenes/card/card_viewer.tscn" id="22_lkbpy"]
-[ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_fsr2k"]
+[ext_resource type="PackedScene" path="res://_scenes/card/card_viewer.tscn" id="22_lkbpy"]
+[ext_resource type="PackedScene" path="res://_scenes/ui/pause_menu.tscn" id="24_fsr2k"]
 [ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="25_gibnw"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="26_5f5da"]
 

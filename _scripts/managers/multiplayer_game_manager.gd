@@ -39,7 +39,7 @@ func _set_up_each_peer(p_curr_turn: int, p_player_turn_queue: Array[int], p_rand
 	curr_turn = p_curr_turn
 	player_turn_queue = p_player_turn_queue
 	random_seed = p_random_seed
-	rift_grid.pre_defined_seed = p_random_seed
+	rift_grid.local_rift_grid.pre_defined_seed = p_random_seed
 	seed(p_random_seed)
 	
 @rpc("any_peer", "call_local", "reliable")
@@ -92,6 +92,7 @@ func setup_peers():
 	for pid in multiplayer.get_peers():
 		player_turn_queue.push_back(pid)
 	random_seed = randi()
+	rift_grid.local_rift_grid.pre_defined_seed = random_seed
 	seed(random_seed)
 	_set_up_each_peer.rpc(curr_turn, player_turn_queue, random_seed)
 
