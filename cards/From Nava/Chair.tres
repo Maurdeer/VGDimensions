@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 [sub_resource type="Resource" id="Resource_1hqu6"]
 script = ExtResource("2_5fgrg")
 bullet_type = 5
-bullet_description = "Disappears at the start of your next turn."
+bullet_description = "Disappears at the start of the next turn"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

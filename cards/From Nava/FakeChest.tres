@@ -18,7 +18,7 @@ script = ExtResource("2_xpoev")
 bullet_type = 1
 bullet_cost = 1
 _bullet_event = SubResource("Resource_d47hd")
-bullet_description = "Gain 2 Deleons and a Polaroid. Remove this card from the Rift."
+bullet_description = "Use 1 action to gain 2 Deleons and a Polaroid. Remove this card from the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

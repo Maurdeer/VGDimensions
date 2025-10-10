@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_jf1k8"]
 [ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="2_xa7xj"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_oqkso"]
-[ext_resource type="Texture2D" uid="uid://b130sturhehrl" path="res://art/card_art/VGDev/lilguy.png" id="5_ccn1d"]
+[ext_resource type="Texture2D" uid="uid://b130sturhehrl" path="res://art/card_art/VGDev/LilGuy.png" id="5_ccn1d"]
 
 [sub_resource type="Resource" id="Resource_oqkso"]
 script = ExtResource("3_oqkso")

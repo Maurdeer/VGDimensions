@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dgpr0uywveph4"
 [sub_resource type="Resource" id="Resource_h73w3"]
 script = ExtResource("2_pqhu8")
 _bullet_event = SubResource("Resource_ui568")
-bullet_description = "Deal 2 Damage"
+bullet_description = "Play this card to deal 2 Damage"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

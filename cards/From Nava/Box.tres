@@ -17,7 +17,7 @@ script = ExtResource("2_xqdwr")
 bullet_type = 1
 bullet_cost = 1
 _bullet_event = SubResource("Resource_5j851")
-bullet_description = "Move this card to be on top of an adjacent card."
+bullet_description = "Use 1 Action to move this card to be on top of an adjacent card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
