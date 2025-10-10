@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=4 format=3 uid="uid://vv40absiaurl"]
+
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_v5yea"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_fp3yt"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_dvhxn"]
+
+[resource]
+script = ExtResource("3_dvhxn")
+title = "Torch"
+game_origin = 25
+deleon_value = 4
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
