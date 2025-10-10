@@ -19,6 +19,7 @@ func drawCards(count : int):
 	var drawnCards = []
 	for i in range(count):
 		drawnCards.append(deck_array.pop_front())
+	update_card_deck_poses()
 	return drawnCards
 
 func addCards(cardArray: Array[Card]):
@@ -29,7 +30,9 @@ func addCard(card: Card):
 	if card in deck_array: return
 	if deck_size > 0: 
 		remove_child(deck_array[0])
+		
 	deck_array.push_front(card)
+	update_card_deck_poses()
 		
 	# If Card is attached to a parent previously, then remove it from that parent
 	if card.get_parent(): card.get_parent().remove_child(card)
@@ -41,6 +44,7 @@ func add_card_under(card: Card) -> void:
 		addCard(card)
 		return
 	deck_array.push_back(card)
+	update_card_deck_poses()
 		
 func get_top_card() -> Card:
 	if deck_size <= 0: return null
@@ -55,9 +59,20 @@ func remove_top_card() -> Card:
 	var removed_card = deck_array.pop_front()
 	
 	remove_child(removed_card)
+	removed_card.deck_pos = -1
+	update_card_deck_poses()
 	
 	if deck_size > 0: display_card(deck_array[0])
 		
+	return removed_card
+	
+func remove_card_at(idx: int) -> Card:
+	if idx >= deck_size: return null
+	if idx == 0: return remove_top_card()
+	
+	var removed_card: Card = deck_array[idx]
+	deck_array.remove_at(idx)
+	update_card_deck_poses()
 	return removed_card
 
 func clear_deck() -> void:
@@ -70,6 +85,7 @@ func shuffleDeck():
 	remove_child(deck_array[0])
 	deck_array.shuffle()
 	add_child(deck_array[0])
+	update_card_deck_poses()
 
 func mergeDeck(merging_deck : Deck):
 	if merging_deck.deck_size <= 0: return
@@ -79,6 +95,7 @@ func mergeDeck(merging_deck : Deck):
 	
 	if deck_size > 0:
 		add_child(deck_array[0])
+		update_card_deck_poses()
 		if flipped: deck_array[0].flip_reveal()
 		else: deck_array[0].flip_hide()
 
@@ -96,3 +113,7 @@ func display_card(card: Card) -> void:
 func undisplay_card(card: Card) -> void:
 	if not card in deck_array: return
 	remove_child(card)
+	
+func update_card_deck_poses() -> void:
+	for i in deck_array.size():
+		deck_array[i].deck_pos = i

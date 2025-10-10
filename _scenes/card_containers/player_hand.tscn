@@ -21,7 +21,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
-z_index = -1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

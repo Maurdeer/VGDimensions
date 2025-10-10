@@ -12,7 +12,7 @@ func execute(card_ref: Card) -> bool:
 		if other_card_resource == null:
 			RiftGrid.Instance.place_card(selected_card_pos, card_ref)
 		else:
-			var other_card = CardManager.create_card(other_card_resource, true)
+			var other_card = await CardManager.create_card(other_card_resource, true)
 			RiftGrid.Instance.place_card(selected_card_pos, other_card)
 	elif card_ref.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
 		if only_adjacent_cards:
@@ -25,6 +25,6 @@ func execute(card_ref: Card) -> bool:
 			RiftGrid.Instance.move_card_to(selected_card_pos, card_ref.grid_pos)
 			RiftGrid.Instance.fill_empty_decks()
 		else:
-			var other_card = CardManager.create_card(other_card_resource, true)
+			var other_card = await CardManager.create_card(other_card_resource, true)
 			RiftGrid.Instance.place_card(selected_card_pos, other_card)
 	return true

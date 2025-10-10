@@ -34,7 +34,7 @@ font_color = Color(1, 0, 0, 1)
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 
-[node name="sandbox" type="Control"]
+[node name="sandbox" type="Control" node_paths=PackedStringArray("rift_grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +50,7 @@ script = ExtResource("1_em4v1")
 cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm")])
 card_pack = ExtResource("5_dy7xj")
 shop_initial_packs = Array[ExtResource("8_ku0we")]([ExtResource("9_waucd")])
+rift_grid = NodePath("RiftGrid")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

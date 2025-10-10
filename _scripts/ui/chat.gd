@@ -1,4 +1,5 @@
 extends Control
+class_name Chat
 
 @onready var message_text: LineEdit = $MarginContainer/VBoxContainer/HBoxContainer/message_text
 @onready var messages: VBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/Messages
