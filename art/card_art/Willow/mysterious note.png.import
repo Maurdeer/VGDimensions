@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b130sturhehrl"
-path="res://.godot/imported/lilguy.png-8d12cbc6563519585cb7932b693a6734.ctex"
+uid="uid://baj0p6slf4skp"
+path="res://.godot/imported/mysterious note.png-60c8781b9b3d37291b54fddc6a8383dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/VGDev/lilguy.png"
-dest_files=["res://.godot/imported/lilguy.png-8d12cbc6563519585cb7932b693a6734.ctex"]
+source_file="res://art/card_art/Willow/mysterious note.png"
+dest_files=["res://.godot/imported/mysterious note.png-60c8781b9b3d37291b54fddc6a8383dd.ctex"]
 
 [params]
 

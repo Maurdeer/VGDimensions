@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=8 format=3 uid="uid://c1ciuxwp3folr"]
+
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_5nel5"]
+[ext_resource type="Resource" uid="uid://dukngenqtaln" path="res://cards/Willow/MysteriousNote.tres" id="2_6gw20"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="2_em0jp"]
+[ext_resource type="Resource" uid="uid://6ms4uldtlv8n" path="res://cards/Willow/BottledBlade.tres" id="3_mifof"]
+[ext_resource type="Resource" uid="uid://ck1pvtf1xnr2p" path="res://cards/Willow/HealthPickup.tres" id="4_0ni82"]
+[ext_resource type="Resource" uid="uid://dfps6yavr0fte" path="res://cards/Willow/FireworkCharm.tres" id="5_0ni82"]
+[ext_resource type="Resource" uid="uid://fy5u21cthrw7" path="res://cards/Willow/SpiritShifting.tres" id="6_3w2y0"]
+
+[resource]
+script = ExtResource("2_em0jp")
+card_resources = Dictionary[ExtResource("1_5nel5"), int]({
+ExtResource("2_6gw20"): 2,
+ExtResource("3_mifof"): 2,
+ExtResource("4_0ni82"): 2,
+ExtResource("5_0ni82"): 2,
+ExtResource("6_3w2y0"): 2
+})
+metadata/_custom_type_script = "uid://div70lvrir1m0"

@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://dp3k57niax0qb"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://dp3k57niax0qb"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_0dcse"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_oqkso"]
-[ext_resource type="Texture2D" uid="uid://bvvvy7bwkk6jq" path="res://art/card_art/VGDev/LilGuy.png" id="2_5gc1e"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_jf1k8"]
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="2_xa7xj"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_oqkso"]
+[ext_resource type="Texture2D" uid="uid://b130sturhehrl" path="res://art/card_art/VGDev/lilguy.png" id="5_ccn1d"]
 
 [sub_resource type="Resource" id="Resource_oqkso"]
 script = ExtResource("3_oqkso")
@@ -24,5 +25,6 @@ title = "Lil Guy"
 type = 1
 deleon_value = 1
 bullets = Array[ExtResource("1_0dcse")]([SubResource("Resource_0dcse")])
-card_art = ExtResource("2_5gc1e")
+card_art = ExtResource("5_ccn1d")
+background_art = ExtResource("2_xa7xj")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

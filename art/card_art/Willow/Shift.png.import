@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b130sturhehrl"
-path="res://.godot/imported/lilguy.png-8d12cbc6563519585cb7932b693a6734.ctex"
+uid="uid://3q5ih2xyica4"
+path="res://.godot/imported/Shift.png-5aa1f8fa2c000771eb755f7d9090f23a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/VGDev/lilguy.png"
-dest_files=["res://.godot/imported/lilguy.png-8d12cbc6563519585cb7932b693a6734.ctex"]
+source_file="res://art/card_art/Willow/Shift.png"
+dest_files=["res://.godot/imported/Shift.png-5aa1f8fa2c000771eb755f7d9090f23a.ctex"]
 
 [params]
 
