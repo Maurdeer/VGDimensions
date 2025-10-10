@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4otkrgs0dwer"
-path="res://.godot/imported/hostesstemp.png-32ad21f89cb0b33a3b0141c1b5396a0b.ctex"
+uid="uid://b1ie7o6xgw7jk"
+path="res://.godot/imported/hostess_card.png-4227f9984675848dd30299e4e6f8eba6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/Willow/hostesstemp.png"
-dest_files=["res://.godot/imported/hostesstemp.png-32ad21f89cb0b33a3b0141c1b5396a0b.ctex"]
+source_file="res://art/card_art/Willow/hostess_card.png"
+dest_files=["res://.godot/imported/hostess_card.png-4227f9984675848dd30299e4e6f8eba6.ctex"]
 
 [params]
 

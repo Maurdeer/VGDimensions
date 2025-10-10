@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://btq58c26wofpi" path="res://_scripts/resources/EventResources/DamageAreaEvent.gd" id="4_tsw10"]
 [ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="5_8vuo7"]
 [ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_ola8q"]
-[ext_resource type="Texture2D" uid="uid://c4otkrgs0dwer" path="res://art/card_art/Willow/hostesstemp.png" id="8_ola8q"]
+[ext_resource type="Texture2D" uid="uid://b1ie7o6xgw7jk" path="res://art/card_art/Willow/hostess_card.png" id="8_8vuo7"]
 
 [sub_resource type="Resource" id="Resource_q1cx5"]
 script = ExtResource("4_tsw10")
@@ -70,6 +70,6 @@ game_origin = 30
 deleon_value = 5
 starting_hp = 20
 bullets = Array[ExtResource("2_8tltd")]([SubResource("Resource_hfojn"), SubResource("Resource_ola8q"), SubResource("Resource_dommp")])
-card_art = ExtResource("8_ola8q")
+card_art = ExtResource("8_8vuo7")
 background_art = ExtResource("2_8vuo7")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

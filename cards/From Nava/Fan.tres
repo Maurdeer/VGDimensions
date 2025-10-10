@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 [sub_resource type="Resource" id="Resource_gjxh4"]
 script = ExtResource("2_13rty")
 bullet_type = 5
-bullet_description = "If this card would be moved, instead remove it from the Rift."
+bullet_description = "If this card would be moved, instead remove it from the Rift and gain a Polaroid."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
