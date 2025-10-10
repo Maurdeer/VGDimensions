@@ -58,7 +58,6 @@ font_size = 70
 font_color = Color(0, 0, 0, 1)
 
 [node name="card_visualizer" type="Sprite2D"]
-material = SubResource("ShaderMaterial_tbra6")
 scale = Vector2(0.177, 0.177)
 script = ExtResource("1_51wi6")
 card_resource = SubResource("Resource_fh26a")
