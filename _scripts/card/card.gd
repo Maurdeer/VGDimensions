@@ -155,24 +155,17 @@ func remove(event : EventResource):
 
 # Barrier Implemenation for networking
 var players_processed_passive: int = 0
-var my_sense: bool = false
-var global_sense: bool = false
+signal process
 @rpc("any_peer", "call_local", "reliable")
 func _increment_count() -> void:
 	players_processed_passive += 1
-@rpc("any_peer", "call_local", "reliable")
-func _set_sense(p_my_sense: bool) -> void:
-	global_sense = p_my_sense
+	if players_processed_passive == GNM.players.size():
+		process.emit()
+		players_processed_passive = 0
 	
 func _barrier() -> void:
-	pass
-	#my_sense = not my_sense
-	#_increment_count.rpc()
-	#if players_processed_passive >= GNM.players.size():
-		#players_processed_passive = 0
-		#_set_sense.rpc(my_sense)
-	#else:
-		#while global_sense != my_sense: pass
+	_increment_count.rpc()
+	await process
 
 # Passive Functions
 func on_play(): 
