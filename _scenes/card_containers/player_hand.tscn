@@ -6,8 +6,8 @@
 
 [node name="player_hand" type="Node2D" node_paths=PackedStringArray("discard_pile", "draw_pile")]
 script = ExtResource("1_2yr0q")
-discard_pile = NodePath("HBoxContainer/DiscardPile/Deck")
-draw_pile = NodePath("HBoxContainer/DrawPile/Deck")
+discard_pile = NodePath("DiscardPile/Deck")
+draw_pile = NodePath("DrawPile/Deck")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 4
@@ -50,43 +50,43 @@ grow_vertical = 2
 texture = ExtResource("2_iyo8l")
 region_rect = Rect2(0, 0, 1688, 1144)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="DiscardPile" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -646.0
+offset_right = -646.0
+size_flags_horizontal = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Deck" type="Node2D" parent="DiscardPile"]
+script = ExtResource("2_l6uod")
+flipped = true
+
+[node name="Slots" type="HBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -646.0
-offset_top = -106.0
-offset_right = 646.0
-offset_bottom = 106.0
+offset_left = -493.5
+offset_top = -96.0
+offset_right = 493.5
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
 mouse_filter = 2
-theme_override_constants/separation = 250
 alignment = 1
 
-[node name="DiscardPile" type="Control" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 4
-mouse_filter = 2
-
-[node name="Deck" type="Node2D" parent="HBoxContainer/DiscardPile"]
-script = ExtResource("2_l6uod")
-flipped = true
-
-[node name="Slots" type="HBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 198
-alignment = 1
-
-[node name="DrawPile" type="Control" parent="HBoxContainer"]
-layout_mode = 2
+[node name="DrawPile" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 646.0
+offset_right = 646.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Deck" type="Node2D" parent="HBoxContainer/DrawPile"]
+[node name="Deck" type="Node2D" parent="DrawPile"]
 script = ExtResource("2_l6uod")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b130sturhehrl"
-path="res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"
+uid="uid://cfhdeua7qx47q"
+path="res://.godot/imported/report.png-0299f009b17e8d09eda5a2fc8c5a81ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/VGDev/LilGuy.png"
-dest_files=["res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"]
+source_file="res://art/card_art/FromNava/report.png"
+dest_files=["res://.godot/imported/report.png-0299f009b17e8d09eda5a2fc8c5a81ee.ctex"]
 
 [params]
 

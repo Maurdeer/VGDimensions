@@ -56,7 +56,8 @@ func _create_cards_for_player_hand_rpc():
 	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
 	for card in player_hand_cards:
 		player_hand.discard_card(card)
-	player_hand.fill_hand()
+	#player_hand.fill_hand()
+	player_hand.reshuffle_draw_pile()
 
 @rpc("any_peer", "call_local", "reliable")
 func _setup_player_turn(pid: int):

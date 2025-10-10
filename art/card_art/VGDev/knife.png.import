@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b130sturhehrl"
-path="res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"
+uid="uid://bugdnojfpntle"
+path="res://.godot/imported/knife.png-de30ec8f2902475aad188f28ea6d2f77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/VGDev/LilGuy.png"
-dest_files=["res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"]
+source_file="res://art/card_art/VGDev/knife.png"
+dest_files=["res://.godot/imported/knife.png-de30ec8f2902475aad188f28ea6d2f77.ctex"]
 
 [params]
 

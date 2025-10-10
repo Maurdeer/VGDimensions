@@ -1,24 +1,41 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://b7t0rerk5mn3d"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://b7t0rerk5mn3d"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_21bua"]
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="2_cii6k"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_pvuhx"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_8kc8w"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_pvuhx"]
+[ext_resource type="Texture2D" uid="uid://c75smq0at4y8b" path="res://art/card_art/VGDev/rizz.png" id="5_obv5h"]
 
 [sub_resource type="Resource" id="Resource_8kc8w"]
 script = ExtResource("3_pvuhx")
-type = 2
-amount = 4
+type = 1
+amount = 1
 metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
 [sub_resource type="Resource" id="Resource_cii6k"]
 script = ExtResource("2_pvuhx")
 bullet_cost = 1
 _bullet_event = SubResource("Resource_8kc8w")
+bullet_description = "Gain 1 Action"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_obv5h"]
+script = ExtResource("3_pvuhx")
+type = 2
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_wm0rp"]
+script = ExtResource("2_pvuhx")
+_bullet_event = SubResource("Resource_obv5h")
+bullet_description = "Gain 1 Social"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
 script = ExtResource("3_8kc8w")
-title = "Rizz Guy"
-bullets = Array[ExtResource("2_pvuhx")]([SubResource("Resource_cii6k")])
+title = "Little Guy"
+bullets = Array[ExtResource("2_pvuhx")]([SubResource("Resource_cii6k"), SubResource("Resource_wm0rp")])
+card_art = ExtResource("5_obv5h")
+background_art = ExtResource("2_cii6k")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

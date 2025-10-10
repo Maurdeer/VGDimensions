@@ -1,24 +1,28 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://cx8yypimalqcf"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://cx8yypimalqcf"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_5wf0y"]
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="2_63hgc"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_pqhu8"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_0dbhp"]
 [ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="3_pqhu8"]
+[ext_resource type="Texture2D" uid="uid://bugdnojfpntle" path="res://art/card_art/VGDev/knife.png" id="5_1bd1s"]
 
-[sub_resource type="Resource" id="Resource_0dbhp"]
+[sub_resource type="Resource" id="Resource_ui568"]
 script = ExtResource("3_pqhu8")
-amount = 1
+amount = 2
 metadata/_custom_type_script = "uid://dgpr0uywveph4"
 
-[sub_resource type="Resource" id="Resource_63hgc"]
+[sub_resource type="Resource" id="Resource_h73w3"]
 script = ExtResource("2_pqhu8")
-_bullet_event = SubResource("Resource_0dbhp")
+_bullet_event = SubResource("Resource_ui568")
+bullet_description = "Deal 2 Damage"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
 script = ExtResource("3_0dbhp")
 title = "Buff Guy"
 type = 1
-deleon_value = 1
-bullets = Array[ExtResource("2_pqhu8")]([SubResource("Resource_63hgc")])
+bullets = Array[ExtResource("2_pqhu8")]([SubResource("Resource_h73w3")])
+card_art = ExtResource("5_1bd1s")
+background_art = ExtResource("2_63hgc")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

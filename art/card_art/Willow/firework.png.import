@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b130sturhehrl"
-path="res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"
+uid="uid://0okvtq7g52lt"
+path="res://.godot/imported/firework.png-827a7c6b0fe9fa8b1061313e0efe914e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_art/VGDev/LilGuy.png"
-dest_files=["res://.godot/imported/LilGuy.png-61a81933e200264c42759ba33a67e8a7.ctex"]
+source_file="res://art/card_art/Willow/firework.png"
+dest_files=["res://.godot/imported/firework.png-827a7c6b0fe9fa8b1061313e0efe914e.ctex"]
 
 [params]
 

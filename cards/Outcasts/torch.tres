@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://eiujrr381fsx"]
+
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_v5yea"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_fp3yt"]
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_jngxa"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_dvhxn"]
+[ext_resource type="Script" uid="uid://cxthocnum3gvm" path="res://_scripts/resources/EventResources/BurnStatusEvent.gd" id="4_l5v7m"]
+[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/BurnEvent.gd" id="5_lgqjt"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="6_s1wlr"]
+[ext_resource type="Texture2D" uid="uid://bendi3v6lstit" path="res://art/card_art/Outcasts/Torch.png" id="7_dw6gv"]
+
+[sub_resource type="Resource" id="Resource_arwft"]
+script = ExtResource("4_l5v7m")
+metadata/_custom_type_script = "uid://cxthocnum3gvm"
+
+[sub_resource type="Resource" id="Resource_1rp7o"]
+script = ExtResource("5_lgqjt")
+_passive_event = SubResource("Resource_arwft")
+amount = 1
+metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
+
+[sub_resource type="Resource" id="Resource_i5bu5"]
+script = ExtResource("2_fp3yt")
+_bullet_event = SubResource("Resource_1rp7o")
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_fv0j5"]
+script = ExtResource("6_s1wlr")
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_70ike"]
+script = ExtResource("2_fp3yt")
+_bullet_event = SubResource("Resource_fv0j5")
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("3_dvhxn")
+title = "Torch"
+game_origin = 25
+deleon_value = 4
+bullets = Array[ExtResource("2_fp3yt")]([SubResource("Resource_i5bu5"), SubResource("Resource_70ike")])
+card_art = ExtResource("7_dw6gv")
+background_art = ExtResource("2_jngxa")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

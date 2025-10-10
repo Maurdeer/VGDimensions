@@ -3,10 +3,12 @@ class_name PlayerHand
 
 static var Instance: PlayerHand
 
-const hand_limit: int = 5
+const hand_limit: int = 20
+const hand_draw_limit: int = 5
 @export var discard_pile: Deck
 @export var draw_pile: Deck
-@onready var slots: HBoxContainer = $HBoxContainer/Slots
+@onready var slots: HBoxContainer = $Slots
+
 var empty_card: Card
 var slot_queue: Array[Control]
 
@@ -21,7 +23,7 @@ func _ready() -> void:
 	for i in range(hand_limit):
 		var slot: Control = Control.new()
 		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER + Control.SIZE_EXPAND
 		slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		slot_queue.append(slot)
 	call_deferred("_after_ready")
@@ -34,8 +36,10 @@ func clear_hand() -> void:
 		discard_card(card)
 	
 func fill_hand() -> void:
-	while not slot_queue.is_empty():
+	var added_count: int = 0
+	while added_count < hand_draw_limit and not slot_queue.is_empty():
 		draw_card_to_hand()
+		added_count += 1
 		if draw_pile.is_empty(): reshuffle_draw_pile()
 		if draw_pile.is_empty(): break
 

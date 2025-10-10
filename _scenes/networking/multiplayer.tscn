@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="5_gdkaw"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_atenx"]
 [ext_resource type="Resource" uid="uid://ddtpetavhnuc0" path="res://card_packs/FromNavaItemPack.tres" id="6_u0f7i"]
+[ext_resource type="Resource" uid="uid://c1ciuxwp3folr" path="res://card_packs/WillowItemPack.tres" id="7_lkbpy"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_ugm2g"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_6nxkk"]
 [ext_resource type="Script" uid="uid://be71xoslflo7j" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
@@ -54,7 +55,7 @@ mouse_filter = 2
 script = ExtResource("1_7aq5h")
 initial_hand_card_pack = ExtResource("2_6nxkk")
 rift_card_pack = Array[ExtResource("3_u0f7i")]([ExtResource("4_lkbpy")])
-shop_initial_packs = Array[ExtResource("3_u0f7i")]([ExtResource("5_gdkaw"), ExtResource("6_u0f7i")])
+shop_initial_packs = Array[ExtResource("3_u0f7i")]([ExtResource("5_gdkaw"), ExtResource("6_u0f7i"), ExtResource("7_lkbpy")])
 rift_grid = NodePath("NetworkedRiftGrid")
 
 [node name="TextureRect" type="TextureRect" parent="."]
