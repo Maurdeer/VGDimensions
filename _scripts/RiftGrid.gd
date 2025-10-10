@@ -133,8 +133,8 @@ func place_cards_under(place_under: Vector2i, cards: Array[Card]) -> void:
 		place_card_under(place_under, card)
 
 func discard_card_and_draw(discard_from: Vector2i, deck_pos: int = 0, draw_when_empty: bool = true) -> void:
-	if draw_when_empty and not grid[discard_from.y][discard_from.x].is_empty(): return
 	discard_card(discard_from, deck_pos)
+	if draw_when_empty and not grid[discard_from.y][discard_from.x].is_empty(): return
 	draw_card(discard_from)
 	
 func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
