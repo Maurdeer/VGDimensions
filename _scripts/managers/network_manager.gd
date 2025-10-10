@@ -60,6 +60,7 @@ func remove_multiplayer_peer():
 func disconnect_self():
 	_disconnect_peer.rpc(multiplayer.multiplayer_peer)
 	remove_multiplayer_peer()
+	get_tree().change_scene_to_file("res://_scenes/networking/network_lobby.tscn")
 	
 @rpc("call_local", "reliable")
 func _disconnect_peer(pid: int):
@@ -94,6 +95,7 @@ func _register_player(new_player_info):
 func _on_player_disconnected(id):
 	players.erase(id)
 	player_disconnected.emit(id)
+	disconnect_self()
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()

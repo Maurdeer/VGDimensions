@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://j7pqrrms4ivv"]
+
+[ext_resource type="Script" uid="uid://blgkt0a5d6htk" path="res://_scripts/ui/pause_menu.gd" id="1_fbjqs"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jquqm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_edxbm"]
+font_size = 131
+
+[node name="PauseMenu" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fbjqs")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.039215688, 0.039215688, 0.039215688, 0.28235295)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = SubResource("CanvasTexture_jquqm")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -388.0
+offset_top = 130.0
+offset_right = 388.0
+offset_bottom = 310.0
+grow_horizontal = 2
+text = "Pause Menu"
+label_settings = SubResource("LabelSettings_edxbm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -77.5
+offset_right = 229.0
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 29
+alignment = 1
+
+[node name="back_to_game_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Back To Game"
+
+[node name="disconnect_from_server" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Disconnect From Game"
+
+[connection signal="pressed" from="VBoxContainer/back_to_game_button" to="." method="_on_back_to_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/disconnect_from_server" to="." method="_on_disconnect_from_server_pressed"]

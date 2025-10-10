@@ -33,6 +33,10 @@ window/size/viewport_height=1080
 
 project/assembly_name="VGDev Clash"
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg")
