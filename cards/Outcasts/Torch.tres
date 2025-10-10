@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://b7amyf0m6s5mq"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://b7amyf0m6s5mq"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_v5yea"]
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_8u66j"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_fp3yt"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_dvhxn"]
 [ext_resource type="Script" uid="uid://cxthocnum3gvm" path="res://_scripts/resources/EventResources/BurnStatusEvent.gd" id="4_l5v7m"]
 [ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/BurnEvent.gd" id="5_lgqjt"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="6_s1wlr"]
+[ext_resource type="Texture2D" uid="uid://bendi3v6lstit" path="res://art/card_art/Outcasts/Torch.png" id="7_v30is"]
 
 [sub_resource type="Resource" id="Resource_aa62f"]
 script = ExtResource("4_l5v7m")
@@ -41,4 +43,6 @@ title = "Torch"
 game_origin = 25
 deleon_value = 4
 bullets = Array[ExtResource("2_fp3yt")]([SubResource("Resource_8u66j"), SubResource("Resource_txccq")])
+card_art = ExtResource("7_v30is")
+background_art = ExtResource("2_8u66j")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

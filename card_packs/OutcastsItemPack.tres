@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/Outcasts/RockBlock.tres" id="2_04ggx"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="2_wjr48"]
 [ext_resource type="Resource" uid="uid://df2yhxk3csdhh" path="res://cards/Outcasts/RollingStone.tres" id="3_wav00"]
-[ext_resource type="Resource" path="res://cards/Outcasts/Torch.tres" id="4_krse5"]
+[ext_resource type="Resource" uid="uid://b7amyf0m6s5mq" path="res://cards/Outcasts/Torch.tres" id="4_krse5"]
 
 [resource]
 script = ExtResource("2_wjr48")
