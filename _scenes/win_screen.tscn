@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fmr1xqss681a"]
+[gd_scene load_steps=8 format=3 uid="uid://dtuxp875by1ca"]
 
 [ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="1_8kfxt"]
 [ext_resource type="Script" uid="uid://twmhene4le8k" path="res://_scripts/scene_transition.gd" id="1_tb78a"]
@@ -90,3 +90,5 @@ offset_bottom = 252.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Return to Main Menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

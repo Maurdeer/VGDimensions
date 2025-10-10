@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=28 format=3 uid="uid://dxnp8ire8svhn"]
 
 [ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_6nxkk"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="15_gibnw"]
 [ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="16_5f5da"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="18_hvy2v"]
+[ext_resource type="PackedScene" uid="uid://b0gicmy7ni7t3" path="res://_scenes/card/card_viewer.tscn" id="22_lkbpy"]
 [ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="25_gibnw"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="26_5f5da"]
 
@@ -392,5 +393,9 @@ offset_bottom = 40.0
 script = ExtResource("25_gibnw")
 testingPurposeCard = ExtResource("26_5f5da")
 metadata/_custom_type_script = "uid://drhyp4uo8taws"
+
+[node name="CardViewer" parent="." instance=ExtResource("22_lkbpy")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

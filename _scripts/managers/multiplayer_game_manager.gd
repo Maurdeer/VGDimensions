@@ -100,12 +100,12 @@ func _setup_card_shop(shop_card_ids: Array[int]):
 	
 @rpc("any_peer", "call_local", "reliable")
 func _on_victory() -> void:
-	GNM.remove_multiplayer_peer()
-	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+	var winner: bool = multiplayer.get_unique_id() == multiplayer.get_remote_sender_id()
+	GNM.disconnect_self()
+	if winner:
 		get_tree().change_scene_to_file("res://_scenes/win_screen.tscn")
 	else:
 		get_tree().change_scene_to_file("res://_scenes/lose_screen.tscn")
-	
 	
 func game_victory() -> void:
 	# only the winner calls this, so 

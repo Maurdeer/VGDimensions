@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0gicmy7ni7t3"]
+
+[ext_resource type="Script" uid="uid://c1dprd4mp1ia5" path="res://_scripts/card_viewer.gd" id="1_qy155"]
+[ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="2_qy155"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qy155"]
+
+[node name="CardViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qy155")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.039215688, 0.039215688, 0.039215688, 0.28235295)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = SubResource("CanvasTexture_qy155")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="card_visualizer" parent="Control" instance=ExtResource("2_qy155")]
+scale = Vector2(0.308, 0.308)
+
+[node name="close_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -650.0
+offset_top = 68.0
+offset_right = -541.0
+offset_bottom = 159.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 60
+text = "X"
+
+[connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]

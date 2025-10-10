@@ -59,6 +59,12 @@ var _play_bullets: Array[BulletResource]
 var _action_bullets: Array[BulletResource]
 var _social_bullets: Array[BulletResource]
 
+func _ready() -> void:
+	call_deferred("_after_ready")
+	
+func _after_ready() -> void:
+	pass
+
 func set_up(p_card_id: int, p_resource: CardResource) -> void:
 	card_id = p_card_id
 	resource = p_resource
@@ -126,6 +132,10 @@ func _on_single_click() -> void:
 	#if CardInspector.Instance: CardInspector.Instance.set_card(self)
 	if not GameManager.Instance.is_my_turn(): return
 	card_sm.clicked_on()
+	
+func _on_right_click() -> void:
+	if not CardViewer.Instance: return
+	CardViewer.Instance.view_card(resource)
 
 var _pressed_previously: bool = false
 func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -139,6 +149,9 @@ func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEve
 			else:
 				_on_single_click()
 		_pressed_previously = mouse_button_event.pressed
+	if mouse_button_event.button_index == MOUSE_BUTTON_RIGHT:
+		if mouse_button_event.pressed:
+			_on_right_click()
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.

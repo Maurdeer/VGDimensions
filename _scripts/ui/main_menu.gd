@@ -32,9 +32,9 @@ func _is_valid_name(player_name: String) -> bool:
 	
 
 func _on_client_leave_button_pressed() -> void:
-	GNM.remove_multiplayer_peer()
+	GNM.disconnect_self()
 	_on_disconnect()
 
 func _on_host_leave_button_pressed() -> void:
-	GNM.remove_multiplayer_peer()
+	GNM.disconnect_self()
 	_on_disconnect()
