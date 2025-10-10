@@ -165,13 +165,14 @@ func _set_sense(p_my_sense: bool) -> void:
 	global_sense = p_my_sense
 	
 func _barrier() -> void:
-	my_sense = not my_sense
-	_increment_count.rpc()
-	if players_processed_passive >= GNM.players.size():
-		players_processed_passive = 0
-		_set_sense.rpc(my_sense)
-	else:
-		while global_sense != my_sense: pass
+	pass
+	#my_sense = not my_sense
+	#_increment_count.rpc()
+	#if players_processed_passive >= GNM.players.size():
+		#players_processed_passive = 0
+		#_set_sense.rpc(my_sense)
+	#else:
+		#while global_sense != my_sense: pass
 
 # Passive Functions
 func on_play(): 
