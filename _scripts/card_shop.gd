@@ -9,6 +9,10 @@ const max_shop_size: int = 6
 
 const CARD = preload("uid://c3e8058lwu0a")
 
+func reset_shop_deck() -> void:
+	shop_source_deck.clear()
+	current_grid_cards.clear()
+
 func fill_shop_deck(cards: Array[Card]) -> void:
 	for card in cards:
 		shop_source_deck.push_back(card)

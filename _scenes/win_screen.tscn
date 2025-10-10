@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtuxp875by1ca"]
+[gd_scene load_steps=8 format=3 uid="uid://qlimq5rvhi3d"]
 
 [ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="1_8kfxt"]
 [ext_resource type="Script" uid="uid://twmhene4le8k" path="res://_scripts/scene_transition.gd" id="1_tb78a"]
