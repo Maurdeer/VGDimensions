@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=7 format=3 uid="uid://ddtpetavhnuc0"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=8 format=3 uid="uid://ddtpetavhnuc0"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_w7rk0"]
 [ext_resource type="Resource" uid="uid://dwkdhtd2hc5xo" path="res://cards/From Nava/FireballSpell.tres" id="2_0iar2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://d4kn40cwc2gjb" path="res://cards/From Nava/IceballSpell.tres" id="3_re7fj"]
 [ext_resource type="Resource" uid="uid://dpo8g2rb6alvf" path="res://cards/From Nava/WindblastSpell.tres" id="4_106dc"]
 [ext_resource type="Resource" uid="uid://cjxbahb6jejem" path="res://cards/From Nava/ChairSpell.tres" id="5_ooh3j"]
+[ext_resource type="Resource" uid="uid://be41rtnc2fbh3" path="res://cards/From Nava/LabReport.tres" id="6_re7fj"]
 
 [resource]
 script = ExtResource("2_8niof")
@@ -13,6 +14,7 @@ card_resources = Dictionary[ExtResource("1_w7rk0"), int]({
 ExtResource("2_0iar2"): 2,
 ExtResource("3_re7fj"): 2,
 ExtResource("4_106dc"): 2,
-ExtResource("5_ooh3j"): 2
+ExtResource("5_ooh3j"): 2,
+ExtResource("6_re7fj"): 2
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"

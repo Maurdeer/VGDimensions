@@ -40,6 +40,7 @@ script = ExtResource("3_0cbb1")
 title = "The Wanderer"
 type = 1
 game_origin = 30
+starting_hp = 10
 bullets = Array[ExtResource("2_jvdki")]([SubResource("Resource_piiag"), SubResource("Resource_jp0g5")])
 card_art = ExtResource("6_udl6b")
 background_art = ExtResource("2_oi30c")
