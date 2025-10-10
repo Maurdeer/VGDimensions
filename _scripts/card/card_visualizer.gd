@@ -100,43 +100,40 @@ func _on_background_art_change() -> void:
 	$card_background/nestedImage.texture = card_resource.background_art
 	
 func _on_bullet_description_change() -> void:
+	# TODO: Optimize Bullets to be pooled intead of created and destroyed everytime
 	# Running this more than once is kinda a nightmare ngl
 	if not bullet_scene: return
 	var bullet_list = $description_frame/DescriptorContainer/bullet_list
 	if not bullet_list: return
 	var child_count: int = bullet_list.get_child_count()
 	
-	var child_idx: int = 0
-	if card_resource.bullets and card_resource.bullets.size() >= 1:
-		# No Change needs to be done
-		if child_count == card_resource.bullets.size(): return
+	# If no bullets, remove children
+	if not card_resource.bullets:
+		for j in child_count:
+			bullet_list.get_child(j).queue_free()
+		return
+	
+	# If we need more children for the list add them
+	while child_count < card_resource.bullets.size():
+		var bullet_node = bullet_scene.instantiate()
+		bullet_list.add_child(bullet_node)
 		
-		# Update the changes completly, no incrementals to avoid state issues!
-		
-		for bullet in card_resource.bullets:
-			if not bullet is BulletResource: continue
-			
-			# Add a new bullet child if you are missing one.
-			# (Ryan) Turn this into a pooling mechanism instead!!!
-			# Pool around 7 to start with
-			if child_idx >= child_count:
-				var bullet_node = bullet_scene.instantiate()
-				bullet_list.add_child(bullet_node)
-				
-				# It woudln't add it to the edited scene root without it.
-				# But would that work during runtime? --> Answer Is yes it seems!
-				if Engine.is_editor_hint():
-					bullet_node.owner = get_tree().edited_scene_root
-			
-			# Set the bullet node to have the resource, which should update its visual on its own.
-			var bullet_visual: BulletVisualizer = bullet_list.get_child(child_idx)
-			if bullet_visual: bullet_visual.bullet_resource = bullet
-			child_idx += 1
+		if Engine.is_editor_hint():
+			bullet_node.owner = get_tree().edited_scene_root
+		child_count += 1
 		
 	# Remove extra bullet children
 	# (Ryan) Turn this into a pooling mechanism instead!!!
-	for j in range(child_idx, child_count):
+	for j in range(card_resource.bullets.size(), child_count):
 		bullet_list.get_child(j).queue_free()
+		
+	# Update Each Bullets Visual
+	var i: int = 0
+	for bullet in card_resource.bullets:
+		var bullet_child: Node  = bullet_list.get_child(i)
+		assert(bullet_child is BulletVisualizer, "How the Fuck?")
+		bullet_child.bullet_resource = bullet
+		i += 1
 		
 func _on_texture_list_change() -> void:
 	var texture_list = $description_frame/DescriptorContainer/texture_list
