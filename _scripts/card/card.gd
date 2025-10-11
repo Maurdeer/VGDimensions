@@ -7,7 +7,7 @@ signal played(Card)
 @warning_ignore("unused_signal")
 signal interacted(Card)
 @warning_ignore("unused_signal")
-signal selected(Vector2i)
+signal selected(Card)
 
 signal on_stats_change
 
