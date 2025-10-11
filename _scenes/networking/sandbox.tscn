@@ -1,13 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://c57bmxyf3rgq6"]
+[gd_scene load_steps=19 format=3 uid="uid://c57bmxyf3rgq6"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_em4v1"]
-[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cs1dx"]
-[ext_resource type="Resource" uid="uid://dp3k57niax0qb" path="res://cards/LilGuy.tres" id="3_5h11k"]
-[ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="5_ci1gq"]
+[ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_831yh"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_dy7xj"]
-[ext_resource type="Resource" uid="uid://bwgk83gwvfr8w" path="res://cards/Outcasts/RockBlock.tres" id="5_timxm"]
+[ext_resource type="Resource" uid="uid://ddtpetavhnuc0" path="res://card_packs/FromNavaItemPack.tres" id="6_ksrum"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_lfpty"]
-[ext_resource type="Resource" uid="uid://df2yhxk3csdhh" path="res://cards/Outcasts/RollingStone.tres" id="6_timxm"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_gmu8c"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_fje6v"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="8_ku0we"]
@@ -47,9 +44,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_em4v1")
-cards = Array[ExtResource("2_cs1dx")]([ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("3_5h11k"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_ci1gq"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("5_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm"), ExtResource("6_timxm")])
-card_pack = ExtResource("5_dy7xj")
-shop_initial_packs = Array[ExtResource("8_ku0we")]([ExtResource("9_waucd")])
+initial_hand_card_pack = ExtResource("2_831yh")
+rift_card_pack = Array[ExtResource("8_ku0we")]([ExtResource("5_dy7xj")])
+shop_initial_packs = Array[ExtResource("8_ku0we")]([ExtResource("9_waucd"), ExtResource("6_ksrum")])
 rift_grid = NodePath("RiftGrid")
 
 [node name="Camera2D" type="Camera2D" parent="."]

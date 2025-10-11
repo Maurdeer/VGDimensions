@@ -1,0 +1,403 @@
+[gd_scene load_steps=28 format=3 uid="uid://b78acuqchwjyj"]
+
+[ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_3y3hc"]
+[ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_5x1ca"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="3_jd3sr"]
+[ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="4_huwjo"]
+[ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="5_5wpnl"]
+[ext_resource type="Resource" uid="uid://ddtpetavhnuc0" path="res://card_packs/FromNavaItemPack.tres" id="6_wxbsy"]
+[ext_resource type="Resource" uid="uid://c1ciuxwp3folr" path="res://card_packs/WillowItemPack.tres" id="7_cd0cq"]
+[ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="8_c2tc1"]
+[ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="10_c2s8n"]
+[ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="12_3qfnp"]
+[ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="13_2thif"]
+[ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="14_mkmui"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="15_kw02p"]
+[ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="16_7hw7e"]
+[ext_resource type="FontFile" uid="uid://bcwkqrkgs1rci" path="res://font/Abel-Regular.ttf" id="17_e4krt"]
+[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="18_4js2j"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="19_h0xxk"]
+[ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="20_1nh7j"]
+[ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="21_34wvw"]
+[ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="22_e0rbx"]
+[ext_resource type="PackedScene" uid="uid://b0gicmy7ni7t3" path="res://_scenes/card/card_viewer.tscn" id="23_fn044"]
+[ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_7qvlh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvy2v"]
+shader = ExtResource("8_c2tc1")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5f5da"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u4bsf"]
+font = ExtResource("17_e4krt")
+font_size = 45
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kgmkq"]
+font = ExtResource("17_e4krt")
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ccn5w"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="singleplayer" type="Control" node_paths=PackedStringArray("rift_grid")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3y3hc")
+initial_hand_card_pack = ExtResource("2_5x1ca")
+rift_card_pack = Array[ExtResource("3_jd3sr")]([ExtResource("4_huwjo")])
+shop_initial_packs = Array[ExtResource("3_jd3sr")]([ExtResource("6_wxbsy"), ExtResource("7_cd0cq"), ExtResource("5_5wpnl")])
+rift_grid = NodePath("RiftGrid")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hvy2v")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_5f5da")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="RiftGrid" parent="." instance=ExtResource("10_c2s8n")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 248.0
+offset_top = 344.0
+offset_right = 248.0
+offset_bottom = 344.0
+grow_vertical = 1
+
+[node name="QuestManager" type="Control" parent="RiftGrid"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 596.0
+offset_top = 9.0
+offset_right = 636.0
+offset_bottom = 49.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("12_3qfnp")
+testingPurposeCard = ExtResource("13_2thif")
+metadata/_custom_type_script = "uid://drhyp4uo8taws"
+
+[node name="PlayerHandUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -713.0
+offset_top = -148.0
+offset_right = -713.0
+offset_bottom = -148.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PlayerStatsUI" type="HBoxContainer" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message")]
+layout_mode = 0
+offset_left = -159.0
+offset_top = -185.0
+offset_right = -119.0
+offset_bottom = -145.0
+theme_override_constants/separation = 204
+script = ExtResource("14_mkmui")
+deleon_amount = NodePath("Deleon/TextureRect/HBoxContainer/Label")
+action_amount = NodePath("Action/TextureRect/HBoxContainer/Label")
+social_amount = NodePath("Social/TextureRect/HBoxContainer/Label")
+polariod_amount = NodePath("Message/Polaroids/TextureRect/HBoxContainer/Label")
+message = NodePath("Message/TextureRect/Label")
+
+[node name="Deleon" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("16_7hw7e")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Action" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("18_4js2j")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Social" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("19_h0xxk")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI/Message"]
+anchors_preset = 0
+offset_left = -14.0
+offset_top = -59.0
+offset_right = 323.0
+offset_bottom = -19.0
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.5
+offset_top = -41.0
+offset_right = 50.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "Polaroids:"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -38.0
+offset_right = 221.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/TextureRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 353.0
+offset_bottom = 65.0
+label_settings = SubResource("LabelSettings_kgmkq")
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("20_1nh7j")]
+scale = Vector2(0.9, 0.9)
+
+[node name="name_label" type="Label" parent="PlayerHandUI"]
+layout_mode = 0
+offset_left = -662.0
+offset_top = -186.0
+offset_right = -315.0
+offset_bottom = -134.0
+text = "Player Name"
+label_settings = SubResource("LabelSettings_ccn5w")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="next_turn_button" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -237.0
+offset_top = 13.0
+offset_right = -9.516113
+offset_bottom = 69.0
+grow_horizontal = 0
+text = "Next Turn"
+
+[node name="CardShopUI" parent="." instance=ExtResource("21_34wvw")]
+position = Vector2(0, 129)
+
+[node name="Chat" parent="." instance=ExtResource("22_e0rbx")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.63100004
+anchor_right = 0.26500002
+anchor_bottom = 0.989
+offset_left = -0.53200054
+offset_top = 0.25793457
+offset_right = -0.3300171
+offset_bottom = -0.09802246
+
+[node name="CardViewer" parent="." instance=ExtResource("23_fn044")]
+visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("24_7qvlh")]
+layout_mode = 1
+
+[connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]
