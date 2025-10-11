@@ -46,7 +46,12 @@ func setup_card_shop():
 	
 func setup_rift_grid():
 	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(rift_card_pack)
-	rift_grid.generate_new_grid(rift_cards,3,3)
+	# If this becomes local, then you need to call this for every peer in fact
+	_setup_rift_grid_rpc.rpc(CardManager.cards_to_ids(rift_cards))
+	
+@rpc("call_local", "any_peer")
+func _setup_rift_grid_rpc(rift_card_ids: Array[int]):
+	rift_grid.generate_new_grid(CardManager.ids_to_cards(rift_card_ids),3,3)
 	
 func create_cards_for_player_hand():
 	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])

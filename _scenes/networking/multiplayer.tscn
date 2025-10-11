@@ -1,9 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=28 format=3 uid="uid://dxnp8ire8svhn"]
 
 [ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_6nxkk"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="3_u0f7i"]
-[ext_resource type="Script" uid="uid://dfckbjmx1ganv" path="res://_scripts/networked_rift_grid.gd" id="4_gethx"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="4_lkbpy"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="5_gdkaw"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="6_atenx"]
@@ -11,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://c1ciuxwp3folr" path="res://card_packs/WillowItemPack.tres" id="7_lkbpy"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="7_ugm2g"]
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="8_6nxkk"]
-[ext_resource type="Script" uid="uid://be71xoslflo7j" path="res://_scripts/local_rift_grid.gd" id="10_ugm2g"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="11_gdkaw"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="12_4glm7"]
 [ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="13_5f5da"]
@@ -21,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="16_5f5da"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="18_hvy2v"]
 [ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="22_lkbpy"]
-[ext_resource type="PackedScene" path="res://_scenes/ui/pause_menu.tscn" id="24_fsr2k"]
+[ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_fsr2k"]
 [ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="25_gibnw"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="26_5f5da"]
 
@@ -45,7 +43,7 @@ font_color = Color(1, 0, 0, 1)
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 
-[node name="multiplayer" type="Control" node_paths=PackedStringArray("rift_grid")]
+[node name="multiplayer" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +55,6 @@ script = ExtResource("1_7aq5h")
 initial_hand_card_pack = ExtResource("2_6nxkk")
 rift_card_pack = Array[ExtResource("3_u0f7i")]([ExtResource("4_lkbpy")])
 shop_initial_packs = Array[ExtResource("3_u0f7i")]([ExtResource("5_gdkaw"), ExtResource("6_u0f7i"), ExtResource("7_lkbpy")])
-rift_grid = NodePath("NetworkedRiftGrid")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_hvy2v")
@@ -72,16 +69,7 @@ texture = SubResource("CanvasTexture_5f5da")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="NetworkedRiftGrid" type="Control" parent="." node_paths=PackedStringArray("local_rift_grid")]
-anchors_preset = 0
-offset_left = 1209.0
-offset_top = 344.0
-offset_right = 1249.0
-offset_bottom = 384.0
-script = ExtResource("4_gethx")
-local_rift_grid = NodePath("../LocalRiftGrid")
-
-[node name="LocalRiftGrid" parent="." instance=ExtResource("6_atenx")]
+[node name="RiftGrid" parent="." instance=ExtResource("6_atenx")]
 layout_mode = 1
 anchors_preset = 5
 anchor_top = 0.0
@@ -91,9 +79,8 @@ offset_top = 344.0
 offset_right = 248.0
 offset_bottom = 344.0
 grow_vertical = 1
-script = ExtResource("10_ugm2g")
 
-[node name="QuestManager" type="Control" parent="LocalRiftGrid"]
+[node name="QuestManager" type="Control" parent="RiftGrid"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
