@@ -1,21 +1,16 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://cjxbahb6jejem"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://cjxbahb6jejem"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_u1g5w"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_2qb4m"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_af5si"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xyng2"]
-[ext_resource type="Resource" uid="uid://eq5vqnlsot7r" path="res://cards/From Nava/Chair.tres" id="4_fhbk1"]
-[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="5_bwfa1"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="4_af5si"]
 [ext_resource type="Texture2D" uid="uid://c6snfbfeid2ax" path="res://art/card_art/FromNava/-e ChairSpell -e.png" id="5_fhbk1"]
-
-[sub_resource type="Resource" id="Resource_moox1"]
-script = ExtResource("5_bwfa1")
-other_card_resource = ExtResource("4_fhbk1")
-metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_af5si"]
 script = ExtResource("2_2qb4m")
-_bullet_event = SubResource("Resource_moox1")
+bullet_type = null
+bullet_cost = null
 bullet_description = "Play this card to place a Chair anywhere on the Rfit. It will disappear in a turn."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

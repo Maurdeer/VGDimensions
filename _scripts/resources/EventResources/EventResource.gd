@@ -6,11 +6,13 @@ class_name EventResource
 # Add an Undo execution functionality for event Resources when undoing changes
 # 
 var m_card_invoker: Card
+var m_card_refs: Dictionary[int, Card]
 
 # Provide a card_ref into this function
 # returns true if succesful, false otherwise
-func execute(p_card_invoker: Card) -> bool:
+func execute(p_card_invoker: Card, p_card_refs: Dictionary[int, Card]) -> bool:
 	m_card_invoker = p_card_invoker
+	m_card_refs = p_card_refs
 	var failure: bool = on_execute()
 	return failure
 

@@ -1,64 +1,28 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=18 format=3 uid="uid://qmga8sfbyw11"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://qmga8sfbyw11"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_7iwcn"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_8tltd"]
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_8vuo7"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_gw6ci"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="3_iis8u"]
-[ext_resource type="Script" uid="uid://btq58c26wofpi" path="res://_scripts/resources/EventResources/DamageAreaEvent.gd" id="4_tsw10"]
-[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="5_8vuo7"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_ola8q"]
 [ext_resource type="Texture2D" uid="uid://b1ie7o6xgw7jk" path="res://art/card_art/Willow/hostess_card.png" id="8_8vuo7"]
-
-[sub_resource type="Resource" id="Resource_q1cx5"]
-script = ExtResource("4_tsw10")
-amount = 2
-widthOfArea = 5
-heightOfArea = 5
-metadata/_custom_type_script = "uid://btq58c26wofpi"
-
-[sub_resource type="Resource" id="Resource_b0j2n"]
-script = ExtResource("5_8vuo7")
-metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
-
-[sub_resource type="Resource" id="Resource_jdu6f"]
-script = ExtResource("6_ola8q")
-events = Array[ExtResource("3_iis8u")]([SubResource("Resource_q1cx5"), SubResource("Resource_b0j2n")])
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_hfojn"]
 script = ExtResource("2_8tltd")
-_bullet_event = SubResource("Resource_jdu6f")
 bullet_description = "Play this card to deal 2 damage to all card on the Rift. Place this card down on target location on the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_8vuo7"]
-script = ExtResource("4_tsw10")
-amount = 3
-widthOfArea = 3
-heightOfArea = 1
-metadata/_custom_type_script = "uid://btq58c26wofpi"
 
 [sub_resource type="Resource" id="Resource_ola8q"]
 script = ExtResource("2_8tltd")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_8vuo7")
 bullet_description = "Use 1 Social to deal 3 Damage to all cards in target row."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_wa6ts"]
-script = ExtResource("4_tsw10")
-amount = 3
-widthOfArea = 1
-heightOfArea = 3
-metadata/_custom_type_script = "uid://btq58c26wofpi"
 
 [sub_resource type="Resource" id="Resource_dommp"]
 script = ExtResource("2_8tltd")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_wa6ts")
 bullet_description = "Use 1 Social to deal 3 Damage to all cards in target column"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

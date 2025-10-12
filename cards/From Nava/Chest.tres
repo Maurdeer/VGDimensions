@@ -1,40 +1,16 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://c1ftp2h4vrsy6"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://c1ftp2h4vrsy6"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_vinvw"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_1v6xg"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_4tbpa"]
-[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_4tbpa"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_15rce"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="4_lmt7w"]
 [ext_resource type="Texture2D" uid="uid://cdwp11qf1rdit" path="res://art/card_art/FromNava/-e chest.png" id="5_h5wk0"]
-[ext_resource type="Script" uid="uid://e8vymu1ddkjw" path="res://custom_event_resources/DiscardSelfEvent.gd" id="6_bbckg"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="7_81ee8"]
-
-[sub_resource type="Resource" id="Resource_lmt7w"]
-script = ExtResource("3_4tbpa")
-amount = 2
-metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
-
-[sub_resource type="Resource" id="Resource_81ee8"]
-script = ExtResource("3_4tbpa")
-type = 3
-amount = 1
-metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
-
-[sub_resource type="Resource" id="Resource_bbckg"]
-script = ExtResource("6_bbckg")
-metadata/_custom_type_script = "uid://e8vymu1ddkjw"
-
-[sub_resource type="Resource" id="Resource_0kas5"]
-script = ExtResource("7_81ee8")
-events = Array[ExtResource("4_lmt7w")]([SubResource("Resource_lmt7w"), SubResource("Resource_81ee8"), SubResource("Resource_bbckg")])
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_q0odr"]
 script = ExtResource("2_4tbpa")
 bullet_type = 1
 bullet_cost = 1
-_bullet_event = SubResource("Resource_0kas5")
 bullet_description = "Use 1 action to gain 2 Deleons and a Polaroid. Remove this card from the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

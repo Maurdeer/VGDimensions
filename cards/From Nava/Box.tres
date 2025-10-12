@@ -1,22 +1,16 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://cc1x4vm6hevcw"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://cc1x4vm6hevcw"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_jqcs0"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_c51c7"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_xqdwr"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_5j851"]
-[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="3_xqdwr"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="4_gc5so"]
 [ext_resource type="Texture2D" uid="uid://bub6n227kopqw" path="res://art/card_art/FromNava/-e box -e.png" id="5_2woo7"]
-
-[sub_resource type="Resource" id="Resource_5j851"]
-script = ExtResource("3_xqdwr")
-only_adjacent_cards = true
-metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_c51c7"]
 script = ExtResource("2_xqdwr")
 bullet_type = 1
 bullet_cost = 1
-_bullet_event = SubResource("Resource_5j851")
 bullet_description = "Use 1 Action to move this card to be on top of an adjacent card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

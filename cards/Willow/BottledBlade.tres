@@ -1,20 +1,16 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://6ms4uldtlv8n"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://6ms4uldtlv8n"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_31rkp"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_1esg5"]
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_6qg02"]
-[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="3_1esg5"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_v5pch"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="4_6qg02"]
 [ext_resource type="Texture2D" uid="uid://c3gwva1bmi8mi" path="res://art/card_art/Willow/bottledblade.png" id="5_bae3o"]
-
-[sub_resource type="Resource" id="Resource_v5pch"]
-script = ExtResource("3_1esg5")
-amount = 5
-metadata/_custom_type_script = "uid://dgpr0uywveph4"
 
 [sub_resource type="Resource" id="Resource_6qg02"]
 script = ExtResource("2_1esg5")
-_bullet_event = SubResource("Resource_v5pch")
+bullet_type = null
+bullet_cost = null
 bullet_description = "Play this card to deal 3 Damage to target card on the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

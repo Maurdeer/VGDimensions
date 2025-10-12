@@ -1,40 +1,13 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=18 format=3 uid="uid://crpp42hdxyxji"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://crpp42hdxyxji"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_i1r70"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_j4mri"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="2_wy1lx"]
-[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_i1r70"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="3_wy1lx"]
-[ext_resource type="Script" uid="uid://cxthocnum3gvm" path="res://_scripts/resources/EventResources/BurnStatusEvent.gd" id="4_dfnuw"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="5_dfnuw"]
-[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/BurnEvent.gd" id="5_fq0fa"]
 [ext_resource type="Texture2D" uid="uid://cgmcqn4gdd8ny" path="res://art/card_art/FromNava/SmallGuy.png" id="6_fq0fa"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="7_veqhd"]
 
-[sub_resource type="Resource" id="Resource_li3ld"]
-script = ExtResource("3_i1r70")
-amount = 2
-metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
-
-[sub_resource type="Resource" id="Resource_dfnuw"]
-script = ExtResource("3_i1r70")
-type = 3
-amount = 1
-metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
-
-[sub_resource type="Resource" id="Resource_fq0fa"]
-script = ExtResource("4_dfnuw")
-metadata/_custom_type_script = "uid://cxthocnum3gvm"
-
-[sub_resource type="Resource" id="Resource_thke4"]
-script = ExtResource("5_fq0fa")
-_passive_event = SubResource("Resource_fq0fa")
-amount = 3
-metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
-
 [sub_resource type="Resource" id="Resource_veqhd"]
-script = ExtResource("5_dfnuw")
-events = Array[ExtResource("2_wy1lx")]([SubResource("Resource_li3ld"), SubResource("Resource_dfnuw"), SubResource("Resource_thke4")])
 metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_rcfl5"]
@@ -46,6 +19,7 @@ metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 [sub_resource type="Resource" id="Resource_j4mri"]
 script = ExtResource("3_wy1lx")
 bullet_type = 2
+bullet_cost = null
 bullet_description = "Defeat this card to earn 2 Deleons and Burn a card on the Rift. Also, gain a Polaroid."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

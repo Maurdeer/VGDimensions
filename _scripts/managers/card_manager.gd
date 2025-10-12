@@ -1,8 +1,9 @@
 extends Node
+
 # Card Manager Script, This is very essential for having constant referencs of all
 # Cards and defing their creations here
 
-const CARD = preload("uid://c3e8058lwu0a")
+var CARD: PackedScene = null
 
 var next_card_id: int = 0
 # If a card needs to be freed, this can be changed to a dict.
@@ -13,6 +14,7 @@ const card_resources_folder: String = "res://cards/"
 var cards_loaded: int = 0
 
 func _ready() -> void:
+	CARD = load("res://_scenes/card/card.tscn") as PackedScene
 	_load_all_card_resources_from_folder(card_resources_folder)
 	
 func get_card_by_id(id: int) -> Card:
@@ -45,20 +47,6 @@ func create_cards(card_resources: Array[CardResource]) -> Array[Card]:
 	return _create_cards_locally(card_resources)
 	
 func create_cards_from_packs(card_pack_resources: Array[CardPackResource]) -> Array[Card]:
-	# Unsafe due to Dictionaries not preserving order
-	#var crpwa_dict: Dictionary[String, int]
-	#var crp_dict: Dictionary[CardResource, int]
-	#for pack in card_pack_resources:
-		#for card_resource in pack.card_resources:
-			#if crpwa_dict.has(card_resource.resource_path):
-				#crp_dict[card_resource] += pack.card_resources[card_resource]
-				#crpwa_dict[card_resource.resource_path] += pack.card_resources[card_resource]
-			#else:
-				#crp_dict[card_resource] = pack.card_resources[card_resource]
-				#crpwa_dict[card_resource.resource_path] = pack.card_resources[card_resource]
-					#
-	#var json = JSON.stringify(crpwa_dict)
-	
 	var card_resource_paths: Array[String]
 	var card_resources: Array[CardResource]
 	for pack in card_pack_resources:

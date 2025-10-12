@@ -17,7 +17,7 @@ enum SelectionType {
 func on_execute() -> bool:
 	return false
 	
-func select(card_invoker: Card) -> Card:
+func select(card_invoker: Card, cancellable: bool) -> Card:
 	match (type):
 		SelectionType.SELF:
 			return card_invoker

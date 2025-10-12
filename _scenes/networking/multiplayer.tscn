@@ -43,7 +43,7 @@ font_color = Color(1, 0, 0, 1)
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 
-[node name="multiplayer" type="Control"]
+[node name="multiplayer" type="Control" node_paths=PackedStringArray("rift_grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,6 +55,8 @@ script = ExtResource("1_7aq5h")
 initial_hand_card_pack = ExtResource("2_6nxkk")
 rift_card_pack = Array[ExtResource("3_u0f7i")]([ExtResource("4_lkbpy")])
 shop_initial_packs = Array[ExtResource("3_u0f7i")]([ExtResource("5_gdkaw"), ExtResource("6_u0f7i"), ExtResource("7_lkbpy")])
+initial_quest_card = ExtResource("26_5f5da")
+rift_grid = NodePath("RiftGrid")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_hvy2v")

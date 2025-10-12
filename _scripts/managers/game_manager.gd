@@ -9,6 +9,7 @@ signal on_end_of_turn
 @export var rift_card_pack: Array[CardPackResource]
 @export var shop_initial_packs: Array[CardPackResource]
 @export var initial_grid_size: Vector2i = Vector2i(3, 3)
+@export var initial_quest_card: CardResource
 
 @export_category("Developer Tests")
 @export var infinite_resources: bool = false

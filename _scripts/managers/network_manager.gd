@@ -111,3 +111,18 @@ func _on_server_disconnected():
 	players.clear()
 	server_disconnected.emit()
 	
+# Barrier Implemenation for networking
+var players_processed_passive: int = 0
+signal process
+@rpc("any_peer", "call_local", "reliable")
+func _increment_count() -> void:
+	players_processed_passive += 1
+	if players_processed_passive == GNM.players.size():
+		process.emit()
+		players_processed_passive = 0
+	
+func barrier() -> void:
+	if not multiplayer.multiplayer_peer: return
+	_increment_count.rpc()
+	await process
+	
