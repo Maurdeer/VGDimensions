@@ -13,17 +13,19 @@ func enter() -> void:
 	card.flip_reveal()
 	
 func clicked_on() -> void:
-	if card._play_bullets.size() == 1:
+	if card.play_bullets.size() == 1:
 		# Execute function right way, no selection needed!
-		var success: bool = card._play_bullets[0].try_execute(card)
+		var success: bool = await card.try_execute(card.play_bullets[0], 0)
 		if not success: return
-	elif card._play_bullets.size() > 1:
+	elif card.play_bullets.size() > 1:
 		var select_ui: SelectionUI = card.SELECTION_UI.instantiate()
 		get_tree().root.add_child(select_ui)
-		var bullet = await select_ui.get_play_selection(card.resource)
+		var selection = await select_ui.get_play_selection(card)
 		select_ui.queue_free()
-		
-		var success: bool = bullet.try_execute(card)
+		if not selection: 
+			# If Selection didn't give valid results, implies canceled!
+			return
+		var success: bool = await card.try_execute(selection[0], selection[1])
 		if not success: return
 	else:
 		printerr("Card is unplayable!! That shouldn't be the case!")

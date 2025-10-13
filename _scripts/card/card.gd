@@ -56,9 +56,9 @@ var interactable: bool = false:
 var card_id: int
 
 # Dynamic Bullet Functions
-var _play_bullets: Array[BulletResource]
-var _action_bullets: Array[BulletResource]
-var _social_bullets: Array[BulletResource]
+var play_bullets: Array[BulletResource]
+var action_bullets: Array[BulletResource]
+var social_bullets: Array[BulletResource]
 
 func _ready() -> void:
 	call_deferred("_after_ready")
@@ -84,14 +84,17 @@ func _setup() -> void:
 	dnd_2d.draggable = draggable
 	
 func _on_resource_change() -> void:
+	play_bullets.clear()
+	action_bullets.clear()
+	social_bullets.clear()
 	for bullet in resource.bullets:
 		match(bullet.bullet_type):
 			BulletResource.BulletType.PLAY:
-				_play_bullets.append(bullet)
+				play_bullets.append(bullet)
 			BulletResource.BulletType.ACTION:
-				_action_bullets.append(bullet)
+				action_bullets.append(bullet)
 			BulletResource.BulletType.SOCIAL:
-				_social_bullets.append(bullet)
+				social_bullets.append(bullet)
 				
 	resource.set_up_event_resources()
 	
@@ -165,6 +168,46 @@ func add_to_events(event : EventResource):
 func remove(event : EventResource):
 	var index = statusEffects.find(event)
 	statusEffects.remove_at(index)
+
+# Invoking Bullet Events Here
+# The networking magic happens here
+func try_execute(bullet: BulletResource, idx: int) -> bool:
+	# Currently only action and social have a cost for bullet activativations
+	if bullet.bullet_events.is_empty(): return false
+	match(bullet.bullet_type):
+		BulletResource.BulletType.PLAY:
+			queue_bullet_events.rpc(bullet.bullet_type, idx)
+			if await queue_bullet_events(bullet.bullet_type, idx): return false
+		BulletResource.BulletType.ACTION:
+			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
+			queue_bullet_events.rpc(bullet.bullet_type, idx)
+			if await queue_bullet_events(bullet.bullet_type, idx): return false
+			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
+		BulletResource.BulletType.SOCIAL:
+			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
+			queue_bullet_events.rpc(bullet.bullet_type, idx)
+			if await queue_bullet_events(bullet.bullet_type, idx): return false
+			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
+	return true
+	
+@rpc("call_remote", "any_peer", "reliable")
+func queue_bullet_events(bullet_type: BulletResource.BulletType, idx: int) -> bool:
+	match(bullet_type):
+		BulletResource.BulletType.PLAY:
+			EventManager.queue_event_group(play_bullets[idx].bullet_events, self)
+			if await EventManager.process_event_queue(): return true
+			on_play()
+		BulletResource.BulletType.ACTION:
+			EventManager.queue_event_group(action_bullets[idx].bullet_events, self)
+			if await EventManager.process_event_queue(): return true
+			on_action()
+		BulletResource.BulletType.SOCIAL:
+			EventManager.queue_event_group(social_bullets[idx].bullet_events, self)
+			if await EventManager.process_event_queue(): return true
+			on_social()
+	# Process If there were added events from the card passives or not
+	EventManager.process_event_queue()
+	return false
 
 # Passive Functions
 func on_play(): 

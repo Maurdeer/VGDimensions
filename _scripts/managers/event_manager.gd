@@ -24,7 +24,7 @@ func process_event_queue() -> bool:
 			continue
 		if event is SelectionEventResource:
 			if GameManager.Instance.is_my_turn():
-				selection = event.select(card_invoker, not pass_selection)
+				selection = await event.select(card_invoker, not pass_selection)
 				if not selection:
 					if pass_selection:
 						process_result = ProcessResult.FAILED

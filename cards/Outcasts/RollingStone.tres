@@ -9,8 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_h4xlq"]
 script = ExtResource("2_lq183")
-bullet_type = null
-bullet_cost = null
 bullet_description = "Play this card to deal 3 damage to any target card. If defeated, replace it."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

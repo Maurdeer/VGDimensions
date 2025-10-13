@@ -19,7 +19,6 @@ metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 [sub_resource type="Resource" id="Resource_yifxq"]
 script = ExtResource("2_ey6v6")
 bullet_type = 5
-bullet_cost = null
 bullet_description = "Collect 9 Polaroids to win!
 Polaroids are awarded for killing enemies and solving various puzzles."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
