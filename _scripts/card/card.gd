@@ -176,40 +176,16 @@ func try_execute(bullet: BulletResource, idx: int) -> bool:
 	if bullet.bullet_events.is_empty(): return false
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
-			queue_bullet_events.rpc(bullet.bullet_type, idx)
-			if await queue_bullet_events(bullet.bullet_type, idx): return false
+			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
 		BulletResource.BulletType.ACTION:
 			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
-			queue_bullet_events.rpc(bullet.bullet_type, idx)
-			if await queue_bullet_events(bullet.bullet_type, idx): return false
+			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
 		BulletResource.BulletType.SOCIAL:
 			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
-			queue_bullet_events.rpc(bullet.bullet_type, idx)
-			if await queue_bullet_events(bullet.bullet_type, idx): return false
+			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
 	return true
-
-# Reason for error, because the card isn't in the scene itself
-# Damn it
-@rpc("call_remote", "any_peer", "reliable")
-func queue_bullet_events(bullet_type: BulletResource.BulletType, idx: int) -> bool:
-	match(bullet_type):
-		BulletResource.BulletType.PLAY:
-			EventManager.queue_event_group(play_bullets[idx].bullet_events, self)
-			if await EventManager.process_event_queue(): return true
-			on_play()
-		BulletResource.BulletType.ACTION:
-			EventManager.queue_event_group(action_bullets[idx].bullet_events, self)
-			if await EventManager.process_event_queue(): return true
-			on_action()
-		BulletResource.BulletType.SOCIAL:
-			EventManager.queue_event_group(social_bullets[idx].bullet_events, self)
-			if await EventManager.process_event_queue(): return true
-			on_social()
-	# Process If there were added events from the card passives or not
-	EventManager.process_event_queue()
-	return false
 
 # Passive Functions
 func on_play(): 

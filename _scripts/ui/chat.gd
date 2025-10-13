@@ -43,7 +43,7 @@ func _input(event: InputEvent) -> void:
 func _on_scrollbar_changed() -> void:
 	scroll_container.scroll_vertical = scrollbar.max_value
 	
-func _on_player_join(pid, _player_info) -> void:
+func _on_player_join(pid) -> void:
 	if multiplayer.is_server():
 		if pid == 1: 
 			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])
@@ -51,10 +51,9 @@ func _on_player_join(pid, _player_info) -> void:
 			rpc_id(pid, "create_messages", message_strings)
 			rpc("create_message", "%s has Joined Session" % GNM.players[pid]['name'])
 	
-func _on_player_leave(pid, _player_info) -> void:
+func _on_player_leave(pid) -> void:
 	if multiplayer.is_server():
 		if pid == 1: 
 			rpc("create_message", "%s has Left Session" % GNM.players[pid]['name'])
 		else:
-			rpc_id(pid, "create_messages", message_strings)
 			rpc("create_message", "%s has Left Session" % GNM.players[pid]['name'])

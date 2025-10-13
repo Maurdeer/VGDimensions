@@ -33,11 +33,11 @@ func process_event_queue() -> bool:
 					break
 				broadcast_selection.rpc(selection.card_id)
 			# Await for the selection event to complete
-			GNM.barrier() 
+			await GNM.barrier() 
 			# Network that selection!
 			card_refs[event.store_at] = selection
 		else:
-			pass_selection = false
+			pass_selection = true
 			if event.execute(card_invoker, card_refs):
 				process_result = ProcessResult.FAILED
 			
@@ -67,6 +67,35 @@ func queue_event_group(events: Array, card_invoker: Card) -> void:
 			push_warning("Null Event found, will not be pushed to event_queue! Designer Fault!")
 			continue
 		_callable_queue.push_back([event, card_invoker])
+		
+func queue_and_process_bullet_events(cid: int, bullet_type: BulletResource.BulletType, idx: int) -> bool:
+	# TODO: This might need to be improved lowkey bro
+	# This may not be good for ensuring the ordering of the calls
+	_queue_bullet_events.rpc(cid, bullet_type, idx)
+	var canceled: bool = await _queue_bullet_events(cid, bullet_type, idx)
+	return canceled
+	
+		
+@rpc("call_remote", "any_peer", "reliable")
+func _queue_bullet_events(cid: int, bullet_type: BulletResource.BulletType, idx: int) -> bool:
+	var card_invoker: Card = CardManager.get_card_by_id(cid)
+	match(bullet_type):
+		BulletResource.BulletType.PLAY:
+			queue_event_group(card_invoker.play_bullets[idx].bullet_events, card_invoker)
+			if await process_event_queue(): return true
+			card_invoker.on_play()
+		BulletResource.BulletType.ACTION:
+			queue_event_group(card_invoker.action_bullets[idx].bullet_events, card_invoker)
+			if await process_event_queue(): return true
+			card_invoker.on_action()
+		BulletResource.BulletType.SOCIAL:
+			queue_event_group(card_invoker.social_bullets[idx].bullet_events, card_invoker)
+			if await EventManager.process_event_queue(): return true
+			card_invoker.on_social()
+	# Process If there were added events from the card passives or not
+	EventManager.process_event_queue()
+	await GNM.barrier() 
+	return false
 	
 enum ProcessResult {
 	SUCCESS,
