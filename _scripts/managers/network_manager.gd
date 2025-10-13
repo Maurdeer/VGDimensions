@@ -111,8 +111,11 @@ func _on_server_disconnected():
 	remove_multiplayer_peer()
 	players.clear()
 	server_disconnected.emit()
-	
-# Barrier Implemenation for networking
+
+# TODO: Fix Barrier Impelementation for networking
+# (Ryan) Please do not use yet, I need to refactor it. Prolly gonna use a Dissemination barrier, or 
+# some kind of rpc requester and response system to make things simple!
+# ==================Barrier Implemenation for networking====================
 var players_processed_passive: int = 0
 var switch: bool = false
 signal process
@@ -129,4 +132,4 @@ func barrier() -> void:
 	else:
 		await process
 	players_processed_passive = 0
-	
+#=============================================================================

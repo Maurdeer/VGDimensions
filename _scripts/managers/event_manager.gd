@@ -45,9 +45,17 @@ func process_event_queue() -> bool:
 				process_result = ProcessResult.FAILED
 			
 	match (process_result):
+		# (Ryan) Clearing the queue may or may not go here, you could want them to remain?
+		# But no situation where that is clear yet
+		# TODO: Remove the clear condition IF AND ONLY IF there is a situation where
+		# events that remain are still desired after being cancelled or failed.
 		ProcessResult.CANCELED:
+			# Flush left over events since we are cancelling the process
+			_callable_queue.clear()
 			return true
 		ProcessResult.FAILED:
+			# Flush left over events since we are cancelling the process
+			_callable_queue.clear()
 			push_error("Process had failed unexpectadly")
 			return true
 			
