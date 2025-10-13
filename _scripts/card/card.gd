@@ -189,7 +189,9 @@ func try_execute(bullet: BulletResource, idx: int) -> bool:
 			if await queue_bullet_events(bullet.bullet_type, idx): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
 	return true
-	
+
+# Reason for error, because the card isn't in the scene itself
+# Damn it
 @rpc("call_remote", "any_peer", "reliable")
 func queue_bullet_events(bullet_type: BulletResource.BulletType, idx: int) -> bool:
 	match(bullet_type):

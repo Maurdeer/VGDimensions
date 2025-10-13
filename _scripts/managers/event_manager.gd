@@ -62,7 +62,6 @@ func queue_event(event: EventResource, card_invoker: Card) -> void:
 	_callable_queue.push_back([event, card_invoker])
 	
 func queue_event_group(events: Array, card_invoker: Card) -> void:
-	
 	for event in events:
 		if not event or not event is EventResource:
 			push_warning("Null Event found, will not be pushed to event_queue! Designer Fault!")
