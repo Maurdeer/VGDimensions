@@ -4,6 +4,7 @@ var _callable_queue: Array[Array]
 
 var stored_card: Dictionary[int, Card]
 var selection: Card
+signal peer_selection
 
 # returns false is Completed, true if canceled by player input
 func process_event_queue() -> bool:
@@ -24,6 +25,7 @@ func process_event_queue() -> bool:
 			continue
 		if event is SelectionEventResource:
 			if GameManager.Instance.is_my_turn():
+				# Responsible for selecting card
 				selection = await event.select(card_invoker, not pass_selection)
 				if not selection:
 					if pass_selection:
@@ -32,8 +34,9 @@ func process_event_queue() -> bool:
 						process_result = ProcessResult.CANCELED
 					break
 				broadcast_selection.rpc(selection.card_id)
-			# Await for the selection event to complete
-			await GNM.barrier() 
+			else:
+				# Await for the selection event to complete
+				await peer_selection
 			# Network that selection!
 			card_refs[event.store_at] = selection
 		else:
@@ -53,6 +56,7 @@ func process_event_queue() -> bool:
 @rpc("call_remote", "any_peer", "reliable")
 func broadcast_selection(cid: int):
 	selection = CardManager.get_card_by_id(cid)
+	peer_selection.emit()
 	
 func queue_event(event: EventResource, card_invoker: Card) -> void:
 	if not event:
@@ -93,8 +97,7 @@ func _queue_bullet_events(cid: int, bullet_type: BulletResource.BulletType, idx:
 			if await EventManager.process_event_queue(): return true
 			card_invoker.on_social()
 	# Process If there were added events from the card passives or not
-	EventManager.process_event_queue()
-	await GNM.barrier() 
+	await EventManager.process_event_queue()
 	return false
 	
 enum ProcessResult {

@@ -114,6 +114,7 @@ func _on_server_disconnected():
 	
 # Barrier Implemenation for networking
 var players_processed_passive: int = 0
+var switch: bool = false
 signal process
 @rpc("any_peer", "call_local", "reliable")
 func _increment_count() -> void:
