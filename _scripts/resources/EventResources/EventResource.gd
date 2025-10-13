@@ -18,3 +18,6 @@ func execute(p_card_invoker: Card, p_card_refs: Dictionary[int, Card]) -> bool:
 
 @abstract
 func on_execute() -> bool
+
+@abstract
+func required_events() -> Array[EventResource]

@@ -20,3 +20,6 @@ func on_execute() -> bool:
 	RiftGrid.Instance.fill_empty_decks()
 	
 	return false
+	
+func required_events() -> Array[EventResource]:
+	return []

@@ -78,6 +78,9 @@ func queue_event_group(events: Array, card_invoker: Card) -> void:
 		if not event or not event is EventResource:
 			push_warning("Null Event found, will not be pushed to event_queue! Designer Fault!")
 			continue
+		var required_events: Array[EventResource] = (event as EventResource).required_events()
+		for required_event in required_events:
+			_callable_queue.push_back([required_event, card_invoker])
 		_callable_queue.push_back([event, card_invoker])
 		
 func queue_and_process_bullet_events(cid: int, bullet_type: BulletResource.BulletType, idx: int) -> bool:

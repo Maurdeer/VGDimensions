@@ -5,3 +5,6 @@ class_name MultiEvent
 
 func on_execute() -> bool:
 	return true
+	
+func required_events() -> Array[EventResource]:
+	return []

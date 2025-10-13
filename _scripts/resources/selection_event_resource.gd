@@ -24,3 +24,6 @@ func select(card_invoker: Card, cancellable: bool) -> Card:
 		SelectionType.RIFT:
 			return await RiftCardSelector.Instance.player_select_card()
 	return null
+	
+func required_events() -> Array[EventResource]:
+	return []

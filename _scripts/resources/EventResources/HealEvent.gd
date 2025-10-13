@@ -7,3 +7,6 @@ class_name HealEvent
 
 func on_execute() -> bool:
 	return true
+	
+func required_events() -> Array[EventResource]:
+	return []

@@ -30,6 +30,11 @@ func clicked_on() -> void:
 	else:
 		printerr("Card is unplayable!! That shouldn't be the case!")
 		return
+		
+	if card.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
+		PlayerHand.Instance.remove_card_from_hand(card)
+	else:
+		PlayerHand.Instance.discard_card(card)
 	
 func exit() -> void:
 	super.exit()
