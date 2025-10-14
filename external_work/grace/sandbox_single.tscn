@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cffwpx4i5iult"]
+[gd_scene load_steps=29 format=3 uid="uid://cffwpx4i5iult"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_pgr64"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_uwtkr"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="18_vrhp2"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="19_qco3q"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="20_u0b06"]
+[ext_resource type="PackedScene" uid="uid://c71uoxlt0gksi" path="res://_scenes/ui/deck_inspector.tscn" id="20_uwtkr"]
 [ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="21_crukd"]
 [ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="22_5mt3i"]
 
@@ -65,6 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("CanvasTexture_5f5da")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -350,8 +352,9 @@ label_settings = SubResource("LabelSettings_kgmkq")
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("18_vrhp2")]
+[node name="player_hand" parent="PlayerHandUI" node_paths=PackedStringArray("deck_inspector") instance=ExtResource("18_vrhp2")]
 scale = Vector2(0.9, 0.9)
+deck_inspector = NodePath("../../DeckInspector")
 
 [node name="name_label" type="Label" parent="PlayerHandUI"]
 layout_mode = 0
@@ -380,6 +383,10 @@ text = "Next Turn"
 
 [node name="CardShopUI" parent="." instance=ExtResource("19_qco3q")]
 position = Vector2(0, 129)
+
+[node name="DeckInspector" parent="." instance=ExtResource("20_uwtkr")]
+visible = false
+layout_mode = 1
 
 [node name="Chat" parent="." instance=ExtResource("20_u0b06")]
 layout_mode = 1

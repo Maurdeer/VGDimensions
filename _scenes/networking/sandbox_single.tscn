@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://d1b1m0y144lgx" path="res://_scenes/card_containers/player_hand.tscn" id="20_1nh7j"]
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="21_34wvw"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="22_e0rbx"]
-[ext_resource type="PackedScene" uid="uid://b0gicmy7ni7t3" path="res://_scenes/card/card_viewer.tscn" id="23_fn044"]
+[ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="23_fn044"]
 [ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_7qvlh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvy2v"]

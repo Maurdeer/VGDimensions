@@ -7,12 +7,11 @@ const hand_limit: int = 20
 const hand_draw_limit: int = 5
 @export var discard_pile: Deck
 @export var draw_pile: Deck
-@export var deck_inspector_scene: PackedScene
+@export var deck_inspector: Control
 @onready var slots: HBoxContainer = $Slots
 
 var empty_card: Card
 var slot_queue: Array[Control]
-var deck_inspector: DeckInspector = null
 
 var cards_in_hand: Dictionary[Card, Control] = {}
 
@@ -126,15 +125,18 @@ func disable_player_hand() -> void:
 func enable_player_hand() -> void:
 	for card in cards_in_hand:
 		card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)
-# is this node or signal?
+		
+# move this method to deck class if we want this view for ANY deck
 func _on_discard_pile_ui_clicked(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	var mouse_event: InputEventMouseButton = event
-	print("discard pile clicked")
 	
-	if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.pressed:
+	if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.is_pressed():
 		if not deck_inspector:
-			deck_inspector = deck_inspector_scene.instantiate()
-			get_tree().root.add_child(deck_inspector)
-			
+			printerr("PlayerHand ERROR: A deck_inspector node is needed to view the discard pile.")
+			return 
+		if discard_pile.is_empty():
+			print("Discard Pile is empty. Cannot open deck inspector.")
+			return
+		deck_inspector.visible = true
 		deck_inspector.view_deck(discard_pile)
