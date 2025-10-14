@@ -13,5 +13,5 @@ enum BulletType {
 @export var bullet_cost: int
 
 ## Only used by PLAY, ACTION, and SOCIAL. For anything else refer to "Passive Events"
-@export var bullet_events: Array[EventResource]
+@export var bullet_event: EventResource
 @export_multiline var bullet_description: String = ""

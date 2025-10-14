@@ -173,7 +173,7 @@ func remove(event : EventResource):
 # The networking magic happens here
 func try_execute(bullet: BulletResource, idx: int) -> bool:
 	# Currently only action and social have a cost for bullet activativations
-	if bullet.bullet_events.is_empty(): return false
+	if not bullet.bullet_event: return false
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
 			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
