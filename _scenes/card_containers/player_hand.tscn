@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1b1m0y144lgx"]
+[gd_scene load_steps=5 format=3 uid="uid://d1b1m0y144lgx"]
 
 [ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player/player_hand.gd" id="1_2yr0q"]
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="2_iyo8l"]
+[ext_resource type="PackedScene" uid="uid://c71uoxlt0gksi" path="res://_scenes/ui/desk_inspector.tscn" id="2_jiku1"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="2_l6uod"]
 
 [node name="player_hand" type="Node2D" node_paths=PackedStringArray("discard_pile", "draw_pile")]
 script = ExtResource("1_2yr0q")
 discard_pile = NodePath("DiscardPile/Deck")
 draw_pile = NodePath("DrawPile/Deck")
+deck_inspector_scene = ExtResource("2_jiku1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 4
@@ -57,7 +59,6 @@ offset_left = -646.0
 offset_right = -646.0
 size_flags_horizontal = 2
 size_flags_vertical = 4
-mouse_filter = 2
 
 [node name="Deck" type="Node2D" parent="DiscardPile"]
 script = ExtResource("2_l6uod")
@@ -90,3 +91,5 @@ mouse_filter = 2
 
 [node name="Deck" type="Node2D" parent="DrawPile"]
 script = ExtResource("2_l6uod")
+
+[connection signal="gui_input" from="DiscardPile" to="." method="_on_discard_pile_ui_clicked"]
