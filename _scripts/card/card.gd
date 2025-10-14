@@ -176,14 +176,14 @@ func try_execute(bullet: BulletResource, idx: int) -> bool:
 	if not bullet.bullet_event: return false
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
-			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
+			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
 		BulletResource.BulletType.ACTION:
 			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
-			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
+			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
 		BulletResource.BulletType.SOCIAL:
 			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
-			if await EventManager.queue_and_process_bullet_events(card_id, bullet.bullet_type, idx): return false
+			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
 	return true
 
