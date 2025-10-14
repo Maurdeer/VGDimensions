@@ -44,7 +44,7 @@ func create_cards(card_resources: Array[CardResource]) -> Array[Card]:
 	_create_cards_rpc.rpc(card_resource_paths)
 	
 	# Create the cards locally
-	return _create_cards_locally(card_resources)
+	return create_cards_locally(card_resources)
 	
 func create_cards_from_packs(card_pack_resources: Array[CardPackResource]) -> Array[Card]:
 	var card_resource_paths: Array[String]
@@ -59,7 +59,7 @@ func create_cards_from_packs(card_pack_resources: Array[CardPackResource]) -> Ar
 	_create_cards_rpc.rpc(card_resource_paths)
 	
 	# Create the cards locally
-	return _create_cards_locally(card_resources)
+	return create_cards_locally(card_resources)
 	
 @rpc("any_peer", "call_local", "reliable")
 func _remove_card_by_id_rpc(id: int) -> void:
@@ -95,7 +95,7 @@ func _create_cards_rpc(card_resource_paths: Array[String]) -> void:
 	for path in card_resource_paths:
 		card_resources.push_back(_card_resources_dict[path])
 		
-	_create_cards_locally(card_resources)
+	create_cards_locally(card_resources)
 
 # Prolly a waste of time dude
 @rpc("any_peer", "call_remote", "reliable")
@@ -109,7 +109,15 @@ func _create_cards_from_pack_rpc(json: String) -> void:
 	
 	_create_cards_from_pack_locally(crp_dict)
 	
-func _create_cards_locally(card_resources: Array[CardResource]) -> Array[Card]:
+func create_card_locally(card_resource: CardResource, is_temporary: bool) -> Card:
+	var new_card: Card = CARD.instantiate()
+	new_card.set_up(next_card_id, card_resource)
+	new_card.temporary = is_temporary
+	_cards.push_back(new_card)
+	next_card_id += 1
+	return new_card
+	
+func create_cards_locally(card_resources: Array[CardResource]) -> Array[Card]:
 	if card_resources.is_empty():
 		push_warning("No cards were created")
 	var new_cards: Array[Card]

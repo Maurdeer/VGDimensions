@@ -17,7 +17,7 @@ func _ready() -> void:
 		return
 	Instance = self
 	
-func player_select_card(filter: Callable = func(card: Card): return true) -> Card:
+func player_select_card(cancellable: bool, filter: Callable = func(card: Card): return true) -> Card:
 	if _is_selection_active: return null
 	_is_selection_active = true
 	_first = true
@@ -63,3 +63,7 @@ func on_card_clicked(card: Card):
 	revert_card_states()
 	_selected_card = card
 	selected.emit()
+	
+# ====== Filters you can use =========
+func adjacent_only(from_card: Card) -> Callable:
+	return func(card: Card): return (card.grid_pos - from_card.grid_pos).length() == 1

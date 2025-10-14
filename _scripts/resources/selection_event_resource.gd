@@ -13,6 +13,7 @@ enum SelectionType {
 }
 @export var type: SelectionType
 @export var store_at: int
+var filter: Callable = func(_card): return true
 
 func on_execute() -> bool:
 	return false
@@ -22,7 +23,7 @@ func select(card_invoker: Card, cancellable: bool) -> Card:
 		SelectionType.SELF:
 			return card_invoker
 		SelectionType.RIFT:
-			return await RiftCardSelector.Instance.player_select_card()
+			return await RiftCardSelector.Instance.player_select_card(cancellable, filter)
 	return null
 	
 func required_events() -> Array[EventResource]:

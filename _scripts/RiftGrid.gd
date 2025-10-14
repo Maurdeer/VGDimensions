@@ -106,6 +106,10 @@ func draw_card(draw_to: Vector2i) -> void:
 		
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	place_card(draw_to, new_card)
+	
+func draw_card_if_empty(draw_to: Vector2i) -> void:
+	if grid[draw_to.y][draw_to.x].is_empty():
+		draw_card(draw_to)
  
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
