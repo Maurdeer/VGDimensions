@@ -26,6 +26,7 @@ func clicked_on() -> void:
 	card.interacted.emit(card)
 	
 func exit() -> void:
+	card.refresh_stats()
 	gridcard_visualizer.visible = false
 	gridcard_back.visible = false
 	gridcard_shape.disabled = true

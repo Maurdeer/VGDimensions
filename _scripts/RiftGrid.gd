@@ -151,14 +151,16 @@ func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
 	card = grid[discard_from.y][discard_from.x].remove_card_at(deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
 	
-	# TODO: (Ryan) When we add netcoding, do a more explicit player check in the networked version
+	# TODO: Ensure this discard check behavior is correct
 	if card.temporary:
 		CardManager.remove_card_by_id(card.card_id)
-	elif card.player_owner == "": 
+	elif card.owner_pid < 0: 
 		_rift_discard_pile.addCard(card)
 		card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
-	else:
+	elif multiplayer.has_multiplayer_peer() and multiplayer.get_unique_id() == card.owner_pid:
 		PlayerHand.Instance.discard_card(card)
+	else:
+		remove_child(card)
 	
 	await card.on_discard()
 	

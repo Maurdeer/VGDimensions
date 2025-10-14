@@ -42,18 +42,27 @@ var hp: int:
 	set(value):
 		hp = value
 		on_stats_change.emit()
-		
 var grid_pos: Vector2i = Vector2i(-1, -1)
 var deck_pos: int = -1
-var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
+var owner_pid: int = -1
 var revealed: bool
 var temporary: bool = false
 var interactable: bool = false:
 	set(value):
 		dnd_2d.interactable = value
 		interactable = value
-		
 var card_id: int
+enum CardDirection {
+	NORTH,
+	NORTH_EAST,
+	EAST,
+	SOUTH_EAST,
+	SOUTH,
+	SOUTH_WEST,
+	WEST,
+	NORTH_WEST
+}
+var card_dir: CardDirection
 
 # Dynamic Bullet Functions
 var play_bullets: Array[BulletResource]
@@ -100,6 +109,7 @@ func _on_resource_change() -> void:
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
+	global_rotation_degrees = 0
 	#call_deferred("_on_values_change")
 
 # Return whether or not the card reach zero hp
@@ -108,6 +118,18 @@ func damage(amount: int) -> bool:
 	on_damage()
 	if hp < 0: hp = 0
 	return hp == 0
+	
+func rotate_card(dir: CardDirection):
+	card_dir = dir
+	match (dir):
+		CardDirection.NORTH: global_rotation_degrees = 0
+		CardDirection.NORTH_EAST: global_rotation_degrees = 45
+		CardDirection.EAST: global_rotation_degrees = 90
+		CardDirection.SOUTH_EAST: global_rotation_degrees = 135
+		CardDirection.SOUTH: global_rotation_degrees = 180
+		CardDirection.SOUTH_WEST: global_rotation_degrees = 225
+		CardDirection.WEST: global_rotation_degrees = 270
+		CardDirection.NORTH_WEST: global_rotation_degrees = 315
 
 func flip() -> void:
 	if revealed: flip_hide()
