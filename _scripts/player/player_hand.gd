@@ -37,11 +37,13 @@ func clear_hand() -> void:
 	
 func fill_hand() -> void:
 	var added_count: int = 0
+	
 	while added_count < hand_draw_limit and not slot_queue.is_empty():
 		draw_card_to_hand()
-		added_count += 1
-		if draw_pile.is_empty(): reshuffle_draw_pile()
 		if draw_pile.is_empty(): break
+		added_count += 1
+		#if draw_pile.is_empty(): reshuffle_draw_pile()
+		
 
 # not used yet (use with caution)
 func add_card_to_hand(card: Card) -> void:
