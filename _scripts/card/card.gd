@@ -121,15 +121,19 @@ func damage(amount: int) -> bool:
 	
 func rotate_card(dir: CardDirection):
 	card_dir = dir
+	var rotate_to: float = 0
 	match (dir):
-		CardDirection.NORTH: global_rotation_degrees = 0
-		CardDirection.NORTH_EAST: global_rotation_degrees = 45
-		CardDirection.EAST: global_rotation_degrees = 90
-		CardDirection.SOUTH_EAST: global_rotation_degrees = 135
-		CardDirection.SOUTH: global_rotation_degrees = 180
-		CardDirection.SOUTH_WEST: global_rotation_degrees = 225
-		CardDirection.WEST: global_rotation_degrees = 270
-		CardDirection.NORTH_WEST: global_rotation_degrees = 315
+		CardDirection.NORTH: rotate_to = 0
+		CardDirection.NORTH_EAST: rotate_to = 45
+		CardDirection.EAST: rotate_to = 90
+		CardDirection.SOUTH_EAST: rotate_to = 135
+		CardDirection.SOUTH: rotate_to = 180
+		CardDirection.SOUTH_WEST: rotate_to = 225
+		CardDirection.WEST: rotate_to = 270
+		CardDirection.NORTH_WEST: rotate_to = 315
+	while global_rotation_degrees != rotate_to:
+		rotate_toward(global_rotation_degrees, rotate_to, get_process_delta_time())
+		await get_tree().create_timer(get_process_delta_time()).timeout
 
 func flip() -> void:
 	if revealed: flip_hide()

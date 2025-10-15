@@ -26,6 +26,7 @@ func _process(_delta) -> void:
 		_on_values_change()
 	
 func _on_values_change() -> void:
+	if not bullet_resource: return
 	_on_bullet_type_change()
 	_on_bullet_description_change()
 	

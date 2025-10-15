@@ -311,6 +311,10 @@ func freeze_card(card_pos: Vector2i) -> bool:
 	card.interactable = false
 	#card.add_to_events(FreezeStatusEvent.new())
 	return true
+	
+func rotate_card(card_pos: Vector2i, dir: Card.CardDirection) -> void:
+	var card: Card = get_top_card(card_pos)
+	card.rotate(dir)
 
 func revolveCards():
 	pass

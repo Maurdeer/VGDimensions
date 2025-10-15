@@ -11,23 +11,35 @@
 script = ExtResource("1_5wf0y")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
-[sub_resource type="Resource" id="Resource_1bd1s"]
+[sub_resource type="Resource" id="Resource_63hgc"]
 script = ExtResource("6_mq1va")
 target_card = 1
 amount = 2
 metadata/_custom_type_script = "uid://dgpr0uywveph4"
 
-[sub_resource type="Resource" id="Resource_63hgc"]
+[sub_resource type="Resource" id="Resource_1bd1s"]
 script = ExtResource("2_pqhu8")
-bullet_event = SubResource("Resource_1bd1s")
-bullet_description = "Deal 2 Damage to any card on the rift."
+bullet_event = SubResource("Resource_63hgc")
+bullet_description = "Deal 2 damage to any card on the rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
 script = ExtResource("3_0dbhp")
 title = "Buff Guy"
 type = 1
-bullets = Array[ExtResource("2_pqhu8")]([SubResource("Resource_63hgc")])
+game_origin = null
+deleon_value = null
+starting_hp = null
+movable = null
+burnable = null
+discardable = null
+stackable = null
+refreshable = null
+stunnable = null
+flippable = null
+bullets = Array[ExtResource("2_pqhu8")]([SubResource("Resource_1bd1s")])
+description_textures = null
+quip_description = null
 _passive_event_resources = Array[ExtResource("1_5wf0y")]([SubResource("Resource_0dbhp")])
 card_art = ExtResource("5_1bd1s")
 background_art = ExtResource("2_63hgc")
