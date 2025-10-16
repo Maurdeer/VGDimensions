@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_plkjb"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_1sf21"]
 [ext_resource type="Texture2D" uid="uid://b1ib5ux1y6l4c" path="res://art/card_art/Outcasts/Cave Breakable Tiles.png" id="6_1sf21"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="6_uaglv"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="6_uaglv"]
 
 [sub_resource type="Resource" id="Resource_lu05x"]
 script = ExtResource("2_lu05x")

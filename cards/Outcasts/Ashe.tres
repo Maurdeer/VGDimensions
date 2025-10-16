@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_woeob"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_2258d"]
 [ext_resource type="Texture2D" uid="uid://dxsicibt8xu3t" path="res://art/card_art/Outcasts/Ashe.png" id="3_woeob"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="4_60hme"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_60hme"]
 
 [sub_resource type="Resource" id="Resource_11ysp"]
 script = ExtResource("1_gdfbu")

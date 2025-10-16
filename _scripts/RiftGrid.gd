@@ -14,6 +14,9 @@ var _card_refs: Array[Card]
 @onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
 var pre_defined_seed: int
 
+# Global Signals to be read
+signal on_discard(Card)
+
 func _ready() -> void:
 	# Initialize Singleton
 	if Instance: 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://tf162gxo2o30" path="res://art/card_art/Willow/BulletLantern.png" id="2_7kn37"]
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_cmv12"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_wd5mm"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="4_omcjo"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_omcjo"]
 [ext_resource type="Texture2D" uid="uid://dlrnrg4gsdym1" path="res://art/card_ui/WillowGrids/grid_BulletLantern.png" id="5_omcjo"]
 
 [sub_resource type="Resource" id="Resource_pxc3g"]

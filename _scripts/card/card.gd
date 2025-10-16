@@ -213,7 +213,7 @@ func try_execute(bullet: BulletResource, idx: int) -> bool:
 			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
 	return true
 
-# Passive Functions
+# Passive Functions effecting card itself
 func on_play(): 
 	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY], self)
 func on_action(): 
@@ -250,3 +250,5 @@ func on_freeze():
 	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
 func on_quest_progress(): 
 	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)
+	
+# 
