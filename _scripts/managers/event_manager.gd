@@ -14,6 +14,7 @@ func process_event_queue() -> bool:
 	
 	var card_refs: Dictionary[int, Card] = {}
 	var pass_selection: bool = false
+	var event_fault: EventResource
 	var process_result: ProcessResult = ProcessResult.SUCCESS
 	while not _callable_queue.is_empty():
 		var event_pair: Array = _callable_queue.pop_front()
@@ -30,6 +31,7 @@ func process_event_queue() -> bool:
 				if not selection:
 					if pass_selection:
 						process_result = ProcessResult.FAILED
+						event_fault = event
 					else:
 						process_result = ProcessResult.CANCELED
 					break
@@ -43,6 +45,7 @@ func process_event_queue() -> bool:
 			pass_selection = true
 			if event.execute(card_invoker, card_refs):
 				process_result = ProcessResult.FAILED
+				event_fault = event
 			
 	match (process_result):
 		# (Ryan) Clearing the queue may or may not go here, you could want them to remain?
@@ -56,7 +59,7 @@ func process_event_queue() -> bool:
 		ProcessResult.FAILED:
 			# Flush left over events since we are cancelling the process
 			_callable_queue.clear()
-			push_error("Process had failed unexpectadly")
+			printerr("Process had failed unexpectadly due to event at %s" % event_fault.resource_path)
 			return true
 			
 	return false
@@ -70,9 +73,11 @@ func queue_event(event: EventResource, card_invoker: Card) -> void:
 	if not event:
 		push_warning("Pushed Null Event, didn't add to queue")
 		return 
-		
-	var required_events: Array[EventResource] = (event as EventResource).required_events()
-	queue_event_group(required_events, card_invoker)
+	
+	# Desinger input if they want these queued up or not
+	if event.need_required_events:
+		var required_events: Array[EventResource] = (event as EventResource).required_events()
+		queue_event_group(required_events, card_invoker)
 	_callable_queue.push_back([event, card_invoker])
 	
 func queue_event_group(events: Array, card_invoker: Card) -> void:

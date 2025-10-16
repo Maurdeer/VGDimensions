@@ -6,8 +6,12 @@ class_name BurnEffect
 var curr_duration: int
 
 func on_execute() -> bool:
+	# Directly damage the card
+	if m_card_invoker.is_state() or m_card_invoker.deck_pos != 0: 
+		on_duration_remove()
+		return false
+	m_card_invoker.damage(amount)
 	on_duration_progress()
-	#m_card_invoker.damage(amount)
 	return false
 	
 func required_events() -> Array[EventResource]:
@@ -18,6 +22,8 @@ func on_duration_create() -> void:
 	
 func on_duration_progress() -> void:
 	curr_duration -= 1
+	if curr_duration <= 0:
+		on_duration_remove()
 	
 func on_duration_remove() -> void:
-	pass
+	m_card_invoker.remove_passive_event(self)

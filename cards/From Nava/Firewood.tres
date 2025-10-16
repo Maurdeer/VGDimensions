@@ -1,19 +1,10 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://yoeovssgnxf0"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://yoeovssgnxf0"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_nqwmh"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_m3xws"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_i6qow"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_ngxhq"]
 [ext_resource type="Texture2D" uid="uid://bbma30onu0ftc" path="res://art/card_art/FromNava/-e firewood.png" id="5_w1jfo"]
-
-[sub_resource type="Resource" id="Resource_4dhxs"]
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
-
-[sub_resource type="Resource" id="Resource_i6qow"]
-script = ExtResource("1_nqwmh")
-event_type = 9
-event = SubResource("Resource_4dhxs")
-metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_lq12l"]
 script = ExtResource("2_m3xws")
@@ -27,7 +18,6 @@ title = "Firewood"
 type = 5
 game_origin = 26
 bullets = Array[ExtResource("2_m3xws")]([SubResource("Resource_lq12l")])
-_passive_event_resources = Array[ExtResource("1_nqwmh")]([SubResource("Resource_i6qow")])
 card_art = ExtResource("5_w1jfo")
 background_art = ExtResource("3_i6qow")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

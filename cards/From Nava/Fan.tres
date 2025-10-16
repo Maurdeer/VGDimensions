@@ -1,19 +1,10 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://bfmf5a377dkdm"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://bfmf5a377dkdm"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_02xht"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_13rty"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_c78l2"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_qi8vg"]
 [ext_resource type="Texture2D" uid="uid://b52gn6tbq0if" path="res://art/card_art/FromNava/fan.png" id="5_mxq4v"]
-
-[sub_resource type="Resource" id="Resource_mxfw3"]
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
-
-[sub_resource type="Resource" id="Resource_oswot"]
-script = ExtResource("1_02xht")
-event_type = 13
-event = SubResource("Resource_mxfw3")
-metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_gjxh4"]
 script = ExtResource("2_13rty")
@@ -27,7 +18,6 @@ title = "Fan"
 type = 5
 game_origin = 26
 bullets = Array[ExtResource("2_13rty")]([SubResource("Resource_gjxh4")])
-_passive_event_resources = Array[ExtResource("1_02xht")]([SubResource("Resource_oswot")])
 card_art = ExtResource("5_mxq4v")
 background_art = ExtResource("3_c78l2")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
