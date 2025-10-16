@@ -7,7 +7,7 @@ signal played(Card)
 @warning_ignore("unused_signal")
 signal interacted(Card)
 @warning_ignore("unused_signal")
-signal selected(Vector2i)
+signal selected(Card)
 
 signal on_stats_change
 
@@ -42,23 +42,32 @@ var hp: int:
 	set(value):
 		hp = value
 		on_stats_change.emit()
-		
 var grid_pos: Vector2i = Vector2i(-1, -1)
 var deck_pos: int = -1
-var player_owner: String # (Temp) A string for now until we change this to something more staticly defined
+var owner_pid: int = -1
 var revealed: bool
 var temporary: bool = false
 var interactable: bool = false:
 	set(value):
 		dnd_2d.interactable = value
 		interactable = value
-		
 var card_id: int
+enum CardDirection {
+	NORTH,
+	NORTH_EAST,
+	EAST,
+	SOUTH_EAST,
+	SOUTH,
+	SOUTH_WEST,
+	WEST,
+	NORTH_WEST
+}
+var card_dir: CardDirection
 
 # Dynamic Bullet Functions
-var _play_bullets: Array[BulletResource]
-var _action_bullets: Array[BulletResource]
-var _social_bullets: Array[BulletResource]
+var play_bullets: Array[BulletResource]
+var action_bullets: Array[BulletResource]
+var social_bullets: Array[BulletResource]
 
 func _ready() -> void:
 	call_deferred("_after_ready")
@@ -84,19 +93,23 @@ func _setup() -> void:
 	dnd_2d.draggable = draggable
 	
 func _on_resource_change() -> void:
+	play_bullets.clear()
+	action_bullets.clear()
+	social_bullets.clear()
 	for bullet in resource.bullets:
 		match(bullet.bullet_type):
 			BulletResource.BulletType.PLAY:
-				_play_bullets.append(bullet)
+				play_bullets.append(bullet)
 			BulletResource.BulletType.ACTION:
-				_action_bullets.append(bullet)
+				action_bullets.append(bullet)
 			BulletResource.BulletType.SOCIAL:
-				_social_bullets.append(bullet)
+				social_bullets.append(bullet)
 				
 	resource.set_up_event_resources()
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
+	global_rotation_degrees = 0
 	#call_deferred("_on_values_change")
 
 # Return whether or not the card reach zero hp
@@ -105,6 +118,22 @@ func damage(amount: int) -> bool:
 	on_damage()
 	if hp < 0: hp = 0
 	return hp == 0
+	
+func rotate_card(dir: CardDirection):
+	card_dir = dir
+	var rotate_to: float = 0
+	match (dir):
+		CardDirection.NORTH: rotate_to = 0
+		CardDirection.NORTH_EAST: rotate_to = 45
+		CardDirection.EAST: rotate_to = 90
+		CardDirection.SOUTH_EAST: rotate_to = 135
+		CardDirection.SOUTH: rotate_to = 180
+		CardDirection.SOUTH_WEST: rotate_to = 225
+		CardDirection.WEST: rotate_to = 270
+		CardDirection.NORTH_WEST: rotate_to = 315
+	while global_rotation_degrees != rotate_to:
+		rotate_toward(global_rotation_degrees, rotate_to, get_process_delta_time())
+		await get_tree().create_timer(get_process_delta_time()).timeout
 
 func flip() -> void:
 	if revealed: flip_hide()
@@ -166,92 +195,60 @@ func remove(event : EventResource):
 	var index = statusEffects.find(event)
 	statusEffects.remove_at(index)
 
-# Barrier Implemenation for networking
-var players_processed_passive: int = 0
-signal process
-@rpc("any_peer", "call_local", "reliable")
-func _increment_count() -> void:
-	players_processed_passive += 1
-	if players_processed_passive == GNM.players.size():
-		process.emit()
-		players_processed_passive = 0
-	
-func _barrier() -> void:
-	_increment_count.rpc()
-	await process
+# Invoking Bullet Events Here
+# The networking magic happens here
+func try_execute(bullet: BulletResource, idx: int) -> bool:
+	# Currently only action and social have a cost for bullet activativations
+	if not bullet.bullet_event: return false
+	match(bullet.bullet_type):
+		BulletResource.BulletType.PLAY:
+			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
+		BulletResource.BulletType.ACTION:
+			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
+			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
+			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet.bullet_cost): return false
+		BulletResource.BulletType.SOCIAL:
+			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
+			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
+			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet.bullet_cost): return false
+	return true
 
-# Passive Functions
+# Passive Functions effecting card itself
 func on_play(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY]: await event.execute(self)	
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
-
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY], self)
 func on_action(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ACTION]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_ACTION], self)
 func on_social(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL], self)
 func on_enter_tree(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE], self)
 func on_state_of_grid_change(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE], self)
 func on_end_of_turn(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN], self)
 func on_start_of_turn(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN]: await event.execute(self)
-		for event in statusEffects: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN], self)
 func on_damage(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE], self)
 func on_discard(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD], self)
 func on_burn(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN], self)
 func on_stack(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK], self)
 func on_flip_hide(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE], self)
 func on_flip_reveal(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL], self)
 func on_before_move(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE], self)
 func on_after_move(): 
-	if not GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE], self)
 func on_replace(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE], self)
 func on_freeze(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
 func on_quest_progress(): 
-	if GameManager.Instance.is_my_turn():
-		for event in resource.passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS]: await event.execute(self)
-	if GameManager.Instance is MultiplayerGameManager: _barrier()
+	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)
+	
+# 

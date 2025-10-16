@@ -69,7 +69,7 @@ func draw_card_to_hand() -> void:
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
 	card.grid_pos = Vector2i(-1, -1)
-	card.player_owner = "Player" # When we add netcoding do this -> GNM.player_info['name']
+	card.owner_pid = multiplayer.get_unique_id() # When we add netcoding do this -> GNM.player_info['name']
 	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
 	
 	# =================I'm not a big fan of this====================

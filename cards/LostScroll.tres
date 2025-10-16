@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://c67uiicbmirnv"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://c67uiicbmirnv"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_gwo4p"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_h6vb4"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_kkt8v"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_kkt8v"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_paeuq"]
 
 [sub_resource type="Resource" id="Resource_h6vb4"]
 script = ExtResource("1_gwo4p")

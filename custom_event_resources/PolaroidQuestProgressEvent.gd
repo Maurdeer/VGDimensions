@@ -3,12 +3,8 @@ class_name PolaroidQuestProgressEvent
 
 @export var necessaryPolaroidAmount: int
 
-func execute(card_ref: Card) -> bool:
-	#var card_pos: Vector2i = card_ref.grid_pos
-	print("We're in the From Nava Quest! Gonna check if the player has won...")
-	if (PlayerStatistics.from_nava_polaroids >= necessaryPolaroidAmount):
-		print("The player has won! Amazing!")
-		if GameManager.Instance is MultiplayerGameManager: 
-			(GameManager.Instance as MultiplayerGameManager).game_victory()
-		
+func on_execute() -> bool:
 	return true
+	
+func required_events() -> Array[EventResource]:
+	return []

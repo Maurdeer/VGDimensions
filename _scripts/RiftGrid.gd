@@ -14,6 +14,9 @@ var _card_refs: Array[Card]
 @onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
 var pre_defined_seed: int
 
+# Global Signals to be read
+signal on_discard(Card)
+
 func _ready() -> void:
 	# Initialize Singleton
 	if Instance: 
@@ -106,6 +109,10 @@ func draw_card(draw_to: Vector2i) -> void:
 		
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	place_card(draw_to, new_card)
+	
+func draw_card_if_empty(draw_to: Vector2i) -> void:
+	if grid[draw_to.y][draw_to.x].is_empty():
+		draw_card(draw_to)
  
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
@@ -147,14 +154,16 @@ func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
 	card = grid[discard_from.y][discard_from.x].remove_card_at(deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
 	
-	# TODO: (Ryan) When we add netcoding, do a more explicit player check in the networked version
+	# TODO: Ensure this discard check behavior is correct
 	if card.temporary:
 		CardManager.remove_card_by_id(card.card_id)
-	elif card.player_owner == "": 
+	elif card.owner_pid < 0: 
 		_rift_discard_pile.addCard(card)
 		card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
-	else:
+	elif multiplayer.has_multiplayer_peer() and multiplayer.get_unique_id() == card.owner_pid:
 		PlayerHand.Instance.discard_card(card)
+	else:
+		remove_child(card)
 	
 	await card.on_discard()
 	
@@ -295,7 +304,7 @@ func damage_card(card_pos: Vector2i, amount: int) -> bool:
 func burn_card(card_pos: Vector2i) -> bool:
 	var card: Card = get_top_card(card_pos)
 	card.on_burn()
-	card.add_to_events(BurnStatusEvent.new())
+	#card.add_to_events(BurnStatusEvent.new())
 	print("Applied the Burn Status Effect to the given card.")
 	return true
 	
@@ -303,8 +312,12 @@ func freeze_card(card_pos: Vector2i) -> bool:
 	var card: Card = get_top_card(card_pos)
 	card.on_freeze()
 	card.interactable = false
-	card.add_to_events(FreezeStatusEvent.new())
+	#card.add_to_events(FreezeStatusEvent.new())
 	return true
+	
+func rotate_card(card_pos: Vector2i, dir: Card.CardDirection) -> void:
+	var card: Card = get_top_card(card_pos)
+	card.rotate(dir)
 
 func revolveCards():
 	pass

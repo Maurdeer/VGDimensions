@@ -1,30 +1,41 @@
 extends EventResource
 class_name PlaceEvent
 
+@export var source_card_type: SelectionEventResource.SelectionType
 @export var only_adjacent_cards: bool = false
 @export var other_card_resource: CardResource
+const card_to_place: int = 0
+const location_to_place: int = 1
 
-func execute(card_ref: Card) -> bool:
-	var selected_card_pos: Vector2i
+func on_execute() -> bool:
+	var source_card: Card
+	if other_card_resource:
+		# (Ryan) Since events are not responsible of invoking rpcs, 
+		# we do local calls from now on 
+		source_card = CardManager.create_card_locally(other_card_resource, true)
+	else:
+		source_card = m_card_refs[card_to_place]
+		
+	var selected_pos: Vector2i = m_card_refs[location_to_place].grid_pos
+	if source_card.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
+		# Just move the cards within the rift
+		RiftGrid.Instance.move_card_to(selected_pos, source_card.grid_pos)
+		RiftGrid.Instance.draw_card_if_empty(source_card.grid_pos)
+	else:
+		# The Card was not in the rift grid yet, so just place it in the new spot
+		RiftGrid.Instance.place_card(selected_pos, source_card)
+	return false
+
+func required_events() -> Array[EventResource]:
+	# Where are we grabbing this card from?
+	var source_card_selection: SelectionEventResource = SelectionEventResource.new()
+	source_card_selection.store_at = card_to_place
+	source_card_selection.type = source_card_type
 	
-	if card_ref.card_sm.is_state(CardStateMachine.StateType.IN_HAND):
-		selected_card_pos = await GridPositionSelector.Instance.player_select_card()
-		if other_card_resource == null:
-			RiftGrid.Instance.place_card(selected_card_pos, card_ref)
-		else:
-			var other_card = await CardManager.create_card(other_card_resource, true)
-			RiftGrid.Instance.place_card(selected_card_pos, other_card)
-	elif card_ref.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
-		if only_adjacent_cards:
-			var filter: Callable = func(card):
-				return (card.grid_pos - card_ref.grid_pos).length() == 1
-			selected_card_pos = await GridPositionSelector.Instance.player_select_card_filter(filter)
-		else:
-			selected_card_pos = await GridPositionSelector.Instance.player_select_card()
-		if other_card_resource == null:
-			RiftGrid.Instance.move_card_to(selected_card_pos, card_ref.grid_pos)
-			RiftGrid.Instance.fill_empty_decks()
-		else:
-			var other_card = await CardManager.create_card(other_card_resource, true)
-			RiftGrid.Instance.place_card(selected_card_pos, other_card)
-	return true
+	# The location to place the card is always on the Rift
+	var location_to_place_selection: SelectionEventResource = SelectionEventResource.new()
+	location_to_place_selection.store_at = location_to_place
+	location_to_place_selection.type = SelectionEventResource.SelectionType.RIFT
+	if only_adjacent_cards:
+		location_to_place_selection.filter = RiftCardSelector.Instance.adjacent_only(m_card_invoker)
+	return [source_card_selection, location_to_place_selection]

@@ -11,10 +11,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
-	call_deferred("_after_ready")
 	
-func _after_ready() -> void:
-	add_quest(await CardManager.create_card(testingPurposeCard, false))
 
 func add_quest(card : Card):
 	if (card == null):

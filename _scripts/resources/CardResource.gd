@@ -97,9 +97,6 @@ var damagable: bool = starting_hp > -1
 @export var description_textures: Array[Texture]
 @export_multiline var quip_description: String
 
-# Passive Events
-@export_group("Passive Events")
-@export var _passive_event_resources: Array[PassiveEventResource]
 var passive_events: Array[Array]
 
 # Visuals
@@ -111,6 +108,8 @@ var passive_events: Array[Array]
 func set_up_event_resources():
 	passive_events.clear()
 	passive_events.resize(PassiveEventResource.PassiveEvent.size())
-	for passive_event_resource in _passive_event_resources:
-		if not passive_event_resource or not passive_event_resource.event: continue
-		passive_events[passive_event_resource.event_type].append(passive_event_resource.event)
+	for bullet in bullets:
+		if bullet.bullet_type != BulletResource.BulletType.PASSIVE: continue
+		if bullet.passive_events.is_empty(): continue
+		for passive_event_resource in bullet.passive_events:
+			passive_events[passive_event_resource.event_type].append(passive_event_resource.event)

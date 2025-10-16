@@ -1,39 +1,34 @@
+@tool
 extends Resource
 class_name BulletResource
 
 enum BulletType {
 	PLAY,
 	ACTION,
-	DEFEAT,
 	SOCIAL,
-	DISCARD,
 	PASSIVE
 }
-@export var bullet_type: BulletType
+@export var bullet_type: BulletType:
+	set(value):
+		bullet_type = value
+		notify_property_list_changed()
 @export var bullet_cost: int
 
 ## Only used by PLAY, ACTION, and SOCIAL. For anything else refer to "Passive Events"
-@export var _bullet_event: EventResource
+@export var bullet_event: EventResource
+@export var passive_events: Array[PassiveEventResource]
 @export_multiline var bullet_description: String = ""
 
-func try_execute(card_ref: Card) -> bool:
-	# (Ryan) This is currently where cost is being spent, not sure if that is a good idea?
-	if not _bullet_event: return false
-	
-	# Currently only action and social have a cost for bullet activativations
-	match(bullet_type):
+func _validate_property(property: Dictionary) -> void:
+	var hide_list = []
+	match bullet_type:
 		BulletType.PLAY:
-			if not await _bullet_event.execute(card_ref): return false
-			await card_ref.on_play()
+			hide_list.append("passive_events")
 		BulletType.ACTION:
-			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.ACTION, bullet_cost): return false
-			if not await _bullet_event.execute(card_ref): return false
-			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.ACTION, bullet_cost): return false
-			await card_ref.on_action()
+			hide_list.append("passive_events")
 		BulletType.SOCIAL:
-			if not PlayerStatistics.can_afford(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return false
-			if not await _bullet_event.execute(card_ref): return false
-			if not PlayerStatistics.purchase_attempt(PlayerStatistics.ResourceType.SOCIAL, bullet_cost): return false
-			await card_ref.on_social()
-	return true
-	
+			hide_list.append("passive_events")
+		_:
+			hide_list.append("bullet_event")
+	if property.name in hide_list:
+		property.usage = PROPERTY_USAGE_NO_EDITOR

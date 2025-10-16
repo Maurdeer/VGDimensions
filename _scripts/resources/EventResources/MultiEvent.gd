@@ -3,9 +3,8 @@ class_name MultiEvent
 
 @export var events: Array[EventResource]
 
-func execute(card_ref: Card) -> bool:
-	# TODO: determine how to succed or fail with this one
-	for event in events:
-		await event.execute(card_ref)
-		
-	return true
+func on_execute() -> bool:
+	return false
+	
+func required_events() -> Array[EventResource]:
+	return events

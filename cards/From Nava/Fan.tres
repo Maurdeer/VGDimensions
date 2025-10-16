@@ -1,28 +1,12 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://bfmf5a377dkdm"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://bfmf5a377dkdm"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_02xht"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_13rty"]
-[ext_resource type="Script" uid="uid://e8vymu1ddkjw" path="res://custom_event_resources/DiscardSelfEvent.gd" id="2_gjxh4"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResources/EventResource.gd" id="2_wu7on"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_c78l2"]
-[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_ff2lb"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_qi8vg"]
 [ext_resource type="Texture2D" uid="uid://b52gn6tbq0if" path="res://art/card_art/FromNava/fan.png" id="5_mxq4v"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="5_wq70l"]
-
-[sub_resource type="Resource" id="Resource_kgowp"]
-script = ExtResource("3_ff2lb")
-type = 3
-amount = 1
-metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
-
-[sub_resource type="Resource" id="Resource_nv2p1"]
-script = ExtResource("2_gjxh4")
-metadata/_custom_type_script = "uid://e8vymu1ddkjw"
 
 [sub_resource type="Resource" id="Resource_mxfw3"]
-script = ExtResource("5_wq70l")
-events = Array[ExtResource("2_wu7on")]([SubResource("Resource_kgowp"), SubResource("Resource_nv2p1")])
 metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_oswot"]

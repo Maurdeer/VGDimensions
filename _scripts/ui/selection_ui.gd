@@ -7,41 +7,49 @@ const SOCIAL_ICON = preload("uid://tv4w2lagffrf")
 const ACTION_ICON = preload("uid://cn0xhk718r4iv")
 @onready var buttons: VBoxContainer = $TextureRect/Buttons
 var _bullet_selected: BulletResource
-
-func make_selection(bullet: BulletResource) -> void:
+var _bullet_idx: int
+func make_selection(bullet: BulletResource, idx: int) -> void:
 	_bullet_selected = bullet
+	_bullet_idx = idx
 	selection_complete.emit()
 	
-func get_play_selection(resource: CardResource) -> BulletResource:
+func get_play_selection(card: Card):
 	var selection_was_created: bool = false
-	for bullet in resource.bullets:
-		if bullet.bullet_type == BulletResource.BulletType.PLAY:
-			create_button_by_bullet(bullet)
-			selection_was_created = true
+	var idx: int = 0
+	for play_bullet in card.play_bullets:
+		create_button_by_bullet(play_bullet, idx)
+		selection_was_created = true
+		idx += 1
 			
 	if not selection_was_created:
 		printerr("Playable Card has no Play bullets!")
 		return null
 			
 	await selection_complete
-	return _bullet_selected
+	return [_bullet_selected, _bullet_idx]
 
-func get_interaction_selection(resource: CardResource) -> BulletResource:
+func get_interaction_selection(card: Card):
 	var selection_was_created: bool = false
-	for bullet in resource.bullets:
-		if bullet.bullet_type == BulletResource.BulletType.SOCIAL \
-		or bullet.bullet_type == BulletResource.BulletType.ACTION:
-			create_button_by_bullet(bullet)
-			selection_was_created = true
+	var idx: int = 0
+	for bullet in card.social_bullets:
+		create_button_by_bullet(bullet, idx)
+		selection_was_created = true
+		idx += 1
+		
+	idx = 0
+	for bullet in card.action_bullets:
+		create_button_by_bullet(bullet, idx)
+		selection_was_created = true
+		idx += 1
 			
 	if not selection_was_created:
 		printerr("Interactable Card has no interactable bullets!")
 		return null
 		
 	await selection_complete
-	return _bullet_selected
+	return [_bullet_selected, _bullet_idx]
 
-func create_button_by_bullet(bullet: BulletResource):
+func create_button_by_bullet(bullet: BulletResource, idx: int):
 	var new_hbox: HBoxContainer = HBoxContainer.new()
 	var new_button: Button = Button.new()
 	var new_label: Label = Label.new()
@@ -60,7 +68,7 @@ func create_button_by_bullet(bullet: BulletResource):
 		BulletResource.BulletType.ACTION:
 			new_button.icon = ACTION_ICON 
 
-	new_button.pressed.connect(func(): make_selection(bullet))
+	new_button.pressed.connect(func(): make_selection(bullet, idx))
 	buttons.add_child(new_hbox)
 	new_hbox.add_child(new_button)
 	new_hbox.add_child(new_label)

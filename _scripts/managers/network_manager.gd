@@ -1,6 +1,6 @@
 extends Node
 
-signal player_connected(pid, player_info)
+signal player_connected(pid)
 signal player_disconnected(pid)
 signal server_disconnected
 signal all_players_loaded
@@ -36,7 +36,7 @@ func host(p_player_name: String, port: int = DEFAULT_PORT) -> bool:
 	
 	# Attach player to players
 	players[1] = player_info
-	player_connected.emit(1, player_info)
+	player_connected.emit(1)
 	
 	return true
 	
@@ -58,7 +58,7 @@ func remove_multiplayer_peer():
 	players.clear()
 	
 func disconnect_self():
-	_disconnect_peer.rpc(multiplayer.multiplayer_peer)
+	_disconnect_peer.rpc(multiplayer.get_unique_id())
 	remove_multiplayer_peer()
 	get_tree().change_scene_to_file("res://_scenes/networking/network_lobby.tscn")
 	
@@ -90,17 +90,18 @@ func player_loaded():
 func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
-	player_connected.emit(new_player_id, new_player_info)
+	player_connected.emit(new_player_id)
 	
 func _on_player_disconnected(id):
-	players.erase(id)
 	player_disconnected.emit(id)
+	players.erase(id)
 	disconnect_self()
+	
 
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	players[peer_id] = player_info
-	player_connected.emit(peer_id, player_info)
+	player_connected.emit(peer_id)
 
 
 func _on_connected_fail():
@@ -110,4 +111,25 @@ func _on_server_disconnected():
 	remove_multiplayer_peer()
 	players.clear()
 	server_disconnected.emit()
+
+# TODO: Fix Barrier Impelementation for networking
+# (Ryan) Please do not use yet, I need to refactor it. Prolly gonna use a Dissemination barrier, or 
+# some kind of rpc requester and response system to make things simple!
+# ==================Barrier Implemenation for networking====================
+var players_processed_passive: int = 0
+var switch: bool = false
+signal process
+@rpc("any_peer", "call_local", "reliable")
+func _increment_count() -> void:
+	players_processed_passive += 1
 	
+func barrier() -> void:
+	if not multiplayer.multiplayer_peer: return
+	_increment_count.rpc()
+	# (Ryan) Keep an eye on this if there are any problems in the future
+	if players_processed_passive == GNM.players.size():
+		process.emit()
+	else:
+		await process
+	players_processed_passive = 0
+#=============================================================================

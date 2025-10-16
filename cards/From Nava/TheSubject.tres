@@ -1,91 +1,43 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=25 format=3 uid="uid://dorgbnjirif8v"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://dorgbnjirif8v"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_c2l58"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_x6vkk"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_y6sqj"]
-[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/BurnEvent.gd" id="3_6c8e3"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_8gt5c"]
-[ext_resource type="Script" uid="uid://cxthocnum3gvm" path="res://_scripts/resources/EventResources/BurnStatusEvent.gd" id="4_xv7b8"]
-[ext_resource type="Resource" uid="uid://eq5vqnlsot7r" path="res://cards/From Nava/Chair.tres" id="5_k2gpq"]
-[ext_resource type="Script" uid="uid://nejanh6hhpp5" path="res://_scripts/resources/EventResources/FreezeStatusEvent.gd" id="6_fehfv"]
-[ext_resource type="Script" uid="uid://bg0mn6ch4hw1q" path="res://_scripts/resources/EventResources/ApplyFreezeEvent.gd" id="7_eebf0"]
-[ext_resource type="Script" uid="uid://db1qnsvwn0mg" path="res://_scripts/resources/EventResources/ShiftEvent.gd" id="8_36owy"]
-[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="9_36owy"]
 [ext_resource type="Texture2D" uid="uid://livyak5xsugs" path="res://art/card_art/FromNava/subject.png" id="9_lm5a4"]
-
-[sub_resource type="Resource" id="Resource_bd2yj"]
-script = ExtResource("4_xv7b8")
-metadata/_custom_type_script = "uid://cxthocnum3gvm"
-
-[sub_resource type="Resource" id="Resource_k2gpq"]
-script = ExtResource("3_6c8e3")
-_passive_event = SubResource("Resource_bd2yj")
-amount = 3
-metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
 
 [sub_resource type="Resource" id="Resource_36owy"]
 script = ExtResource("2_y6sqj")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_k2gpq")
-bullet_description = "Use 1 Social to deal 3 Damage and burn target card."
+bullet_description = "Deal 3 Damage and burn target card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_bo44w"]
-script = ExtResource("6_fehfv")
-metadata/_custom_type_script = "uid://nejanh6hhpp5"
-
-[sub_resource type="Resource" id="Resource_wy3xp"]
-script = ExtResource("7_eebf0")
-_passive_event = SubResource("Resource_bo44w")
-amount = 1
-metadata/_custom_type_script = "uid://bg0mn6ch4hw1q"
 
 [sub_resource type="Resource" id="Resource_fehfv"]
 script = ExtResource("2_y6sqj")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_wy3xp")
-bullet_description = "Use 1 Social to deal 1 Damage and freeze target card."
+bullet_description = "Deal 1 Damage and freeze target card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_xv7b8"]
-script = ExtResource("8_36owy")
-shift_all = true
-metadata/_custom_type_script = "uid://db1qnsvwn0mg"
 
 [sub_resource type="Resource" id="Resource_eebf0"]
 script = ExtResource("2_y6sqj")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_xv7b8")
-bullet_description = "Use 1 Social to shift all cards in target row 1 card to the right."
+bullet_description = "Shift all cards in target row 1 card to the right."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_topf3"]
-script = ExtResource("8_36owy")
-shift_direction = 1
-shift_all = true
-metadata/_custom_type_script = "uid://db1qnsvwn0mg"
 
 [sub_resource type="Resource" id="Resource_p2nhm"]
 script = ExtResource("2_y6sqj")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_topf3")
-bullet_description = "Use 1 Social to shift all cards in target column 1 card down."
+bullet_description = "Shift all cards in target column 1 card down."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_yxm2j"]
-script = ExtResource("9_36owy")
-other_card_resource = ExtResource("5_k2gpq")
-metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_h5fdw"]
 script = ExtResource("2_y6sqj")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_yxm2j")
 bullet_description = "Use 1 Social to place a Chair down anywhere on the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

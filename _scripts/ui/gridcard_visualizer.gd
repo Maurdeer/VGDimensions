@@ -37,8 +37,8 @@ func _on_values_change() -> void:
 	
 	_on_stat_change()
 	
-	$GUI/Icons/ACTION.visible = not card._action_bullets.is_empty()
-	$GUI/Icons/SOCIAL.visible = not card._social_bullets.is_empty()
+	$GUI/Icons/ACTION.visible = not card.action_bullets.is_empty()
+	$GUI/Icons/SOCIAL.visible = not card.social_bullets.is_empty()
 	$GUI/Icons/PASSIVE.visible = false
 	
 func _on_stat_change() -> void:

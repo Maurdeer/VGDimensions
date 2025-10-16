@@ -3,8 +3,8 @@ class_name DrawEvent
 
 @export var amount : int
 
-func execute(_card_ref: Card) -> bool:
-	for i in amount:
-		GameManager.Instance.player_hand.draw_card_to_hand()
-	
+func on_execute() -> bool:
 	return true
+	
+func required_events() -> Array[EventResource]:
+	return []

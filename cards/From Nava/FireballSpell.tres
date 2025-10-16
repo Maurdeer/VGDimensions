@@ -1,26 +1,13 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://dwkdhtd2hc5xo"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://dwkdhtd2hc5xo"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_c71t1"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_iieos"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_mi7rg"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_hpcky"]
-[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/BurnEvent.gd" id="5_e4jcp"]
 [ext_resource type="Texture2D" uid="uid://dg623aalbeqda" path="res://art/card_art/FromNava/-e Fire -e.png" id="5_hpcky"]
-[ext_resource type="Script" uid="uid://cxthocnum3gvm" path="res://_scripts/resources/EventResources/BurnStatusEvent.gd" id="6_mll46"]
-
-[sub_resource type="Resource" id="Resource_hpcky"]
-script = ExtResource("6_mll46")
-metadata/_custom_type_script = "uid://cxthocnum3gvm"
-
-[sub_resource type="Resource" id="Resource_e4jcp"]
-script = ExtResource("5_e4jcp")
-_passive_event = SubResource("Resource_hpcky")
-amount = 3
-metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
 
 [sub_resource type="Resource" id="Resource_exm1x"]
 script = ExtResource("2_mi7rg")
-_bullet_event = SubResource("Resource_e4jcp")
 bullet_description = "Play this card to deal 3 Damage and burn the target."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

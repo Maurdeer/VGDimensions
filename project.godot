@@ -23,6 +23,7 @@ PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 CardShop="*res://_scripts/card_shop.gd"
 PlayerStatistics="*res://_scripts/player/player_statistics.gd"
 CardManager="*res://_scripts/managers/card_manager.gd"
+EventManager="*res://_scripts/managers/event_manager.gd"
 
 [display]
 

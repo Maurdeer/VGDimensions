@@ -1,49 +1,27 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://fuprndqilal5"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://fuprndqilal5"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_ml86o"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_ck6ue"]
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_x8p16"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_damly"]
-[ext_resource type="Script" uid="uid://wcgspm8flkce" path="res://custom_event_resources/DiscardAndReplaceEvent.gd" id="4_flryt"]
-[ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="5_41v7w"]
 [ext_resource type="Texture2D" uid="uid://bhafqg1ktk811" path="res://art/card_art/Willow/wanderer.jpg" id="6_0l8qs"]
-
-[sub_resource type="Resource" id="Resource_fd8pa"]
-script = ExtResource("4_flryt")
-damage_amount = 5
-metadata/_custom_type_script = "uid://wcgspm8flkce"
 
 [sub_resource type="Resource" id="Resource_ddpyv"]
 script = ExtResource("2_ck6ue")
-_bullet_event = SubResource("Resource_fd8pa")
 bullet_description = "Play this card to deal 5 damage to target card. If defeated, replace with this card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_yycwr"]
-script = ExtResource("4_flryt")
-adjacent_only = true
-damage_amount = 5
-metadata/_custom_type_script = "uid://wcgspm8flkce"
 
 [sub_resource type="Resource" id="Resource_khvwd"]
 script = ExtResource("2_ck6ue")
 bullet_type = 3
 bullet_cost = 2
-_bullet_event = SubResource("Resource_yycwr")
 bullet_description = "Use 2 Social to deal 5 damage to adjacent card. If defeated, replace with this card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_tk12a"]
-script = ExtResource("5_41v7w")
-first_card_is_calling_card = true
-adjacent_only = true
-metadata/_custom_type_script = "uid://banseryattu42"
 
 [sub_resource type="Resource" id="Resource_r6ug0"]
 script = ExtResource("2_ck6ue")
 bullet_type = 3
 bullet_cost = 1
-_bullet_event = SubResource("Resource_tk12a")
 bullet_description = "Use 1 Social to swap this card with an adjacent card"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
