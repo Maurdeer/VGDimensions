@@ -155,6 +155,8 @@ func discard_card(card: Card) -> void:
 	grid[card.grid_pos.y][card.grid_pos.x].remove_card_at(card.deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
 	
+	card.on_discard()
+	
 	# TODO: Ensure this discard check behavior is correct
 	if card.temporary:
 		CardManager.remove_card_by_id(card.card_id)
@@ -165,8 +167,6 @@ func discard_card(card: Card) -> void:
 		PlayerHand.Instance.discard_card(card)
 	else:
 		remove_child(card)
-	
-	await card.on_discard()
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()
@@ -350,7 +350,7 @@ func _on_start_of_new_turn() -> void:
 			if not grid[y][x].get_top_card():
 				draw_card(Vector2i(x,y))
 			grid[y][x].get_top_card().on_start_of_turn()
-	EventManager.process_event_queue()
+	await EventManager.process_event_queue()
 
 func _on_end_of_new_turn() -> void:
 	for y in rift_grid_height:
@@ -358,7 +358,7 @@ func _on_end_of_new_turn() -> void:
 			if not grid[y][x].get_top_card():
 				draw_card(Vector2i(x,y))
 			grid[y][x].get_top_card().on_end_of_turn()
-	EventManager.process_event_queue()
+	await EventManager.process_event_queue()
 			
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:

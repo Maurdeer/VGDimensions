@@ -124,13 +124,15 @@ func refresh_stats() -> void:
 
 # Return whether or not the card reach zero hp
 func damage(amount: int) -> bool:
-	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return false
+	var discarded: bool = false
+	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return discarded
 	hp -= amount
 	on_damage()
-	if hp < 0: 
+	if hp <= 0: 
 		hp = 0
+		discarded = true
 		RiftGrid.Instance.discard_card(self)
-	return hp == 0
+	return discarded
 	
 func rotate_card(dir: CardDirection):
 	card_dir = dir
