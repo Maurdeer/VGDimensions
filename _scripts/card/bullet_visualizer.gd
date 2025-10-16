@@ -40,12 +40,8 @@ func _on_bullet_type_change() -> void:
 			_on_bullet_type_play()
 		BulletResource.BulletType.ACTION:
 			_on_bullet_type_action()
-		BulletResource.BulletType.DEFEAT:
-			_on_bullet_type_defeat()
 		BulletResource.BulletType.SOCIAL:
 			_on_bullet_type_social()
-		BulletResource.BulletType.DISCARD:
-			_on_bullet_type_discard()
 		BulletResource.BulletType.PASSIVE:
 			_on_bullet_type_passive()
 			
