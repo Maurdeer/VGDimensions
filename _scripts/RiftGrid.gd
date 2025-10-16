@@ -148,7 +148,7 @@ func discard_card_and_draw(card: Card, draw_when_empty: bool = true) -> void:
 	draw_card(card.grid_pos)
 	
 func discard_card(card: Card) -> void:
-	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.x, card.y])
+	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.grid_pos.x, card.grid_pos.y])
 	#await card.gridVisualizer.dissolve_shader()
 	var stack = grid[card.grid_pos.y][card.grid_pos.x]
 	assert(0 <= card.deck_pos and card.deck_pos < stack.deck_size, "Incorrect deck position to discard, Card Problem")
@@ -347,17 +347,23 @@ func fill_empty_decks() -> void:
 func _on_start_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			await grid[y][x].get_top_card().on_start_of_turn()
+			if not grid[y][x].get_top_card():
+				draw_card(Vector2i(x,y))
+			grid[y][x].get_top_card().on_start_of_turn()
+	EventManager.process_event_queue()
 
 func _on_end_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			await grid[y][x].get_top_card().on_end_of_turn()
+			if not grid[y][x].get_top_card():
+				draw_card(Vector2i(x,y))
+			grid[y][x].get_top_card().on_end_of_turn()
+	EventManager.process_event_queue()
 			
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			await grid[y][x].get_top_card().on_state_of_grid_change()
+			grid[y][x].get_top_card().on_state_of_grid_change()
 			
 # Only when things get CRAAAAZZZZZYYY
 # This should hopefully not happen, unless the deck isn't created that well

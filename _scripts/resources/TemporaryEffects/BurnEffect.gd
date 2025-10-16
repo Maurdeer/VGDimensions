@@ -7,9 +7,6 @@ var curr_duration: int
 
 func on_execute() -> bool:
 	# Directly damage the card
-	if m_card_invoker.is_state() or m_card_invoker.deck_pos != 0: 
-		on_duration_remove()
-		return false
 	m_card_invoker.damage(amount)
 	on_duration_progress()
 	return false

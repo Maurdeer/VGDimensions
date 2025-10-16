@@ -105,9 +105,9 @@ func _on_resource_change() -> void:
 			BulletResource.BulletType.SOCIAL:
 				social_bullets.append(bullet)
 				
-	set_up_passive_events()
+	reset_passive_events()
 	
-func set_up_passive_events() -> void:
+func reset_passive_events() -> void:
 	passive_events.clear()
 	passive_events.resize(PassiveEventResource.PassiveEvent.size())
 	for bullet in resource.bullets:
@@ -119,6 +119,7 @@ func set_up_passive_events() -> void:
 func refresh_stats() -> void:
 	hp = resource.starting_hp
 	global_rotation_degrees = 0
+	reset_passive_events()
 	#call_deferred("_on_values_change")
 
 # Return whether or not the card reach zero hp
