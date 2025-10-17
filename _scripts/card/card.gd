@@ -214,7 +214,7 @@ func remove_passive_event(event : EventResource):
 	if event is TemporaryEffect:
 		# Specific parameter your guranteed
 		var idx: int = passive_events[event.invoked_when].find(event)
-		passive_events[event.invoked_when].remove_at(idx)
+		if idx >= 0: passive_events[event.invoked_when].remove_at(idx)
 	else:
 		# No logic of duration, so you may have wanted this effect to be permenant
 		push_warning("Newly added passive event wasn't a temporary effect, await new logic soon!")
