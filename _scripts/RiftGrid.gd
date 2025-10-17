@@ -26,8 +26,7 @@ func _ready() -> void:
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
-	GameManager.Instance.on_start_of_turn.connect(_on_start_of_new_turn)
-	GameManager.Instance.on_end_of_turn.connect(_on_end_of_new_turn)
+	pass
 
 #Add functionality for border cards, a la Bullet spawning locations in Willow
 
@@ -344,7 +343,7 @@ func fill_empty_decks() -> void:
 		for x in rift_grid_width:
 			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
 	
-func _on_start_of_new_turn() -> void:
+func on_start_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
 			if not grid[y][x].get_top_card():
@@ -352,7 +351,7 @@ func _on_start_of_new_turn() -> void:
 			grid[y][x].get_top_card().on_start_of_turn()
 	await EventManager.process_event_queue()
 
-func _on_end_of_new_turn() -> void:
+func on_end_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
 			if not grid[y][x].get_top_card():

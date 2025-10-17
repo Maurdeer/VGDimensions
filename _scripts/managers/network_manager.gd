@@ -119,13 +119,14 @@ func _on_server_disconnected():
 var players_processed_passive: int = 0
 var switch: bool = false
 signal process
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_remote", "reliable")
 func _increment_count() -> void:
 	players_processed_passive += 1
 	
 func barrier() -> void:
 	if not multiplayer.multiplayer_peer: return
 	_increment_count.rpc()
+	_increment_count()
 	# (Ryan) Keep an eye on this if there are any problems in the future
 	if players_processed_passive == GNM.players.size():
 		process.emit()

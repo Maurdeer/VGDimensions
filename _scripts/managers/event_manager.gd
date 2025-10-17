@@ -9,7 +9,7 @@ signal peer_selection
 # returns false is Completed, true if canceled by player input
 func process_event_queue() -> bool:
 	if _callable_queue.is_empty():
-		push_warning("Called Process Event Queue, but queue was empty")
+		#push_warning("Called Process Event Queue, but queue was empty")
 		return true
 	
 	var card_refs: Dictionary[int, Card] = {}
