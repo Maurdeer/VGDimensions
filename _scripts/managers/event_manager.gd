@@ -25,6 +25,8 @@ func process_event_queue() -> bool:
 			push_warning("Null Event was found in event queue! System Fault!")
 			continue
 		if event is SelectionEventResource:
+			if event.type == 0:
+				continue
 			if GameManager.Instance.is_my_turn():
 				# Responsible for selecting card
 				selection = await event.select(card_invoker, not pass_selection)
@@ -34,13 +36,14 @@ func process_event_queue() -> bool:
 						event_fault = event
 					else:
 						process_result = ProcessResult.CANCELED
+					broadcast_selection.rpc(selection.card_id)
 					break
 				broadcast_selection.rpc(selection.card_id)
 			else:
 				# Await for the selection event to complete
 				await peer_selection
 			# Network that selection!
-			card_refs[event.store_at] = selection
+			if selection: card_refs[event.store_at] = selection
 		else:
 			pass_selection = true
 			if event.execute(card_invoker, card_refs):
@@ -75,9 +78,8 @@ func queue_event(event: EventResource, card_invoker: Card) -> void:
 		return 
 	
 	# Desinger input if they want these queued up or not
-	if event.need_required_events:
-		var required_events: Array[EventResource] = (event as EventResource).required_events()
-		queue_event_group(required_events, card_invoker)
+	var required_events: Array[EventResource] = (event as EventResource).required_events()
+	if not required_events.is_empty(): queue_event_group(required_events, card_invoker)
 	_callable_queue.push_back([event, card_invoker])
 	
 func queue_event_group(events: Array, card_invoker: Card) -> void:

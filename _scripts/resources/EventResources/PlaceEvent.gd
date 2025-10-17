@@ -1,7 +1,7 @@
 extends EventResource
 class_name PlaceEvent
 
-@export var source_card_type: SelectionEventResource.SelectionType
+@export var source_selection_type: SelectionEventResource.SelectionType
 @export var only_adjacent_cards: bool = false
 @export var other_card_resource: CardResource
 const card_to_place: int = 0
@@ -30,7 +30,7 @@ func required_events() -> Array[EventResource]:
 	# Where are we grabbing this card from?
 	var source_card_selection: SelectionEventResource = SelectionEventResource.new()
 	source_card_selection.store_at = card_to_place
-	source_card_selection.type = source_card_type
+	source_card_selection.type = source_selection_type
 	
 	# The location to place the card is always on the Rift
 	var location_to_place_selection: SelectionEventResource = SelectionEventResource.new()

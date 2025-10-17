@@ -1,7 +1,7 @@
 extends EventResource
 class_name ApplyTemporaryEffectEvent
 
-@export var target_card: SelectionEventResource.SelectionType
+@export var selection_type: SelectionEventResource.SelectionType
 @export var temp_effect: TemporaryEffect
 const target_card_at: int = 0
 
@@ -14,5 +14,5 @@ func on_execute() -> bool:
 func required_events() -> Array[EventResource]:
 	var selection: SelectionEventResource = SelectionEventResource.new()
 	selection.store_at = target_card_at
-	selection.type = target_card
+	selection.type = selection_type
 	return [selection]

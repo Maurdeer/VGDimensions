@@ -4,27 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_j4mri"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="3_wy1lx"]
 [ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="4_vydwj"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="5_j4mri"]
+[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="5_j4mri"]
 [ext_resource type="Texture2D" uid="uid://cgmcqn4gdd8ny" path="res://art/card_art/FromNava/SmallGuy.png" id="6_fq0fa"]
 [ext_resource type="Script" uid="uid://dk8vfhf4dqxns" path="res://_scripts/resources/TemporaryEffects/BurnEffect.gd" id="6_wy1lx"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="7_veqhd"]
 
 [sub_resource type="Resource" id="Resource_i1r70"]
 script = ExtResource("4_vydwj")
-target_card = 1
 amount = 3
 metadata/_custom_type_script = "uid://dgpr0uywveph4"
 
 [sub_resource type="Resource" id="Resource_dfnuw"]
 script = ExtResource("6_wy1lx")
-duration = 2
+amount = 2
 invoked_when = 5
-need_required_events = false
 metadata/_custom_type_script = "uid://dk8vfhf4dqxns"
 
 [sub_resource type="Resource" id="Resource_li3ld"]
 script = ExtResource("5_j4mri")
-target_card = 1
+selection_type = 2
 temp_effect = SubResource("Resource_dfnuw")
 metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
 
