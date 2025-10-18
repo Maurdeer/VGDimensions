@@ -33,8 +33,6 @@ func _start_game() -> void:
 func start_next_turn() -> void:
 	# End Current Player Turn
 	end_local_play_turn()
-	on_end_of_turn.emit()
-	
 	_start_next_turn.rpc()
 	
 @rpc("any_peer", "call_remote", "reliable")
@@ -47,6 +45,8 @@ func _set_up_each_peer(p_curr_turn: int, p_player_turn_queue: Array[int], p_rand
 	
 @rpc("any_peer", "call_local", "reliable")
 func _start_next_turn() -> void:
+	on_end_of_turn.emit()
+	await RiftGrid.Instance.on_end_of_new_turn()
 	curr_turn = (curr_turn + 1) % player_turn_queue.size()
 	if not multiplayer.is_server(): return
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
@@ -64,9 +64,10 @@ func _create_cards_for_player_hand_rpc():
 
 @rpc("any_peer", "call_local", "reliable")
 func _setup_player_turn(pid: int):
-	if not multiplayer.get_unique_id() == pid: return
-	start_local_play_turn()
+	if multiplayer.get_unique_id() == pid:
+		start_local_play_turn()
 	on_start_of_turn.emit()
+	await RiftGrid.Instance.on_start_of_new_turn()
 	
 func _on_next_turn_button_pressed() -> void:
 	start_next_turn()
@@ -75,6 +76,7 @@ func start_local_play_turn() -> void:
 	chat.create_message.rpc("[Server] Its %s's Turn!" % GNM.player_info['name'])
 	next_turn_button.visible = true
 	player_hand.fill_hand()
+	
 	
 func end_local_play_turn() -> void:
 	next_turn_button.visible = false

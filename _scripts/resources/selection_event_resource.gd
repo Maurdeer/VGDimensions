@@ -2,6 +2,7 @@ extends EventResource
 class_name SelectionEventResource
 
 enum SelectionType {
+	NO_SELECTION,
 	SELF,
 	RIFT,
 	PLAYER_HAND,

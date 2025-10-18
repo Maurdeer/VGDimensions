@@ -1,19 +1,10 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://c12brfjf3lm30"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://c12brfjf3lm30"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_hxjvc"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_xblm5"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_4fjvc"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="7_vbj8w"]
 [ext_resource type="Texture2D" uid="uid://bbyvm56cdaraj" path="res://art/card_art/FromNava/icetower.png" id="9_uq5a3"]
-
-[sub_resource type="Resource" id="Resource_tljqf"]
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
-
-[sub_resource type="Resource" id="Resource_8o3q2"]
-script = ExtResource("1_hxjvc")
-event_type = 8
-event = SubResource("Resource_tljqf")
-metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_6h11u"]
 script = ExtResource("2_xblm5")
@@ -28,7 +19,6 @@ type = 8
 game_origin = 26
 starting_hp = 5
 bullets = Array[ExtResource("2_xblm5")]([SubResource("Resource_6h11u")])
-_passive_event_resources = Array[ExtResource("1_hxjvc")]([SubResource("Resource_8o3q2")])
 card_art = ExtResource("9_uq5a3")
 background_art = ExtResource("7_vbj8w")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

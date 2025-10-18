@@ -9,7 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_xjtsy"]
 script = ExtResource("4_gc5so")
-source_card_type = 1
 only_adjacent_cards = true
 metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 

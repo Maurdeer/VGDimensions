@@ -97,19 +97,7 @@ var damagable: bool = starting_hp > -1
 @export var description_textures: Array[Texture]
 @export_multiline var quip_description: String
 
-var passive_events: Array[Array]
-
 # Visuals
 @export_group("Visuals")
 @export var card_art: Texture
 @export var background_art: Texture # By Default base it off of the game
-
-	
-func set_up_event_resources():
-	passive_events.clear()
-	passive_events.resize(PassiveEventResource.PassiveEvent.size())
-	for bullet in bullets:
-		if bullet.bullet_type != BulletResource.BulletType.PASSIVE: continue
-		if bullet.passive_events.is_empty(): continue
-		for passive_event_resource in bullet.passive_events:
-			passive_events[passive_event_resource.event_type].append(passive_event_resource.event)

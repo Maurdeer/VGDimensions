@@ -35,7 +35,7 @@ const SELECTION_UI = preload("uid://vei3yr63fqcj")
 @onready var card_sm: CardStateMachine = $CardSM
 @onready var dnd_2d: DragAndDropComponent2D = $drag_and_drop_component2D
 @onready var gridVisualizer: GridCardVisualizer = $gridcard_visualizer
-var statusEffects: Array[EventResource]
+var passive_events: Array[Array]
 
 # Dynamic Stats
 var hp: int:
@@ -105,19 +105,34 @@ func _on_resource_change() -> void:
 			BulletResource.BulletType.SOCIAL:
 				social_bullets.append(bullet)
 				
-	resource.set_up_event_resources()
+	reset_passive_events()
+	
+func reset_passive_events() -> void:
+	passive_events.clear()
+	passive_events.resize(PassiveEventResource.PassiveEvent.size())
+	for bullet in resource.bullets:
+		if bullet.bullet_type != BulletResource.BulletType.PASSIVE: continue
+		if bullet.passive_events.is_empty(): continue
+		for passive_event_resource in bullet.passive_events:
+			passive_events[passive_event_resource.event_type].append(passive_event_resource.event)
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
 	global_rotation_degrees = 0
+	reset_passive_events()
 	#call_deferred("_on_values_change")
 
 # Return whether or not the card reach zero hp
 func damage(amount: int) -> bool:
+	var discarded: bool = false
+	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return discarded
 	hp -= amount
 	on_damage()
-	if hp < 0: hp = 0
-	return hp == 0
+	if hp <= 0: 
+		hp = 0
+		discarded = true
+		RiftGrid.Instance.discard_card(self)
+	return discarded
 	
 func rotate_card(dir: CardDirection):
 	card_dir = dir
@@ -185,15 +200,24 @@ func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEve
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.
-
-func add_to_events(event : EventResource):
-	print("Appended")
-	#resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN].append(event)
-	statusEffects.append(event)
 	
-func remove(event : EventResource):
-	var index = statusEffects.find(event)
-	statusEffects.remove_at(index)
+func add_passive_event(event: EventResource):
+	if event is TemporaryEffect:
+		# Specific parameter your guranteed
+		passive_events[event.invoked_when].append(event)
+		event.on_duration_create()
+	else:
+		# No logic of duration, so you may have wanted this effect to be permenant
+		push_warning("Newly added passive event wasn't a temporary effect, await new logic soon!")
+	
+func remove_passive_event(event : EventResource):
+	if event is TemporaryEffect:
+		# Specific parameter your guranteed
+		var idx: int = passive_events[event.invoked_when].find(event)
+		if idx >= 0: passive_events[event.invoked_when].remove_at(idx)
+	else:
+		# No logic of duration, so you may have wanted this effect to be permenant
+		push_warning("Newly added passive event wasn't a temporary effect, await new logic soon!")
 
 # Invoking Bullet Events Here
 # The networking magic happens here
@@ -215,40 +239,38 @@ func try_execute(bullet: BulletResource, idx: int) -> bool:
 
 # Passive Functions effecting card itself
 func on_play(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_PLAY], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_PLAY], self)
 func on_action(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_ACTION], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_ACTION], self)
 func on_social(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL], self)
 func on_enter_tree(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE], self)
 func on_state_of_grid_change(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE], self)
 func on_end_of_turn(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN], self)
 func on_start_of_turn(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN], self)
 func on_damage(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE], self)
 func on_discard(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD], self)
 func on_burn(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_BURN], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_BURN], self)
 func on_stack(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_STACK], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_STACK], self)
 func on_flip_hide(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE], self)
 func on_flip_reveal(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL], self)
 func on_before_move(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE], self)
 func on_after_move(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE], self)
 func on_replace(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE], self)
 func on_freeze(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
 func on_quest_progress(): 
-	EventManager.queue_event_group(resource.passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)
-	
-# 
+	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)

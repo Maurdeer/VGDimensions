@@ -26,8 +26,7 @@ func _ready() -> void:
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
-	GameManager.Instance.on_start_of_turn.connect(_on_start_of_new_turn)
-	GameManager.Instance.on_end_of_turn.connect(_on_end_of_new_turn)
+	pass
 
 #Add functionality for border cards, a la Bullet spawning locations in Willow
 
@@ -142,17 +141,20 @@ func place_cards_under(place_under: Vector2i, cards: Array[Card]) -> void:
 	for card in cards:
 		place_card_under(place_under, card)
 
-func discard_card_and_draw(discard_from: Vector2i, deck_pos: int = 0, draw_when_empty: bool = true) -> void:
-	discard_card(discard_from, deck_pos)
-	if draw_when_empty and not grid[discard_from.y][discard_from.x].is_empty(): return
-	draw_card(discard_from)
+func discard_card_and_draw(card: Card, draw_when_empty: bool = true) -> void:
+	discard_card(card)
+	if draw_when_empty and not grid[card.grid_pos.y][card.grid_pos.x].is_empty(): return
+	draw_card(card.grid_pos)
 	
-func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
-	assert(is_valid_pos(discard_from), "Cannot discard card from position (%s, %s)" % [discard_from.x, discard_from.y])
-	var card: Card = grid[discard_from.y][discard_from.x].get_card_at(deck_pos)
+func discard_card(card: Card) -> void:
+	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.grid_pos.x, card.grid_pos.y])
 	#await card.gridVisualizer.dissolve_shader()
-	card = grid[discard_from.y][discard_from.x].remove_card_at(deck_pos)
+	var stack = grid[card.grid_pos.y][card.grid_pos.x]
+	assert(0 <= card.deck_pos and card.deck_pos < stack.deck_size, "Incorrect deck position to discard, Card Problem")
+	grid[card.grid_pos.y][card.grid_pos.x].remove_card_at(card.deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
+	
+	card.on_discard()
 	
 	# TODO: Ensure this discard check behavior is correct
 	if card.temporary:
@@ -164,8 +166,6 @@ func discard_card(discard_from: Vector2i, deck_pos: int = 0) -> void:
 		PlayerHand.Instance.discard_card(card)
 	else:
 		remove_child(card)
-	
-	await card.on_discard()
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()
@@ -187,7 +187,7 @@ func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
 	while not deck.is_empty():
-		discard_card(discard_from)
+		discard_card(deck.pop_front())
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
 	return grid[remove_from.y][remove_from.x].removeCard()
@@ -296,10 +296,7 @@ func damage_card(card_pos: Vector2i, amount: int) -> bool:
 	var card: Card = get_top_card(card_pos)
 	if card.hp == -1:
 		return false
-	if card.damage(amount):
-		await discard_card(card_pos)
-		return true
-	return false
+	return card.damage(amount)
 
 func burn_card(card_pos: Vector2i) -> bool:
 	var card: Card = get_top_card(card_pos)
@@ -346,20 +343,26 @@ func fill_empty_decks() -> void:
 		for x in rift_grid_width:
 			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
 	
-func _on_start_of_new_turn() -> void:
+func on_start_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			await grid[y][x].get_top_card().on_start_of_turn()
+			if not grid[y][x].get_top_card():
+				draw_card(Vector2i(x,y))
+			grid[y][x].get_top_card().on_start_of_turn()
+	await EventManager.process_event_queue()
 
-func _on_end_of_new_turn() -> void:
+func on_end_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			await grid[y][x].get_top_card().on_end_of_turn()
+			if not grid[y][x].get_top_card():
+				draw_card(Vector2i(x,y))
+			grid[y][x].get_top_card().on_end_of_turn()
+	await EventManager.process_event_queue()
 			
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			await grid[y][x].get_top_card().on_state_of_grid_change()
+			grid[y][x].get_top_card().on_state_of_grid_change()
 			
 # Only when things get CRAAAAZZZZZYYY
 # This should hopefully not happen, unless the deck isn't created that well

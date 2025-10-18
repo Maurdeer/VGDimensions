@@ -1,18 +1,58 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://b7amyf0m6s5mq"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=20 format=3 uid="uid://b7amyf0m6s5mq"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_v5yea"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_8u66j"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_fp3yt"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_dvhxn"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_v30is"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="4_txccq"]
+[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="5_txccq"]
+[ext_resource type="Script" uid="uid://dk8vfhf4dqxns" path="res://_scripts/resources/TemporaryEffects/BurnEffect.gd" id="6_1m3uf"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_apaiy"]
 [ext_resource type="Texture2D" uid="uid://bendi3v6lstit" path="res://art/card_art/Outcasts/Torch.png" id="7_v30is"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="9_1m3uf"]
+
+[sub_resource type="Resource" id="Resource_apaiy"]
+script = ExtResource("9_1m3uf")
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_1m3uf"]
+script = ExtResource("4_txccq")
+amount = 1
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_kfim8"]
+script = ExtResource("6_1m3uf")
+amount = 2
+invoked_when = 5
+metadata/_custom_type_script = "uid://dk8vfhf4dqxns"
+
+[sub_resource type="Resource" id="Resource_kggjn"]
+script = ExtResource("5_txccq")
+temp_effect = SubResource("Resource_kfim8")
+metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
+
+[sub_resource type="Resource" id="Resource_7flkt"]
+script = ExtResource("6_apaiy")
+events = Array[ExtResource("3_v30is")]([SubResource("Resource_apaiy"), SubResource("Resource_1m3uf"), SubResource("Resource_kggjn")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_8u66j"]
 script = ExtResource("2_fp3yt")
+bullet_event = SubResource("Resource_7flkt")
 bullet_description = "Deal 1 Damage and burn target card on the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
+[sub_resource type="Resource" id="Resource_67ipl"]
+script = ExtResource("9_1m3uf")
+type = 2
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
 [sub_resource type="Resource" id="Resource_txccq"]
 script = ExtResource("2_fp3yt")
+bullet_event = SubResource("Resource_67ipl")
 bullet_description = "Gain 2 Social"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

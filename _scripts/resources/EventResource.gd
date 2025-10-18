@@ -4,7 +4,6 @@ class_name EventResource
 
 # TODO: Eventually, add a contextual thing for different points execute can be invoked
 # Add an Undo execution functionality for event Resources when undoing changes
-# 
 var m_card_invoker: Card
 var m_card_refs: Dictionary[int, Card]
 
