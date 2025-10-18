@@ -15,12 +15,15 @@ func _ready():
 func _after_ready() -> void:
 	pass
 
-func drawCards(count : int):
-	var drawnCards = []
+func draw_cards(count : int) -> Array[Card]:
+	var drawnCards : Array[Card] = []
 	for i in range(count):
 		drawnCards.append(deck_array.pop_front())
 	update_card_deck_poses()
 	return drawnCards
+
+func draw_all_cards() -> Array[Card]:
+	return draw_cards(deck_size)
 
 func addCards(cardArray: Array[Card]):
 	for card in cardArray:

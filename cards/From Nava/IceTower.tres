@@ -1,14 +1,35 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://c12brfjf3lm30"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=13 format=3 uid="uid://c12brfjf3lm30"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_hxjvc"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_xblm5"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_4fjvc"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_mrcxi"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="5_qoj1n"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_6h11u"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="7_vbj8w"]
 [ext_resource type="Texture2D" uid="uid://bbyvm56cdaraj" path="res://art/card_art/FromNava/icetower.png" id="9_uq5a3"]
 
+[sub_resource type="Resource" id="Resource_okhud"]
+script = ExtResource("5_qoj1n")
+amount = 1
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_i53wt"]
+script = ExtResource("6_6h11u")
+events = Array[ExtResource("4_mrcxi")]([SubResource("Resource_okhud")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+
+[sub_resource type="Resource" id="Resource_4n4lr"]
+script = ExtResource("1_hxjvc")
+event_type = 8
+event = SubResource("Resource_i53wt")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
 [sub_resource type="Resource" id="Resource_6h11u"]
 script = ExtResource("2_xblm5")
-bullet_type = 4
+bullet_type = 3
+bullet_cost = 0
+passive_events = Array[ExtResource("1_hxjvc")]([SubResource("Resource_4n4lr")])
 bullet_description = "When this card is defetaed, deal 1 damage and freeze a card on the Rift. Also, gain a Polaroid."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

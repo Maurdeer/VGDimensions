@@ -191,7 +191,7 @@ func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
 	while not deck.is_empty():
-		discard_card(deck.pop_front())
+		discard_card(deck.get_top_card())
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
 	return grid[remove_from.y][remove_from.x].removeCard()

@@ -124,6 +124,8 @@ func refresh_stats() -> void:
 
 # Return whether or not the card reach zero hp
 func damage(amount: int) -> bool:
+	if hp < 0:
+		return false
 	var discarded: bool = false
 	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return discarded
 	hp -= amount
@@ -205,7 +207,8 @@ func add_passive_event(event: EventResource):
 	if event is TemporaryEffect:
 		# Specific parameter your guranteed
 		passive_events[event.invoked_when].append(event)
-		event.on_apply()
+		event.m_card_invoker= self
+		event.on_effect_apply()
 	else:
 		# No logic of duration, so you may have wanted this effect to be permenant
 		push_warning("Newly added passive event wasn't a temporary effect, await new logic soon!")

@@ -1,20 +1,34 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://eq5vqnlsot7r"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://eq5vqnlsot7r"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_kb6ih"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_5fgrg"]
 [ext_resource type="Script" uid="uid://e8vymu1ddkjw" path="res://custom_event_resources/DiscardSelfEvent.gd" id="2_ees5j"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_ees5j"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_neax4"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="5_1hqu6"]
 [ext_resource type="Texture2D" uid="uid://ba4ntoy26iu0s" path="res://art/card_art/FromNava/-e chair.png" id="5_deeim"]
 
 [sub_resource type="Resource" id="Resource_maqig"]
 script = ExtResource("2_ees5j")
 metadata/_custom_type_script = "uid://e8vymu1ddkjw"
 
+[sub_resource type="Resource" id="Resource_o8353"]
+script = ExtResource("5_1hqu6")
+selection_type = 1
+metadata/_custom_type_script = "uid://bcwfjrechyjc"
+
+[sub_resource type="Resource" id="Resource_deeim"]
+script = ExtResource("1_kb6ih")
+event_type = 6
+event = SubResource("Resource_o8353")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
 [sub_resource type="Resource" id="Resource_1hqu6"]
 script = ExtResource("2_5fgrg")
-bullet_type = 5
+bullet_type = 3
+bullet_cost = 0
 bullet_event = SubResource("Resource_maqig")
+passive_events = Array[ExtResource("1_kb6ih")]([SubResource("Resource_deeim")])
 bullet_description = "Disappears at the start of the next turn"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

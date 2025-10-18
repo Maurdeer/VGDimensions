@@ -1,18 +1,34 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://dpo8g2rb6alvf"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://dpo8g2rb6alvf"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_4yu1s"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_c1ns2"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_c7aet"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_384sf"]
+[ext_resource type="Script" uid="uid://db1qnsvwn0mg" path="res://_scripts/resources/EventResources/ShiftEvent.gd" id="3_c1ns2"]
 [ext_resource type="Texture2D" uid="uid://c7oel6726tokb" path="res://art/card_art/FromNava/-e wind -e.png" id="5_xoklb"]
+
+[sub_resource type="Resource" id="Resource_d50gk"]
+script = ExtResource("3_c1ns2")
+shift_all = true
+metadata/_custom_type_script = "uid://db1qnsvwn0mg"
 
 [sub_resource type="Resource" id="Resource_d4iys"]
 script = ExtResource("2_c7aet")
+bullet_cost = 0
+bullet_event = SubResource("Resource_d50gk")
 bullet_description = "Play this card to shift all cards in target row 1 to the right."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
+[sub_resource type="Resource" id="Resource_xoklb"]
+script = ExtResource("3_c1ns2")
+shift_direction = 1
+shift_all = true
+metadata/_custom_type_script = "uid://db1qnsvwn0mg"
+
 [sub_resource type="Resource" id="Resource_e67gu"]
 script = ExtResource("2_c7aet")
+bullet_cost = 0
+bullet_event = SubResource("Resource_xoklb")
 bullet_description = "Play this card to shift all cards in target column 1 card down."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
