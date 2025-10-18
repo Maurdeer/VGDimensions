@@ -1,14 +1,42 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://yoeovssgnxf0"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://yoeovssgnxf0"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_nqwmh"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_m3xws"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_i6qow"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_ngxhq"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_w1jfo"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="5_3aoox"]
 [ext_resource type="Texture2D" uid="uid://bbma30onu0ftc" path="res://art/card_art/FromNava/-e firewood.png" id="5_w1jfo"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="6_3aoox"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_rp3gl"]
+
+[sub_resource type="Resource" id="Resource_tpxvn"]
+script = ExtResource("5_3aoox")
+type = 3
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_rp3gl"]
+script = ExtResource("6_3aoox")
+selection_type = 1
+metadata/_custom_type_script = "uid://bcwfjrechyjc"
+
+[sub_resource type="Resource" id="Resource_01a3v"]
+script = ExtResource("6_rp3gl")
+events = Array[ExtResource("4_w1jfo")]([SubResource("Resource_tpxvn"), SubResource("Resource_rp3gl")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+
+[sub_resource type="Resource" id="Resource_ngxhq"]
+script = ExtResource("1_nqwmh")
+event_type = 9
+event = SubResource("Resource_01a3v")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_lq12l"]
 script = ExtResource("2_m3xws")
-bullet_type = 5
+bullet_type = 3
+bullet_cost = 0
+passive_events = Array[ExtResource("1_nqwmh")]([SubResource("Resource_ngxhq")])
 bullet_description = "When this card is burned, remove this card from the Rift and gain a Polaroid."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

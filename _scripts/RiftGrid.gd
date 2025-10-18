@@ -146,11 +146,14 @@ func discard_card_and_draw(card: Card, draw_when_empty: bool = true) -> void:
 	if draw_when_empty and not grid[card.grid_pos.y][card.grid_pos.x].is_empty(): return
 	draw_card(card.grid_pos)
 	
-func discard_card(card: Card) -> void:
+func discard_card(card: Card) -> bool:
 	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.grid_pos.x, card.grid_pos.y])
 	#await card.gridVisualizer.dissolve_shader()
 	var stack = grid[card.grid_pos.y][card.grid_pos.x]
 	assert(0 <= card.deck_pos and card.deck_pos < stack.deck_size, "Incorrect deck position to discard, Card Problem")
+	if not card.resource.discardable:
+		# TODO: Do some kind of visual to show card isn't discardable
+		return false
 	grid[card.grid_pos.y][card.grid_pos.x].remove_card_at(card.deck_pos)
 	card.grid_pos = Vector2i(-1, -1)
 	
@@ -166,6 +169,7 @@ func discard_card(card: Card) -> void:
 		PlayerHand.Instance.discard_card(card)
 	else:
 		remove_child(card)
+	return true
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()

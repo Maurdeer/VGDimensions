@@ -205,7 +205,7 @@ func add_passive_event(event: EventResource):
 	if event is TemporaryEffect:
 		# Specific parameter your guranteed
 		passive_events[event.invoked_when].append(event)
-		event.on_duration_create()
+		event.on_apply()
 	else:
 		# No logic of duration, so you may have wanted this effect to be permenant
 		push_warning("Newly added passive event wasn't a temporary effect, await new logic soon!")
