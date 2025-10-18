@@ -19,7 +19,6 @@ metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
 [sub_resource type="Resource" id="Resource_1m3uf"]
 script = ExtResource("4_txccq")
-selection_type = 2
 amount = 1
 metadata/_custom_type_script = "uid://dgpr0uywveph4"
 
