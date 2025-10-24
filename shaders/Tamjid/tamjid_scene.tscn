@@ -1,0 +1,153 @@
+[gd_scene load_steps=14 format=3 uid="uid://d23v4ldy0pyx4"]
+
+[ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="1_kiprd"]
+[ext_resource type="Material" uid="uid://bdso0qblr8jqa" path="res://shaders/Tamjid/ice_vfx_.material" id="2_j60g1"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="3_c1yeb"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_dvo4y"]
+[ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="5_wg6al"]
+[ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="7_418s0"]
+[ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="8_w817v"]
+
+[sub_resource type="Resource" id="Resource_u8xt1"]
+script = ExtResource("4_dvo4y")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
+
+[sub_resource type="Animation" id="Animation_ajdvn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_front:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.177, 0.177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_back:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0.177)]
+}
+
+[sub_resource type="Animation" id="Animation_hkicm"]
+resource_name = "flip_hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_back:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00152054, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(1e-05, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_front:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177, 0.177), Vector2(0, 0.177)]
+}
+
+[sub_resource type="Animation" id="Animation_wb4pw"]
+resource_name = "flip_reveal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_front:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(0, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_back:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177352, 0.177352), Vector2(0, 0.177)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51bko"]
+_data = {
+&"RESET": SubResource("Animation_ajdvn"),
+&"flip_hide": SubResource("Animation_hkicm"),
+&"flip_reveal": SubResource("Animation_wb4pw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayivb"]
+size = Vector2(341.818, 476.364)
+
+[node name="TamjidScene" type="Node2D"]
+
+[node name="card_front" parent="." instance=ExtResource("1_kiprd")]
+card_resource = SubResource("Resource_u8xt1")
+
+[node name="card_back" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(4.76837e-06, 0)
+scale = Vector2(1e-05, 0.177)
+
+[node name="card_background2" type="Sprite2D" parent="card_back"]
+clip_children = 2
+position = Vector2(-2.69399e-05, 0)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("5_wg6al")
+
+[node name="image" type="Sprite2D" parent="card_back/card_background2"]
+clip_children = 2
+position = Vector2(-14.0076, 0)
+scale = Vector2(3.94079, 3.32063)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_51bko")
+}
+speed_scale = 3.0
+
+[node name="gridcard_visualizer" parent="." instance=ExtResource("7_418s0")]
+visible = false
+script = null
+
+[node name="drag_and_drop_component2D" type="Area2D" parent="."]
+script = ExtResource("8_w817v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="drag_and_drop_component2D"]
+texture_filter = 2
+texture_repeat = 2
+material = ExtResource("2_j60g1")
+position = Vector2(-8.66977e-07, -1.73395e-06)
+shape = SubResource("RectangleShape2D_ayivb")
+
+[connection signal="area_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_entered"]
+[connection signal="area_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_exited"]
+[connection signal="input_event" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_input_event"]
+[connection signal="mouse_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_mouse_exited"]

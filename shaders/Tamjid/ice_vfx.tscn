@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://elg3ithoru5q"]
+
+[ext_resource type="Material" uid="uid://bdso0qblr8jqa" path="res://shaders/Tamjid/ice_vfx_.material" id="1_qp0vo"]
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+process_material = ExtResource("1_qp0vo")
