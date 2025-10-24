@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=5 format=3 uid="uid://c5nt13h15cfhw"]
+
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_gsw16"]
+[ext_resource type="Resource" uid="uid://crpp42hdxyxji" path="res://cards/From Nava/SmallGuy.tres" id="2_r7sbs"]
+[ext_resource type="Resource" uid="uid://cjuwh834fvdq" path="res://cards/Altarune/Battery.tres" id="3_1a8w0"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="11_6l5ga"]
+
+[resource]
+script = ExtResource("11_6l5ga")
+card_resources = Dictionary[ExtResource("1_gsw16"), int]({
+ExtResource("2_r7sbs"): 8,
+ExtResource("3_1a8w0"): 5
+})
+metadata/_custom_type_script = "uid://div70lvrir1m0"
