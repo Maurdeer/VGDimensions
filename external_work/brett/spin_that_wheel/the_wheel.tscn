@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbpdi5v1c5ch"]
+
+[ext_resource type="Script" uid="uid://d1qkolmp42v4o" path="res://external_work/brett/spin_that_wheel/the_wheel.gd" id="1_88l3q"]
+[ext_resource type="Script" uid="uid://8efuev2lcoly" path="res://external_work/brett/spin_that_wheel/the_arrow.gd" id="2_p6jua"]
+
+[sub_resource type="FontFile" id="FontFile_88l3q"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[node name="TheWheel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wheel" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = 3992.197
+script = ExtResource("1_88l3q")
+wheel_passive_speed = 1
+wheel_accel = 100
+wheel_decel = 20
+wheel_font = SubResource("FontFile_88l3q")
+dimension_list = Array[String](["From Nava", "Outcasts", "Willow", "Tetra City", "Sleighers", "Altarune", "Mourning Brew", "Journey To Arduous Star"])
+color_list = Array[Color]([Color(1, 0.6333333, 0, 1), Color(0, 1, 0.083333254, 1), Color(0.7000003, 0, 1, 1), Color(0, 1, 0.8166666, 1), Color(1, 0, 0.016666412, 1), Color(0, 0.10000014, 1, 1), Color(1, 0.8666667, 0, 1), Color(0.53, 0.53, 0.53, 1), Color(0.38436526, 0.20389923, 1.92523e-07, 1)])
+
+[node name="Timer" type="Timer" parent="Wheel"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Arrow" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_p6jua")
