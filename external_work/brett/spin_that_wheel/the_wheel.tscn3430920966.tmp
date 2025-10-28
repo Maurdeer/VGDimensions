@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbpdi5v1c5ch"]
+[gd_scene load_steps=4 format=3 uid="uid://bbpdi5v1c5ch"]
 
 [ext_resource type="Script" uid="uid://d1qkolmp42v4o" path="res://external_work/brett/spin_that_wheel/the_wheel.gd" id="1_88l3q"]
 [ext_resource type="Script" uid="uid://8efuev2lcoly" path="res://external_work/brett/spin_that_wheel/the_arrow.gd" id="2_p6jua"]
-[ext_resource type="Script" uid="uid://cafhrlj8s1oc5" path="res://external_work/brett/spin_that_wheel/wheel_debugging.gd" id="3_aptao"]
 
 [sub_resource type="FontFile" id="FontFile_88l3q"]
 cache/0/16/0/ascent = 0.0
@@ -26,8 +25,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 39.99997
 script = ExtResource("1_88l3q")
-wheel_top_speed = 30
-extra_rotations = 10
+extra_rotations = 2
 wheel_font = SubResource("FontFile_88l3q")
 dimension_list = Array[String](["From Nava", "Outcasts", "Willow", "Tetra City", "Sleighers", "Altarune", "Mourning Brew", "Journey To Arduous Star"])
 color_list = Array[Color]([Color(1, 0.6333333, 0, 1), Color(0, 1, 0.083333254, 1), Color(0.7000003, 0, 1, 1), Color(0, 1, 0.8166666, 1), Color(1, 0, 0.016666412, 1), Color(0, 0.10000014, 1, 1), Color(1, 0.8666667, 0, 1), Color(0.53, 0.53, 0.53, 1), Color(0.38436526, 0.20389923, 1.92523e-07, 1)])
@@ -41,9 +39,3 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_p6jua")
-
-[node name="wheel debugging" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("3_aptao")

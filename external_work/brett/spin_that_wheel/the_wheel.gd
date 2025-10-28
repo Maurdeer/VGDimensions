@@ -1,4 +1,4 @@
-@tool
+# @tool
 extends Control
 
 @export_group("Wheel Physical Attributes")
@@ -10,11 +10,14 @@ extends Control
 @export var arc_resolution: int = 256
 
 @export_group("Wheel Behavior")
-@export var wheel_passive_speed: int = 5
-@export var wheel_accel: int = 10
-@export var wheel_decel: int = 1
-@export var wheel_top_speed: int = 60
-@export var rotation_scale: float = 0.25
+@export var wheel_passive_speed: float = 0.25
+@export var do_passive_spin: bool = false
+@export var wheel_accel: float = 25
+@export var wheel_top_speed: int = 15
+# @export var rotation_scale: float = 0.25
+# @export var stopping_time: float = 2.0
+@export var extra_rotations: int = 1
+@export var range_tolerance: float = 0.05
 
 @export_group("Wheel Sector Appearance")
 @export var wheel_font: Font
@@ -23,10 +26,12 @@ extends Control
 
 var wheel_radius_midpoint: int = wheel_radius / 2
 var wheel_rotation_speed: float = wheel_passive_speed
-var do_passive_spin: bool = true
 var do_accel: bool = true
 var do_hold: bool = false
 var do_slowdown: bool = false
+var do_stop_range_calc: bool = false
+var target_game: String = ""
+var wheel_decel: float = 0
 
 func _draw():
 	
@@ -66,6 +71,7 @@ func _draw():
 
 func spin_that_wheel(target_dimension: String) -> bool:
 	if dimension_list.has(target_dimension):
+		target_game = target_dimension
 		do_passive_spin = false
 		do_accel = true
 		return true
@@ -84,19 +90,34 @@ func set_wheel_position(new_pos: Vector2):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if (Input.is_action_just_pressed("ui_accept")):
-		spin_that_wheel("From Nava")
+		spin_that_wheel("Willow")
 	if (Input.is_action_just_pressed("ui_up")):
 		do_passive_spin = true
 		do_accel = true
 		do_hold = false
 		do_slowdown = false
+	if (Input.is_action_just_pressed("ui_down")):
+		do_passive_spin = false
 	
 	queue_redraw()
-
+	
 func _on_timer_timeout():
 	do_slowdown = true
+	do_stop_range_calc = true
 
 func _physics_process(delta):
+	if (do_stop_range_calc):
+		var game_index: int = dimension_list.find(target_game)
+		var sector_start_angle: float = TAU * game_index/len(dimension_list)
+		var sector_end_angle: float = TAU * (game_index+1)/len(dimension_list)
+		var sector_range: float = sector_end_angle - sector_start_angle
+		var target_stopping_angle: float = randf() * (sector_range - range_tolerance) + sector_start_angle + range_tolerance/2
+		var stopping_range: float = TAU - target_stopping_angle
+		stopping_range += TAU - rotation
+		stopping_range += TAU * (extra_rotations)
+		wheel_decel = (wheel_top_speed*wheel_top_speed)/(2*stopping_range)
+		do_stop_range_calc = false
+		
 	if (do_passive_spin):
 		wheel_rotation_speed = wheel_passive_speed
 	elif (do_accel):
@@ -110,13 +131,18 @@ func _physics_process(delta):
 		$Timer.start()
 	elif (do_slowdown):
 		wheel_rotation_speed -= wheel_decel * delta
-		if (wheel_rotation_speed < 0):
+		if (wheel_rotation_speed <= 0):
 			wheel_rotation_speed = 0
 			do_slowdown = false
 	
-	rotation += wheel_rotation_speed * rotation_scale * delta
+	rotation += wheel_rotation_speed * delta
+	if (rotation > TAU):
+		rotation -= TAU
+	# print(rotation)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Timer.timeout.connect(_on_timer_timeout) # Replace with function body.
+	rotation = 0
+	do_passive_spin = true
+	$Timer.connect("timeout", _on_timer_timeout)
