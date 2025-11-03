@@ -84,11 +84,12 @@ func _on_next_turn_button_pressed() -> void:
 	on_start_of_turn.emit() # Invoked by and seen by all players
 	
 func start_local_play_turn() -> void:
-	pass
+	await RiftGrid.Instance.on_start_of_new_turn()
 	
 func end_local_play_turn() -> void:
 	player_hand.clear_hand()
 	player_hand.fill_hand()
+	await RiftGrid.Instance.on_end_of_new_turn()
 	
 	if infinite_resources: dev_infinite_resources()
 	else: reset_temporary_resources()
