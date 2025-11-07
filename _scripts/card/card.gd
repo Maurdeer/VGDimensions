@@ -72,7 +72,7 @@ var social_bullets: Array[BulletResource]
 # Hover timer for card viewer
 var hover_timer: Timer
 var is_hovering: bool = false
-var hover_delay: float = 1.5
+var hover_delay: float = 0.8
 
 func _ready() -> void:
 	call_deferred("_after_ready")
