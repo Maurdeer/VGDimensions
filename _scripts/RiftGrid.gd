@@ -230,6 +230,12 @@ func shuffle_card_back_in_deck(shuffleCard: Card, targetDeck: Deck):
 	targetDeck.addCard(shuffleCard)
 	seed(pre_defined_seed)
 	targetDeck.shuffleDeck()
+	
+func shuffle_card_back_in_draw_pile(shuffleCard: Card):
+	shuffle_card_back_in_deck(shuffleCard, _rift_deck)
+	
+func shuffle_card_back_in_discard_pile(shuffleCard: Card):
+	shuffle_card_back_in_deck(shuffleCard, _rift_discard_pile)
 
 func shift_decks_horizontally(start_pos: Vector2i, offset: int):
 	if not is_valid_pos(start_pos):
