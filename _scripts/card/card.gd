@@ -109,12 +109,15 @@ func _on_resource_change() -> void:
 	
 func reset_passive_events() -> void:
 	passive_events.clear()
-	passive_events.resize(PassiveEventResource.PassiveEvent.size())
+	passive_events.resize(PassiveEventResource.PassiveEvent.size() + PassiveEventResource.GlobalEvent.size())
 	for bullet in resource.bullets:
 		if bullet.bullet_type != BulletResource.BulletType.PASSIVE: continue
-		if bullet.passive_events.is_empty(): continue
-		for passive_event_resource in bullet.passive_events:
-			passive_events[passive_event_resource.event_type].append(passive_event_resource.event)
+		if not bullet.passive_events.is_empty():
+			for passive_event_resource in bullet.passive_events:
+				if passive_event_resource.is_global:
+					passive_events[passive_event_resource.global_event_type].append(passive_event_resource.event)
+				else:
+					passive_events[passive_event_resource.passive_event_type].append(passive_event_resource.event)
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
@@ -128,7 +131,12 @@ func damage(amount: int) -> bool:
 	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return discarded
 	hp -= amount
 	on_damage()
+<<<<<<< Updated upstream
 	if hp <= 0: 
+=======
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_DAMAGE, self)
+	if hp <= 0:
+>>>>>>> Stashed changes
 		hp = 0
 		discarded = true
 		RiftGrid.Instance.discard_card(self)
@@ -246,6 +254,7 @@ func on_social():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL], self)
 func on_enter_tree(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE], self)
+<<<<<<< Updated upstream
 func on_state_of_grid_change(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE], self)
 func on_end_of_turn(): 
@@ -253,6 +262,15 @@ func on_end_of_turn():
 func on_start_of_turn(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN], self)
 func on_damage(): 
+=======
+func on_state_of_grid_change():
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_STATE_OF_GRID_CHANGE], self)
+func on_end_of_turn():
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_END_OF_TURN], self)
+func on_start_of_turn():
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_START_OF_TURN], self)
+func on_damage():
+>>>>>>> Stashed changes
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE], self)
 func on_discard(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD], self)
@@ -272,5 +290,10 @@ func on_replace():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE], self)
 func on_freeze(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
+<<<<<<< Updated upstream
 func on_quest_progress(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)
+=======
+func on_quest_progress():
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_QUEST_PROGRESS], self)
+>>>>>>> Stashed changes

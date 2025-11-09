@@ -5,6 +5,34 @@
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_c78l2"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_qi8vg"]
 [ext_resource type="Texture2D" uid="uid://b52gn6tbq0if" path="res://art/card_art/FromNava/fan.png" id="5_mxq4v"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="5_wu7on"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_ff2lb"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="6_wu7on"]
+
+[sub_resource type="Resource" id="Resource_wq70l"]
+script = ExtResource("5_wu7on")
+type = 3
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_ff2lb"]
+script = ExtResource("6_wu7on")
+selection_type = 1
+metadata/_custom_type_script = "uid://bcwfjrechyjc"
+
+[sub_resource type="Resource" id="Resource_kgowp"]
+script = ExtResource("6_ff2lb")
+events = Array[ExtResource("4_mxq4v")]([SubResource("Resource_wq70l"), SubResource("Resource_ff2lb")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+
+[sub_resource type="Resource" id="Resource_nv2p1"]
+script = ExtResource("1_02xht")
+passive_event_type = 10
+event = SubResource("Resource_kgowp")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+>>>>>>> Stashed changes
 
 [sub_resource type="Resource" id="Resource_gjxh4"]
 script = ExtResource("2_13rty")

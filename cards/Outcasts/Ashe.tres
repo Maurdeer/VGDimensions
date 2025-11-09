@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_woeob"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_2258d"]
 [ext_resource type="Texture2D" uid="uid://dxsicibt8xu3t" path="res://art/card_art/Outcasts/Ashe.png" id="3_woeob"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_60hme"]
 
 [sub_resource type="Resource" id="Resource_11ysp"]
 script = ExtResource("1_gdfbu")
@@ -14,10 +13,15 @@ bullet_cost = 2
 bullet_description = "Swap any 2 cards on the rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
+[sub_resource type="Resource" id="Resource_ge41m"]
+script = ExtResource("1_woeob")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
 [sub_resource type="Resource" id="Resource_c7etx"]
 script = ExtResource("1_gdfbu")
 bullet_type = 3
 bullet_cost = 2
+passive_events = Array[ExtResource("1_woeob")]([SubResource("Resource_ge41m")])
 bullet_description = "Deal 4 damage to any adjacent damagable card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

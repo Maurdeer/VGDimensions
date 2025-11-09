@@ -6,6 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="7_vbj8w"]
 [ext_resource type="Texture2D" uid="uid://bbyvm56cdaraj" path="res://art/card_art/FromNava/icetower.png" id="9_uq5a3"]
 
+<<<<<<< Updated upstream
+=======
+[sub_resource type="Resource" id="Resource_okhud"]
+script = ExtResource("5_qoj1n")
+amount = 1
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_i53wt"]
+script = ExtResource("6_6h11u")
+events = Array[ExtResource("4_mrcxi")]([SubResource("Resource_okhud")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+
+[sub_resource type="Resource" id="Resource_4n4lr"]
+script = ExtResource("1_hxjvc")
+event = SubResource("Resource_i53wt")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+>>>>>>> Stashed changes
 [sub_resource type="Resource" id="Resource_6h11u"]
 script = ExtResource("2_xblm5")
 bullet_type = 4

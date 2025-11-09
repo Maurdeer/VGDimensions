@@ -28,7 +28,6 @@ metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_ngxhq"]
 script = ExtResource("1_nqwmh")
-event_type = 9
 event = SubResource("Resource_01a3v")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 

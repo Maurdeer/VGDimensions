@@ -55,4 +55,10 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 60
 text = "X"
 
+<<<<<<< Updated upstream
+=======
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
+>>>>>>> Stashed changes
 [connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
