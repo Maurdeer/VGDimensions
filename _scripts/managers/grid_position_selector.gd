@@ -67,3 +67,7 @@ func on_card_clicked(card: Card):
 # ====== Filters you can use =========
 func adjacent_only(from_card: Card) -> Callable:
 	return func(card: Card): return (card.grid_pos - from_card.grid_pos).length() == 1
+
+func select_sepcific_card(select_card : CardResource) -> Callable:
+	return func(card: Card): return card.resource.title == select_card.title
+		

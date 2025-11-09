@@ -21,7 +21,6 @@ metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 [sub_resource type="Resource" id="Resource_r6ug0"]
 script = ExtResource("2_ck6ue")
 bullet_type = 3
-bullet_cost = 1
 bullet_description = "Use 1 Social to swap this card with an adjacent card"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

@@ -8,15 +8,15 @@ const card_to_place: int = 0
 const location_to_place: int = 1
 
 func on_execute() -> bool:
-	var source_card: Card
+	var source_card: Card = m_card_refs[card_to_place]
+	var selected_pos: Vector2i = m_card_refs[location_to_place].grid_pos
 	if other_card_resource:
 		# (Ryan) Since events are not responsible of invoking rpcs, 
 		# we do local calls from now on 
 		source_card = CardManager.create_card_locally(other_card_resource, true)
-	else:
-		source_card = m_card_refs[card_to_place]
-		
-	var selected_pos: Vector2i = m_card_refs[location_to_place].grid_pos
+		RiftGrid.Instance.place_card(selected_pos, source_card)
+		return false
+
 	if source_card.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
 		# Just move the cards within the rift
 		RiftGrid.Instance.move_card_to(selected_pos, source_card.grid_pos)

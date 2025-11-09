@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://40v7v203k8px"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://40v7v203k8px"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_8vbsk"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_q2iq8"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_yahf8"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_yahf8"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_8186b"]
 [ext_resource type="Texture2D" uid="uid://i2ig7r2frl75" path="res://art/card_art/FromNava/-e pressure -e.png" id="4_u4y71"]
-<<<<<<< Updated upstream
-=======
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="5_shdh5"]
 [ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="6_lvmox"]
 [ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="7_eef6t"]
@@ -29,13 +28,15 @@ metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
 [sub_resource type="Resource" id="Resource_3jh2w"]
 script = ExtResource("1_8vbsk")
+event_type = 10
 event = SubResource("Resource_7w6jt")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
->>>>>>> Stashed changes
 
 [sub_resource type="Resource" id="Resource_u4y71"]
 script = ExtResource("2_q2iq8")
-bullet_type = 5
+bullet_type = 3
+bullet_cost = 0
+passive_events = Array[ExtResource("1_8vbsk")]([SubResource("Resource_3jh2w")])
 bullet_description = "When a card would be placed on top of this card, remove this card from the Rift and gain a Polaroid."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

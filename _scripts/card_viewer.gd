@@ -1,7 +1,6 @@
 extends Control
 class_name CardViewer
 
-
 static var Instance: CardViewer
 @onready var card_visualizer: CardVisualizer = $Control/card_visualizer
 
@@ -18,11 +17,6 @@ func view_card(card_resource: CardResource) -> void:
 	
 func hide_view() -> void:
 	visible = false
-<<<<<<< Updated upstream
-	
-func _on_close_button_pressed() -> void:
-	hide_view()
-=======
 
 #func _on_control_mouse_exited() -> void:
 	#hide_view()
@@ -39,4 +33,3 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 
 func _on_control_gui_input(event: InputEvent) -> void:
 	_gui_input(event)
->>>>>>> Stashed changes
