@@ -9,15 +9,21 @@ var is_dragging: bool = false
 signal on_drop
 signal on_hover_enter
 signal on_hover_left
+static var currently_hovered_card: DragAndDropComponent2D = null
 var draggable: bool = true
 var pre_drag_pos: Vector2
 var interactable: bool = true
+var default_z_index = 0
+var hover_offset: = Vector2(0, -50)
+var tween_time: = 0.1
+var hover_tween: Tween
 
 var scale_due_to_hover: bool
 
 func _ready() -> void:
 	pre_drag_pos = _parent.global_position
 	scale_prior_to_hover = _parent.scale
+	default_z_index = _parent.z_index
 
 func _process(_delta):
 	_input_process()
@@ -68,13 +74,42 @@ func _on_area_exited(area: Area2D) -> void:
 	hovering_over_area_temp = null
 	
 func hover() -> void:
+	if DragAndDropComponent2D.currently_hovered_card and DragAndDropComponent2D.currently_hovered_card != self:
+		DragAndDropComponent2D.currently_hovered_card.unhover(true)
+		
 	if scale_due_to_hover: return
+	
 	scale_due_to_hover = true
+	DragAndDropComponent2D.currently_hovered_card = self
 	scale_prior_to_hover = _parent.scale
-	_parent.scale *= 1.05
+	pre_drag_pos = _parent.position
+	_parent.z_index = 100
+	
+	if hover_tween and hover_tween.is_running():
+		hover_tween.stop()
+	
+	hover_tween = create_tween()
+	hover_tween.tween_property(_parent, "scale", _parent.scale * 1.5, tween_time)
+	hover_tween.parallel().tween_property(_parent, "position", _parent.position + hover_offset, tween_time)
+	
 	on_hover_enter.emit()
 	
-func unhover() -> void:
+func unhover(force: = false) -> void:
+	if not scale_due_to_hover:
+		return
+		
+	if not force and DragAndDropComponent2D.currently_hovered_card != self:
+		return
+	
 	scale_due_to_hover = false
-	_parent.scale = scale_prior_to_hover
+	DragAndDropComponent2D.currently_hovered_card = null
+	_parent.z_index = default_z_index
+	
+	if hover_tween and hover_tween.is_running():
+		hover_tween.stop()
+	
+	var tween = create_tween()
+	tween.tween_property(_parent, "scale", scale_prior_to_hover, tween_time)
+	tween.parallel().tween_property(_parent, "position", pre_drag_pos, tween_time)
+	
 	on_hover_left.emit()
