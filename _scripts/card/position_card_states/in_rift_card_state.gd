@@ -5,11 +5,11 @@ func enter() -> void:
 	card.refresh_stats()
 	gridcard_visualizer.visible = true
 	gridcard_back.visible = true
-	gridcard_shape.disabled = false
+	gridcard_shape.visible = true
 	
 	card_visualizer.visible = false
 	card_back.visible = false
-	card_shape.disabled = true
+	card_shape.visible = false
 	card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)
 	card.flip_reveal()
 	
@@ -29,8 +29,8 @@ func exit() -> void:
 	card.refresh_stats()
 	gridcard_visualizer.visible = false
 	gridcard_back.visible = false
-	gridcard_shape.disabled = true
+	gridcard_shape.visible= false
 	
 	card_visualizer.visible = true
 	card_back.visible = true
-	card_shape.disabled = false
+	card_shape.visible = true
