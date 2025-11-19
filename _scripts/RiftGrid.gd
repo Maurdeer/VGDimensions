@@ -14,9 +14,6 @@ var _card_refs: Array[Card]
 @onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
 var pre_defined_seed: int
 
-# Global Signals to be read
-signal on_discard(Card)
-
 func _ready() -> void:
 	# Initialize Singleton
 	if Instance: 
@@ -121,7 +118,9 @@ func place_card(place_at: Vector2i, newCard: Card) -> void:
 	AudioManager.play_sfx("place_card")
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
-	if card_underneath: await card_underneath.on_stack()
+	if card_underneath: 
+		card_underneath.on_stack()
+		RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_STACK, card_underneath)
 	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
@@ -143,9 +142,10 @@ func place_cards_under(place_under: Vector2i, cards: Array[Card]) -> void:
 		place_card_under(place_under, card)
 
 func discard_card_and_draw(card: Card, draw_when_empty: bool = true) -> void:
+	var selected_pos : Vector2i = card.grid_pos
 	discard_card(card)
-	if draw_when_empty and not grid[card.grid_pos.y][card.grid_pos.x].is_empty(): return
-	draw_card(card.grid_pos)
+	if draw_when_empty and not grid[selected_pos.y][selected_pos.x].is_empty(): return
+	draw_card(selected_pos)
 	
 func discard_card(card: Card) -> bool:
 	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.grid_pos.x, card.grid_pos.y])
@@ -159,6 +159,7 @@ func discard_card(card: Card) -> bool:
 	card.grid_pos = Vector2i(-1, -1)
 	
 	card.on_discard()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_DISCARD, card)
 	
 	# TODO: Ensure this discard check behavior is correct
 	if card.temporary:
@@ -174,20 +175,24 @@ func discard_card(card: Card) -> bool:
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()
-	await card.on_before_move()
+	card.on_before_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BEFORE_MOVE, card)
 	card = grid[move_from.y][move_from.x].remove_top_card()
 	print(card.grid_pos)
 	place_card(move_to, card)
-	await card.on_after_move()
+	card.on_after_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_AFTER_MOVE, card)
 	
 func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()
 	print(card.grid_pos)
-	await card.on_before_move()
+	card.on_before_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BEFORE_MOVE, card)
 	card = grid[move_from.y][move_from.x].remove_top_card()
 	print(card.grid_pos)
 	place_card_under(move_to, card)
-	await card.on_after_move()
+	card.on_after_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_AFTER_MOVE, card)
 	
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
@@ -308,20 +313,6 @@ func damage_card(card_pos: Vector2i, amount: int) -> bool:
 	if card.hp == -1:
 		return false
 	return card.damage(amount)
-
-func burn_card(card_pos: Vector2i) -> bool:
-	var card: Card = get_top_card(card_pos)
-	card.on_burn()
-	#card.add_to_events(BurnStatusEvent.new())
-	print("Applied the Burn Status Effect to the given card.")
-	return true
-	
-func freeze_card(card_pos: Vector2i) -> bool:
-	var card: Card = get_top_card(card_pos)
-	card.on_freeze()
-	card.interactable = false
-	#card.add_to_events(FreezeStatusEvent.new())
-	return true
 	
 func rotate_card(card_pos: Vector2i, dir: Card.CardDirection) -> void:
 	var card: Card = get_top_card(card_pos)
@@ -406,7 +397,11 @@ func on_start_of_new_turn() -> void:
 		for x in rift_grid_width:
 			if not grid[y][x].get_top_card():
 				draw_card(Vector2i(x,y))
-			grid[y][x].get_top_card().on_start_of_turn()
+			for card in grid[y][x].deck_array:
+				# If the card blocks global events from invoking underneath it
+				card.on_start_of_turn()
+				if card.resource.blocking: break
+			
 	await EventManager.process_event_queue()
 
 func on_end_of_new_turn() -> void:
@@ -414,13 +409,39 @@ func on_end_of_new_turn() -> void:
 		for x in rift_grid_width:
 			if not grid[y][x].get_top_card():
 				draw_card(Vector2i(x,y))
-			grid[y][x].get_top_card().on_end_of_turn()
+			for card in grid[y][x].deck_array:
+				# If the card blocks global events from invoking underneath it
+				card.on_end_of_turn()
+				if card.resource.blocking: break
 	await EventManager.process_event_queue()
-			
+	
+# Intentionally sequential to avoid broadcast reordering
+func emit_global_event(global_event_type: PassiveEventResource.GlobalEvent, card_invoker: Card = null) -> void:
+	if card_invoker:
+		for y in rift_grid_height:
+			for x in rift_grid_width:
+				for card in (grid[y][x] as Deck).deck_array:
+					EventManager.queue_event_group(card.passive_events[global_event_type], card_invoker)
+					
+					# If the card blocks global events from invoking underneath it
+					if card.resource.blocking: break
+	else:
+		for y in rift_grid_height:
+			for x in rift_grid_width:
+				for card in (grid[y][x] as Deck).deck_array:
+					EventManager.queue_event_group(card.passive_events[global_event_type], card)
+					
+					# If the card blocks global events from invoking underneath it
+					if card.resource.blocking: break
+	# (Ryan) Commented out to avoid processing mid processor await EventManager.process_event_queue()
+	
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			grid[y][x].get_top_card().on_state_of_grid_change()
+			for card in grid[y][x].deck_array:
+				# If the card blocks global events from invoking underneath it
+				card.on_state_of_grid_change()
+				if card.resource.blocking: break
 			
 # Only when things get CRAAAAZZZZZYYY
 # This should hopefully not happen, unless the deck isn't created that well

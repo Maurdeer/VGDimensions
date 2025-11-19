@@ -1,22 +1,37 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://d4kn40cwc2gjb"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://d4kn40cwc2gjb"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_tnd83"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_su04x"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_xh2d6"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_1dbrw"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_78eom"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="3_d4pks"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_ui5op"]
+[ext_resource type="Script" uid="uid://lr4o3s55jrrx" path="res://_scripts/resources/TemporaryEffects/FreezeEffect.gd" id="4_1dbrw"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_su04x"]
 [ext_resource type="Texture2D" uid="uid://c5f41kf3ygdjf" path="res://art/card_art/FromNava/-e Iceball -e.png" id="6_1dbrw"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="7_mdifv"]
-
-[sub_resource type="Resource" id="Resource_87h3x"]
-script = ExtResource("7_mdifv")
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="6_3ahvo"]
 
 [sub_resource type="Resource" id="Resource_h425j"]
+script = ExtResource("4_1dbrw")
+metadata/_custom_type_script = "uid://lr4o3s55jrrx"
+
+[sub_resource type="Resource" id="Resource_kxkhx"]
+script = ExtResource("3_d4pks")
+selection_type = 2
+temp_effect = SubResource("Resource_h425j")
+metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
+
+[sub_resource type="Resource" id="Resource_mdifv"]
+script = ExtResource("6_3ahvo")
+selection_type = 0
+amount = 1
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_jwkql"]
 script = ExtResource("2_xh2d6")
-bullet_cost = 0
-bullet_event = SubResource("Resource_87h3x")
-bullet_description = "Play this card to deal 1 Damage and Freeze target card"
+is_multi_event = true
+bullet_event = SubResource("Resource_kxkhx")
+bullet_events = Array[ExtResource("3_78eom")]([SubResource("Resource_kxkhx"), SubResource("Resource_mdifv")])
+bullet_description = "On Play: Deal 1 damage and Freeze target card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -24,7 +39,7 @@ script = ExtResource("3_ui5op")
 title = "Iceball Spell"
 game_origin = 26
 deleon_value = 4
-bullets = Array[ExtResource("2_xh2d6")]([SubResource("Resource_h425j")])
+bullets = Array[ExtResource("2_xh2d6")]([SubResource("Resource_jwkql")])
 card_art = ExtResource("6_1dbrw")
 background_art = ExtResource("2_su04x")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

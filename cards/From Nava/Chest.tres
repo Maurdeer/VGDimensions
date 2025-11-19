@@ -1,41 +1,37 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://c1ftp2h4vrsy6"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=13 format=3 uid="uid://c1ftp2h4vrsy6"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_vinvw"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_1v6xg"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_4tbpa"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_1v6xg"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_5ddmx"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_15rce"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_5ddmx"]
-[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="5_bbckg"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_h5wk0"]
 [ext_resource type="Texture2D" uid="uid://cdwp11qf1rdit" path="res://art/card_art/FromNava/-e chest.png" id="5_h5wk0"]
-[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="5_lmt7w"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_bbckg"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="5_lmt7w"]
 
-[sub_resource type="Resource" id="Resource_81ee8"]
-script = ExtResource("5_lmt7w")
+[sub_resource type="Resource" id="Resource_bbckg"]
+script = ExtResource("3_5ddmx")
 amount = 2
 metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
-[sub_resource type="Resource" id="Resource_nyf21"]
-script = ExtResource("5_lmt7w")
+[sub_resource type="Resource" id="Resource_81ee8"]
+script = ExtResource("3_5ddmx")
 type = 3
 amount = 1
 metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
-[sub_resource type="Resource" id="Resource_0kas5"]
-script = ExtResource("5_bbckg")
+[sub_resource type="Resource" id="Resource_nyf21"]
+script = ExtResource("5_lmt7w")
 selection_type = 1
 metadata/_custom_type_script = "uid://bcwfjrechyjc"
 
 [sub_resource type="Resource" id="Resource_716ib"]
-script = ExtResource("6_bbckg")
-events = Array[ExtResource("4_5ddmx")]([SubResource("Resource_81ee8"), SubResource("Resource_nyf21"), SubResource("Resource_0kas5")])
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
-
-[sub_resource type="Resource" id="Resource_q0odr"]
 script = ExtResource("2_4tbpa")
 bullet_type = 1
-bullet_event = SubResource("Resource_716ib")
-bullet_description = "Use 1 action to gain 2 Deleons and a Polaroid. Remove this card from the Rift."
+is_multi_event = true
+bullet_event = SubResource("Resource_bbckg")
+bullet_events = Array[ExtResource("3_1v6xg")]([SubResource("Resource_bbckg"), SubResource("Resource_81ee8"), SubResource("Resource_nyf21")])
+bullet_description = "On Interact: Gain 2 Deleons and a Polaroid and remove this from the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -43,7 +39,7 @@ script = ExtResource("3_15rce")
 title = "Chest"
 type = 5
 game_origin = 26
-bullets = Array[ExtResource("2_4tbpa")]([SubResource("Resource_q0odr")])
+bullets = Array[ExtResource("2_4tbpa")]([SubResource("Resource_716ib")])
 card_art = ExtResource("5_h5wk0")
 background_art = ExtResource("2_1v6xg")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

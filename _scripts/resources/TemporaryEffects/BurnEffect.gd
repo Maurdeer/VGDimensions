@@ -1,3 +1,4 @@
+@tool
 extends TemporaryEffect
 class_name BurnEffect
 
@@ -15,3 +16,4 @@ func required_events() -> Array[EventResource]:
 func on_effect_apply() -> void:
 	super.on_effect_apply()
 	m_card_invoker.on_burn()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BURN, m_card_invoker)

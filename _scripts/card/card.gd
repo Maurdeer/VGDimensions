@@ -119,13 +119,24 @@ func _on_resource_change() -> void:
 	reset_passive_events()
 	
 func reset_passive_events() -> void:
+	# TODO: Unopmtimized, clean up :3
 	passive_events.clear()
-	passive_events.resize(PassiveEventResource.PassiveEvent.size())
+	passive_events.resize(PassiveEventResource.PassiveEvent.size() + PassiveEventResource.GlobalEvent.size())
 	for bullet in resource.bullets:
 		if bullet.bullet_type != BulletResource.BulletType.PASSIVE: continue
-		if bullet.passive_events.is_empty(): continue
-		for passive_event_resource in bullet.passive_events:
-			passive_events[passive_event_resource.event_type].append(passive_event_resource.event)
+		var passive_event_resources: Array[PassiveEventResource] = []
+		if bullet.is_multi_event:
+			passive_event_resources = bullet.passive_events
+		elif bullet.passive_event:
+			passive_event_resources.append(bullet.passive_event)
+			
+		for passive_event_resource in passive_event_resources:
+			if passive_event_resource.is_global:
+				passive_events[passive_event_resource.global_event_type].append(passive_event_resource.event)
+			else:
+				passive_events[passive_event_resource.passive_event_type].append(passive_event_resource.event)
+				
+
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
@@ -141,6 +152,7 @@ func damage(amount: int) -> bool:
 	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return discarded
 	hp -= amount
 	on_damage()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_DAMAGE, self)
 	if hp <= 0:
 		hp = 0
 		discarded = true
@@ -273,7 +285,9 @@ func remove_passive_event(event : EventResource):
 # The networking magic happens here
 func try_execute(bullet: BulletResource, idx: int) -> bool:
 	# Currently only action and social have a cost for bullet activativations
-	if not bullet.bullet_event: return false
+	# TODO: Discrete math anyone?
+	if (bullet.is_multi_event and not bullet.bullet_events) or \
+	(not bullet.is_multi_event and not bullet.bullet_event): return false
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
 			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false
@@ -297,11 +311,11 @@ func on_social():
 func on_enter_tree():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE], self)
 func on_state_of_grid_change():
-	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_STATE_OF_GRID_CHANGE], self)
 func on_end_of_turn():
-	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_END_OF_TURN], self)
 func on_start_of_turn():
-	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN], self)
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_START_OF_TURN], self)
 func on_damage():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE], self)
 func on_discard():
@@ -322,5 +336,5 @@ func on_replace():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE], self)
 func on_freeze():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
-func on_quest_progress():
-	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)
+func on_quest_progress(): 
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_QUEST_PROGRESS], self)

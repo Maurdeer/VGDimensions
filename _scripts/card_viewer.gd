@@ -21,8 +21,15 @@ func hide_view() -> void:
 #func _on_control_mouse_exited() -> void:
 	#hide_view()
 
-func _input(event: InputEvent) -> void:
+func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT and mouse_button_event.pressed:
 		hide_view()
+
+
+func _on_texture_rect_gui_input(event: InputEvent) -> void:
+	_gui_input(event)
+
+func _on_control_gui_input(event: InputEvent) -> void:
+	_gui_input(event)
