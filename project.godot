@@ -15,6 +15,10 @@ run/main_scene="uid://ci47eik7lfa7d"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+
 [autoload]
 
 GNM="*res://_scripts/managers/network_manager.gd"

@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ec1n8sae3byg"]
+[gd_scene load_steps=2 format=3 uid="uid://ec1n8sae3byg"]
 
 [ext_resource type="Script" uid="uid://bfplf5y16mrju" path="res://_scripts/audio_manager.gd" id="1_ot5wn"]
-[ext_resource type="AudioStream" uid="uid://bp17eo5x0xm38" path="res://gp_card_place_hand_v3_03.wav" id="2_cmpqd"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_ot5wn")
-
-[node name="Card_Place_Hand_SFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_cmpqd")
-volume_db = -10.0

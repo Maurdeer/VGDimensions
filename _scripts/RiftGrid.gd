@@ -118,6 +118,7 @@ func place_card(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
 	var card_underneath: Card = grid[place_at.y][place_at.x].get_top_card()
 	grid[place_at.y][place_at.x].addCard(newCard)
+	AudioManager.play_sfx("place_card")
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
 	if card_underneath: await card_underneath.on_stack()

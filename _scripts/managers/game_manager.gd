@@ -44,7 +44,9 @@ func _after_ready() -> void:
 func setup_card_shop():
 	var shop_cards: Array[Card] = CardManager.create_cards_from_packs(shop_initial_packs)
 	CardShop.fill_shop_deck(shop_cards)
-	
+
+# TODO: This is the location for changing the game change functionality
+# This should include the song that will play, for now I will handle this
 func setup_rift_grid():
 	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(rift_card_pack)
 	# If this becomes local, then you need to call this for every peer in fact
@@ -52,6 +54,7 @@ func setup_rift_grid():
 	
 @rpc("call_local", "any_peer")
 func _setup_rift_grid_rpc(rift_card_ids: Array[int]):
+	AudioManager.play_music("FromNava")
 	rift_grid.generate_new_grid(CardManager.ids_to_cards(rift_card_ids),3,3)
 	
 func create_cards_for_player_hand():
