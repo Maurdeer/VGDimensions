@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_446el"]
 script = ExtResource("4_moox1")
-source_selection_type = 3
+source_selection_type = 1
 other_card_resource = ExtResource("3_bwfa1")
 metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
