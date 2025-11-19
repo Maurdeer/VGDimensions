@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://dkv5fsn4snafe"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://dkv5fsn4snafe"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_jblfp"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_e5uie"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_e5uie"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="3_nns4j"]
 [ext_resource type="Texture2D" uid="uid://ce46jtioa5jf" path="res://art/card_art/Outcasts/Tinker.png" id="4_iedem"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="5_5yx88"]
@@ -9,7 +10,6 @@
 [sub_resource type="Resource" id="Resource_fsag3"]
 script = ExtResource("3_nns4j")
 bullet_type = 3
-bullet_cost = 1
 bullet_description = "Swap Places with any adjacent card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 

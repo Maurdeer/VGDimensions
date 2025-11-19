@@ -2,7 +2,7 @@
 extends TemporaryEffect
 class_name BurnEffect
 
-@export var amount: int = 1
+@export var amount: int = 2
 
 func on_execute() -> bool:
 	# Directly damage the card
