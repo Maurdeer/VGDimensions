@@ -22,6 +22,8 @@ func player_select_card(cancellable: bool, filter: Callable = func(card: Card): 
 	_is_selection_active = true
 	_first = true
 	var no_cards_connected: bool = true
+	
+	# Effects to do on Selectable
 	for i in rift_grid.rift_grid_height:
 		for deck: Deck in rift_grid.grid[i]:
 			var card: Card = deck.get_top_card()
@@ -38,11 +40,13 @@ func player_select_card(cancellable: bool, filter: Callable = func(card: Card): 
 		_is_selection_active = false
 		return null
 	
+	# TODO: State swapping instead?
 	GameManager.Instance.next_turn_button.visible = false
 	PlayerHand.Instance.disable_player_hand()
 	await selected
 	GameManager.Instance.next_turn_button.visible = true
 	PlayerHand.Instance.enable_player_hand()
+	# =====================================
 	_is_selection_active = false
 	return _selected_card
 		

@@ -5,13 +5,17 @@ var _callable_queue: Array[Array]
 var stored_card: Dictionary[int, Card]
 var selection: Card
 signal peer_selection
+var in_process: bool
 
 # returns false is Completed, true if canceled by player input
 func process_event_queue() -> bool:
 	if _callable_queue.is_empty():
 		#push_warning("Called Process Event Queue, but queue was empty")
 		return true
-	
+	if in_process:
+		push_warning("Called Process Event Queue while it was already in progress")
+		return false
+	in_process = true
 	var card_refs: Dictionary[int, Card] = {}
 	var pass_selection: bool = false
 	var event_fault: EventResource
@@ -49,7 +53,8 @@ func process_event_queue() -> bool:
 			if event.execute(card_invoker, card_refs):
 				process_result = ProcessResult.FAILED
 				event_fault = event
-			
+	
+	
 	match (process_result):
 		# (Ryan) Clearing the queue may or may not go here, you could want them to remain?
 		# But no situation where that is clear yet
@@ -58,13 +63,15 @@ func process_event_queue() -> bool:
 		ProcessResult.CANCELED:
 			# Flush left over events since we are cancelling the process
 			_callable_queue.clear()
+			in_process = false
 			return true
 		ProcessResult.FAILED:
 			# Flush left over events since we are cancelling the process
 			_callable_queue.clear()
+			in_process = false
 			printerr("Process had failed unexpectadly due to event at %s" % event_fault.resource_path)
 			return true
-			
+	in_process = false
 	return false
 
 @rpc("call_remote", "any_peer", "reliable")

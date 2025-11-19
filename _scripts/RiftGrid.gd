@@ -432,7 +432,7 @@ func emit_global_event(global_event_type: PassiveEventResource.GlobalEvent, card
 					
 					# If the card blocks global events from invoking underneath it
 					if card.resource.blocking: break
-	await EventManager.process_event_queue()
+	# (Ryan) Commented out to avoid processing mid processor await EventManager.process_event_queue()
 	
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
