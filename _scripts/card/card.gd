@@ -114,16 +114,24 @@ func _on_resource_change() -> void:
 	reset_passive_events()
 	
 func reset_passive_events() -> void:
+	# TODO: Unopmtimized, clean up :3
 	passive_events.clear()
 	passive_events.resize(PassiveEventResource.PassiveEvent.size() + PassiveEventResource.GlobalEvent.size())
 	for bullet in resource.bullets:
 		if bullet.bullet_type != BulletResource.BulletType.PASSIVE: continue
-		if not bullet.passive_events.is_empty():
-			for passive_event_resource in bullet.passive_events:
-				if passive_event_resource.is_global:
-					passive_events[passive_event_resource.global_event_type].append(passive_event_resource.event)
-				else:
-					passive_events[passive_event_resource.passive_event_type].append(passive_event_resource.event)
+		var passive_event_resources: Array[PassiveEventResource] = []
+		if bullet.is_multi_event:
+			passive_event_resources = bullet.passive_events
+		elif bullet.passive_event:
+			passive_event_resources.append(bullet.passive_event)
+			
+		for passive_event_resource in passive_event_resources:
+			if passive_event_resource.is_global:
+				passive_events[passive_event_resource.global_event_type].append(passive_event_resource.event)
+			else:
+				passive_events[passive_event_resource.passive_event_type].append(passive_event_resource.event)
+				
+
 	
 func refresh_stats() -> void:
 	hp = resource.starting_hp
@@ -265,7 +273,9 @@ func remove_passive_event(event : EventResource):
 # The networking magic happens here
 func try_execute(bullet: BulletResource, idx: int) -> bool:
 	# Currently only action and social have a cost for bullet activativations
-	if not bullet.bullet_event: return false
+	# TODO: Discrete math anyone?
+	if (bullet.is_multi_event and not bullet.bullet_events) or \
+	(not bullet.is_multi_event and not bullet.bullet_event): return false
 	match(bullet.bullet_type):
 		BulletResource.BulletType.PLAY:
 			if await EventManager.queue_and_process_bullet_event(card_id, bullet.bullet_type, idx): return false

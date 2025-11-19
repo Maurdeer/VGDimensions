@@ -1,5 +1,5 @@
 extends Node
-
+# EventManager Here yes :3
 var _callable_queue: Array[Array]
 
 var stored_card: Dictionary[int, Card]
@@ -100,21 +100,33 @@ func queue_and_process_bullet_event(cid: int, bullet_type: BulletResource.Bullet
 @rpc("call_remote", "any_peer", "reliable")
 func _queue_bullet_event(cid: int, bullet_type: BulletResource.BulletType, idx: int) -> bool:
 	var card_invoker: Card = CardManager.get_card_by_id(cid)
+	var passive_call: Callable
+	var bullet: BulletResource
 	match(bullet_type):
 		BulletResource.BulletType.PLAY:
-			queue_event(card_invoker.play_bullets[idx].bullet_event, card_invoker)
-			if await process_event_queue(): return true
-			card_invoker.on_play()
+			bullet = card_invoker.play_bullets[idx]
+			passive_call = card_invoker.on_play
 		BulletResource.BulletType.ACTION:
-			queue_event(card_invoker.action_bullets[idx].bullet_event, card_invoker)
-			if await process_event_queue(): return true
-			card_invoker.on_action()
+			bullet = card_invoker.action_bullets[idx]
+			passive_call = card_invoker.on_action
 		BulletResource.BulletType.SOCIAL:
-			queue_event(card_invoker.social_bullets[idx].bullet_event, card_invoker)
-			if await EventManager.process_event_queue(): return true
-			card_invoker.on_social()
+			bullet = card_invoker.social_bullets[idx]
+			passive_call = card_invoker.on_social
+			
+	# Queue up the bullet event
+	if bullet.is_multi_event: 
+		queue_event_group(bullet.bullet_events, card_invoker)
+	else: 
+		queue_event(bullet.bullet_event, card_invoker)
+	
+	if await process_event_queue():
+		# If any actions failed unexpectedly notify up
+		return true
+	
+	passive_call.call()
 	# Process If there were added events from the card passives or not
-	await EventManager.process_event_queue()
+	# (Ryan) Do I need to propagate any passive event errors?
+	await process_event_queue()
 	return false
 	
 enum ProcessResult {
