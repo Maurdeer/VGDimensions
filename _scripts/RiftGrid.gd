@@ -29,14 +29,15 @@ func _after_ready() -> void:
 
 #Create Grid
 func clear_grid() -> void:
+	for child in grid_container.get_children():
+		child.queue_free()
+		
 	if grid.is_empty() \
 	and _rift_deck.is_empty() \
 	and _rift_discard_pile.is_empty() \
 	and _card_refs.is_empty(): \
 		return
 		
-	for child in grid_container.get_children():
-		child.queue_free()
 	grid.clear()
 	_rift_deck.clear_deck()
 	_rift_discard_pile.clear_deck()
