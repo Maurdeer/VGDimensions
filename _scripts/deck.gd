@@ -48,6 +48,8 @@ func add_card_under(card: Card) -> void:
 		return
 	deck_array.push_back(card)
 	update_card_deck_poses()
+	
+	if card.get_parent(): card.get_parent().remove_child(card)
 		
 func get_top_card() -> Card:
 	if deck_size <= 0: return null

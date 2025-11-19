@@ -41,7 +41,7 @@ func process_purchase(card_to_purchase: Card) -> void:
 func _on_card_purchase(card_id: int) -> void:
 	var card_to_purchase: Card = CardManager.get_card_by_id(card_id)
 	if multiplayer.get_remote_sender_id() == multiplayer.get_unique_id():
-		PlayerHand.Instance.add_to_discard(card_to_purchase)
+		PlayerHand.Instance.add_to_draw_pile(card_to_purchase)
 	else:
 		card_to_purchase.get_parent().remove_child(card_to_purchase)
 	current_grid_cards.erase(card_to_purchase)

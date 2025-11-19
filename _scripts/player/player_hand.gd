@@ -21,10 +21,14 @@ func _ready() -> void:
 		return
 	Instance = self
 	
+	# Clear Prexisting stuff in this
+	for child in slots.get_children():
+		child.queue_free()
+	
 	for i in range(hand_limit):
 		var slot: Control = Control.new()
 		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER + Control.SIZE_EXPAND
+		slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		slot_queue.append(slot)
 	call_deferred("_after_ready")
@@ -38,12 +42,10 @@ func clear_hand() -> void:
 	
 func fill_hand() -> void:
 	var added_count: int = 0
-	
 	while added_count < hand_draw_limit and not slot_queue.is_empty():
-		draw_card_to_hand()
-		if draw_pile.is_empty(): break
+		if draw_card_to_hand():
+			break
 		added_count += 1
-		#if draw_pile.is_empty(): reshuffle_draw_pile()
 		
 
 # not used yet (use with caution)
@@ -62,10 +64,10 @@ func add_card_to_hand(card: Card) -> void:
 	card.flip_reveal()
 	cards_in_hand[card] = slot
 
-func draw_card_to_hand() -> void:
-	if slot_queue.is_empty(): return
+func draw_card_to_hand() -> bool:
+	if slot_queue.is_empty(): return true
 	if draw_pile.is_empty(): reshuffle_draw_pile()
-	if draw_pile.is_empty(): return
+	if draw_pile.is_empty(): return true
 	
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
@@ -95,6 +97,7 @@ func draw_card_to_hand() -> void:
 	card.flip_reveal()
 	
 	cards_in_hand[card] = slot
+	return false
 	
 func reshuffle_draw_pile() -> void:
 	draw_pile.mergeDeck(discard_pile)
@@ -104,6 +107,11 @@ func reshuffle_draw_pile() -> void:
 func add_to_discard(card: Card) -> void:
 	card.grid_pos = Vector2i(-1, -1)
 	discard_pile.addCard(card)
+	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
+	
+func add_to_draw_pile(card: Card) -> void:
+	card.grid_pos = Vector2i(-1, -1)
+	draw_pile.add_card_under(card)
 	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 func discard_card(card: Card) -> void:

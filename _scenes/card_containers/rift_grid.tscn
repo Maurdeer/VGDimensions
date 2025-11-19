@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgrqj32tibok0"]
+[gd_scene load_steps=5 format=3 uid="uid://bgrqj32tibok0"]
 
 [ext_resource type="Script" uid="uid://dnu2i04hrhd01" path="res://_scripts/RiftGrid.gd" id="1_exr2v"]
 [ext_resource type="Script" uid="uid://dm44e4xnwpkd1" path="res://_scripts/managers/grid_position_selector.gd" id="2_exr2v"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="3_l8qsw"]
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="4_o8edh"]
 
 [node name="RiftGrid" type="Control"]
 layout_mode = 3
@@ -51,6 +52,51 @@ size_flags_horizontal = 4
 theme_override_constants/h_separation = 150
 theme_override_constants/v_separation = 150
 columns = 3
+
+[node name="Control" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control" instance=ExtResource("4_o8edh")]
+
+[node name="Control2" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control2" instance=ExtResource("4_o8edh")]
+
+[node name="Control3" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control3" instance=ExtResource("4_o8edh")]
+
+[node name="Control4" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control4" instance=ExtResource("4_o8edh")]
+
+[node name="Control5" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control5" instance=ExtResource("4_o8edh")]
+
+[node name="Control6" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control6" instance=ExtResource("4_o8edh")]
+
+[node name="Control7" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control7" instance=ExtResource("4_o8edh")]
+
+[node name="Control8" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control8" instance=ExtResource("4_o8edh")]
+
+[node name="Control9" type="Control" parent="HBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Card" parent="HBoxContainer/GridContainer/Control9" instance=ExtResource("4_o8edh")]
 
 [node name="Control2" type="Control" parent="HBoxContainer"]
 layout_mode = 2

@@ -61,8 +61,6 @@ func create_cards_for_player_hand():
 	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
 	for card in player_hand_cards:
 		player_hand.discard_card(card)
-		
-	player_hand.fill_hand()
 	
 func initial_player_stats():
 	PlayerStatistics.deleons = 10
@@ -87,11 +85,11 @@ func _on_next_turn_button_pressed() -> void:
 	on_start_of_turn.emit() # Invoked by and seen by all players
 	
 func start_local_play_turn() -> void:
+	player_hand.fill_hand()
 	await RiftGrid.Instance.on_start_of_new_turn()
 	
 func end_local_play_turn() -> void:
 	player_hand.clear_hand()
-	player_hand.fill_hand()
 	await RiftGrid.Instance.on_end_of_new_turn()
 	
 	if infinite_resources: dev_infinite_resources()

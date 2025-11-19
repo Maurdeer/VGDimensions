@@ -22,13 +22,13 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 [autoload]
 
 GNM="*res://_scripts/managers/network_manager.gd"
+Noray="*res://addons/netfox.noray/noray.gd"
+PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 CardShop="*res://_scripts/card_shop.gd"
 PlayerStatistics="*res://_scripts/player/player_statistics.gd"
 CardManager="*res://_scripts/managers/card_manager.gd"
 EventManager="*res://_scripts/managers/event_manager.gd"
 AudioManager="*res://_scenes/audio_manager.tscn"
-Noray="*res://addons/netfox.noray/noray.gd"
-PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 
 [display]
 

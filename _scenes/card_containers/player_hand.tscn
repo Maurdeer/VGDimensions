@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player/player_hand.gd" id="1_2yr0q"]
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="2_iyo8l"]
-[ext_resource type="PackedScene" uid="uid://c71uoxlt0gksi" path="res://_scenes/ui/desk_inspector.tscn" id="2_jiku1"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="2_l6uod"]
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="4_jiku1"]
 
 [node name="player_hand" type="Node2D" node_paths=PackedStringArray("discard_pile", "draw_pile")]
 script = ExtResource("1_2yr0q")
 discard_pile = NodePath("DiscardPile/Deck")
 draw_pile = NodePath("DrawPile/Deck")
-deck_inspector_scene = ExtResource("2_jiku1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 4
@@ -78,7 +77,43 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 mouse_filter = 2
+theme_override_constants/separation = 195
 alignment = 1
+
+[node name="Control" type="Control" parent="Slots"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Card" parent="Slots/Control" instance=ExtResource("4_jiku1")]
+
+[node name="Control2" type="Control" parent="Slots"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Card" parent="Slots/Control2" instance=ExtResource("4_jiku1")]
+
+[node name="Control3" type="Control" parent="Slots"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Card" parent="Slots/Control3" instance=ExtResource("4_jiku1")]
+
+[node name="Control4" type="Control" parent="Slots"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Card" parent="Slots/Control4" instance=ExtResource("4_jiku1")]
+
+[node name="Control5" type="Control" parent="Slots"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Card" parent="Slots/Control5" instance=ExtResource("4_jiku1")]
 
 [node name="DrawPile" type="Control" parent="."]
 layout_mode = 3

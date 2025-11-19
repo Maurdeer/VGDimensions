@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="21_34wvw"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="22_e0rbx"]
 [ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="23_fn044"]
-[ext_resource type="PackedScene" uid="uid://ec1n8sae3byg" path="res://_scenes/audio_manager.tscn" id="23_qt330"]
+[ext_resource type="Script" uid="uid://d1sug2on8v3c4" path="res://_scripts/ui/ui_manager.gd" id="23_qt330"]
 [ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_7qvlh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvy2v"]
@@ -367,7 +367,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="next_turn_button" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -401,6 +400,10 @@ layout_mode = 1
 [node name="PauseMenu" parent="." instance=ExtResource("24_7qvlh")]
 layout_mode = 1
 
-[node name="AudioManager" parent="." instance=ExtResource("23_qt330")]
+[node name="GUI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("23_qt330")
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

@@ -57,11 +57,12 @@ func _add_audio_from_dir_to_dict(path, dict):
 				# Recursive Call
 				_add_audio_from_dir_to_dict(absolute_path, dict)
 			else:
-				if file_name.contains(".wav") or file_name.contains(".mp3"):
-					var file_key = file_name.get_basename().get_file()
-					dict[file_key] = ResourceLoader.load(absolute_path) as AudioStream
-				else:
-					push_warning("\"%s\" sound file was not in .wav format" % [file_name])
+				if not file_name.contains(".import"):
+					if file_name.contains(".wav") or file_name.contains(".mp3"):
+						var file_key = file_name.get_basename().get_file()
+						dict[file_key] = ResourceLoader.load(absolute_path) as AudioStream
+					else:
+						push_warning("\"%s\" sound file was not in .wav format" % [file_name])
 			file_name = dir.get_next()
 				
 	else:
