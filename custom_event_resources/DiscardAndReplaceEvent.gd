@@ -12,7 +12,7 @@ func on_execute() -> bool:
 	if (replacement_card == null):
 		RiftGrid.Instance.discard_card_and_draw(selected_card)
 	else:
-		var selected_pos : Vector2i = selected_card.gris_pos
+		var selected_pos : Vector2i = selected_card.grid_pos
 		RiftGrid.Instance.discard_card(selected_card)
 		var source_card = CardManager.create_card_locally(replacement_card, true)
 		RiftGrid.Instance.place_card(selected_pos, source_card)

@@ -17,11 +17,13 @@ func on_execute() -> bool:
 		source_card = CardManager.create_card_locally(other_card_resource, true)
 		RiftGrid.Instance.place_card(selected_pos, source_card)
 		return false
+		
 
 	if source_card.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
 		# Just move the cards within the rift
+		var temp_location : Vector2i = source_card.grid_pos
 		RiftGrid.Instance.move_card_to(selected_pos, source_card.grid_pos)
-		RiftGrid.Instance.draw_card_if_empty(source_card.grid_pos)
+		RiftGrid.Instance.draw_card_if_empty(temp_location)
 	else:
 		# The Card was not in the rift grid yet, so just place it in the new spot
 		RiftGrid.Instance.place_card(selected_pos, source_card)

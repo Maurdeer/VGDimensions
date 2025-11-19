@@ -1,15 +1,25 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://cjxbahb6jejem"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://cjxbahb6jejem"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_u1g5w"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_2qb4m"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_af5si"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_af5si"]
+[ext_resource type="Resource" uid="uid://eq5vqnlsot7r" path="res://cards/From Nava/Chair.tres" id="3_bwfa1"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_fhbk1"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_xyng2"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="4_moox1"]
 [ext_resource type="Texture2D" uid="uid://c6snfbfeid2ax" path="res://art/card_art/FromNava/-e ChairSpell -e.png" id="5_fhbk1"]
 
-[sub_resource type="Resource" id="Resource_af5si"]
+[sub_resource type="Resource" id="Resource_446el"]
+script = ExtResource("4_moox1")
+source_selection_type = 3
+other_card_resource = ExtResource("3_bwfa1")
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_870n0"]
 script = ExtResource("2_2qb4m")
-bullet_cost = 0
-bullet_description = "Play this card to place a Chair anywhere on the Rfit. It will disappear in a turn."
+bullet_event = SubResource("Resource_446el")
+bullet_events = Array[ExtResource("3_fhbk1")]([SubResource("Resource_446el")])
+bullet_description = "On Play: Place a Chair on any space on the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -19,7 +29,7 @@ game_origin = 26
 deleon_value = 4
 starting_hp = 3
 movable = false
-bullets = Array[ExtResource("2_2qb4m")]([SubResource("Resource_af5si")])
+bullets = Array[ExtResource("2_2qb4m")]([SubResource("Resource_870n0")])
 card_art = ExtResource("5_fhbk1")
 background_art = ExtResource("2_af5si")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

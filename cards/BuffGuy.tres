@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://cx8yypimalqcf"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://cx8yypimalqcf"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_5wf0y"]
 [ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="2_63hgc"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_pqhu8"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_0dbhp"]
 [ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="3_63hgc"]
+[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="4_1bd1s"]
 [ext_resource type="Texture2D" uid="uid://bugdnojfpntle" path="res://art/card_art/VGDev/knife.png" id="5_1bd1s"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="5_mq1va"]
 
 [sub_resource type="Resource" id="Resource_mq1va"]
 script = ExtResource("3_63hgc")
@@ -15,6 +16,7 @@ metadata/_custom_type_script = "uid://dgpr0uywveph4"
 [sub_resource type="Resource" id="Resource_1bd1s"]
 script = ExtResource("2_pqhu8")
 bullet_event = SubResource("Resource_mq1va")
+bullet_events = Array[ExtResource("4_1bd1s")]([SubResource("Resource_mq1va")])
 bullet_description = "Deal 2 damage to any card on the rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
