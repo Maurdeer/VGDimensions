@@ -2,7 +2,7 @@
 extends EventResource
 class_name TemporaryEffect
 
-@export var invoked_when: PassiveEventResource.PassiveEvent
+@export var invoked_when: PassiveEventResource.GlobalEvent = PassiveEventResource.GlobalEvent.ON_START_OF_TURN
 @export var duration: int = 2
 var curr_duration: int
 
