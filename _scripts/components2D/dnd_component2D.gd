@@ -1,4 +1,4 @@
-extends Area2D
+extends Control
 class_name DragAndDropComponent2D
 
 @export_group("Specifications")
@@ -29,7 +29,7 @@ func _input_process() -> void:
 func follow_mouse():
 	_parent.global_position = get_global_mouse_position()
 
-func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton or not draggable: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
@@ -42,7 +42,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 			_parent.global_position = pre_drag_pos
 			
 			# Call drop functions
-			if hovering_over_area_temp: hovering_over_area_temp.drop(self)
+			#if hovering_over_area_temp: hovering_over_area_temp.drop(self)
 			pre_drag_pos = _parent.global_position
 			is_dragging = false
 
@@ -55,17 +55,17 @@ func _on_mouse_exited() -> void:
 	if not interactable or is_dragging or not scale_prior_to_hover: return
 	unhover()
 
-var hovering_over_area_temp: DropSlot2D
-func _on_area_entered(area: Area2D) -> void:
-	var dropslot: DropSlot2D = area as DropSlot2D
-	if not dropslot: return
-	hovering_over_area_temp = dropslot
-	
-func _on_area_exited(area: Area2D) -> void:
-	if not hovering_over_area_temp: return
-	var dropslot: DropSlot2D = area as DropSlot2D
-	if not dropslot or dropslot != hovering_over_area_temp: return
-	hovering_over_area_temp = null
+#var hovering_over_area_temp: DropSlot2D
+#func _on_area_entered(area: Area2D) -> void:
+	#var dropslot: DropSlot2D = area as DropSlot2D
+	#if not dropslot: return
+	#hovering_over_area_temp = dropslot
+	#
+#func _on_area_exited(area: Area2D) -> void:
+	#if not hovering_over_area_temp: return
+	#var dropslot: DropSlot2D = area as DropSlot2D
+	#if not dropslot or dropslot != hovering_over_area_temp: return
+	#hovering_over_area_temp = null
 	
 func hover() -> void:
 	if scale_due_to_hover: return

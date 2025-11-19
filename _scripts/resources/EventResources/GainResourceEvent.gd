@@ -5,7 +5,7 @@ class_name GainResourceEvent
 @export var amount: int
 
 func on_execute() -> bool:
-	AudioManager.card_place_hand_sfx.play()
+	#AudioManager.play_sfx()
 	if GameManager.Instance.is_my_turn():
 		PlayerStatistics.modify_resource(type, amount)
 	return false

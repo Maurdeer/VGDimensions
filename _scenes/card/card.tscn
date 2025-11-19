@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=17 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="2_oyue5"]
@@ -154,12 +154,6 @@ _data = {
 script = ExtResource("3_uhl3e")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ol5b"]
-size = Vector2(341.81818, 478.18176)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f61jr"]
-size = Vector2(218.18181, 218.1818)
-
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
@@ -214,25 +208,33 @@ visible = false
 scale = Vector2(1e-05, 0.177)
 card_resource = SubResource("Resource_u8xt1")
 
-[node name="drag_and_drop_component2D" type="Area2D" parent="."]
+[node name="gridcard_shape" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -109.090904
+offset_top = -109.090904
+offset_right = 109.090904
+offset_bottom = 109.090904
+mouse_default_cursor_shape = 2
 script = ExtResource("4_f61jr")
 
-[node name="card_shape" type="CollisionShape2D" parent="drag_and_drop_component2D"]
-position = Vector2(0, 0.9090769)
-shape = SubResource("RectangleShape2D_2ol5b")
-
-[node name="gridcard_shape" type="CollisionShape2D" parent="drag_and_drop_component2D"]
-position = Vector2(-3.196976e-06, -2.8176737e-06)
-shape = SubResource("RectangleShape2D_f61jr")
+[node name="card_shape" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -170.90909
+offset_top = -238.18181
+offset_right = 170.90909
+offset_bottom = 239.99998
+mouse_default_cursor_shape = 2
+script = ExtResource("4_f61jr")
 
 [node name="CardSM" type="Node" parent="."]
 script = ExtResource("9_uhl3e")
 
-[connection signal="area_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_entered"]
-[connection signal="area_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_area_exited"]
-[connection signal="body_entered" from="drag_and_drop_component2D" to="." method="_on_drag_and_drop_component_2d_body_entered"]
-[connection signal="input_event" from="drag_and_drop_component2D" to="." method="_on_drag_and_drop_component_2d_input_event"]
-[connection signal="input_event" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_input_event"]
-[connection signal="mouse_entered" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="drag_and_drop_component2D" to="drag_and_drop_component2D" method="_on_mouse_exited"]
-[connection signal="on_drop" from="drag_and_drop_component2D" to="." method="_on_drag_and_drop_component_2d_on_drop"]
+[connection signal="gui_input" from="gridcard_shape" to="." method="_on_gridcard_shape_gui_input"]
+[connection signal="mouse_entered" from="gridcard_shape" to="gridcard_shape" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="gridcard_shape" to="gridcard_shape" method="_on_mouse_exited"]
+[connection signal="gui_input" from="card_shape" to="." method="_on_card_shape_gui_input"]
+[connection signal="mouse_entered" from="card_shape" to="card_shape" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="card_shape" to="card_shape" method="_on_mouse_exited"]

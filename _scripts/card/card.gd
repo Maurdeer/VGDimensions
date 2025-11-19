@@ -33,7 +33,8 @@ const SELECTION_UI = preload("uid://vei3yr63fqcj")
 # Utilities
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var card_sm: CardStateMachine = $CardSM
-@onready var dnd_2d: DragAndDropComponent2D = $drag_and_drop_component2D
+@onready var card_shape: DragAndDropComponent2D = $card_shape
+@onready var gridcard_shape: DragAndDropComponent2D = $gridcard_shape
 @onready var gridVisualizer: GridCardVisualizer = $gridcard_visualizer
 var passive_events: Array[Array]
 
@@ -49,7 +50,8 @@ var revealed: bool
 var temporary: bool = false
 var interactable: bool = false:
 	set(value):
-		dnd_2d.interactable = value
+		gridcard_shape.interactable = value
+		card_shape.interactable = value
 		interactable = value
 var card_id: int
 enum CardDirection {
@@ -78,8 +80,10 @@ func _ready() -> void:
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
-	dnd_2d.on_hover_enter.connect(_on_hover_enter)
-	dnd_2d.on_hover_left.connect(_on_hover_left)
+	gridcard_shape.on_hover_enter.connect(_on_hover_enter)
+	gridcard_shape.on_hover_left.connect(_on_hover_left)
+	card_shape.on_hover_enter.connect(_on_hover_enter)
+	card_shape.on_hover_left.connect(_on_hover_left)
 
 func set_up(p_card_id: int, p_resource: CardResource) -> void:
 	card_id = p_card_id
@@ -96,7 +100,8 @@ func _setup() -> void:
 	else: animation_player.play("flip_reveal")
 	
 	# Let card be draggable on launch or not
-	dnd_2d.draggable = draggable
+	card_shape.draggable = draggable
+	gridcard_shape.draggable = draggable
 
 func _on_resource_change() -> void:
 	play_bullets.clear()
@@ -200,7 +205,7 @@ func _on_single_click() -> void:
 
 func _on_hover_enter() -> void:
 	if not interactable: return
-	if dnd_2d.is_dragging: return
+	if gridcard_shape.is_dragging or card_shape.is_dragging: return
 	# Don't start hover if CardViewer is already open
 	if CardViewer.Instance and CardViewer.Instance.visible: return
 	
@@ -221,14 +226,21 @@ func _on_hover_left() -> void:
 
 func _on_hover_timeout() -> void:	
 	# Check we're still hovering and not dragging before showing viewer
-	if (is_hovering and not dnd_2d.is_dragging and CardViewer.Instance and 
-		not CardViewer.Instance.visible):
+	if (is_hovering and not (card_shape.is_dragging or gridcard_shape.is_dragging) 
+	and CardViewer.Instance and not CardViewer.Instance.visible):
 		CardViewer.Instance.view_card(resource)
 	else:
 		print("Hover timeout cancelled - conditions not met")
 
 var _pressed_previously: bool = false
-func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+
+func _on_gridcard_shape_gui_input(event: InputEvent) -> void:
+	_process_input_event(event)
+
+func _on_card_shape_gui_input(event: InputEvent) -> void:
+	_process_input_event(event)
+		
+func _process_input_event(event: InputEvent) -> void:
 	if not interactable or not event is InputEventMouseButton: return
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
