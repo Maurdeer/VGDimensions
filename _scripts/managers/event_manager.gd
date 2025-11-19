@@ -85,7 +85,8 @@ func queue_event(event: EventResource, card_invoker: Card) -> void:
 		return 
 	
 	# Desinger input if they want these queued up or not
-	var required_events: Array[EventResource] = (event as EventResource).required_events()
+	event.m_card_invoker = card_invoker
+	var required_events: Array[EventResource] = event.required_events()
 	if not required_events.is_empty(): queue_event_group(required_events, card_invoker)
 	_callable_queue.push_back([event, card_invoker])
 	
