@@ -69,11 +69,17 @@ var play_bullets: Array[BulletResource]
 var action_bullets: Array[BulletResource]
 var social_bullets: Array[BulletResource]
 
+# Hover timer for card viewer
+var hover_timer: Timer
+var is_hovering: bool = false
+var hover_delay: float = 0.8
+
 func _ready() -> void:
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
-	pass
+	dnd_2d.on_hover_enter.connect(_on_hover_enter)
+	dnd_2d.on_hover_left.connect(_on_hover_left)
 
 func set_up(p_card_id: int, p_resource: CardResource) -> void:
 	card_id = p_card_id
@@ -91,7 +97,7 @@ func _setup() -> void:
 	
 	# Let card be draggable on launch or not
 	dnd_2d.draggable = draggable
-	
+
 func _on_resource_change() -> void:
 	play_bullets.clear()
 	action_bullets.clear()
@@ -130,7 +136,7 @@ func damage(amount: int) -> bool:
 	if not card_sm.is_state(CardStateMachine.StateType.IN_RIFT): return discarded
 	hp -= amount
 	on_damage()
-	if hp <= 0: 
+	if hp <= 0:
 		hp = 0
 		discarded = true
 		RiftGrid.Instance.discard_card(self)
@@ -179,10 +185,35 @@ func _on_single_click() -> void:
 	#if CardInspector.Instance: CardInspector.Instance.set_card(self)
 	if not GameManager.Instance.is_my_turn(): return
 	card_sm.clicked_on()
+
+func _on_hover_enter() -> void:
+	if not interactable: return
+	if dnd_2d.is_dragging: return
+	# Don't start hover if CardViewer is already open
+	if CardViewer.Instance and CardViewer.Instance.visible: return
 	
-func _on_right_click() -> void:
-	if not CardViewer.Instance: return
-	CardViewer.Instance.view_card(resource)
+	is_hovering = true
+	if not hover_timer:
+		hover_timer = Timer.new()
+		add_child(hover_timer)
+		hover_timer.wait_time = hover_delay
+		hover_timer.one_shot = true
+		hover_timer.timeout.connect(_on_hover_timeout)
+	hover_timer.start()
+
+func _on_hover_left() -> void:
+	is_hovering = false
+	if hover_timer:
+		hover_timer.queue_free()
+		hover_timer = null
+
+func _on_hover_timeout() -> void:	
+	# Check we're still hovering and not dragging before showing viewer
+	if (is_hovering and not dnd_2d.is_dragging and CardViewer.Instance and 
+		not CardViewer.Instance.visible):
+		CardViewer.Instance.view_card(resource)
+	else:
+		print("Hover timeout cancelled - conditions not met")
 
 var _pressed_previously: bool = false
 func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -190,15 +221,19 @@ func _on_drag_and_drop_component_2d_input_event(_viewport: Node, event: InputEve
 	var mouse_button_event: InputEventMouseButton = event
 	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 		if mouse_button_event.pressed and not _pressed_previously:
+			# Cancel hover timer when player starts interacting
+			if hover_timer and hover_timer.time_left > 0:
+				hover_timer.stop()
+				hover_timer.queue_free()
+				hover_timer = null
+				is_hovering = false
+			
 			_pressed_previously = true
 			if mouse_button_event.double_click:
 				_on_double_click()
 			else:
 				_on_single_click()
 		_pressed_previously = mouse_button_event.pressed
-	if mouse_button_event.button_index == MOUSE_BUTTON_RIGHT:
-		if mouse_button_event.pressed:
-			_on_right_click()
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.
@@ -241,39 +276,39 @@ func try_execute(bullet: BulletResource, idx: int) -> bool:
 	return true
 
 # Passive Functions effecting card itself
-func on_play(): 
+func on_play():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_PLAY], self)
-func on_action(): 
+func on_action():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_ACTION], self)
-func on_social(): 
+func on_social():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_SOCIAL], self)
-func on_enter_tree(): 
+func on_enter_tree():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_ENTER_TREE], self)
-func on_state_of_grid_change(): 
+func on_state_of_grid_change():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_STATE_OF_GRID_CHANGE], self)
-func on_end_of_turn(): 
+func on_end_of_turn():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_END_OF_TURN], self)
-func on_start_of_turn(): 
+func on_start_of_turn():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_START_OF_TURN], self)
-func on_damage(): 
+func on_damage():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DAMAGE], self)
-func on_discard(): 
+func on_discard():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_DISCARD], self)
-func on_burn(): 
+func on_burn():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_BURN], self)
-func on_stack(): 
+func on_stack():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_STACK], self)
-func on_flip_hide(): 
+func on_flip_hide():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_HIDE], self)
-func on_flip_reveal(): 
+func on_flip_reveal():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FLIP_REVEAL], self)
-func on_before_move(): 
+func on_before_move():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_BEFORE_MOVE], self)
-func on_after_move(): 
+func on_after_move():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_AFTER_MOVE], self)
-func on_replace(): 
+func on_replace():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_REPLACE], self)
-func on_freeze(): 
+func on_freeze():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
-func on_quest_progress(): 
+func on_quest_progress():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_QUEST_PROGRESS], self)

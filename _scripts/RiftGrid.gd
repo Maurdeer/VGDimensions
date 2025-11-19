@@ -230,6 +230,12 @@ func shuffle_card_back_in_deck(shuffleCard: Card, targetDeck: Deck):
 	targetDeck.addCard(shuffleCard)
 	seed(pre_defined_seed)
 	targetDeck.shuffleDeck()
+	
+func shuffle_card_back_in_draw_pile(shuffleCard: Card):
+	shuffle_card_back_in_deck(shuffleCard, _rift_deck)
+	
+func shuffle_card_back_in_discard_pile(shuffleCard: Card):
+	shuffle_card_back_in_deck(shuffleCard, _rift_discard_pile)
 
 func shift_decks_horizontally(start_pos: Vector2i, offset: int):
 	if not is_valid_pos(start_pos):
@@ -336,7 +342,54 @@ func is_valid_pos(pos: Vector2i) -> bool:
 func get_top_card(pos: Vector2i) -> Card:
 	assert(is_valid_pos(pos), "Incorrect position: (%s, %s)" % [pos.x, pos.y]) 
 	return grid[pos.y][pos.x].get_top_card()
-	
+
+func get_adjacent_cards(pos: Vector2i) -> Array[Card]:
+	var targeted_cards : Array[Card]
+	if (is_valid_pos(pos + Vector2i(0, 1))):
+		targeted_cards.append(grid[pos.y + 1][pos.x].get_top_card())	
+	if (is_valid_pos(pos + Vector2i(0, -1))):
+		targeted_cards.append(grid[pos.y - 1][pos.x].get_top_card())	
+	if (is_valid_pos(pos + Vector2i(1, 0))):
+		targeted_cards.append(grid[pos.y][pos.x + 1].get_top_card())	
+	if (is_valid_pos(pos + Vector2i(-1, 0))):
+		targeted_cards.append(grid[pos.y][pos.x - 1].get_top_card())	
+	return targeted_cards
+
+func get_diagonal_cards(pos: Vector2i) -> Array[Card]:
+	var targeted_cards  : Array[Card]
+	if (is_valid_pos(pos + Vector2i(1, 1))):
+		targeted_cards.append(grid[pos.y + 1][pos.x + 1].get_top_card())	
+	if (is_valid_pos(pos + Vector2i(-1, 1))):
+		targeted_cards.append(grid[pos.y + 1][pos.x - 1].get_top_card())	
+	if (is_valid_pos(pos + Vector2i(1, -1))):
+		targeted_cards.append(grid[pos.y - 1][pos.x + 1].get_top_card())	
+	if (is_valid_pos(pos + Vector2i(-1, -1))):
+		targeted_cards.append(grid[pos.y - 1][pos.x - 1].get_top_card())	
+		
+	return targeted_cards
+
+func find_lowest_health() -> Card:
+	var found_card : Card = null
+	for i in rift_grid_height:
+		for j in rift_grid_width:
+			var curr_card : Card = grid[i][j].get_top_card()
+			if curr_card.hp == -1:
+				continue
+			if found_card == null:
+				found_card = curr_card
+				continue
+			found_card = compare_lower_health(curr_card, found_card)
+	print(found_card.resource.title)
+	return found_card
+#filter.call(card)
+
+func compare_higher_health(card_a: Card, card_b : Card) -> Card:
+	return card_a if card_a.hp > card_b.hp else card_b
+
+func compare_lower_health(card_a: Card, card_b : Card) -> Card:
+	return card_a if card_a.hp < card_b.hp else card_b
+# A way to use lambda functions to filter things
+# Take in a lambda call to figure out what to filter by, and then go for it
 #====================== Section of iterating over the entire grid =====================
 # O(n * m) land bruh, but luckily n and m are small. Max size is n*m = 25 for this game hopefully
 

@@ -10,7 +10,7 @@ func on_execute() -> bool:
 	if not RiftGrid.Instance.is_valid_pos(selected_card_pos):
 		return true
 	var defeated: bool = m_card_refs[target_card_at].damage(amount)
-	if defeated: RiftGrid.Instance.draw_card(selected_card_pos)
+	if defeated: RiftGrid.Instance.draw_card_if_empty(selected_card_pos)
 	return false
 	
 func required_events() -> Array[EventResource]:
