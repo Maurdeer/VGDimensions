@@ -141,9 +141,10 @@ func place_cards_under(place_under: Vector2i, cards: Array[Card]) -> void:
 		place_card_under(place_under, card)
 
 func discard_card_and_draw(card: Card, draw_when_empty: bool = true) -> void:
+	var selected_pos : Vector2i = card.grid_pos
 	discard_card(card)
-	if draw_when_empty and not grid[card.grid_pos.y][card.grid_pos.x].is_empty(): return
-	draw_card(card.grid_pos)
+	if draw_when_empty and not grid[selected_pos.y][selected_pos.x].is_empty(): return
+	draw_card(selected_pos)
 	
 func discard_card(card: Card) -> bool:
 	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.grid_pos.x, card.grid_pos.y])
