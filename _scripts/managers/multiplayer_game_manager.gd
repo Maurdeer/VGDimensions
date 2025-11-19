@@ -3,7 +3,6 @@ class_name MultiplayerGameManager
 @onready var chat: Chat = $Chat
 @onready var name_label: Label = $PlayerHandUI/name_label
 
-
 var player_turn_queue: Array[int]
 var curr_turn: int
 var random_seed: int

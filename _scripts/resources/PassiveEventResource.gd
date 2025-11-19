@@ -43,6 +43,9 @@ enum GlobalEvent {
 @export var global_event_type: GlobalEvent = GlobalEvent.ON_CARD_PLAY
 @export var event: EventResource
 
+static var LOCAL_ENUM_HINT := ",".join(PassiveEvent.keys())
+static var GLOBAL_ENUM_HINT := ",".join(GlobalEvent.keys())
+
 func _validate_property(property: Dictionary) -> void:
 	var hide_list = []
 	if is_global:
