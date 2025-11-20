@@ -18,6 +18,7 @@ class_name CardVisualizer
 		_on_values_change()
 
 @export var bullet_scene: PackedScene
+@onready var icons: VBoxContainer = $GUI/Icons
 
 
 func _ready() -> void:
@@ -83,9 +84,14 @@ func _on_starting_hp_change() -> void:
 func _on_deleon_value_change() -> void:
 	var deleon_value_frame = $"HBoxContainer/deleon_value_frame"
 	var deleon_value_label = $"HBoxContainer/deleon_value_frame/TextureRect/Label"
-	if not deleon_value_frame or not deleon_value_label: return
-	deleon_value_label.text = "%s" % card_resource.deleon_value
-	deleon_value_frame.visible = card_resource.deleon_value >= 0
+	if deleon_value_frame and deleon_value_label: 
+		deleon_value_label.text = "%s" % card_resource.deleon_value
+		deleon_value_frame.visible = card_resource.deleon_value >= 0
+	var deleon_badge_icon = $GUI/Icons/deleon
+	var deleon_badge_label = $GUI/Icons/deleon/Label
+	if deleon_badge_icon and deleon_badge_label:
+		deleon_badge_label.text = "%s" % card_resource.deleon_value
+		deleon_badge_icon.visible = card_resource.deleon_value >= 0
 		
 func _on_effector_bools_change() -> void:
 	$"Effectors/not_movable_frame".visible = not card_resource.movable

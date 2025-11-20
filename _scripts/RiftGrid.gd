@@ -10,8 +10,8 @@ var rift_grid_width: int = 3
 var rift_grid_height: int = 3
 
 var _card_refs: Array[Card]
-@onready var _rift_deck: Deck =  $HBoxContainer/Control2/DrawPile
-@onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
+@onready var _rift_deck: Deck =  $Control2/DrawPile
+@onready var _rift_discard_pile: Deck = $Control/DiscardPile
 var pre_defined_seed: int
 
 func _ready() -> void:

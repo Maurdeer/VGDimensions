@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bufxhut03l01j"]
+[gd_scene load_steps=26 format=3 uid="uid://bufxhut03l01j"]
 
 [ext_resource type="Script" uid="uid://dq2rgaxh8ri4t" path="res://_scripts/card/card_visualizer.gd" id="1_51wi6"]
 [ext_resource type="PackedScene" uid="uid://duo3p8powrn74" path="res://_scenes/card/bullet_visualizer.tscn" id="2_dkm5d"]
@@ -55,6 +55,9 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_auvip"]
 font_size = 70
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lnxd"]
+font_size = 180
 
 [node name="card_visualizer" type="Sprite2D"]
 scale = Vector2(0.177, 0.177)
@@ -444,3 +447,54 @@ label_settings = SubResource("LabelSettings_auvip")
 horizontal_alignment = 2
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchor_left = -983.05084
+anchor_top = -1372.8813
+anchor_right = 983.05084
+anchor_bottom = 1378.531
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Icons" type="VBoxContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -242.93787
+offset_top = -163.8418
+offset_right = 158.19202
+offset_bottom = 1485.8757
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="deleon" type="TextureRect" parent="GUI/Icons"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("10_fh26a")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/Icons/deleon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -123.0
+offset_right = 103.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "-1"
+label_settings = SubResource("LabelSettings_8lnxd")
+horizontal_alignment = 1
+vertical_alignment = 1

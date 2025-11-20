@@ -216,6 +216,7 @@ offset_left = -109.090904
 offset_top = -109.090904
 offset_right = 109.090904
 offset_bottom = 109.090904
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource("4_f61jr")
 
@@ -226,6 +227,7 @@ offset_left = -170.90909
 offset_top = -238.18181
 offset_right = 170.90909
 offset_bottom = 239.99998
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource("4_f61jr")
 

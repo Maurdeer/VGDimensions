@@ -10,10 +10,10 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
-	
 func view_card(card_resource: CardResource) -> void:
 	visible = true
 	card_visualizer.card_resource = card_resource
+	card_visualizer.icons.visible = false
 	
 func hide_view() -> void:
 	visible = false

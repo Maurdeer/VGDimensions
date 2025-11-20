@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name PlayerHand
 
 static var Instance: PlayerHand
@@ -8,7 +8,8 @@ const hand_draw_limit: int = 5
 @export var discard_pile: Deck
 @export var draw_pile: Deck
 @export var deck_inspector: Control
-@onready var slots: HBoxContainer = $Slots
+@onready var slots: HBoxContainer = $hand_region/Slots
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var empty_card: Card
 var slot_queue: Array[Control]
@@ -27,7 +28,7 @@ func _ready() -> void:
 	
 	for i in range(hand_limit):
 		var slot: Control = Control.new()
-		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		slot.mouse_filter = Control.MOUSE_FILTER_PASS
 		slot.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		slot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		slot_queue.append(slot)
@@ -150,3 +151,11 @@ func _on_discard_pile_ui_clicked(event: InputEvent) -> void:
 			return
 		deck_inspector.visible = true
 		deck_inspector.view_deck(discard_pile)
+
+
+func _on_hand_region_mouse_entered() -> void:
+	animation_player.play("show")
+
+
+func _on_hand_region_mouse_exited() -> void:
+	animation_player.play("show", -1, -1.0, true)

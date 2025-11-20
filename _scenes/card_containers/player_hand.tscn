@@ -1,130 +1,391 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1b1m0y144lgx"]
+[gd_scene load_steps=14 format=3 uid="uid://d1b1m0y144lgx"]
 
 [ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player/player_hand.gd" id="1_2yr0q"]
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="2_iyo8l"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="2_l6uod"]
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="4_jiku1"]
+[ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="5_gsy7b"]
+[ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="6_7vlg1"]
+[ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="7_7senp"]
+[ext_resource type="Texture2D" uid="uid://bi5onoqlrvjri" path="res://art/card_ui/passive.png" id="8_y3o18"]
 
-[node name="player_hand" type="Node2D" node_paths=PackedStringArray("discard_pile", "draw_pile")]
-script = ExtResource("1_2yr0q")
-discard_pile = NodePath("DiscardPile/Deck")
-draw_pile = NodePath("DrawPile/Deck")
+[sub_resource type="LabelSettings" id="LabelSettings_gsy7b"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -857.0
-offset_top = -22.0
-offset_right = -817.0
-offset_bottom = 18.0
+[sub_resource type="Animation" id="Animation_jiku1"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hand_region/Slots:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-179.995, -200.89001), Vector2(-179.995, -320.315)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hand_region:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hand_region:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(749.995, 1200), Vector2(627.995, 1200)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hand_region/Slots:theme_override_constants/separation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [60, 170]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hand_region:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_ovsbo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hand_region/Slots:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-179.995, -200.89001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hand_region:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hand_region:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(749.995, 1200)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hand_region/Slots:theme_override_constants/separation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [60]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ny1jg"]
+_data = {
+&"RESET": SubResource("Animation_ovsbo"),
+&"show": SubResource("Animation_jiku1")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_vqt30"]
+font_size = 180
+
+[node name="player_hand" type="Control" node_paths=PackedStringArray("discard_pile", "draw_pile")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 mouse_filter = 2
+script = ExtResource("1_2yr0q")
+discard_pile = NodePath("NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile/Deck")
+draw_pile = NodePath("NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile/Deck")
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -327.0
+offset_top = -233.0
+offset_right = -16.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_iyo8l")
+region_rect = Rect2(0, 0, 1688, 1144)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect2"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -737.0
-offset_top = -209.0
-offset_right = -347.0
-offset_bottom = -113.0
+offset_left = -146.0
+offset_top = -11.5
+offset_right = 347.33325
+offset_bottom = 168.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_iyo8l")
-region_rect = Rect2(0, 0, 1688, 1144)
+scale = Vector2(0.6, 0.6)
+alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -767.0
-offset_top = -149.0
-offset_right = 776.0
-offset_bottom = 145.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_iyo8l")
-region_rect = Rect2(0, 0, 1688, 1144)
-
-[node name="DiscardPile" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -646.0
-offset_right = -646.0
-size_flags_horizontal = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
 size_flags_vertical = 4
+theme_override_constants/separation = 135
+alignment = 1
 
-[node name="Deck" type="Node2D" parent="DiscardPile"]
+[node name="DiscardPile" type="Control" parent="NinePatchRect2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+
+[node name="Deck" type="Node2D" parent="NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile"]
 script = ExtResource("2_l6uod")
 flipped = true
 
-[node name="Slots" type="HBoxContainer" parent="."]
+[node name="Card" parent="NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile/Deck" instance=ExtResource("4_jiku1")]
+
+[node name="Label" type="Label" parent="NinePatchRect2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Discard Pile"
+label_settings = SubResource("LabelSettings_gsy7b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="NinePatchRect2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 135
+alignment = 1
+
+[node name="DrawPile" type="Control" parent="NinePatchRect2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+mouse_filter = 2
+
+[node name="Deck" type="Node2D" parent="NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile"]
+script = ExtResource("2_l6uod")
+
+[node name="Card" parent="NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile/Deck" instance=ExtResource("4_jiku1")]
+
+[node name="Label2" type="Label" parent="NinePatchRect2/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+text = "Draw Pile"
+label_settings = SubResource("LabelSettings_gsy7b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="hand_region" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -210.005
+offset_top = 120.0
+offset_right = 210.00708
+offset_bottom = 358.43457
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+region_rect = Rect2(0, 0, 1690, 1139.88)
+
+[node name="Slots" type="HBoxContainer" parent="hand_region"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -493.5
-offset_top = -96.0
-offset_right = 493.5
-offset_bottom = 96.0
+offset_left = -390.00104
+offset_top = -320.1073
+offset_right = 389.99896
+offset_bottom = -127.007355
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
-mouse_filter = 2
-theme_override_constants/separation = 195
+mouse_behavior_recursive = 1
+theme_override_constants/separation = 60
 alignment = 1
 
-[node name="Control" type="Control" parent="Slots"]
+[node name="Control" type="Control" parent="hand_region/Slots"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 
-[node name="Card" parent="Slots/Control" instance=ExtResource("4_jiku1")]
+[node name="Card" parent="hand_region/Slots/Control" instance=ExtResource("4_jiku1")]
 
-[node name="Control2" type="Control" parent="Slots"]
+[node name="Control2" type="Control" parent="hand_region/Slots"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 
-[node name="Card" parent="Slots/Control2" instance=ExtResource("4_jiku1")]
+[node name="Card" parent="hand_region/Slots/Control2" instance=ExtResource("4_jiku1")]
 
-[node name="Control3" type="Control" parent="Slots"]
+[node name="Control3" type="Control" parent="hand_region/Slots"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 
-[node name="Card" parent="Slots/Control3" instance=ExtResource("4_jiku1")]
+[node name="Card" parent="hand_region/Slots/Control3" instance=ExtResource("4_jiku1")]
 
-[node name="Control4" type="Control" parent="Slots"]
+[node name="Control4" type="Control" parent="hand_region/Slots"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 
-[node name="Card" parent="Slots/Control4" instance=ExtResource("4_jiku1")]
+[node name="Card" parent="hand_region/Slots/Control4" instance=ExtResource("4_jiku1")]
 
-[node name="Control5" type="Control" parent="Slots"]
+[node name="Control5" type="Control" parent="hand_region/Slots"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 
-[node name="Card" parent="Slots/Control5" instance=ExtResource("4_jiku1")]
+[node name="Card" parent="hand_region/Slots/Control5" instance=ExtResource("4_jiku1")]
 
-[node name="DrawPile" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 646.0
-offset_right = 646.0
-size_flags_horizontal = 10
-size_flags_vertical = 4
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ny1jg")
+}
+speed_scale = 5.0
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 1
+anchor_left = -627.1719
+anchor_top = -621.2185
+anchor_right = 621.4158
+anchor_bottom = 627.3691
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Icons" type="VBoxContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -242.93787
+offset_top = -163.8418
+offset_right = 158.19202
+offset_bottom = 1485.8757
+grow_horizontal = 0
 mouse_filter = 2
 
-[node name="Deck" type="Node2D" parent="DrawPile"]
-script = ExtResource("2_l6uod")
+[node name="HP" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_gsy7b")
+expand_mode = 4
+stretch_mode = 5
 
-[connection signal="gui_input" from="DiscardPile" to="." method="_on_discard_pile_ui_clicked"]
+[node name="Label" type="Label" parent="GUI/Icons/HP"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24000001
+anchor_top = 0.141
+anchor_right = 0.75100005
+anchor_bottom = 0.754
+offset_left = -0.19490051
+offset_top = -0.043815613
+offset_right = -0.10592651
+offset_bottom = 0.14318848
+grow_horizontal = 2
+grow_vertical = 2
+text = "99"
+label_settings = SubResource("LabelSettings_vqt30")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ACTION" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_7vlg1")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="SOCIAL" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_7senp")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="PASSIVE" type="TextureRect" parent="GUI/Icons"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("8_y3o18")
+expand_mode = 4
+stretch_mode = 5
+
+[connection signal="gui_input" from="NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile" to="." method="_on_discard_pile_ui_clicked"]
+[connection signal="mouse_entered" from="hand_region" to="." method="_on_hand_region_mouse_entered"]
+[connection signal="mouse_exited" from="hand_region" to="." method="_on_hand_region_mouse_exited"]

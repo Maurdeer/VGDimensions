@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b78acuqchwjyj"]
+[gd_scene load_steps=30 format=3 uid="uid://b78acuqchwjyj"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_3y3hc"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_5x1ca"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="10_c2s8n"]
 [ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="12_3qfnp"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="13_2thif"]
+[ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="13_k3prr"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="14_mkmui"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="15_kw02p"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="16_7hw7e"]
@@ -66,6 +67,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("CanvasTexture_5f5da")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -73,14 +75,7 @@ anchor_mode = 0
 
 [node name="RiftGrid" parent="." instance=ExtResource("10_c2s8n")]
 layout_mode = 1
-anchors_preset = 5
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = 248.0
-offset_top = 344.0
-offset_right = 248.0
-offset_bottom = 344.0
-grow_vertical = 1
+scale = Vector2(1.25, 1.25)
 
 [node name="QuestManager" type="Control" parent="RiftGrid"]
 layout_mode = 1
@@ -101,26 +96,20 @@ metadata/_custom_type_script = "uid://drhyp4uo8taws"
 
 [node name="PlayerHandUI" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -713.0
-offset_top = -148.0
-offset_right = -713.0
-offset_bottom = -148.0
-grow_horizontal = 0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerStatsUI" type="HBoxContainer" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message")]
-layout_mode = 0
-offset_left = -159.0
-offset_top = -185.0
-offset_right = -119.0
-offset_bottom = -145.0
-theme_override_constants/separation = 204
+[node name="PlayerStatsUI" type="Control" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message")]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 1922.0
+offset_bottom = 1081.0
+mouse_filter = 2
 script = ExtResource("14_mkmui")
 deleon_amount = NodePath("Deleon/TextureRect/HBoxContainer/Label")
 action_amount = NodePath("Action/TextureRect/HBoxContainer/Label")
@@ -129,36 +118,46 @@ polariod_amount = NodePath("Message/Polaroids/TextureRect/HBoxContainer/Label")
 message = NodePath("Message/TextureRect/Label")
 
 [node name="Deleon" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 0
+offset_left = 113.0
+offset_top = 71.0
+offset_right = 113.0
+offset_bottom = 71.0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -38.0
-offset_right = 50.0
-offset_bottom = 48.0
+offset_left = -106.0
+offset_top = -50.0
+offset_right = 95.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("15_kw02p")
-expand_mode = 1
+texture = ExtResource("13_k3prr")
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -81.0
-offset_top = 6.0
+offset_top = -29.5
 offset_right = 81.0
-offset_bottom = 65.0
+offset_bottom = 29.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect/HBoxContainer"]
@@ -176,10 +175,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Action" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -305.0
+offset_right = -71.0
+offset_bottom = -305.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action"]
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Action"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -192,20 +202,25 @@ offset_right = 50.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 texture = ExtResource("15_kw02p")
-expand_mode = 1
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -81.0
-offset_top = 6.0
+offset_top = -29.5
 offset_right = 81.0
-offset_bottom = 65.0
+offset_bottom = 29.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect/HBoxContainer"]
@@ -223,10 +238,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Social" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -416.0
+offset_right = -73.0
+offset_bottom = -416.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social"]
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Social"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -239,20 +265,25 @@ offset_right = 50.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 texture = ExtResource("15_kw02p")
-expand_mode = 1
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -81.0
-offset_top = 6.0
+offset_top = -29.5
 offset_right = 81.0
-offset_bottom = 65.0
+offset_bottom = 29.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect/HBoxContainer"]
@@ -270,15 +301,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+anchors_preset = 0
+offset_left = -1457.0
+offset_top = 850.0
+offset_right = -1457.0
+offset_bottom = 850.0
 size_flags_horizontal = 4
 
 [node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI/Message"]
 anchors_preset = 0
 offset_left = -14.0
-offset_top = -59.0
+offset_top = -77.0
 offset_right = 323.0
-offset_bottom = -19.0
+offset_bottom = -37.0
 size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids"]
@@ -352,7 +387,7 @@ vertical_alignment = 1
 autowrap_mode = 1
 
 [node name="player_hand" parent="PlayerHandUI" instance=ExtResource("20_1nh7j")]
-scale = Vector2(0.9, 0.9)
+layout_mode = 1
 
 [node name="name_label" type="Label" parent="PlayerHandUI"]
 layout_mode = 0
@@ -368,20 +403,22 @@ metadata/_edit_use_anchors_ = true
 
 [node name="next_turn_button" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -237.0
-offset_top = 13.0
-offset_right = -9.516113
-offset_bottom = 69.0
-grow_horizontal = 0
-text = "Next Turn"
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -84.0
+offset_right = 250.48389
+offset_bottom = -28.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "End Turn"
 
 [node name="CardShopUI" parent="." instance=ExtResource("21_34wvw")]
-position = Vector2(0, 129)
+layout_mode = 1
 
 [node name="Chat" parent="." instance=ExtResource("22_e0rbx")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.006
@@ -392,6 +429,7 @@ offset_left = -0.53200054
 offset_top = 0.25793457
 offset_right = -0.3300171
 offset_bottom = -0.09802246
+mouse_filter = 2
 
 [node name="CardViewer" parent="." instance=ExtResource("23_fn044")]
 visible = false
@@ -402,8 +440,9 @@ layout_mode = 1
 
 [node name="GUI" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 249.0
+offset_bottom = 163.0
+mouse_filter = 2
 script = ExtResource("23_qt330")
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

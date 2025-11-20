@@ -20,6 +20,41 @@ script = ExtResource("1_exr2v")
 [node name="GridPositionSelector" type="Node" parent="."]
 script = ExtResource("2_exr2v")
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1138.0
+offset_top = -482.0
+offset_right = 1138.0
+offset_bottom = -482.0
+grow_horizontal = 0
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="DiscardPile" type="Node2D" parent="Control"]
+script = ExtResource("3_l8qsw")
+flipped = true
+metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1138.0
+offset_top = -482.0
+offset_right = 1138.0
+offset_bottom = -482.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="DrawPile" type="Node2D" parent="Control2"]
+script = ExtResource("3_l8qsw")
+metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -27,30 +62,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -350.0
+offset_top = -150.0
+offset_right = 350.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 200
 alignment = 1
 
-[node name="Control" type="Control" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 4
-
-[node name="DiscardPile" type="Node2D" parent="HBoxContainer/Control"]
-script = ExtResource("3_l8qsw")
-flipped = true
-metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
-
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/h_separation = 150
-theme_override_constants/v_separation = 150
+theme_override_constants/h_separation = 140
+theme_override_constants/v_separation = 140
 columns = 3
 
 [node name="Control" type="Control" parent="HBoxContainer/GridContainer"]
@@ -97,12 +122,3 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Card" parent="HBoxContainer/GridContainer/Control9" instance=ExtResource("4_o8edh")]
-
-[node name="Control2" type="Control" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 4
-
-[node name="DrawPile" type="Node2D" parent="HBoxContainer/Control2"]
-script = ExtResource("3_l8qsw")
-metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"

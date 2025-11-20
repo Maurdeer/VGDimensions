@@ -197,6 +197,10 @@ func flip_hide() -> void:
 func _on_double_click() -> void:
 	pass
 	#flip()
+	
+func _on_right_click() -> void:
+	if not CardViewer.Instance or CardViewer.Instance.visible: return
+	CardViewer.Instance.view_card(resource)
 
 func _on_single_click() -> void:
 	#if CardInspector.Instance: CardInspector.Instance.set_card(self)
@@ -228,7 +232,9 @@ func _on_hover_timeout() -> void:
 	# Check we're still hovering and not dragging before showing viewer
 	if (is_hovering and not (card_shape.is_dragging or gridcard_shape.is_dragging) 
 	and CardViewer.Instance and not CardViewer.Instance.visible):
-		CardViewer.Instance.view_card(resource)
+		# (Ryan) This is where you enable hover behavior here
+		#CardViewer.Instance.view_card(resource)
+		pass
 	else:
 		print("Hover timeout cancelled - conditions not met")
 
@@ -243,21 +249,23 @@ func _on_card_shape_gui_input(event: InputEvent) -> void:
 func _process_input_event(event: InputEvent) -> void:
 	if not interactable or not event is InputEventMouseButton: return
 	var mouse_button_event: InputEventMouseButton = event
-	if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
-		if mouse_button_event.pressed and not _pressed_previously:
-			# Cancel hover timer when player starts interacting
-			if hover_timer and hover_timer.time_left > 0:
-				hover_timer.stop()
-				hover_timer.queue_free()
-				hover_timer = null
-				is_hovering = false
-			
-			_pressed_previously = true
+	if mouse_button_event.pressed and not _pressed_previously:
+		# Cancel hover timer when player starts interacting
+		if hover_timer and hover_timer.time_left > 0:
+			hover_timer.stop()
+			hover_timer.queue_free()
+			hover_timer = null
+			is_hovering = false
+		
+		_pressed_previously = true
+		if mouse_button_event.button_index == MOUSE_BUTTON_LEFT:
 			if mouse_button_event.double_click:
 				_on_double_click()
 			else:
 				_on_single_click()
-		_pressed_previously = mouse_button_event.pressed
+		elif mouse_button_event.button_index == MOUSE_BUTTON_RIGHT:
+			_on_right_click()
+	_pressed_previously = mouse_button_event.pressed
 				
 func _on_drag_and_drop_component_2d_on_drop() -> void:
 	pass # Replace with function body.
