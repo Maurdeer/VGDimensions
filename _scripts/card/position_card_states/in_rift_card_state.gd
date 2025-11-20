@@ -11,6 +11,7 @@ func enter() -> void:
 	card_back.visible = false
 	card_shape.visible = false
 	card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)
+	card.revealed = false
 	card.flip_reveal()
 	
 func clicked_on() -> void:

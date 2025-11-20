@@ -92,6 +92,7 @@ func draw_card_to_hand() -> bool:
 	# Acquire a slot from the slot queue to hold the card
 	var slot: Control = slot_queue.pop_back()
 	slot.add_child(card)
+	card.position = Vector2.ZERO
 	slots.add_child(slot)
 	
 	# When card in tree do the following:

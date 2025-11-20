@@ -96,8 +96,8 @@ func _enter_tree() -> void:
 	
 func _setup() -> void:
 	# Play the animation when entering the tree
-	if not revealed: animation_player.play("flip_hide")
-	else: animation_player.play("flip_reveal")
+	if not revealed: animation_player.play("flip_hide", -1, 1, true)
+	else: animation_player.play("flip_reveal", -1, 1, true)
 	
 	# Let card be draggable on launch or not
 	card_shape.draggable = draggable

@@ -25,10 +25,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1138.0
-offset_top = -482.0
-offset_right = 1138.0
-offset_bottom = -482.0
+offset_left = -442.0
+offset_top = -46.0
+offset_right = -442.0
+offset_bottom = -46.0
 grow_horizontal = 0
 size_flags_horizontal = 2
 size_flags_vertical = 4
@@ -43,10 +43,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1138.0
-offset_top = -482.0
-offset_right = 1138.0
-offset_bottom = -482.0
+offset_left = 399.0
+offset_top = -39.0
+offset_right = 399.0
+offset_bottom = -39.0
 grow_horizontal = 0
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -55,70 +55,81 @@ size_flags_vertical = 4
 script = ExtResource("3_l8qsw")
 metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="GridContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -150.0
-offset_right = 350.0
-offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 200
-alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/h_separation = 140
-theme_override_constants/v_separation = 140
-columns = 3
+[node name="Control" type="Control" parent="GridContainer"]
+anchors_preset = 0
 
-[node name="Control" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control" instance=ExtResource("4_o8edh")]
+[node name="Control2" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_left = 140.0
+offset_right = 140.0
 
-[node name="Control2" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control2" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control2" instance=ExtResource("4_o8edh")]
+[node name="Control3" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_left = 280.0
+offset_right = 280.0
 
-[node name="Control3" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control3" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control3" instance=ExtResource("4_o8edh")]
+[node name="Control4" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_top = 140.0
+offset_bottom = 140.0
 
-[node name="Control4" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control4" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control4" instance=ExtResource("4_o8edh")]
+[node name="Control5" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_left = 140.0
+offset_top = 140.0
+offset_right = 140.0
+offset_bottom = 140.0
 
-[node name="Control5" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control5" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control5" instance=ExtResource("4_o8edh")]
+[node name="Control6" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 140.0
+offset_right = 280.0
+offset_bottom = 140.0
 
-[node name="Control6" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control6" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control6" instance=ExtResource("4_o8edh")]
+[node name="Control7" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_top = 280.0
+offset_bottom = 280.0
 
-[node name="Control7" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control7" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control7" instance=ExtResource("4_o8edh")]
+[node name="Control8" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_left = 140.0
+offset_top = 280.0
+offset_right = 140.0
+offset_bottom = 280.0
 
-[node name="Control8" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
+[node name="Card" parent="GridContainer/Control8" instance=ExtResource("4_o8edh")]
 
-[node name="Card" parent="HBoxContainer/GridContainer/Control8" instance=ExtResource("4_o8edh")]
+[node name="Control9" type="Control" parent="GridContainer"]
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 280.0
+offset_right = 280.0
+offset_bottom = 280.0
 
-[node name="Control9" type="Control" parent="HBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="Card" parent="HBoxContainer/GridContainer/Control9" instance=ExtResource("4_o8edh")]
+[node name="Card" parent="GridContainer/Control9" instance=ExtResource("4_o8edh")]
