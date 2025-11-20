@@ -19,7 +19,7 @@ func clicked_on() -> void:
 	get_tree().root.add_child(select_ui)
 	var selection = await select_ui.get_interaction_selection(card)
 	select_ui.queue_free()
-	if not selection: 
+	if selection.is_empty() or not selection[0] or selection[1] < 0: 
 		# If Selection didn't give valid results, implies canceled!
 		return
 	var success: bool = await card.try_execute(selection[0], selection[1])

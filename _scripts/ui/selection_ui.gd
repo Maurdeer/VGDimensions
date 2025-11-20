@@ -55,7 +55,8 @@ func create_button_by_bullet(bullet: BulletResource, idx: int):
 	var new_label: Label = Label.new()
 	
 	# TODO Make the text look a lot better; holy
-	#new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	new_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	new_label.text = bullet.bullet_description
 	new_label.set("theme_override_colors/font_color", Color.BLACK)
 	
@@ -72,3 +73,13 @@ func create_button_by_bullet(bullet: BulletResource, idx: int):
 	buttons.add_child(new_hbox)
 	new_hbox.add_child(new_button)
 	new_hbox.add_child(new_label)
+
+func _on_texture_rect_2_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			make_selection(null, -1)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			make_selection(null, -1)

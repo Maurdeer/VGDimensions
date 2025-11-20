@@ -59,7 +59,7 @@ func revert_card_states() -> void:
 			card.selected.disconnect(on_card_clicked)
 			
 func on_card_clicked(card: Card):
-	if card.grid_pos.x < 0 and card.grid_pos.y < 0:
+	if card and (card.grid_pos.x < 0 or card.grid_pos.y < 0):
 		# Not on the rift grid, thus invalid
 		return
 	if not _first: return
