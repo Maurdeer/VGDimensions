@@ -31,8 +31,9 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
-	if Engine.is_editor_hint() and (card_resource or (card and card.resource)):
-		_on_values_change()
+	#if Engine.is_editor_hint() and (card_resource or (card and card.resource)):
+		#_on_values_change()
+	pass
 
 func _on_values_change() -> void:
 	if not card_resource: return
@@ -124,8 +125,9 @@ func _on_bullet_description_change() -> void:
 		var bullet_node = bullet_scene.instantiate()
 		bullet_list.add_child(bullet_node)
 		
-		if Engine.is_editor_hint():
-			bullet_node.owner = get_tree().edited_scene_root
+		#var tree = get_tree()
+		#if Engine.is_editor_hint() and tree and tree.edited_scene_root:
+			#bullet_node.owner = get_tree().edited_scene_root
 		child_count += 1
 		
 	# Remove extra bullet children

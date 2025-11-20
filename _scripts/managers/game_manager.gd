@@ -42,6 +42,11 @@ func _after_ready() -> void:
 	on_start_of_turn.emit() 
 	
 func setup_card_shop():
+	# Hacky I know
+	var random_seed = randi()
+	rift_grid.pre_defined_seed = random_seed
+	seed(random_seed)
+	#======
 	var shop_cards: Array[Card] = CardManager.create_cards_from_packs(shop_initial_packs)
 	CardShop.fill_shop_deck(shop_cards)
 

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_hxg26"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_aitro"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_h55c3"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_hxg26"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_hxg26"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_h55c3"]
 [ext_resource type="Texture2D" uid="uid://3q5ih2xyica4" path="res://art/card_art/Willow/Shift.png" id="5_sm85p"]
 

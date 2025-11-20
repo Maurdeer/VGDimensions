@@ -306,18 +306,18 @@ vertical_alignment = 1
 
 [node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
 anchors_preset = 0
-offset_left = -1457.0
-offset_top = 850.0
-offset_right = -1457.0
-offset_bottom = 850.0
+offset_left = 1687.0
+offset_top = 133.0
+offset_right = 1687.0
+offset_bottom = 133.0
 size_flags_horizontal = 4
 
 [node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI/Message"]
 anchors_preset = 0
-offset_left = -14.0
-offset_top = -77.0
-offset_right = 323.0
-offset_bottom = -37.0
+offset_left = -1341.0
+offset_top = 780.0
+offset_right = -1004.0
+offset_bottom = 820.0
 size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids"]
@@ -370,10 +370,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -38.0
-offset_right = 221.0
-offset_bottom = 48.0
+offset_left = -146.0
+offset_top = -107.0
+offset_right = 216.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -389,10 +389,6 @@ offset_bottom = 65.0
 label_settings = SubResource("LabelSettings_kgmkq")
 vertical_alignment = 1
 autowrap_mode = 1
-
-[node name="player_hand" parent="PlayerHandUI" node_paths=PackedStringArray("deck_inspector") instance=ExtResource("20_1nh7j")]
-layout_mode = 1
-deck_inspector = NodePath("../../DeckInspector")
 
 [node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI"]
 layout_mode = 1
@@ -424,6 +420,10 @@ text = "Player Name"
 label_settings = SubResource("LabelSettings_ccn5w")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="player_hand" parent="PlayerHandUI" node_paths=PackedStringArray("deck_inspector") instance=ExtResource("20_1nh7j")]
+layout_mode = 1
+deck_inspector = NodePath("../../DeckInspector")
 
 [node name="next_turn_button" type="Button" parent="."]
 layout_mode = 1

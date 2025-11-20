@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_x6vkk"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_y6sqj"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_1jepr"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_1jepr"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_8gt5c"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="3_k2gpq"]
+[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="3_k2gpq"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_3xgj4"]
 [ext_resource type="Script" uid="uid://dk8vfhf4dqxns" path="res://_scripts/resources/TemporaryEffects/BurnEffect.gd" id="4_x6vkk"]
 [ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="6_lm5a4"]

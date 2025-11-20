@@ -22,8 +22,9 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	# Polling BS technically ok because its just in the editor,
 	# But would be better if its event handeled
-	if Engine.is_editor_hint() and bullet_resource:
-		_on_values_change()
+	#if Engine.is_editor_hint() and bullet_resource:
+		#_on_values_change()
+	pass
 	
 func _on_values_change() -> void:
 	if not bullet_resource: return

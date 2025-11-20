@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_kb6ih"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_5fgrg"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_deeim"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_deeim"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_ees5j"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_neax4"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="4_deeim"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="4_deeim"]
 [ext_resource type="Texture2D" uid="uid://ba4ntoy26iu0s" path="res://art/card_art/FromNava/-e chair.png" id="5_deeim"]
 
 [sub_resource type="Resource" id="Resource_o8353"]

@@ -3,6 +3,7 @@ class_name RiftGrid
 
 static var Instance: RiftGrid
 @onready var grid_container: GridContainer = $HBoxContainer/GridContainer
+@export var speed: float = 1000
 
 var grid: Array[Array]
 
@@ -20,6 +21,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
+	process_animations()
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
@@ -110,15 +112,28 @@ func draw_card(draw_to: Vector2i) -> void:
 func draw_card_if_empty(draw_to: Vector2i) -> void:
 	if grid[draw_to.y][draw_to.x].is_empty():
 		draw_card(draw_to)
- 
+
+
 func place_card(place_at: Vector2i, newCard: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
-	var card_underneath: Card = grid[place_at.y][place_at.x].get_top_card()
-	grid[place_at.y][place_at.x].addCard(newCard)
-	AudioManager.play_sfx("place_card")
-	newCard.grid_pos = place_at
+	var deck: Deck = grid[place_at.y][place_at.x]
+	var card_underneath: Card = deck.get_top_card()
+	
+	# Ensure it is in the scene before doing anything
+	
+	
+	var original_pos = newCard.global_position
+	deck.addCard(newCard)
+	newCard.global_position = original_pos
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+	newCard.grid_pos = place_at
+	# Animation?
+	queue_animation(func(): 
+		await _vfx_move_card(newCard, deck.position)
+		AudioManager.play_sfx("place_card")
+	)
+	
 	if card_underneath: 
 		card_underneath.on_stack()
 		RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_STACK, card_underneath)
@@ -179,7 +194,7 @@ func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	card.on_before_move()
 	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BEFORE_MOVE, card)
 	card = grid[move_from.y][move_from.x].remove_top_card()
-	print(card.grid_pos)
+	#print(card.grid_pos)
 	place_card(move_to, card)
 	card.on_after_move()
 	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_AFTER_MOVE, card)
@@ -190,7 +205,7 @@ func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 	card.on_before_move()
 	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BEFORE_MOVE, card)
 	card = grid[move_from.y][move_from.x].remove_top_card()
-	print(card.grid_pos)
+	#print(card.grid_pos)
 	place_card_under(move_to, card)
 	card.on_after_move()
 	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_AFTER_MOVE, card)
@@ -381,6 +396,30 @@ func compare_higher_health(card_a: Card, card_b : Card) -> Card:
 
 func compare_lower_health(card_a: Card, card_b : Card) -> Card:
 	return card_a if card_a.hp < card_b.hp else card_b
+	
+	
+	
+# ============================ VFX ==============================================
+# Defintly could have used seperate script but weeeeee
+
+var animation_queue: Array[Callable]
+
+func _vfx_move_card(card: Card, target_position: Vector2) -> void:
+	while card.position != target_position:
+		card.position = card.position.move_toward(target_position, get_process_delta_time() * speed)
+		await get_tree().process_frame
+		
+func queue_animation(animation_func: Callable) -> void:
+	animation_queue.append(animation_func)
+	
+func process_animations() -> void:
+	while true:
+		if animation_queue.is_empty():
+			await get_tree().process_frame
+			continue
+		await animation_queue.pop_front().call()
+
+#================================================================================
 # A way to use lambda functions to filter things
 # Take in a lambda call to figure out what to filter by, and then go for it
 #====================== Section of iterating over the entire grid =====================

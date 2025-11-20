@@ -2,12 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_1v6xg"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_4tbpa"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResource.gd" id="3_1v6xg"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_1v6xg"]
 [ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_5ddmx"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_15rce"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_h5wk0"]
 [ext_resource type="Texture2D" uid="uid://cdwp11qf1rdit" path="res://art/card_art/FromNava/-e chest.png" id="5_h5wk0"]
-[ext_resource type="Script" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="5_lmt7w"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="5_lmt7w"]
 
 [sub_resource type="Resource" id="Resource_bbckg"]
 script = ExtResource("3_5ddmx")
