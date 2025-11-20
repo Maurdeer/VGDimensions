@@ -18,11 +18,11 @@ func on_execute() -> bool:
 		if (replacement_card):
 			var replacement = CardManager.create_card_locally(replacement_card, true)
 			RiftGrid.Instance.place_card(selected_pos, replacement)
-		if m_card_invoker.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
+		elif m_card_invoker.card_sm.is_state(CardStateMachine.StateType.IN_RIFT):
 			var temp_location : Vector2i = m_card_invoker.grid_pos
 			RiftGrid.Instance.move_card_to(selected_pos, m_card_invoker.grid_pos)
 			RiftGrid.Instance.draw_card_if_empty(temp_location)
-		if m_card_invoker.card_sm.is_state(CardStateMachine.StateType.IN_HAND):
+		else:
 			RiftGrid.Instance.place_card(selected_pos, m_card_invoker)
 	return false
 	

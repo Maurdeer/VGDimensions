@@ -128,8 +128,8 @@ func place_card(place_at: Vector2i, new_card: Card) -> void:
 	# Ensure it is in the scene before doing anything
 	var original_pos = new_card.global_position
 	deck.addCard(new_card)
-	new_card.global_position = original_pos
 	new_card.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+	new_card.global_position = original_pos
 	new_card.grid_pos = place_at
 	# Animation?
 	queue_animation(func(): 

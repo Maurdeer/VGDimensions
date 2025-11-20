@@ -7,3 +7,6 @@
 [node name="multiplayer" instance=ExtResource("1_l7x4r")]
 script = ExtResource("1_7aq5h")
 initial_quest_card = ExtResource("26_5f5da")
+
+[node name="next_turn_button" parent="." index="4"]
+visible = false

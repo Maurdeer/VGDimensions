@@ -110,6 +110,7 @@ func is_empty() -> bool:
 func display_card(card: Card) -> void:
 	if not card in deck_array: return
 	add_child(card)
+	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_DECK)
 	if flipped: 
 		card.flip_reveal()
 	else: 
