@@ -1,7 +1,7 @@
 extends GameManager
 class_name MultiplayerGameManager
 @onready var chat: Chat = $Chat
-@onready var name_label: Label = $PlayerHandUI/name_label
+@onready var name_label: Label = $PlayerHandUI/TextureRect/name_label
 
 var player_turn_queue: Array[int]
 var curr_turn: int

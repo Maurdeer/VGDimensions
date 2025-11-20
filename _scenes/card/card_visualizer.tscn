@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bhxhtvqq7257s" path="res://art/card_ui/fire_icon copy.png" id="13_8lnxd"]
 [ext_resource type="Texture2D" uid="uid://jq3s8k0wq1wt" path="res://art/card_ui/typing_frame.png" id="13_deg38"]
 [ext_resource type="Texture2D" uid="uid://bqqkvq20w5r7w" path="res://art/card_ui/stack_icon copy.png" id="14_r8tiv"]
-[ext_resource type="Texture2D" path="res://custom_event_resources/discard_icon copy.png" id="15_m0jti"]
+[ext_resource type="Texture2D" uid="uid://mpfcnhnmjjom" path="res://art/card_ui/discard_icon copy.png" id="15_m0jti"]
 
 [sub_resource type="Resource" id="Resource_fh26a"]
 script = ExtResource("4_tbra6")
@@ -462,6 +462,7 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Icons" type="VBoxContainer" parent="GUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

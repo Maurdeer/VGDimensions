@@ -136,9 +136,16 @@ func disable_player_hand() -> void:
 func enable_player_hand() -> void:
 	for card in cards_in_hand:
 		card.card_sm.transition_to_state(CardStateMachine.StateType.INTERACTABLE)
-		
+
+func _on_hand_region_mouse_entered() -> void:
+	animation_player.play("show")
+
+
+func _on_hand_region_mouse_exited() -> void:
+	animation_player.play("show", -1, -1.0, true)
+
 # move this method to deck class if we want this view for ANY deck
-func _on_discard_pile_ui_clicked(event: InputEvent) -> void:
+func _on_control_gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	var mouse_event: InputEventMouseButton = event
 	
@@ -151,11 +158,3 @@ func _on_discard_pile_ui_clicked(event: InputEvent) -> void:
 			return
 		deck_inspector.visible = true
 		deck_inspector.view_deck(discard_pile)
-
-
-func _on_hand_region_mouse_entered() -> void:
-	animation_player.play("show")
-
-
-func _on_hand_region_mouse_exited() -> void:
-	animation_player.play("show", -1, -1.0, true)

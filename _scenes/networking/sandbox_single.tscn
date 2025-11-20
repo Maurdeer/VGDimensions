@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b78acuqchwjyj"]
+[gd_scene load_steps=31 format=3 uid="uid://b78acuqchwjyj"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_3y3hc"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_5x1ca"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="23_fn044"]
 [ext_resource type="Script" uid="uid://d1sug2on8v3c4" path="res://_scripts/ui/ui_manager.gd" id="23_qt330"]
 [ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_7qvlh"]
+[ext_resource type="PackedScene" uid="uid://c71uoxlt0gksi" path="res://_scenes/ui/deck_inspector.tscn" id="25_5x1ca"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvy2v"]
 shader = ExtResource("8_c2tc1")
@@ -42,7 +43,7 @@ font_size = 30
 font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ccn5w"]
-font_size = 30
+font_size = 32
 font_color = Color(0, 0, 0, 1)
 
 [node name="singleplayer" type="Control" node_paths=PackedStringArray("rift_grid")]
@@ -119,11 +120,14 @@ message = NodePath("Message/TextureRect/Label")
 
 [node name="Deleon" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 113.0
-offset_top = 71.0
-offset_right = 113.0
-offset_bottom = 71.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 115.0
+offset_top = -150.0
+offset_right = 115.0
+offset_bottom = -150.0
+grow_vertical = 0
 size_flags_horizontal = 4
 
 [node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
@@ -133,9 +137,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -106.0
+offset_left = -101.0
 offset_top = -50.0
-offset_right = 95.0
+offset_right = 103.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -182,9 +186,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -71.0
-offset_top = -305.0
+offset_top = -404.0
 offset_right = -71.0
-offset_bottom = -305.0
+offset_bottom = -404.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -245,9 +249,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -73.0
-offset_top = -416.0
+offset_top = -297.0
 offset_right = -73.0
-offset_bottom = -416.0
+offset_bottom = -297.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -386,30 +390,53 @@ label_settings = SubResource("LabelSettings_kgmkq")
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("20_1nh7j")]
+[node name="player_hand" parent="PlayerHandUI" node_paths=PackedStringArray("deck_inspector") instance=ExtResource("20_1nh7j")]
 layout_mode = 1
+deck_inspector = NodePath("../../DeckInspector")
 
-[node name="name_label" type="Label" parent="PlayerHandUI"]
-layout_mode = 0
-offset_left = -662.0
-offset_top = -186.0
-offset_right = -315.0
-offset_bottom = -134.0
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -948.0
+offset_top = 450.0
+offset_right = -374.0
+offset_bottom = 530.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_kw02p")
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+
+[node name="name_label" type="Label" parent="PlayerHandUI/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Player Name"
 label_settings = SubResource("LabelSettings_ccn5w")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="next_turn_button" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_top = -84.0
-offset_right = 250.48389
-offset_bottom = -28.0
+offset_left = -240.0
+offset_top = -516.0
+offset_right = -12.516113
+offset_bottom = -460.0
+grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 26
 text = "End Turn"
@@ -431,18 +458,21 @@ offset_right = -0.3300171
 offset_bottom = -0.09802246
 mouse_filter = 2
 
-[node name="CardViewer" parent="." instance=ExtResource("23_fn044")]
-visible = false
-layout_mode = 1
-
-[node name="PauseMenu" parent="." instance=ExtResource("24_7qvlh")]
-layout_mode = 1
-
 [node name="GUI" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 249.0
 offset_bottom = 163.0
 mouse_filter = 2
 script = ExtResource("23_qt330")
+
+[node name="DeckInspector" parent="." instance=ExtResource("25_5x1ca")]
+layout_mode = 1
+
+[node name="CardViewer" parent="." instance=ExtResource("23_fn044")]
+visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("24_7qvlh")]
+layout_mode = 1
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]
