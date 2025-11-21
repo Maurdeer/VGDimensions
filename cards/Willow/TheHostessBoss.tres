@@ -49,7 +49,6 @@ title = "The Hostess"
 type = 8
 game_origin = 30
 starting_hp = 20
-discardable = false
 bullets = Array[ExtResource("2_gflah")]([SubResource("Resource_mca72")])
 description_textures = Array[Texture]([ExtResource("8_gflah")])
 card_art = ExtResource("7_sg28j")

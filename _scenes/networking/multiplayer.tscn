@@ -31,6 +31,7 @@ card_packs = Array[ExtResource("4_u7dbv")]([ExtResource("8_gethx")])
 game_name = "Willow"
 quest_card = ExtResource("9_u7dbv")
 music = "FromNava"
+rift_grid_size = Vector2i(5, 5)
 metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
 
 [node name="multiplayer" instance=ExtResource("1_l7x4r")]

@@ -27,7 +27,15 @@ func on_execute() -> bool:
 	#print("This bullet is at ", curr_bullet.grid_pos)
 	if (RiftGrid.Instance.is_valid_pos(target_loc)):
 		#var temp_location : Vector2i = curr_bullet.grid_pos
-		RiftGrid.Instance.move_card_to(target_loc, curr_bullet.grid_pos)
+		var card_at_loc : Card = RiftGrid.Instance.get_top_card(target_loc)
+		# TODO: Make this not damage Willow Cards
+		if ((card_at_loc.resource.type == CardResource.CardType.ENEMY or \
+		card_at_loc.resource.type == CardResource.CardType.ALLY)):
+			var defeated : bool = RiftGrid.Instance.damage_card(target_loc, amount)
+			if defeated: RiftGrid.Instance.draw_card_if_empty(target_loc)
+			RiftGrid.Instance.discard_card_and_draw(curr_bullet)
+		else:
+			RiftGrid.Instance.move_card_to(target_loc, curr_bullet.grid_pos)
 		#RiftGrid.Instance.draw_card_if_empty(temp_location)
 	else:
 		RiftGrid.Instance.discard_card_and_draw(curr_bullet)

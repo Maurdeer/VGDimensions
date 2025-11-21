@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://wg8h3ctof847"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_y6kpa"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_313ty"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_upiex"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_ui5cy"]
+
+[sub_resource type="Resource" id="Resource_lo8rt"]
+script = ExtResource("3_ui5cy")
+is_global = true
+global_event_type = 21
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_ogy5r"]
+script = ExtResource("1_y6kpa")
+bullet_type = 3
+passive_event = SubResource("Resource_lo8rt")
+passive_events = Array[ExtResource("3_ui5cy")]([SubResource("Resource_lo8rt")])
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_upiex")
+title = "Reaper"
+type = 1
+game_origin = 4
+starting_hp = 8
+bullets = Array[ExtResource("1_y6kpa")]([SubResource("Resource_ogy5r")])
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

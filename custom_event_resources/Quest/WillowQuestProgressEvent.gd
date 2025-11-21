@@ -6,8 +6,10 @@ var has_triggered : bool = false
 
 func on_execute() -> bool:
 	if GameManager.Instance.is_my_turn():
+		
 		# Could break if the hostess ally is killed? Just add a check
 		if (not has_triggered and (m_card_invoker.resource.title == hostess_boss.title)):
+			print("Has triggered")
 			has_triggered = true
 			MultiplayerGameManager.Instance.on_quest_completed()
 			#print(m_card_invoker.resource.title)
