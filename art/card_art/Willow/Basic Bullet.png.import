@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd10yyq4gr0e0"
-path="res://.godot/imported/grid_DummySoul.png-f51f39099928c0dfd38dc782903a7dc5.ctex"
+uid="uid://dpatxflhlj7ub"
+path="res://.godot/imported/Basic Bullet.png-74c2ad7fab91a10e20c9153ded2f1cd3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_ui/WillowGrids/grid_DummySoul.png"
-dest_files=["res://.godot/imported/grid_DummySoul.png-f51f39099928c0dfd38dc782903a7dc5.ctex"]
+source_file="res://art/card_art/Willow/Basic Bullet.png"
+dest_files=["res://.godot/imported/Basic Bullet.png-74c2ad7fab91a10e20c9153ded2f1cd3.ctex"]
 
 [params]
 

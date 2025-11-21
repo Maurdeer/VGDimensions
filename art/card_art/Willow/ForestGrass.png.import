@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd10yyq4gr0e0"
-path="res://.godot/imported/grid_DummySoul.png-f51f39099928c0dfd38dc782903a7dc5.ctex"
+uid="uid://duvdtgepn75tf"
+path="res://.godot/imported/ForestGrass.png-38c5c19ee8868daee0ffd8d6d0f43e28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/card_ui/WillowGrids/grid_DummySoul.png"
-dest_files=["res://.godot/imported/grid_DummySoul.png-f51f39099928c0dfd38dc782903a7dc5.ctex"]
+source_file="res://art/card_art/Willow/ForestGrass.png"
+dest_files=["res://.godot/imported/ForestGrass.png-38c5c19ee8868daee0ffd8d6d0f43e28.ctex"]
 
 [params]
 

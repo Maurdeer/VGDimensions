@@ -42,5 +42,5 @@ func required_events() -> Array[EventResource]:
 	if only_adjacent_cards:
 		location_to_place_selection.filter = RiftCardSelector.Instance.adjacent_only(m_card_invoker)
 	if select_position_card_resource != null:
-		location_to_place_selection.filter = RiftCardSelector.Instance.select_sepcific_card(select_position_card_resource)
+		location_to_place_selection.filter = RiftCardSelector.Instance.specific_card(select_position_card_resource)
 	return [source_card_selection, location_to_place_selection]

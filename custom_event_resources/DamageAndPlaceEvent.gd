@@ -1,11 +1,14 @@
 extends EventResource
-class_name DamageAndReplaceEvent
+class_name DamageAndPlaceEvent
 
 @export var selection_type: SelectionEventResource.SelectionType = SelectionEventResource.SelectionType.RIFT
+@export var only_adjacent_cards : bool
 @export var amount: int = 0
+@export var only_on_replace: bool = false
 @export var replacement_card : CardResource
 
 const target_card_at: int = 0
+const card_to_place: int = 0
 
 func on_execute() -> bool:
 	var selected_card: Card = m_card_refs[target_card_at]
@@ -14,7 +17,7 @@ func on_execute() -> bool:
 		return true
 	
 	var defeated: bool = m_card_refs[target_card_at].damage(amount)
-	if defeated:
+	if not only_on_replace or (defeated and only_on_replace):
 		if (replacement_card):
 			var replacement = CardManager.create_card_locally(replacement_card, true)
 			RiftGrid.Instance.place_card(selected_pos, replacement)
@@ -30,5 +33,7 @@ func required_events() -> Array[EventResource]:
 	var selection: SelectionEventResource = SelectionEventResource.new()
 	selection.store_at = target_card_at
 	selection.type = selection_type
+	if only_adjacent_cards:
+		selection.filter = RiftCardSelector.Instance.adjacent_only(m_card_invoker)
 	return [selection]
 	

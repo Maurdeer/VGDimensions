@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=8 format=3 uid="uid://bvoxiky36b0uw"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_hdf6n"]
+[ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="2_u8uj2"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_cv0ry"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_uftkg"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="5_8x4ue"]
+
+[sub_resource type="Resource" id="Resource_yhlb6"]
+script = ExtResource("2_u8uj2")
+source_selection_type = 1
+only_adjacent_cards = true
+metadata/_custom_type_script = "uid://banseryattu42"
+
+[sub_resource type="Resource" id="Resource_plt8x"]
+script = ExtResource("1_hdf6n")
+bullet_type = 1
+bullet_event = SubResource("Resource_yhlb6")
+bullet_events = Array[ExtResource("3_cv0ry")]([SubResource("Resource_yhlb6")])
+bullet_description = "On Interact: Swap this card with an adjacent card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("5_8x4ue")
+title = "Lost Traveler #2"
+type = 7
+game_origin = 30
+starting_hp = 2
+bullets = Array[ExtResource("1_hdf6n")]([SubResource("Resource_plt8x")])
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

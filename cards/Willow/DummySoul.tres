@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=19 format=3 uid="uid://d2qpxxunu217j"]
+
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="1_c7n7b"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_id6ps"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_kfl7d"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="2_vfd0d"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_2d27f"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_d4lyy"]
+[ext_resource type="Script" uid="uid://dqurndy8l8ld7" path="res://custom_event_resources/Willow/BulletSpawnEvent.gd" id="5_d4lyy"]
+[ext_resource type="Script" uid="uid://dl6qbg1lsuuj0" path="res://custom_event_resources/Willow/CheckForPlayerEvent.gd" id="6_f663g"]
+[ext_resource type="Texture2D" uid="uid://cj5swojhvp3ux" path="res://art/card_art/Willow/Dummy Soul.png" id="8_57fy0"]
+[ext_resource type="Texture2D" uid="uid://cd10yyq4gr0e0" path="res://art/card_ui/WillowGrids/grid_DummySoul.png" id="9_c7n7b"]
+
+[sub_resource type="Resource" id="Resource_f663g"]
+script = ExtResource("2_vfd0d")
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_8vfkl"]
+script = ExtResource("2_vfd0d")
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_c7n7b"]
+script = ExtResource("4_d4lyy")
+passive_event_type = 5
+event = SubResource("Resource_8vfkl")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_57fy0"]
+script = ExtResource("1_id6ps")
+bullet_type = 3
+bullet_event = SubResource("Resource_f663g")
+bullet_events = Array[ExtResource("3_2d27f")]([SubResource("Resource_f663g")])
+passive_event = SubResource("Resource_c7n7b")
+passive_events = Array[ExtResource("4_d4lyy")]([SubResource("Resource_c7n7b")])
+bullet_description = "On Defeat: Gain 1 Deleon"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_hltky"]
+script = ExtResource("5_d4lyy")
+spawn_positions = Array[Vector2i]([Vector2i(0, 1)])
+metadata/_custom_type_script = "uid://dqurndy8l8ld7"
+
+[sub_resource type="Resource" id="Resource_yvhcb"]
+script = ExtResource("6_f663g")
+bullet_spawn = SubResource("Resource_hltky")
+metadata/_custom_type_script = "uid://dl6qbg1lsuuj0"
+
+[sub_resource type="Resource" id="Resource_a3wdu"]
+script = ExtResource("4_d4lyy")
+is_global = true
+global_event_type = 20
+event = SubResource("Resource_yvhcb")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_fpa5v"]
+script = ExtResource("1_id6ps")
+bullet_type = 3
+passive_event = SubResource("Resource_a3wdu")
+passive_events = Array[ExtResource("4_d4lyy")]([SubResource("Resource_a3wdu")])
+bullet_description = "When a Lost Traveler is adjacent: Spawn the following pattern at the start of the next turn."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_kfl7d")
+title = "Dummy Soul"
+type = 8
+game_origin = 30
+starting_hp = 1
+bullets = Array[ExtResource("1_id6ps")]([SubResource("Resource_57fy0"), SubResource("Resource_fpa5v")])
+description_textures = Array[Texture]([ExtResource("9_c7n7b")])
+quip_description = "There's room for a thousand."
+card_art = ExtResource("8_57fy0")
+background_art = ExtResource("1_c7n7b")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

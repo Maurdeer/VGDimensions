@@ -4,6 +4,7 @@ class_name DiscardAndReplaceEvent
 @export var selection_type: SelectionEventResource.SelectionType = SelectionEventResource.SelectionType.RIFT
 @export var replacement_card : CardResource
 
+
 const target_card_at: int = 0
 func on_execute() -> bool:
 	var selected_card: Card = m_card_refs[target_card_at]

@@ -92,7 +92,7 @@ func set_up(p_card_id: int, p_resource: CardResource) -> void:
 
 func _enter_tree() -> void:
 	#refresh_stats()
-	on_enter_tree()
+	#on_enter_tree()
 	call_deferred("_setup")
 	
 func _setup() -> void:

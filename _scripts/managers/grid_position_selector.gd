@@ -72,6 +72,9 @@ func on_card_clicked(card: Card):
 func adjacent_only(from_card: Card) -> Callable:
 	return func(card: Card): return (card.grid_pos - from_card.grid_pos).length() == 1
 
-func select_sepcific_card(select_card : CardResource) -> Callable:
+func specific_card(select_card : CardResource) -> Callable:
 	return func(card: Card): return card.resource.title == select_card.title
-		
+
+func edge_only() -> Callable:
+	return func(card: Card): return (card.grid_pos.x == 0 or card.grid_pos.x == RiftGrid.Instance.rift_grid_width - 1) \
+	or (card.grid_pos.y == 0 or card.grid_pos.y == RiftGrid.Instance.rift_grid_height - 1)

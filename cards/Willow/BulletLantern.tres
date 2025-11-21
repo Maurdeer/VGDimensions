@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://2g5xw7uerpsi"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_7t0y3"]
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="1_purmo"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_vbdmf"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_ytf88"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_xr8hl"]
+[ext_resource type="Script" uid="uid://dqurndy8l8ld7" path="res://custom_event_resources/Willow/BulletSpawnEvent.gd" id="4_purmo"]
+[ext_resource type="Script" uid="uid://dl6qbg1lsuuj0" path="res://custom_event_resources/Willow/CheckForPlayerEvent.gd" id="5_6n8tv"]
+[ext_resource type="Texture2D" uid="uid://tf162gxo2o30" path="res://art/card_art/Willow/BulletLantern.png" id="7_6n8tv"]
+[ext_resource type="Texture2D" uid="uid://dlrnrg4gsdym1" path="res://art/card_ui/WillowGrids/grid_BulletLantern.png" id="8_6n8tv"]
+
+[sub_resource type="Resource" id="Resource_7mxu3"]
+script = ExtResource("4_purmo")
+spawn_positions = Array[Vector2i]([Vector2i(4, 1), Vector2i(4, 2), Vector2i(4, 3)])
+metadata/_custom_type_script = "uid://dqurndy8l8ld7"
+
+[sub_resource type="Resource" id="Resource_2a4ge"]
+script = ExtResource("5_6n8tv")
+bullet_spawn = SubResource("Resource_7mxu3")
+metadata/_custom_type_script = "uid://dl6qbg1lsuuj0"
+
+[sub_resource type="Resource" id="Resource_0kej1"]
+script = ExtResource("3_xr8hl")
+is_global = true
+global_event_type = 20
+event = SubResource("Resource_2a4ge")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_bq0ac"]
+script = ExtResource("1_7t0y3")
+bullet_type = 3
+passive_event = SubResource("Resource_0kej1")
+passive_events = Array[ExtResource("3_xr8hl")]([SubResource("Resource_0kej1")])
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_ytf88")
+title = "Bullet Lantern"
+type = 5
+game_origin = 30
+bullets = Array[ExtResource("1_7t0y3")]([SubResource("Resource_bq0ac")])
+description_textures = Array[Texture]([ExtResource("8_6n8tv")])
+card_art = ExtResource("7_6n8tv")
+background_art = ExtResource("1_purmo")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

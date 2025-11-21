@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=6 format=3 uid="uid://dxnp8ire8svhn"]
 
 [ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="PackedScene" uid="uid://b78acuqchwjyj" path="res://_scenes/networking/sandbox_single.tscn" id="1_l7x4r"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="3_oqbob"]
+[ext_resource type="Resource" uid="uid://cb4mmmoirfemr" path="res://card_packs/WillowPack.tres" id="4_d3rrx"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="26_5f5da"]
 
 [node name="multiplayer" instance=ExtResource("1_l7x4r")]
 script = ExtResource("1_7aq5h")
+rift_card_pack = Array[ExtResource("3_oqbob")]([ExtResource("4_d3rrx")])
+initial_grid_size = Vector2i(5, 5)
 initial_quest_card = ExtResource("26_5f5da")
 
 [node name="next_turn_button" parent="." index="4"]

@@ -113,6 +113,8 @@ func draw_card(draw_to: Vector2i) -> void:
 	new_card = _rift_deck.remove_top_card()
 	new_card.global_position = original_pos
 	place_card(draw_to, new_card)
+	print(new_card.resource.title)
+	new_card.on_enter_tree()
 	
 func draw_card_if_empty(draw_to: Vector2i) -> void:
 	if grid[draw_to.y][draw_to.x].is_empty():
@@ -391,6 +393,17 @@ func get_diagonal_cards(pos: Vector2i) -> Array[Card]:
 		
 	return targeted_cards
 
+func get_edge_cards() -> Array[Card]:
+	var edge_cards : Array[Card]
+	for i in range(rift_grid_height):
+		edge_cards.append(grid[i][0].get_top_card())
+		edge_cards.append(grid[i][rift_grid_width - 1].get_top_card())
+	for j in range(rift_grid_width - 1):
+		edge_cards.append(grid[1][j].get_top_card())
+		edge_cards.append(grid[rift_grid_height - 1][0].get_top_card())
+			
+	return edge_cards
+
 func find_lowest_health() -> Card:
 	var found_card : Card = null
 	for i in rift_grid_height:
@@ -402,7 +415,6 @@ func find_lowest_health() -> Card:
 				found_card = curr_card
 				continue
 			found_card = compare_lower_health(curr_card, found_card)
-	print(found_card.resource.title)
 	return found_card
 #filter.call(card)
 
@@ -430,6 +442,8 @@ func queue_animation(animation_func: Callable) -> void:
 	
 func process_animations() -> void:
 	while true:
+		if not get_tree():
+			break
 		if animation_queue.is_empty():
 			await get_tree().process_frame
 			continue
