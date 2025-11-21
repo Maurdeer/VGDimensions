@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://d1b1m0y144lgx"]
+[gd_scene load_steps=16 format=3 uid="uid://d1b1m0y144lgx"]
 
 [ext_resource type="Script" uid="uid://bgo6xmomgm3jq" path="res://_scripts/player/player_hand.gd" id="1_2yr0q"]
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="2_iyo8l"]
 [ext_resource type="Script" uid="uid://b8w3xx7rbfgxj" path="res://_scripts/deck.gd" id="2_l6uod"]
+[ext_resource type="FontFile" uid="uid://c52mdasflhbbi" path="res://font/Jersey10-Regular.ttf" id="4_7vlg1"]
 [ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="4_jiku1"]
 [ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="5_gsy7b"]
 [ext_resource type="Texture2D" uid="uid://cn0xhk718r4iv" path="res://art/card_ui/action.png" id="6_7vlg1"]
@@ -12,6 +13,12 @@
 [sub_resource type="LabelSettings" id="LabelSettings_gsy7b"]
 font_size = 32
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7senp"]
+font = ExtResource("4_7vlg1")
+font_size = 100
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ovsbo"]
 length = 0.001
@@ -210,6 +217,24 @@ mouse_filter = 2
 [node name="Deck" type="Node2D" parent="NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile"]
 script = ExtResource("2_l6uod")
 
+[node name="Label" type="Label" parent="NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.16675
+offset_top = -79.5
+offset_right = 99.16675
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "32"
+label_settings = SubResource("LabelSettings_7senp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Label2" type="Label" parent="NinePatchRect2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -309,10 +334,10 @@ speed_scale = 5.0
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 1
-anchor_left = -627.1719
-anchor_top = -621.2185
-anchor_right = 621.4158
-anchor_bottom = 627.3691
+anchor_left = -627.18335
+anchor_top = -621.25464
+anchor_right = 621.4043
+anchor_bottom = 627.333
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

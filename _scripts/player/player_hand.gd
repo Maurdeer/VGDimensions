@@ -10,6 +10,7 @@ const hand_draw_limit: int = 5
 @export var deck_inspector: Control
 @onready var slots: HBoxContainer = $hand_region/Slots
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var draw_pile_size_label: Label = $NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile/Label
 
 var empty_card: Card
 var slot_queue: Array[Control]
@@ -47,7 +48,6 @@ func fill_hand() -> void:
 		if draw_card_to_hand():
 			break
 		added_count += 1
-		
 
 # not used yet (use with caution)
 func add_card_to_hand(card: Card) -> void:
@@ -72,22 +72,23 @@ func draw_card_to_hand() -> bool:
 	
 	# Retrieve the card
 	var card: Card = draw_pile.remove_top_card()
+	draw_pile_size_label.text = "%s" % draw_pile.deck_size
 	card.grid_pos = Vector2i(-1, -1)
 	card.owner_pid = multiplayer.get_unique_id() # When we add netcoding do this -> GNM.player_info['name']
 	card.card_sm.transition_to_state(CardStateMachine.StateType.IN_HAND)
 	
 	# =================I'm not a big fan of this====================
 	# TODO: Vortex code might change this hopefully?
-	var on_played: Callable
-	match(card.resource.type):
-		CardResource.CardType.FEATURE:
-			on_played = discard_card
-		CardResource.CardType.ALLY:
-			on_played = discard_card
-		CardResource.CardType.ASSET:
-			on_played = remove_card_from_hand
-			
-	if on_played: card.played.connect(on_played)
+	#var on_played: Callable
+	#match(card.resource.type):
+		#CardResource.CardType.FEATURE:
+			#on_played = discard_card
+		#CardResource.CardType.ALLY:
+			#on_played = discard_card
+		#CardResource.CardType.ASSET:
+			#on_played = remove_card_from_hand
+			#
+	#if on_played: card.played.connect(on_played)
 	# ===============================================================
 	# Acquire a slot from the slot queue to hold the card
 	var slot: Control = slot_queue.pop_back()
@@ -103,6 +104,7 @@ func draw_card_to_hand() -> bool:
 	
 func reshuffle_draw_pile() -> void:
 	draw_pile.mergeDeck(discard_pile)
+	draw_pile_size_label.text = "%s" % draw_pile.deck_size
 	draw_pile.shuffleDeck()
 	
 # adds to discard pile ONLY
@@ -114,6 +116,7 @@ func add_to_discard(card: Card) -> void:
 func add_to_draw_pile(card: Card) -> void:
 	card.grid_pos = Vector2i(-1, -1)
 	draw_pile.add_card_under(card)
+	draw_pile_size_label.text = "%s" % draw_pile.deck_size
 	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 func discard_card(card: Card) -> void:

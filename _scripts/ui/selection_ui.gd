@@ -26,6 +26,8 @@ func get_play_selection(card: Card):
 		return null
 			
 	await selection_complete
+	if not _bullet_selected or _bullet_idx < 0:
+		return null
 	return [_bullet_selected, _bullet_idx]
 
 func get_interaction_selection(card: Card):
@@ -47,6 +49,8 @@ func get_interaction_selection(card: Card):
 		return null
 		
 	await selection_complete
+	if not _bullet_selected or _bullet_idx < 0:
+		return null
 	return [_bullet_selected, _bullet_idx]
 
 func create_button_by_bullet(bullet: BulletResource, idx: int):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3e8058lwu0a"]
+[gd_scene load_steps=18 format=3 uid="uid://c3e8058lwu0a"]
 
 [ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
 [ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="2_oyue5"]
@@ -190,6 +190,9 @@ _data = {
 script = ExtResource("3_uhl3e")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ol5b"]
+size = Vector2(345.45453, 483.63635)
+
 [node name="Card" type="Node2D"]
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_q5obu")
@@ -270,9 +273,19 @@ script = ExtResource("4_f61jr")
 [node name="CardSM" type="Node" parent="."]
 script = ExtResource("9_uhl3e")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.3299997e-06, 4.876743e-06)
+shape = SubResource("RectangleShape2D_2ol5b")
+
 [connection signal="gui_input" from="gridcard_shape" to="." method="_on_gridcard_shape_gui_input"]
 [connection signal="mouse_entered" from="gridcard_shape" to="gridcard_shape" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="gridcard_shape" to="gridcard_shape" method="_on_mouse_exited"]
 [connection signal="gui_input" from="card_shape" to="." method="_on_card_shape_gui_input"]
 [connection signal="mouse_entered" from="card_shape" to="card_shape" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="card_shape" to="card_shape" method="_on_mouse_exited"]
+[connection signal="area_entered" from="Area2D" to="gridcard_shape" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Area2D" to="card_shape" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="gridcard_shape" method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="Area2D" to="card_shape" method="_on_area_2d_area_exited"]

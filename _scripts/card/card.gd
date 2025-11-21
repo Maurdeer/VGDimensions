@@ -26,8 +26,9 @@ signal on_stats_change
 @export var draggable: bool = false:
 	set(value):
 		draggable = value
-		$drag_and_drop_component2D.draggable = value
-
+		$gridcard_shape.draggable = value
+		$card_shape.draggable = value
+		
 const SELECTION_UI = preload("uid://vei3yr63fqcj")
 
 # Utilities
