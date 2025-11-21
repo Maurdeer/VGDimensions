@@ -23,8 +23,8 @@ func _start_game() -> void:
 	chat.create_message.rpc("Game Will Start!")
 	#CardManager.create_card(initial_quest_card)
 	setup_peers()
-	create_cards_for_player_hand()
 	setup_card_shop()
+	create_cards_for_player_hand()
 	setup_wheel()
 	dimension_select() # Will begin our loop
 	
@@ -157,7 +157,12 @@ func _on_quest_completed_rpc() -> void:
 		if PlayerStatistics.dimensions_won >= 2:
 			game_victory()
 			return
+			
+	if is_my_turn():
+		end_local_play_turn()
+		
 	rift_grid.clear_grid()
+	
 	if multiplayer.is_server():
 		dimension_select()
 	

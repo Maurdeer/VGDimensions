@@ -11,6 +11,7 @@ signal on_end_of_turn
 @export var shop_initial_packs: Array[CardPackResource]
 @export var initial_grid_size: Vector2i = Vector2i(3, 3)
 @export var the_wheel: TheWheel
+@export var card_shop_ui: CardShopUI
 @export var selected_dimension: String
 
 @export_category("Developer Tests")
@@ -18,6 +19,7 @@ signal on_end_of_turn
 
 @onready var next_turn_button: Button = $next_turn_button
 @onready var player_hand: PlayerHand = $PlayerHandUI/player_hand
+
 @export var rift_grid: RiftGrid
 const CARD = preload("uid://c3e8058lwu0a")
 static var Instance: GameManager

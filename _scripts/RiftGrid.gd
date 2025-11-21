@@ -434,7 +434,7 @@ var animation_queue: Array[Callable]
 
 func _vfx_move(node: Node2D, target_position: Vector2, duration: float = 0.2) -> void:
 	var speed: float = (target_position - node.position).abs().length() / duration
-	while node.position != target_position:
+	while node and node.position != target_position:
 		node.position = node.position.move_toward(target_position, get_process_delta_time() * speed)
 		if (get_tree() == null):
 			break

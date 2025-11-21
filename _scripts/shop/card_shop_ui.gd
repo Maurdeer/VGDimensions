@@ -8,6 +8,7 @@ class_name CardShopUI
 
 var is_shown: bool = false
 var is_hovering: bool = true
+var is_input_enabled: bool = true
 
 
 func display_cards(cards_to_display: Array[Card]) -> void:
@@ -69,14 +70,15 @@ func toggle_card_shop() -> void:
 	else: show_card_shop()
 	
 func _on_button_pressed() -> void:
+	if not is_input_enabled: return
 	toggle_card_shop()
 
 func _on_background_mouse_entered() -> void:
+	if not is_input_enabled: return
 	if is_hovering: return
 	is_hovering = true
 
 func _on_background_mouse_exited() -> void:
-	print("Got in here")
 	if not is_hovering: return
 	is_hovering = false
 	hide_card_shop()
