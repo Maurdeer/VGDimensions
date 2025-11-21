@@ -29,6 +29,7 @@ metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 [sub_resource type="Resource" id="Resource_7w6jt"]
 script = ExtResource("4_ut5cq")
 passive_event_type = 7
+global_event_type = 15
 event = SubResource("Resource_7t5v0")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 

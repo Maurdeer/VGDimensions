@@ -1,15 +1,39 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=5 format=3 uid="uid://vlbi622x6nho"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://vlbi622x6nho"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_ey6v6"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_3llsh"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_y1e8s"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_yifxq"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_cl17c"]
+[ext_resource type="Script" uid="uid://calawcbk2l5ue" path="res://custom_event_resources/Quest/PolaroidQuestProgressEvent.gd" id="4_yifxq"]
 [ext_resource type="Texture2D" uid="uid://cyao6mn60tkjn" path="res://art/card_art/FromNava/ThroughTheLens.png" id="5_yifxq"]
+
+[sub_resource type="Resource" id="Resource_cl17c"]
+script = ExtResource("4_yifxq")
+necessaryPolaroidAmount = 1
+metadata/_custom_type_script = "uid://calawcbk2l5ue"
+
+[sub_resource type="Resource" id="Resource_nj4yd"]
+script = ExtResource("4_cl17c")
+is_global = true
+global_event_type = 29
+event = SubResource("Resource_cl17c")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_7tcna"]
+script = ExtResource("2_ey6v6")
+bullet_type = 3
+passive_event = SubResource("Resource_nj4yd")
+passive_events = Array[ExtResource("4_cl17c")]([SubResource("Resource_nj4yd")])
+bullet_description = "Gain a Polaroid."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
 script = ExtResource("3_y1e8s")
 title = "Through the Lens"
 type = 4
 game_origin = 26
+bullets = Array[ExtResource("2_ey6v6")]([SubResource("Resource_7tcna")])
 card_art = ExtResource("5_yifxq")
 background_art = ExtResource("3_3llsh")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

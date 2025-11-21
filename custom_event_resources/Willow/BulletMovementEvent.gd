@@ -24,10 +24,11 @@ func on_execute() -> bool:
 	#var curr_bullet: Card = m_card_refs[card_to_place]
 	var curr_direction : Card.CardDirection = curr_bullet.card_dir
 	var target_loc : Vector2i = find_new_bullet_location(curr_bullet, curr_direction)
+	#print("This bullet is at ", curr_bullet.grid_pos)
 	if (RiftGrid.Instance.is_valid_pos(target_loc)):
-		var temp_location : Vector2i = curr_bullet.grid_pos
+		#var temp_location : Vector2i = curr_bullet.grid_pos
 		RiftGrid.Instance.move_card_to(target_loc, curr_bullet.grid_pos)
-		RiftGrid.Instance.draw_card_if_empty(temp_location)
+		#RiftGrid.Instance.draw_card_if_empty(temp_location)
 	else:
 		RiftGrid.Instance.discard_card_and_draw(curr_bullet)
 	return false

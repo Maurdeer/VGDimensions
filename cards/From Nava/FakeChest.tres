@@ -18,7 +18,6 @@ metadata/_custom_type_script = "uid://wcgspm8flkce"
 [sub_resource type="Resource" id="Resource_tg1uf"]
 script = ExtResource("2_xpoev")
 bullet_type = 1
-is_multi_event = true
 bullet_event = SubResource("Resource_evm0q")
 bullet_events = Array[ExtResource("3_acpwd")]([SubResource("Resource_evm0q")])
 bullet_description = "On Interact: Replace this card with a Small Guy."

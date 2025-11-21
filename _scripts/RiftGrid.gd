@@ -7,8 +7,8 @@ static var Instance: RiftGrid
 var grid: Array[Array]
 var slot_grid: Array[Array]
 
-var rift_grid_width: int = 3
-var rift_grid_height: int = 3
+var rift_grid_width: int = 5
+var rift_grid_height: int = 5
 
 var _card_refs: Array[Card]
 @onready var _rift_deck: Deck =  $Control2/DrawPile
@@ -113,7 +113,6 @@ func draw_card(draw_to: Vector2i) -> void:
 	new_card = _rift_deck.remove_top_card()
 	new_card.global_position = original_pos
 	place_card(draw_to, new_card)
-	print(new_card.resource.title)
 	new_card.on_enter_tree()
 	
 func draw_card_if_empty(draw_to: Vector2i) -> void:
@@ -135,8 +134,9 @@ func place_card(place_at: Vector2i, new_card: Card) -> void:
 	new_card.grid_pos = place_at
 	# Animation?
 	queue_animation(func(): 
-		await _vfx_move(new_card, deck.position, 0.2)
-		AudioManager.play_sfx("place_card")
+		if (deck != null):
+			await _vfx_move(new_card, deck.position, 0.2)
+			AudioManager.play_sfx("place_card")
 	)
 	
 	if card_underneath: 
@@ -435,6 +435,8 @@ func _vfx_move(node: Node2D, target_position: Vector2, duration: float = 0.2) ->
 	var speed: float = (target_position - node.position).abs().length() / duration
 	while node.position != target_position:
 		node.position = node.position.move_toward(target_position, get_process_delta_time() * speed)
+		if (get_tree() == null):
+			break
 		await get_tree().process_frame
 		
 func queue_animation(animation_func: Callable) -> void:
@@ -493,11 +495,12 @@ func on_end_of_new_turn() -> void:
 # Intentionally sequential to avoid broadcast reordering
 func emit_global_event(global_event_type: PassiveEventResource.GlobalEvent, card_invoker: Card = null) -> void:
 	if card_invoker:
+		EventManager.queue_event_group(QuestManager.Instance.currentQuest.passive_events[global_event_type], \
+		card_invoker)
 		for y in rift_grid_height:
 			for x in rift_grid_width:
-				for card in (grid[y][x] as Deck).deck_array:
+				for card in (grid[y][x] as Deck).deck_array:			
 					EventManager.queue_event_group(card.passive_events[global_event_type], card_invoker)
-					
 					# If the card blocks global events from invoking underneath it
 					if card.resource.blocking: break
 	else:
@@ -505,7 +508,7 @@ func emit_global_event(global_event_type: PassiveEventResource.GlobalEvent, card
 			for x in rift_grid_width:
 				for card in (grid[y][x] as Deck).deck_array:
 					EventManager.queue_event_group(card.passive_events[global_event_type], card)
-					
+					EventManager.queue_event_group(QuestManager.Instance.currentQuest.passive_events[global_event_type], card)
 					# If the card blocks global events from invoking underneath it
 					if card.resource.blocking: break
 	# (Ryan) Commented out to avoid processing mid processor await EventManager.process_event_queue()

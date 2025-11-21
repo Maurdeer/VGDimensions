@@ -347,3 +347,5 @@ func on_freeze():
 	EventManager.queue_event_group(passive_events[PassiveEventResource.PassiveEvent.ON_FREEZE], self)
 func on_quest_progress(): 
 	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_QUEST_PROGRESS], self)
+func on_gain_resource(): 
+	EventManager.queue_event_group(passive_events[PassiveEventResource.GlobalEvent.ON_GAIN_RESOURCE], self)

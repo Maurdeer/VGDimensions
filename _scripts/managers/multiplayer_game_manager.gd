@@ -154,7 +154,7 @@ func _on_quest_completed_rpc() -> void:
 		PlayerStatistics.dimensions_won += 1
 		if PlayerStatistics.dimensions_won >= 2:
 			game_victory()
-		
+			return
 	rift_grid.clear_grid()
 	if multiplayer.is_server():
 		dimension_select()

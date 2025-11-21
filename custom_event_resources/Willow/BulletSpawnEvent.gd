@@ -34,14 +34,13 @@ func determine_direction(card : Card) -> Card.CardDirection:
 
 func on_execute() -> bool:
 	if player_selects:
+		spawn_positions = []
 		var selected_pos: Vector2i = m_card_refs[target_card_at].grid_pos
 		spawn_positions.append(selected_pos)
-	
 	for spawn_pos : Vector2i in spawn_positions:
 		var source_card : Card = CardManager.create_card_locally(bullet_template, true)
 		RiftGrid.Instance.place_card(spawn_pos, source_card)
 		source_card.card_dir = determine_direction(source_card)
-	
 	return false
 	
 func required_events() -> Array[EventResource]:

@@ -19,7 +19,7 @@ enum PassiveEvent {
 	ON_FREEZE
 }
 enum GlobalEvent {
-	ON_CARD_PLAY = 15,
+	ON_CARD_PLAY = 14,
 	ON_CARD_ACTION,
 	ON_CARD_SOCIAL,
 	ON_STATE_OF_GRID_CHANGE,
@@ -33,7 +33,8 @@ enum GlobalEvent {
 	ON_CARD_AFTER_MOVE,
 	ON_CARD_REPLACE,
 	ON_CARD_FREEZE,
-	ON_QUEST_PROGRESS
+	ON_QUEST_PROGRESS,
+	ON_GAIN_RESOURCE
 }
 @export var is_global: bool:
 	set(value):

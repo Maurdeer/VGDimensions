@@ -18,6 +18,7 @@ metadata/_custom_type_script = "uid://dqurndy8l8ld7"
 [sub_resource type="Resource" id="Resource_gflah"]
 script = ExtResource("6_s11k7")
 passive_event_type = 3
+global_event_type = 15
 event = SubResource("Resource_gfx24")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
@@ -29,7 +30,7 @@ metadata/_custom_type_script = "uid://dl6qbg1lsuuj0"
 [sub_resource type="Resource" id="Resource_xeq1x"]
 script = ExtResource("6_s11k7")
 is_global = true
-global_event_type = 20
+global_event_type = 19
 event = SubResource("Resource_s11k7")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 

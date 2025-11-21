@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://druehfvw6obp3"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://druehfvw6obp3"]
 
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="1_hlu47"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_lq1b3"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cayx6"]
 [ext_resource type="Script" uid="uid://dqurndy8l8ld7" path="res://custom_event_resources/Willow/BulletSpawnEvent.gd" id="3_hlu47"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_15wk3"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="5_jd4w4"]
+[ext_resource type="Texture2D" uid="uid://8ne35ut4rcb6" path="res://art/card_art/Willow/Goliath Stone.png" id="6_15wk3"]
 
 [sub_resource type="Resource" id="Resource_5c1eb"]
 script = ExtResource("3_hlu47")
@@ -30,4 +32,6 @@ title = "Goliath Stone"
 game_origin = 30
 deleon_value = 4
 bullets = Array[ExtResource("1_lq1b3")]([SubResource("Resource_bl3c0")])
+card_art = ExtResource("6_15wk3")
+background_art = ExtResource("1_hlu47")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
