@@ -6,10 +6,12 @@ signal on_end_of_turn
 
 @export_category("Initialization Specs")
 @export var initial_hand_card_pack: CardPackResource
-@export var rift_card_pack: Array[CardPackResource]
+@export var dimensions: Array[DimensionResource]
+@export var rigged_dimensions: Array[String]
 @export var shop_initial_packs: Array[CardPackResource]
 @export var initial_grid_size: Vector2i = Vector2i(3, 3)
-@export var initial_quest_card: CardResource
+@export var the_wheel: TheWheel
+@export var selected_dimension: String
 
 @export_category("Developer Tests")
 @export var infinite_resources: bool = false
@@ -20,6 +22,8 @@ signal on_end_of_turn
 const CARD = preload("uid://c3e8058lwu0a")
 static var Instance: GameManager
 
+var dimension_dictionary: Dictionary[String, DimensionResource]
+
 func _ready() -> void:
 	# Initialize Singleton
 	if Instance: 
@@ -28,6 +32,14 @@ func _ready() -> void:
 	Instance = self
 	
 	call_deferred("_after_ready")
+
+func setup_wheel() -> void:
+	var dimension_names: Array[String]
+	for dimension in dimensions:
+		dimension_dictionary[dimension.game_name] = dimension
+		dimension_names.append(dimension.game_name)
+	the_wheel = $TheWheel/WheelSubContainer/Wheel
+	the_wheel.set_dimension_list(dimension_names) 
 
 func _after_ready() -> void:
 	setup_card_shop()
@@ -53,13 +65,12 @@ func setup_card_shop():
 # TODO: This is the location for changing the game change functionality
 # This should include the song that will play, for now I will handle this
 func setup_rift_grid():
-	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(rift_card_pack)
+	var rift_cards: Array[Card] = CardManager.create_cards_from_packs(dimension_dictionary[selected_dimension].card_packs)
 	# If this becomes local, then you need to call this for every peer in fact
 	_setup_rift_grid_rpc.rpc(CardManager.cards_to_ids(rift_cards))
 	
 @rpc("call_local", "any_peer")
 func _setup_rift_grid_rpc(rift_card_ids: Array[int]):
-	AudioManager.play_music("FromNava")
 	rift_grid.generate_new_grid(CardManager.ids_to_cards(rift_card_ids),3,3)
 	
 func create_cards_for_player_hand():

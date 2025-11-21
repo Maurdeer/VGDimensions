@@ -1,11 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://b78acuqchwjyj"]
+[gd_scene load_steps=36 format=3 uid="uid://b78acuqchwjyj"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_3y3hc"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_5x1ca"]
+[ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="3_huwjo"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="3_jd3sr"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="4_huwjo"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="5_5wpnl"]
 [ext_resource type="Resource" uid="uid://ddtpetavhnuc0" path="res://card_packs/FromNavaItemPack.tres" id="6_wxbsy"]
+[ext_resource type="Resource" uid="uid://ytv15oyix42d" path="res://card_packs/OutcastsPack.tres" id="7_5wpnl"]
 [ext_resource type="Resource" uid="uid://c1ciuxwp3folr" path="res://card_packs/WillowItemPack.tres" id="7_cd0cq"]
 [ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="8_c2tc1"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="10_c2s8n"]
@@ -25,6 +27,22 @@
 [ext_resource type="Script" uid="uid://d1sug2on8v3c4" path="res://_scripts/ui/ui_manager.gd" id="23_qt330"]
 [ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_7qvlh"]
 [ext_resource type="PackedScene" uid="uid://c71uoxlt0gksi" path="res://_scenes/ui/deck_inspector.tscn" id="25_5x1ca"]
+[ext_resource type="PackedScene" uid="uid://bbpdi5v1c5ch" path="res://external_work/brett/spin_that_wheel/the_wheel.tscn" id="25_jd3sr"]
+
+[sub_resource type="Resource" id="Resource_5wpnl"]
+script = ExtResource("3_huwjo")
+card_packs = Array[ExtResource("3_jd3sr")]([ExtResource("4_huwjo")])
+game_name = "From Nava"
+quest_card = ExtResource("13_2thif")
+music = "FromNava"
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
+
+[sub_resource type="Resource" id="Resource_wxbsy"]
+script = ExtResource("3_huwjo")
+card_packs = Array[ExtResource("3_jd3sr")]([ExtResource("7_5wpnl")])
+game_name = "Outcasts"
+music = "Outcasts"
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvy2v"]
 shader = ExtResource("8_c2tc1")
@@ -56,7 +74,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_3y3hc")
 initial_hand_card_pack = ExtResource("2_5x1ca")
-rift_card_pack = Array[ExtResource("3_jd3sr")]([ExtResource("4_huwjo")])
+dimensions = Array[ExtResource("3_huwjo")]([SubResource("Resource_5wpnl"), SubResource("Resource_wxbsy")])
+rigged_dimensions = Array[String](["From Nava"])
 shop_initial_packs = Array[ExtResource("3_jd3sr")]([ExtResource("6_wxbsy"), ExtResource("7_cd0cq"), ExtResource("5_5wpnl")])
 rift_grid = NodePath("RiftGrid")
 
@@ -473,6 +492,9 @@ visible = false
 layout_mode = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("24_7qvlh")]
+layout_mode = 1
+
+[node name="TheWheel" parent="." instance=ExtResource("25_jd3sr")]
 layout_mode = 1
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]

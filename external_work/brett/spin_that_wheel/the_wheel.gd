@@ -1,5 +1,6 @@
 # @tool
 extends Control
+class_name TheWheel
 
 @export_group("Wheel Physical Attributes")
 @export var wheel_position: Vector2 = Vector2.ZERO
@@ -34,6 +35,15 @@ var do_slowdown: bool = false
 var do_stop_range_calc: bool = false
 var target_game: String = ""
 var wheel_decel: float = 0
+
+signal wheel_done
+@onready var wheel_sub_container: WheelSubContainer = $".."
+
+func ascend() -> void:
+	wheel_sub_container.ascend()
+
+func descend(selected_dimension: String) -> void:
+	wheel_sub_container.reset_wheel(selected_dimension)
 
 ##CALL TO SPIN
 func spin_that_wheel(target_dimension: String) -> bool:
@@ -174,6 +184,7 @@ func _process(delta):
 		wheel_rotation_speed -= wheel_decel * delta
 		if (wheel_rotation_speed <= 0):
 			wheel_rotation_speed = 0
+			wheel_done.emit()
 			do_slowdown = false
 	
 	rotation += wheel_rotation_speed * delta

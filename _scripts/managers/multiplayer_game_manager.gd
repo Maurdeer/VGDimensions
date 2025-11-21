@@ -10,7 +10,6 @@ var random_seed: int
 func _ready() -> void:
 	if multiplayer.is_server():
 		GNM.all_players_loaded.connect(_start_game)
-	CardManager.create_card(initial_quest_card)
 	super._ready()
 	
 func _after_ready() -> void:
@@ -22,11 +21,42 @@ func _after_ready() -> void:
 func _start_game() -> void:
 	if not multiplayer.is_server(): return
 	chat.create_message.rpc("Game Will Start!")
-	CardManager.create_card(initial_quest_card)
+	#CardManager.create_card(initial_quest_card)
 	setup_peers()
-	setup_card_shop()
-	setup_rift_grid()
 	create_cards_for_player_hand()
+	setup_card_shop()
+	setup_wheel()
+	dimension_select() # Will begin our loop
+	
+func setup_wheel() -> void:
+	_setup_wheel_rpc.rpc()
+	
+@rpc("any_peer", "call_local", "reliable")
+func _setup_wheel_rpc() -> void:
+	super.setup_wheel()
+	
+func dimension_select():
+	selected_dimension = rigged_dimensions.pick_random()
+	rigged_dimensions.erase(selected_dimension)
+	launch_wheel_rpc.rpc(selected_dimension)
+
+@rpc("any_peer", "call_local", "reliable")
+func launch_wheel_rpc(dimension_picked: String):
+	selected_dimension = dimension_picked
+	rift_grid.clear_grid()
+	#await the_wheel.descend()
+	print("Star Here you bitrhc")
+	the_wheel.descend(selected_dimension)
+	await the_wheel.wheel_done
+	AudioManager.play_music(dimension_dictionary[selected_dimension].music)
+	if multiplayer.is_server():
+		setup_dimension()
+	await get_tree().create_timer(3).timeout
+	the_wheel.ascend()
+	the_wheel.dimension_list.erase(selected_dimension)
+	
+func setup_dimension():
+	setup_rift_grid()
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 
 func start_next_turn() -> void:
@@ -112,8 +142,20 @@ func _on_victory() -> void:
 		get_tree().change_scene_to_file("res://_scenes/win_screen.tscn")
 	else:
 		get_tree().change_scene_to_file("res://_scenes/lose_screen.tscn")
+		
+@rpc("any_peer", "call_local", "reliable")
+func _on_quest_completed_rpc() -> void:
+	var winner: bool = multiplayer.get_unique_id() == multiplayer.get_remote_sender_id()
+	if winner:
+		get_tree().change_scene_to_file("res://_scenes/win_screen.tscn")
+	else:
+		get_tree().change_scene_to_file("res://_scenes/lose_screen.tscn")
+	rift_grid.clear_grid()
 	
 func game_victory() -> void:
 	# only the winner calls this, so 
 	_on_victory.rpc()
+	
+func on_quest_completed() -> void:
+	_on_quest_completed_rpc.rpc()
 	
