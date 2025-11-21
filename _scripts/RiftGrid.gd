@@ -56,7 +56,8 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 		
 	# Clean up rift if was prior in use
 	clear_grid()
-	
+	rift_grid_width = rift_width
+	rift_grid_height = rift_height
 	# Establish Rift deck and card refs
 	# Assume cards are pre_shuffled
 	_card_refs = cards
