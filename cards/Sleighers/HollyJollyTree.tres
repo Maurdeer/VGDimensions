@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=16 format=3 uid="uid://b3js45fypnfbt"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_cle45"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_cqsqj"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_gmuda"]
+[ext_resource type="Script" uid="uid://bf6x2y3xsccv8" path="res://custom_event_resources/Sleighers/GainCheer.gd" id="3_cqsqj"]
+[ext_resource type="Script" uid="uid://py2p71o308nx" path="res://custom_event_resources/Sleighers/ChangeTeam.gd" id="4_ivyfa"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="4_wdveq"]
+
+[sub_resource type="Resource" id="Resource_durp7"]
+script = ExtResource("1_cle45")
+bullet_type = 3
+bullet_description = "(Passive) - Holly - Jolly Tree has 3 alignment states, FAE, Neutral, FIR. Holly - Jolly Tree starts as Neutral. "
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_wdveq"]
+script = ExtResource("3_cqsqj")
+amount = 10
+metadata/_custom_type_script = "uid://bf6x2y3xsccv8"
+
+[sub_resource type="Resource" id="Resource_t8381"]
+script = ExtResource("2_cqsqj")
+event_type = 5
+event = SubResource("Resource_wdveq")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_uoh1a"]
+script = ExtResource("4_wdveq")
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_12p7c"]
+script = ExtResource("2_cqsqj")
+event_type = 5
+event = SubResource("Resource_uoh1a")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_ivyfa"]
+script = ExtResource("1_cle45")
+bullet_type = 3
+passive_events = Array[ExtResource("2_cqsqj")]([SubResource("Resource_t8381"), SubResource("Resource_12p7c")])
+bullet_description = "(Passive) - At the end of a player’s turn, gain 10 cheers for the current aligned team and gain 2 Deleons. "
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_v3nmc"]
+script = ExtResource("4_ivyfa")
+metadata/_custom_type_script = "uid://py2p71o308nx"
+
+[sub_resource type="Resource" id="Resource_cqsqj"]
+script = ExtResource("2_cqsqj")
+event_type = 7
+event = SubResource("Resource_v3nmc")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_12exx"]
+script = ExtResource("1_cle45")
+bullet_type = 3
+passive_events = Array[ExtResource("2_cqsqj")]([SubResource("Resource_cqsqj")])
+bullet_description = "When Holly-Jolly Tree is defeated, Move one alignment closer to the defeated player's Team and regain all HP. (If the Holly - Holly Tree is neutral and is defeated by a FIR player, the Holly Jolly Tree is FIR aligned. If the Holly - Jolly Tree is FIR aligned and is defeated by a FAE player, Holly Jolly Tree is Neutral)."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_gmuda")
+title = "Holly-Jolly Tree"
+type = 5
+game_origin = 6
+starting_hp = 2
+movable = false
+discardable = false
+stackable = false
+bullets = Array[ExtResource("1_cle45")]([SubResource("Resource_durp7"), SubResource("Resource_ivyfa"), SubResource("Resource_12exx")])
+quip_description = "THIS CARD NEEDS TO HAVE A ICON FOR TEAMS."
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

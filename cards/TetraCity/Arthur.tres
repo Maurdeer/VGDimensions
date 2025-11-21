@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://crkjg7hmrbtme"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_edrv0"]
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_knmoi"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_jkgkr"]
+[ext_resource type="Script" uid="uid://cd20i8u85x35s" path="res://custom_event_resources/TetraCity/StackTypeonCard.gd" id="3_1ausg"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_i3fn3"]
+[ext_resource type="Texture2D" uid="uid://cmjbn17i22ho0" path="res://art/card_art/TetraCity/arthur.png" id="4_1ausg"]
+[ext_resource type="Resource" uid="uid://dpjnimgwgtaew" path="res://cards/TetraCity/Apartment.tres" id="4_w0ml0"]
+
+[sub_resource type="Resource" id="Resource_fmk81"]
+script = ExtResource("3_1ausg")
+other_card_resource = ExtResource("4_w0ml0")
+metadata/_custom_type_script = "uid://cd20i8u85x35s"
+
+[sub_resource type="Resource" id="Resource_w0ml0"]
+script = ExtResource("1_edrv0")
+bullet_type = 2
+bullet_cost = 2
+bullet_event = SubResource("Resource_fmk81")
+bullet_description = "Makes a apartment. POWER!!!!"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_jkgkr")
+title = "Arthur"
+type = 7
+game_origin = 12
+bullets = Array[ExtResource("1_edrv0")]([SubResource("Resource_w0ml0")])
+quip_description = "What kind of family wants to live on a collapsing island?"
+card_art = ExtResource("4_1ausg")
+background_art = ExtResource("1_knmoi")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

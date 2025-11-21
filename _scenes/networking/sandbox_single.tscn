@@ -77,6 +77,7 @@ initial_hand_card_pack = ExtResource("2_5x1ca")
 dimensions = Array[ExtResource("3_huwjo")]([SubResource("Resource_5wpnl"), SubResource("Resource_wxbsy")])
 rigged_dimensions = Array[String](["From Nava"])
 shop_initial_packs = Array[ExtResource("3_jd3sr")]([ExtResource("6_wxbsy"), ExtResource("7_cd0cq"), ExtResource("5_5wpnl")])
+infinite_resources = true
 rift_grid = NodePath("RiftGrid")
 
 [node name="TextureRect" type="TextureRect" parent="."]

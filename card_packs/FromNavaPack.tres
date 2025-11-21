@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=12 format=3 uid="uid://b66r18jp8ponq"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=13 format=3 uid="uid://b66r18jp8ponq"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_xuuq2"]
 [ext_resource type="Resource" uid="uid://crpp42hdxyxji" path="res://cards/From Nava/SmallGuy.tres" id="2_gkc6p"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://c12brfjf3lm30" path="res://cards/From Nava/IceTower.tres" id="8_5bwb4"]
 [ext_resource type="Resource" uid="uid://bfmf5a377dkdm" path="res://cards/From Nava/Fan.tres" id="9_uhor1"]
 [ext_resource type="Resource" uid="uid://c1ftp2h4vrsy6" path="res://cards/From Nava/Chest.tres" id="10_0ro12"]
+[ext_resource type="Resource" uid="uid://b3js45fypnfbt" path="res://cards/Sleighers/HollyJollyTree.tres" id="11_c62u6"]
 
 [resource]
 script = ExtResource("2_ho1ha")
@@ -23,6 +24,7 @@ ExtResource("6_avhbb"): 3,
 ExtResource("7_fig77"): 1,
 ExtResource("8_5bwb4"): 3,
 ExtResource("9_uhor1"): 3,
-ExtResource("10_0ro12"): 3
+ExtResource("10_0ro12"): 3,
+ExtResource("11_c62u6"): 10
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"

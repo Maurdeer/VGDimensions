@@ -37,6 +37,13 @@ signal on_resource_spend_success(ResourceType)
 	set(value):
 		dimensions_won = value
 		on_stats_change.emit()
+@export var sleighers_cheer: int:
+	set(value):
+		sleighers_cheer = value
+		on_stats_change.emit()
+
+#For Sleighers implementation, remember to set this correctly
+@export var sleighers_team =  SleighersTeam.FAE
 		
 func modify_resource(type: ResourceType, amount: int) -> void:
 	match(type):
@@ -48,7 +55,13 @@ func modify_resource(type: ResourceType, amount: int) -> void:
 			socials += amount
 		ResourceType.POLAROID:
 			from_nava_polaroids += amount
-			
+		ResourceType.TETRACOIN:
+			tetra_city_coins += amount
+		ResourceType.CHEER:
+			if sleighers_team == team:
+				sleighers_cheer += amount
+
+
 func can_afford(type: ResourceType, required_amount: int) -> bool:
 	var affordable = false
 	match(type):
@@ -58,6 +71,8 @@ func can_afford(type: ResourceType, required_amount: int) -> bool:
 			affordable = actions >= required_amount
 		ResourceType.SOCIAL:
 			affordable = socials >= required_amount
+		ResourceType.TETRACOIN:
+			affordable = tetra_city_coins >= required_amount
 			
 	if not affordable:
 		on_resource_spend_fail.emit(type)
@@ -79,6 +94,10 @@ func purchase_attempt(type: ResourceType, required_amount: int) -> bool:
 			if socials >= required_amount:
 				success = true
 				socials -= required_amount
+		ResourceType.TETRACOIN:
+			if tetra_city_coins >= required_amount:
+				success = true
+				tetra_city_coins -= required_amount
 			
 	if success:
 		on_resource_spend_success.emit(type)
@@ -90,6 +109,10 @@ func purchase_attempt(type: ResourceType, required_amount: int) -> bool:
 #boolean statistics
 @export var tetra_city_coins_status: bool
 @export var from_nava_polaroids_status: bool
+@export var sleighers_cheer_status: bool
+
+func enable_sleighers_cheer(status):
+	sleighers_cheer_status = status
 
 func enable_tetra_city_coins(status):
 	tetra_city_coins_status = status
@@ -101,5 +124,13 @@ enum ResourceType {
 	DELEON,
 	ACTION,
 	SOCIAL,
-	POLAROID
+	POLAROID,
+	TETRACOIN,
+	CHEER
+}
+
+enum SleighersTeam {
+	FAE,
+	FIR,
+	NEUTRAL
 }
