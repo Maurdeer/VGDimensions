@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_x8p16"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_4dh55"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_damly"]
-[ext_resource type="Script" path="res://custom_event_resources/DamageAndPlaceEvent.gd" id="3_flryt"]
+[ext_resource type="Script" uid="uid://bid1lim8prwmu" path="res://custom_event_resources/DamageAndPlaceEvent.gd" id="3_flryt"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_x8p16"]
 [ext_resource type="Texture2D" uid="uid://bhafqg1ktk811" path="res://art/card_art/Willow/wanderer.jpg" id="6_0l8qs"]
 [ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="6_flryt"]

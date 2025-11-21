@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=15 format=3 uid="uid://dxnp8ire8svhn"]
 
 [ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="PackedScene" uid="uid://b78acuqchwjyj" path="res://_scenes/networking/sandbox_single.tscn" id="1_l7x4r"]
@@ -9,11 +9,17 @@
 [ext_resource type="Resource" uid="uid://b438wo3k5231r" path="res://dimensions/Sleighers.tres" id="7_4glm7"]
 [ext_resource type="Resource" uid="uid://cdxms323iiv7n" path="res://dimensions/TetraCity.tres" id="8_gethx"]
 [ext_resource type="Resource" uid="uid://bko8ab1tf8r4i" path="res://dimensions/Willow.tres" id="9_f2c4h"]
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="10_f2c4h"]
+[ext_resource type="Resource" uid="uid://ddtpetavhnuc0" path="res://card_packs/FromNavaItemPack.tres" id="11_d51l6"]
+[ext_resource type="Resource" uid="uid://c1ciuxwp3folr" path="res://card_packs/WillowItemPack.tres" id="12_62nay"]
+[ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="13_e1t0q"]
+[ext_resource type="Resource" uid="uid://b0blv16iu6vv3" path="res://card_packs/GuestAllyPack.tres" id="14_atenx"]
 
 [node name="multiplayer" instance=ExtResource("1_l7x4r")]
 script = ExtResource("1_7aq5h")
 dimensions = Array[ExtResource("3_wvlfi")]([ExtResource("4_u7dbv"), ExtResource("5_7aq5h"), ExtResource("6_vw4oh"), ExtResource("7_4glm7"), ExtResource("8_gethx"), ExtResource("9_f2c4h")])
 rigged_dimensions = Array[String](["From Nava", "Willow"])
+shop_initial_packs = Array[ExtResource("10_f2c4h")]([ExtResource("11_d51l6"), ExtResource("12_62nay"), ExtResource("13_e1t0q"), ExtResource("14_atenx")])
 
 [node name="next_turn_button" parent="." index="4"]
 visible = false

@@ -1,61 +1,11 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://cvl64gbgypatl"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=3 format=3 uid="uid://cvl64gbgypatl"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_wjf7w"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_75gah"]
-[ext_resource type="Script" uid="uid://cab2yivcbh6tj" path="res://_scripts/resources/EventResources/PlaceOnCertainCardEvent.gd" id="2_lgqyw"]
-[ext_resource type="Resource" uid="uid://cjuwh834fvdq" path="res://cards/Altarune/Battery.tres" id="3_1us18"]
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_r8kpw"]
-[ext_resource type="Script" uid="uid://boguia5ac7dnu" path="res://custom_event_resources/Altarune/SniperTowerDamageEvent.gd" id="5_36m1c"]
-
-[sub_resource type="Resource" id="Resource_a0lil"]
-script = ExtResource("2_lgqyw")
-source_selection_type = 1
-select_position_card_resource = ExtResource("3_1us18")
-metadata/_custom_type_script = "uid://cab2yivcbh6tj"
-
-[sub_resource type="Resource" id="Resource_31ku4"]
-script = ExtResource("1_wjf7w")
-bullet_event = SubResource("Resource_a0lil")
-bullet_description = "Place this card on any ally battery"
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_5h1ix"]
-script = ExtResource("5_36m1c")
-metadata/_custom_type_script = "uid://boguia5ac7dnu"
-
-[sub_resource type="Resource" id="Resource_7o8jk"]
-script = ExtResource("1_wjf7w")
-bullet_type = 1
-bullet_event = SubResource("Resource_5h1ix")
-bullet_description = "Deal 2 damage to the enemy with the lowest HP on the Rift."
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_848n4"]
-script = ExtResource("2_lgqyw")
-metadata/_custom_type_script = "uid://cab2yivcbh6tj"
-
-[sub_resource type="Resource" id="Resource_snivb"]
-script = ExtResource("5_36m1c")
-metadata/_custom_type_script = "uid://boguia5ac7dnu"
-
-[sub_resource type="Resource" id="Resource_q4cuk"]
-script = ExtResource("4_r8kpw")
-event_type = 5
-event = SubResource("Resource_snivb")
-metadata/_custom_type_script = "uid://bat0pcm2x7x13"
-
-[sub_resource type="Resource" id="Resource_wavox"]
-script = ExtResource("1_wjf7w")
-bullet_type = 3
-bullet_event = SubResource("Resource_848n4")
-passive_events = Array[ExtResource("4_r8kpw")]([SubResource("Resource_q4cuk")])
-bullet_description = "Deal 2 damage to the enemy with the lowest HP on the Rift."
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
 script = ExtResource("2_75gah")
 title = "Sniper Tower"
 type = 2
 game_origin = 7
-bullets = Array[ExtResource("1_wjf7w")]([SubResource("Resource_31ku4"), SubResource("Resource_7o8jk"), SubResource("Resource_wavox")])
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

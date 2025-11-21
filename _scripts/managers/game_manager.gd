@@ -86,6 +86,7 @@ func initial_player_stats():
 	PlayerStatistics.actions = 0
 	PlayerStatistics.socials = 0
 	PlayerStatistics.from_nava_polaroids = 0
+	PlayerStatistics.dimensions_won = 0
 	
 func reset_temporary_resources():
 	PlayerStatistics.actions = 0

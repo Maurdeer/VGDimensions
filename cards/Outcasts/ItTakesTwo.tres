@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://dc4nu5r2x6mqr"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_n6q8c"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_8qfoq"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cyrlv"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_2pfuu"]
+[ext_resource type="Resource" uid="uid://yftpwuitvs20" path="res://cards/Outcasts/AsheAlly.tres" id="4_q30lc"]
+[ext_resource type="Resource" uid="uid://dkv5fsn4snafe" path="res://cards/Outcasts/Tinker.tres" id="5_j7fet"]
+[ext_resource type="Script" uid="uid://bi6v78lx4ugqy" path="res://_scripts/resources/EventResources/RespawnCornerCardsEvent.gd" id="6_jaxqy"]
+
+[sub_resource type="Resource" id="Resource_7r6el"]
+script = ExtResource("3_2pfuu")
+is_global = true
+global_event_type = 23
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_q30lc"]
+script = ExtResource("1_n6q8c")
+bullet_type = 3
+passive_event = SubResource("Resource_7r6el")
+passive_events = Array[ExtResource("3_2pfuu")]([SubResource("Resource_7r6el")])
+bullet_description = "Get Ashe and Tinker to stand on their respective doors to win this Dimension!"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_gpgyc"]
+script = ExtResource("6_jaxqy")
+card_1 = ExtResource("4_q30lc")
+card_2 = ExtResource("5_j7fet")
+metadata/_custom_type_script = "uid://bi6v78lx4ugqy"
+
+[sub_resource type="Resource" id="Resource_mrloe"]
+script = ExtResource("3_2pfuu")
+passive_event_type = 3
+global_event_type = 21
+event = SubResource("Resource_gpgyc")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_bxdqn"]
+script = ExtResource("3_2pfuu")
+is_global = true
+global_event_type = 21
+event = SubResource("Resource_gpgyc")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_jaxqy"]
+script = ExtResource("1_n6q8c")
+bullet_type = 3
+is_multi_event = true
+passive_event = SubResource("Resource_mrloe")
+passive_events = Array[ExtResource("3_2pfuu")]([SubResource("Resource_mrloe"), SubResource("Resource_bxdqn")])
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_cyrlv")
+title = "It Takes Two!"
+type = 4
+game_origin = 25
+bullets = Array[ExtResource("1_n6q8c")]([SubResource("Resource_q30lc"), SubResource("Resource_jaxqy")])
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

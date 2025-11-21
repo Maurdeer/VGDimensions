@@ -25,7 +25,8 @@ script = ExtResource("2_ey6v6")
 bullet_type = 3
 passive_event = SubResource("Resource_nj4yd")
 passive_events = Array[ExtResource("4_cl17c")]([SubResource("Resource_nj4yd")])
-bullet_description = "Gain a Polaroid."
+bullet_description = "Gain 9 Polaroids in order to win this Dimensions!
+Polaroids are earned by defeating enemies and clearing puzzles."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

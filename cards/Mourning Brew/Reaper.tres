@@ -65,6 +65,7 @@ script = ExtResource("2_upiex")
 title = "Reaper"
 type = 1
 game_origin = 4
+deleon_value = 5
 starting_hp = 8
 bullets = Array[ExtResource("1_y6kpa")]([SubResource("Resource_tiyln"), SubResource("Resource_ogy5r")])
 card_art = ExtResource("9_6b5cs")

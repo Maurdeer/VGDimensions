@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=19 format=3 uid="uid://btcsubxhm5n44"]
+
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_bq8is"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_m3fop"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="2_lna07"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_dm181"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="4_bq8is"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="5_4pav3"]
+[ext_resource type="Script" uid="uid://cjqjvb78tfkd4" path="res://custom_event_resources/Altarune/MinigunTowerDamageEvent.gd" id="6_yanq3"]
+[ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="7_lna07"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="7_ugxbr"]
+[ext_resource type="Texture2D" uid="uid://cpvs4wtx445rq" path="res://art/card_art/Sleighers/Lynx Card.png" id="9_4pav3"]
+
+[sub_resource type="Resource" id="Resource_rrpcu"]
+script = ExtResource("2_lna07")
+amount = 3
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_kwbix"]
+script = ExtResource("4_bq8is")
+source_selection_type = 1
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_qt3da"]
+script = ExtResource("1_m3fop")
+is_multi_event = true
+bullet_event = SubResource("Resource_rrpcu")
+bullet_events = Array[ExtResource("3_dm181")]([SubResource("Resource_rrpcu"), SubResource("Resource_kwbix")])
+bullet_description = "On Play: Deal 3 damage to target card and place this card on the Rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_c5fsd"]
+script = ExtResource("6_yanq3")
+metadata/_custom_type_script = "uid://cjqjvb78tfkd4"
+
+[sub_resource type="Resource" id="Resource_1rap1"]
+script = ExtResource("1_m3fop")
+bullet_type = 2
+bullet_event = SubResource("Resource_c5fsd")
+bullet_events = Array[ExtResource("3_dm181")]([SubResource("Resource_c5fsd")])
+bullet_description = "On Social: Deal 2 damage to target and adjacent cards."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_m3fop"]
+script = ExtResource("2_lna07")
+amount = 5
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_dm181"]
+script = ExtResource("7_lna07")
+source_selection_type = 1
+only_adjacent_cards = true
+metadata/_custom_type_script = "uid://banseryattu42"
+
+[sub_resource type="Resource" id="Resource_lna07"]
+script = ExtResource("1_m3fop")
+bullet_type = 2
+is_multi_event = true
+bullet_event = SubResource("Resource_m3fop")
+bullet_events = Array[ExtResource("3_dm181")]([SubResource("Resource_m3fop"), SubResource("Resource_dm181")])
+bullet_description = "On Social: Deal 4 damage to target card. Swap this card with an adjacent card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("7_ugxbr")
+title = "Lynx"
+type = 1
+game_origin = 6
+deleon_value = 5
+starting_hp = 8
+bullets = Array[ExtResource("1_m3fop")]([SubResource("Resource_qt3da"), SubResource("Resource_1rap1"), SubResource("Resource_lna07")])
+card_art = ExtResource("9_4pav3")
+background_art = ExtResource("1_bq8is")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

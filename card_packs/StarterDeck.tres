@@ -4,13 +4,13 @@
 [ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="2_0pbts"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="2_gmdg0"]
 [ext_resource type="Resource" uid="uid://b7t0rerk5mn3d" path="res://cards/RizzGuy.tres" id="3_bfju4"]
-[ext_resource type="Resource" path="res://cards/Altarune/Yanenmhat.tres" id="4_0pbts"]
+[ext_resource type="Resource" uid="uid://be41rtnc2fbh3" path="res://cards/From Nava/LabReport.tres" id="4_0pbts"]
 
 [resource]
 script = ExtResource("2_gmdg0")
 card_resources = Dictionary[ExtResource("1_2dj4a"), int]({
 ExtResource("2_0pbts"): 5,
 ExtResource("3_bfju4"): 5,
-ExtResource("4_0pbts"): 1
+ExtResource("4_0pbts"): 5
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"
