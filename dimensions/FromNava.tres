@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DimensionResource" load_steps=5 format=3 uid="uid://i1hc25ura0mr"]
+
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="1_xsjrs"]
+[ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="2_a688a"]
+[ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="2_vmgd4"]
+[ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="3_lx4kt"]
+
+[resource]
+script = ExtResource("2_a688a")
+card_packs = Array[ExtResource("1_xsjrs")]([ExtResource("2_vmgd4")])
+game_name = "From Nava"
+quest_card = ExtResource("3_lx4kt")
+music = "FromNava"
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"

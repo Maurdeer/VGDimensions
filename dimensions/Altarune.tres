@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DimensionResource" load_steps=3 format=3 uid="uid://ks4xd7rg168s"]
+
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="1_hpt3j"]
+[ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="2_engaj"]
+
+[resource]
+script = ExtResource("2_engaj")
+card_packs = Array[ExtResource("1_hpt3j")]([null])
+game_name = "Altarune"
+music = "Altarune"
+rift_grid_size = Vector2i(4, 4)
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"

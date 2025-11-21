@@ -1,42 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxnp8ire8svhn"]
+[gd_scene load_steps=10 format=3 uid="uid://dxnp8ire8svhn"]
 
 [ext_resource type="Script" uid="uid://c7wptijxbou2w" path="res://_scripts/managers/multiplayer_game_manager.gd" id="1_7aq5h"]
 [ext_resource type="PackedScene" uid="uid://b78acuqchwjyj" path="res://_scenes/networking/sandbox_single.tscn" id="1_l7x4r"]
 [ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="3_wvlfi"]
-[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="4_u7dbv"]
-[ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="5_7aq5h"]
-[ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="6_vw4oh"]
-[ext_resource type="Resource" uid="uid://ytv15oyix42d" path="res://card_packs/OutcastsPack.tres" id="7_4glm7"]
-[ext_resource type="Resource" uid="uid://cb4mmmoirfemr" path="res://card_packs/WillowPack.tres" id="8_gethx"]
-[ext_resource type="Resource" uid="uid://ckjjtm1swfj6p" path="res://cards/Willow/TheCostOfAdmission.tres" id="9_u7dbv"]
-
-[sub_resource type="Resource" id="Resource_5wpnl"]
-script = ExtResource("3_wvlfi")
-card_packs = Array[ExtResource("4_u7dbv")]([ExtResource("5_7aq5h")])
-game_name = "From Nava"
-quest_card = ExtResource("6_vw4oh")
-music = "FromNava"
-metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
-
-[sub_resource type="Resource" id="Resource_wxbsy"]
-script = ExtResource("3_wvlfi")
-card_packs = Array[ExtResource("4_u7dbv")]([ExtResource("7_4glm7")])
-game_name = "Outcasts"
-music = "Outcasts"
-metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
-
-[sub_resource type="Resource" id="Resource_f2c4h"]
-script = ExtResource("3_wvlfi")
-card_packs = Array[ExtResource("4_u7dbv")]([ExtResource("8_gethx")])
-game_name = "Willow"
-quest_card = ExtResource("9_u7dbv")
-music = "FromNava"
-rift_grid_size = Vector2i(5, 5)
-metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
+[ext_resource type="Resource" uid="uid://ks4xd7rg168s" path="res://dimensions/Altarune.tres" id="4_u7dbv"]
+[ext_resource type="Resource" uid="uid://i1hc25ura0mr" path="res://dimensions/FromNava.tres" id="5_7aq5h"]
+[ext_resource type="Resource" uid="uid://b1m2jnur0le5d" path="res://dimensions/Outcasts.tres" id="6_vw4oh"]
+[ext_resource type="Resource" uid="uid://b438wo3k5231r" path="res://dimensions/Sleighers.tres" id="7_4glm7"]
+[ext_resource type="Resource" uid="uid://cdxms323iiv7n" path="res://dimensions/TetraCity.tres" id="8_gethx"]
+[ext_resource type="Resource" uid="uid://bko8ab1tf8r4i" path="res://dimensions/Willow.tres" id="9_f2c4h"]
 
 [node name="multiplayer" instance=ExtResource("1_l7x4r")]
 script = ExtResource("1_7aq5h")
-dimensions = Array[ExtResource("3_wvlfi")]([SubResource("Resource_5wpnl"), SubResource("Resource_wxbsy"), SubResource("Resource_f2c4h")])
+dimensions = Array[ExtResource("3_wvlfi")]([ExtResource("4_u7dbv"), ExtResource("5_7aq5h"), ExtResource("6_vw4oh"), ExtResource("7_4glm7"), ExtResource("8_gethx"), ExtResource("9_f2c4h")])
 rigged_dimensions = Array[String](["From Nava", "Willow"])
 
 [node name="next_turn_button" parent="." index="4"]

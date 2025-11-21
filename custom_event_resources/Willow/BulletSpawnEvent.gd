@@ -13,19 +13,20 @@ var bullet_template : CardResource = load("res://cards/Willow/Bullet.tres")
 
 const target_card_at: int = 0
 #const card_to_place: int = 0
+const crazy: float = 2000
 
-func determine_direction(card : Card) -> Card.CardDirection:
+func determine_direction(grid_pos: Vector2i) -> Card.CardDirection:
 	var direction : Card.CardDirection
 	# By default, I'm assuming that any bullets spawn on corners head to the right.
 	# This is likely not correct behavior, but 
 	var width : int = RiftGrid.Instance.rift_grid_width - 1
 	var height : int = RiftGrid.Instance.rift_grid_height - 1
-	match card.grid_pos.y:
+	match grid_pos.y:
 		0:
 			direction = Card.CardDirection.SOUTH
 		height:
 			direction = Card.CardDirection.NORTH
-	match card.grid_pos.x:
+	match grid_pos.x:
 		0:
 			direction = Card.CardDirection.EAST
 		width:
@@ -39,8 +40,20 @@ func on_execute() -> bool:
 		spawn_positions.append(selected_pos)
 	for spawn_pos : Vector2i in spawn_positions:
 		var source_card : Card = CardManager.create_card_locally(bullet_template, true)
+		source_card.card_dir = determine_direction(spawn_pos)
+		match (source_card.card_dir):
+			Card.CardDirection.SOUTH:
+				source_card.global_position = Vector2(0, crazy)
+			Card.CardDirection.NORTH:
+				source_card.global_position = Vector2(0, -crazy)
+			Card.CardDirection.EAST:
+				source_card.global_position = Vector2(-crazy, 0)
+			Card.CardDirection.WEST:
+				source_card.global_position = Vector2(crazy, 0)
+		
 		RiftGrid.Instance.place_card(spawn_pos, source_card)
-		source_card.card_dir = determine_direction(source_card)
+		
+		
 	return false
 	
 func required_events() -> Array[EventResource]:

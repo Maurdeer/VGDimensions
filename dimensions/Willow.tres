@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DimensionResource" load_steps=5 format=3 uid="uid://bko8ab1tf8r4i"]
+
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="1_ctxqd"]
+[ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="2_lbgil"]
+[ext_resource type="Resource" uid="uid://cb4mmmoirfemr" path="res://card_packs/WillowPack.tres" id="2_omnls"]
+[ext_resource type="Resource" uid="uid://ckjjtm1swfj6p" path="res://cards/Willow/TheCostOfAdmission.tres" id="3_qc1vk"]
+
+[resource]
+script = ExtResource("2_lbgil")
+card_packs = Array[ExtResource("1_ctxqd")]([ExtResource("2_omnls")])
+game_name = "Willow"
+quest_card = ExtResource("3_qc1vk")
+music = "Willow"
+rift_grid_size = Vector2i(5, 5)
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"

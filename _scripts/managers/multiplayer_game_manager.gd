@@ -6,6 +6,7 @@ class_name MultiplayerGameManager
 var player_turn_queue: Array[int]
 var curr_turn: int
 var random_seed: int
+var created_player_hand: bool = false
 
 func _ready() -> void:
 	if multiplayer.is_server():
@@ -24,8 +25,8 @@ func _start_game() -> void:
 	#CardManager.create_card(initial_quest_card)
 	setup_peers()
 	setup_card_shop()
-	create_cards_for_player_hand()
 	setup_wheel()
+	create_cards_for_player_hand()
 	dimension_select() # Will begin our loop
 	
 func setup_wheel() -> void:
@@ -87,7 +88,7 @@ func _start_next_turn() -> void:
 	
 func create_cards_for_player_hand():
 	_create_cards_for_player_hand_rpc.rpc()
-	
+		
 @rpc("any_peer", "call_local", "reliable")
 func _create_cards_for_player_hand_rpc():
 	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
@@ -119,6 +120,8 @@ func end_local_play_turn() -> void:
 	reset_temporary_resources()
 	
 func is_my_turn() -> bool:
+	if not multiplayer:
+		return false
 	return player_turn_queue.size() <= 0 or multiplayer.get_unique_id() == player_turn_queue[curr_turn]
 	
 func setup_card_shop():
