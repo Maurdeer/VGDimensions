@@ -71,7 +71,8 @@ func setup_rift_grid():
 	
 @rpc("call_local", "any_peer")
 func _setup_rift_grid_rpc(rift_card_ids: Array[int]):
-	rift_grid.generate_new_grid(CardManager.ids_to_cards(rift_card_ids),3,3)
+	var rift_grid_size = dimension_dictionary[selected_dimension].rift_grid_size
+	rift_grid.generate_new_grid(CardManager.ids_to_cards(rift_card_ids),rift_grid_size.x,rift_grid_size.y)
 	
 func create_cards_for_player_hand():
 	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
