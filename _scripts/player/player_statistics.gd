@@ -33,6 +33,10 @@ signal on_resource_spend_success(ResourceType)
 	set(value):
 		quests_completed = value
 		on_stats_change.emit()
+@export var dimensions_won: int:
+	set(value):
+		dimensions_won = value
+		on_stats_change.emit()
 		
 func modify_resource(type: ResourceType, amount: int) -> void:
 	match(type):

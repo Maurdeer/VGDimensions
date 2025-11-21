@@ -45,14 +45,17 @@ func launch_wheel_rpc(dimension_picked: String):
 	selected_dimension = dimension_picked
 	rift_grid.clear_grid()
 	#await the_wheel.descend()
-	print("Star Here you bitrhc")
 	the_wheel.descend(selected_dimension)
 	await the_wheel.wheel_done
-	AudioManager.play_music(dimension_dictionary[selected_dimension].music)
+	await get_tree().create_timer(2).timeout
+	the_wheel.ascend()
+	var card = CardManager.create_card_locally(dimension_dictionary[selected_dimension].quest_card, false)
+	QuestManager.Instance.add_quest(card)
 	if multiplayer.is_server():
 		setup_dimension()
-	await get_tree().create_timer(3).timeout
-	the_wheel.ascend()
+	
+	AudioManager.play_music(dimension_dictionary[selected_dimension].music)
+	await get_tree().create_timer(4).timeout
 	the_wheel.dimension_list.erase(selected_dimension)
 	
 func setup_dimension():
@@ -146,11 +149,15 @@ func _on_victory() -> void:
 @rpc("any_peer", "call_local", "reliable")
 func _on_quest_completed_rpc() -> void:
 	var winner: bool = multiplayer.get_unique_id() == multiplayer.get_remote_sender_id()
+	QuestManager.Instance.remove_quest()
 	if winner:
-		get_tree().change_scene_to_file("res://_scenes/win_screen.tscn")
-	else:
-		get_tree().change_scene_to_file("res://_scenes/lose_screen.tscn")
+		PlayerStatistics.dimensions_won += 1
+		if PlayerStatistics.dimensions_won >= 2:
+			game_victory()
+		
 	rift_grid.clear_grid()
+	if multiplayer.is_server():
+		dimension_select()
 	
 func game_victory() -> void:
 	# only the winner calls this, so 
