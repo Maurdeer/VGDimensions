@@ -23,7 +23,7 @@ script = ExtResource("1_lq1b3")
 is_multi_event = true
 bullet_event = SubResource("Resource_5c1eb")
 bullet_events = Array[ExtResource("4_15wk3")]([SubResource("Resource_5c1eb"), SubResource("Resource_fhhv8")])
-bullet_description = "Spawn a Bullet. Yipee!"
+bullet_description = "On Play: Select two cards on the rift grid, and spawn a bullet on each."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

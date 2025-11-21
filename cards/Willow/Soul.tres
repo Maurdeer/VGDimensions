@@ -27,7 +27,7 @@ script = ExtResource("1_av07b")
 bullet_type = 3
 passive_event = SubResource("Resource_q25mh")
 passive_events = Array[ExtResource("4_w1m8a")]([SubResource("Resource_q25mh")])
-bullet_description = "On Defeat: Gain 2 Deleon"
+bullet_description = "On Defeat: Gain 2 Deleons"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [sub_resource type="Resource" id="Resource_hltky"]
