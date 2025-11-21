@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://bu3q5f5qh86v5"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=13 format=3 uid="uid://bu3q5f5qh86v5"]
 
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_blv6j"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_gfsdx"]
 [ext_resource type="Script" uid="uid://b3xwowb7yqe2k" path="res://custom_event_resources/Altarune/PoisonTowerDamageEvent.gd" id="2_gfsdx"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_3uc7w"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_lutno"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_blv6j"]
+[ext_resource type="Texture2D" uid="uid://dkfgu5utdn0de" path="res://art/card_art/Altarune/PoisonTower.png" id="6_odfbu"]
 
 [sub_resource type="Resource" id="Resource_3uc7w"]
 script = ExtResource("2_gfsdx")
@@ -13,6 +16,8 @@ metadata/_custom_type_script = "uid://b3xwowb7yqe2k"
 script = ExtResource("1_gfsdx")
 bullet_type = 1
 bullet_event = SubResource("Resource_3uc7w")
+bullet_events = Array[ExtResource("3_3uc7w")]([SubResource("Resource_3uc7w")])
+bullet_description = "On Interact: Deal 1 damage to all enemies around this card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [sub_resource type="Resource" id="Resource_blv6j"]
@@ -21,14 +26,17 @@ metadata/_custom_type_script = "uid://b3xwowb7yqe2k"
 
 [sub_resource type="Resource" id="Resource_odfbu"]
 script = ExtResource("3_lutno")
-event_type = 5
+is_global = true
+global_event_type = 19
 event = SubResource("Resource_blv6j")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_hadmc"]
 script = ExtResource("1_gfsdx")
 bullet_type = 3
+passive_event = SubResource("Resource_odfbu")
 passive_events = Array[ExtResource("3_lutno")]([SubResource("Resource_odfbu")])
+bullet_description = "On End of Turn: Deal 1 damage to all enemies around this card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -37,4 +45,6 @@ title = "Poison Tower"
 type = 5
 game_origin = 7
 bullets = Array[ExtResource("1_gfsdx")]([SubResource("Resource_lutno"), SubResource("Resource_hadmc")])
+card_art = ExtResource("6_odfbu")
+background_art = ExtResource("1_blv6j")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

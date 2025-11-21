@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_cl17c"]
 script = ExtResource("4_yifxq")
-necessaryPolaroidAmount = 1
+necessaryPolaroidAmount = 9
 metadata/_custom_type_script = "uid://calawcbk2l5ue"
 
 [sub_resource type="Resource" id="Resource_nj4yd"]

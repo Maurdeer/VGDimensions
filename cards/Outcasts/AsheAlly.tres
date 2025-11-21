@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_sw1ny"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_xuqr4"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_66yru"]
-[ext_resource type="Script" path="res://custom_event_resources/DamageAndPlaceEvent.gd" id="3_q6vf7"]
+[ext_resource type="Script" uid="uid://bid1lim8prwmu" path="res://custom_event_resources/DamageAndPlaceEvent.gd" id="3_q6vf7"]
 [ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="3_si806"]
 [ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="3_xuqr4"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_si806"]

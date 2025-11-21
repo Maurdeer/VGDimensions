@@ -1,14 +1,55 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://wg8h3ctof847"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=18 format=3 uid="uid://wg8h3ctof847"]
 
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_qb586"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_y6kpa"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_313ty"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_upiex"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_ogy5r"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_ui5cy"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="4_cqcdu"]
+[ext_resource type="Script" uid="uid://dirs7ro6cix7" path="res://custom_event_resources/AssertIsEnemyOrAllyEvent.gd" id="5_cqcdu"]
+[ext_resource type="Texture2D" uid="uid://iarxkknlpohi" path="res://art/card_art/Mourning Brew/reaper card.png" id="9_6b5cs"]
+
+[sub_resource type="Resource" id="Resource_wvduh"]
+script = ExtResource("3_ogy5r")
+type = 2
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_ohn23"]
+script = ExtResource("4_cqcdu")
+source_selection_type = 1
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_tiyln"]
+script = ExtResource("1_y6kpa")
+is_multi_event = true
+bullet_event = SubResource("Resource_wvduh")
+bullet_events = Array[ExtResource("2_313ty")]([SubResource("Resource_wvduh"), SubResource("Resource_ohn23")])
+bullet_description = "On Play: Gain 2 Social and place this card on the Rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_cqcdu"]
+script = ExtResource("3_ogy5r")
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_qb586"]
+script = ExtResource("3_ogy5r")
+type = 2
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_pkn12"]
+script = ExtResource("5_cqcdu")
+events_to_do = Array[ExtResource("2_313ty")]([SubResource("Resource_cqcdu"), SubResource("Resource_qb586")])
+metadata/_custom_type_script = "uid://dirs7ro6cix7"
 
 [sub_resource type="Resource" id="Resource_lo8rt"]
 script = ExtResource("3_ui5cy")
 is_global = true
 global_event_type = 21
+event = SubResource("Resource_pkn12")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_ogy5r"]
@@ -16,6 +57,7 @@ script = ExtResource("1_y6kpa")
 bullet_type = 3
 passive_event = SubResource("Resource_lo8rt")
 passive_events = Array[ExtResource("3_ui5cy")]([SubResource("Resource_lo8rt")])
+bullet_description = "On Enemy or Ally Defeated: Gain 1 Social and 2 Deleons."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -24,5 +66,7 @@ title = "Reaper"
 type = 1
 game_origin = 4
 starting_hp = 8
-bullets = Array[ExtResource("1_y6kpa")]([SubResource("Resource_ogy5r")])
+bullets = Array[ExtResource("1_y6kpa")]([SubResource("Resource_tiyln"), SubResource("Resource_ogy5r")])
+card_art = ExtResource("9_6b5cs")
+background_art = ExtResource("1_qb586")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
