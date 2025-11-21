@@ -40,7 +40,7 @@ bullet_type = 3
 is_multi_event = true
 passive_event = SubResource("Resource_gflah")
 passive_events = Array[ExtResource("6_s11k7")]([SubResource("Resource_gflah"), SubResource("Resource_xeq1x")])
-bullet_description = "On Enter, and On Start Of Turn"
+bullet_description = "On Enter, and On Start Of Turn, spawn the following bullet pattern"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

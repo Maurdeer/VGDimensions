@@ -32,6 +32,7 @@ script = ExtResource("1_7t0y3")
 bullet_type = 3
 passive_event = SubResource("Resource_0kej1")
 passive_events = Array[ExtResource("3_xr8hl")]([SubResource("Resource_0kej1")])
+bullet_description = "When a Lost Traveler is adjacent: Spawn the following pattern at the start of the next turn."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]

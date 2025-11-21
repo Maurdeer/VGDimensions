@@ -25,6 +25,7 @@ script = ExtResource("1_4trjk")
 bullet_type = 3
 passive_event = SubResource("Resource_0mq3t")
 passive_events = Array[ExtResource("4_atsgt")]([SubResource("Resource_0mq3t")])
+bullet_description = "When this card is moved, discard it."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
