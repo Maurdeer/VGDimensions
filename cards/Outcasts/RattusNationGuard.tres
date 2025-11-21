@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://c1wujf4waferx"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_it8ep"]
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_spxq7"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_ircth"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_qghu7"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_uyo3k"]
+[ext_resource type="Script" uid="uid://b0h3tc6xf4dom" path="res://_scripts/resources/EventResources/DrawEvent.gd" id="4_spxq7"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="5_pburf"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="6_nm4lk"]
+[ext_resource type="Texture2D" uid="uid://bnuu108n1e1ie" path="res://art/card_art/Outcasts/RattusNationGuard.png" id="8_pburf"]
+
+[sub_resource type="Resource" id="Resource_qfuk6"]
+script = ExtResource("3_uyo3k")
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_ym06k"]
+script = ExtResource("4_spxq7")
+amount = 2
+metadata/_custom_type_script = "uid://b0h3tc6xf4dom"
+
+[sub_resource type="Resource" id="Resource_gmxkx"]
+script = ExtResource("5_pburf")
+events = Array[ExtResource("2_qghu7")]([SubResource("Resource_qfuk6"), SubResource("Resource_ym06k")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+
+[sub_resource type="Resource" id="Resource_e5lbs"]
+script = ExtResource("6_nm4lk")
+passive_event_type = 5
+event = SubResource("Resource_gmxkx")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_7soiq"]
+script = ExtResource("1_it8ep")
+bullet_type = 3
+passive_event = SubResource("Resource_e5lbs")
+passive_events = Array[ExtResource("6_nm4lk")]([SubResource("Resource_e5lbs")])
+bullet_description = "On Defeat: Gain 2 Deleons and draw 2 cards."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_ircth")
+title = "Rattus Nation Guard"
+type = 8
+game_origin = 25
+starting_hp = 6
+bullets = Array[ExtResource("1_it8ep")]([SubResource("Resource_7soiq")])
+card_art = ExtResource("8_pburf")
+background_art = ExtResource("1_spxq7")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

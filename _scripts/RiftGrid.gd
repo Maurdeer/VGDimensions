@@ -2,20 +2,18 @@ extends Control
 class_name RiftGrid
 
 static var Instance: RiftGrid
-@onready var grid_container: GridContainer = $HBoxContainer/GridContainer
+@onready var grid_container: Control = $GridContainer
 
 var grid: Array[Array]
+var slot_grid: Array[Array]
 
-var rift_grid_width: int = 3
-var rift_grid_height: int = 3
+var rift_grid_width: int = 5
+var rift_grid_height: int = 5
 
 var _card_refs: Array[Card]
-@onready var _rift_deck: Deck =  $HBoxContainer/Control2/DrawPile
-@onready var _rift_discard_pile: Deck = $HBoxContainer/Control/DiscardPile
+@onready var _rift_deck: Deck =  $Control2/DrawPile
+@onready var _rift_discard_pile: Deck = $Control/DiscardPile
 var pre_defined_seed: int
-
-# Global Signals to be read
-signal on_discard(Card)
 
 func _ready() -> void:
 	# Initialize Singleton
@@ -23,6 +21,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	Instance = self
+	process_animations()
 	call_deferred("_after_ready")
 	
 func _after_ready() -> void:
@@ -32,14 +31,15 @@ func _after_ready() -> void:
 
 #Create Grid
 func clear_grid() -> void:
+	for child in grid_container.get_children():
+		child.queue_free()
+		
 	if grid.is_empty() \
 	and _rift_deck.is_empty() \
 	and _rift_discard_pile.is_empty() \
 	and _card_refs.is_empty(): \
 		return
 		
-	for child in grid_container.get_children():
-		child.queue_free()
 	grid.clear()
 	_rift_deck.clear_deck()
 	_rift_discard_pile.clear_deck()
@@ -56,7 +56,8 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 		
 	# Clean up rift if was prior in use
 	clear_grid()
-	
+	rift_grid_width = rift_width
+	rift_grid_height = rift_height
 	# Establish Rift deck and card refs
 	# Assume cards are pre_shuffled
 	_card_refs = cards
@@ -66,9 +67,11 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 	_rift_deck.shuffleDeck()
 	
 	# Generate the intial setup of the rift
-	grid_container.columns = rift_grid_width
+	var seperation: float = 140
+	grid_container.position = Vector2(-seperation * (rift_grid_height - 1) * 0.5, -seperation * (rift_grid_height - 1)* 0.5)
 	for i in range(rift_grid_height):
 		grid.append([])
+		slot_grid.append([])
 		for j in range(rift_grid_width):
 			var deck: Deck = Deck.new()
 			deck.flipped = true
@@ -76,10 +79,13 @@ func generate_new_grid(cards: Array[Card], rift_width: int, rift_height: int) ->
 			
 			# Visual Element
 			var slot: RiftGridSlot = RiftGridSlot.new()
+			slot_grid[i].append(slot)
 			slot.grid_position = Vector2i(j,i)
-			slot.add_child(grid[i][j])
+			slot.add_child(deck)
+			deck.position = Vector2.ZERO
 			grid_container.add_child(slot)
-			
+			slot.set_anchors_preset(PRESET_TOP_LEFT)
+			slot.position = Vector2(j * seperation, i * seperation)
 			draw_card(Vector2i(j,i))
 
 #CARD INFORMATION
@@ -103,24 +109,40 @@ func draw_card(draw_to: Vector2i) -> void:
 	if _rift_deck.is_empty():
 		# Holy bananza bro, time to double this deck I guess
 		_double_rift_deck()
-		
+	
+	var original_pos = _rift_deck.get_top_card().global_position
 	new_card = _rift_deck.remove_top_card()
-		
-	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
+	new_card.global_position = original_pos
 	place_card(draw_to, new_card)
+	new_card.on_enter_tree()
 	
 func draw_card_if_empty(draw_to: Vector2i) -> void:
 	if grid[draw_to.y][draw_to.x].is_empty():
 		draw_card(draw_to)
- 
-func place_card(place_at: Vector2i, newCard: Card) -> void:
+
+
+func place_card(place_at: Vector2i, new_card: Card) -> void:
 	#THIS IS CORRECT SINCE GRID IS ROW ORDERED
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
-	var card_underneath: Card = grid[place_at.y][place_at.x].get_top_card()
-	grid[place_at.y][place_at.x].addCard(newCard)
-	newCard.grid_pos = place_at
-	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
-	if card_underneath: await card_underneath.on_stack()
+	var deck: Deck = grid[place_at.y][place_at.x]
+	var card_underneath: Card = deck.get_top_card()
+	
+	# Ensure it is in the scene before doing anything
+	var original_pos = new_card.global_position
+	deck.addCard(new_card)
+	new_card.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
+	new_card.global_position = original_pos
+	new_card.grid_pos = place_at
+	# Animation?
+	queue_animation(func(): 
+		if (deck != null):
+			await _vfx_move(new_card, deck.position, 0.2)
+			AudioManager.play_sfx("place_card")
+	)
+	
+	if card_underneath: 
+		card_underneath.on_stack()
+		RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_STACK, card_underneath)
 	
 func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	assert(is_valid_pos(place_at), "Cannot place card on position (%s, %s)" % [place_at.x, place_at.y])
@@ -128,10 +150,16 @@ func place_card_under(place_at: Vector2i, newCard: Card) -> void:
 	newCard.grid_pos = place_at
 	newCard.card_sm.transition_to_state(CardStateMachine.StateType.IN_RIFT)
 
-func place_deck_from_rift(place_at: Vector2i, from_deck_pos: Vector2i) -> void:
-	var deck: Deck = grid[from_deck_pos.y][from_deck_pos.x];
-	while not deck.is_empty():
-		move_card_to_under(place_at, from_deck_pos)
+func place_deck_from_rift(place_at: Vector2i, from_deck_pos: Vector2i) -> void:	
+	var from_deck: Deck = grid[from_deck_pos.y][from_deck_pos.x] as Deck
+	var slot: RiftGridSlot = slot_grid[place_at.y][place_at.x] as RiftGridSlot
+	# Update information approriatly
+	for card in from_deck.deck_array:
+		card.grid_pos = slot.grid_position
+	from_deck.reparent(slot)
+	grid[place_at.y][place_at.x] = from_deck
+	grid[from_deck_pos.y][from_deck_pos.x] = null
+	queue_animation(func(): _vfx_move(from_deck, Vector2.ZERO))
 	
 func place_cards(place_at: Vector2i, cards: Array[Card]) -> void:
 	for card in cards:
@@ -142,9 +170,10 @@ func place_cards_under(place_under: Vector2i, cards: Array[Card]) -> void:
 		place_card_under(place_under, card)
 
 func discard_card_and_draw(card: Card, draw_when_empty: bool = true) -> void:
+	var selected_pos : Vector2i = card.grid_pos
 	discard_card(card)
-	if draw_when_empty and not grid[card.grid_pos.y][card.grid_pos.x].is_empty(): return
-	draw_card(card.grid_pos)
+	if draw_when_empty and not grid[selected_pos.y][selected_pos.x].is_empty(): return
+	draw_card(selected_pos)
 	
 func discard_card(card: Card) -> bool:
 	assert(is_valid_pos(card.grid_pos), "Cannot discard card from position (%s, %s)" % [card.grid_pos.x, card.grid_pos.y])
@@ -158,6 +187,7 @@ func discard_card(card: Card) -> bool:
 	card.grid_pos = Vector2i(-1, -1)
 	
 	card.on_discard()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_DISCARD, card)
 	
 	# TODO: Ensure this discard check behavior is correct
 	if card.temporary:
@@ -173,25 +203,33 @@ func discard_card(card: Card) -> bool:
 	
 func move_card_to(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()
-	await card.on_before_move()
+	card.on_before_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BEFORE_MOVE, card)
+	var temp_global_pos = card.global_position # Hackery for animation
 	card = grid[move_from.y][move_from.x].remove_top_card()
-	print(card.grid_pos)
+	card.global_position = temp_global_pos # Hackery for animation
+	#print(card.grid_pos)
 	place_card(move_to, card)
-	await card.on_after_move()
+	card.on_after_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_AFTER_MOVE, card)
 	
 func move_card_to_under(move_to: Vector2i, move_from: Vector2i) -> void:
 	var card: Card = grid[move_from.y][move_from.x].get_top_card()
 	print(card.grid_pos)
-	await card.on_before_move()
+	card.on_before_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_BEFORE_MOVE, card)
 	card = grid[move_from.y][move_from.x].remove_top_card()
-	print(card.grid_pos)
+	#print(card.grid_pos)
 	place_card_under(move_to, card)
-	await card.on_after_move()
+	card.on_after_move()
+	RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_CARD_AFTER_MOVE, card)
 	
 func discard_entire_deck(discard_from: Vector2i):
 	var deck: Deck = grid[discard_from.y][discard_from.x]
 	while not deck.is_empty():
 		discard_card(deck.get_top_card())
+	grid[discard_from.y][discard_from.x].queue_free()
+	grid[discard_from.y][discard_from.x] = null
 
 func removeCardFromGrid(remove_from: Vector2i) -> Card:
 	return grid[remove_from.y][remove_from.x].removeCard()
@@ -245,11 +283,13 @@ func shift_decks_horizontally(start_pos: Vector2i, offset: int):
 	elif offset < 0: shift_spots = range(0, start_pos.x + 1)
 	else: return
 	
+	var animations: Array[Callable]
 	for x in shift_spots:
 		var curr_pos = Vector2i(x, start_pos.y)
 		var place_pos = Vector2i(x + offset, start_pos.y)
-		if place_pos.x >= rift_grid_width:
-			discard_entire_deck(curr_pos)
+		if x + offset >= rift_grid_width:
+			# dintegrate deck
+			discard_entire_deck(Vector2i(x, start_pos.y))
 		else:
 			place_deck_from_rift(place_pos, curr_pos)
 		
@@ -307,20 +347,6 @@ func damage_card(card_pos: Vector2i, amount: int) -> bool:
 	if card.hp == -1:
 		return false
 	return card.damage(amount)
-
-func burn_card(card_pos: Vector2i) -> bool:
-	var card: Card = get_top_card(card_pos)
-	card.on_burn()
-	#card.add_to_events(BurnStatusEvent.new())
-	print("Applied the Burn Status Effect to the given card.")
-	return true
-	
-func freeze_card(card_pos: Vector2i) -> bool:
-	var card: Card = get_top_card(card_pos)
-	card.on_freeze()
-	card.interactable = false
-	#card.add_to_events(FreezeStatusEvent.new())
-	return true
 	
 func rotate_card(card_pos: Vector2i, dir: Card.CardDirection) -> void:
 	var card: Card = get_top_card(card_pos)
@@ -368,6 +394,17 @@ func get_diagonal_cards(pos: Vector2i) -> Array[Card]:
 		
 	return targeted_cards
 
+func get_edge_cards() -> Array[Card]:
+	var edge_cards : Array[Card]
+	for i in range(rift_grid_height):
+		edge_cards.append(grid[i][0].get_top_card())
+		edge_cards.append(grid[i][rift_grid_width - 1].get_top_card())
+	for j in range(rift_grid_width - 1):
+		edge_cards.append(grid[1][j].get_top_card())
+		edge_cards.append(grid[rift_grid_height - 1][0].get_top_card())
+			
+	return edge_cards
+
 func find_lowest_health() -> Card:
 	var found_card : Card = null
 	for i in rift_grid_height:
@@ -379,7 +416,6 @@ func find_lowest_health() -> Card:
 				found_card = curr_card
 				continue
 			found_card = compare_lower_health(curr_card, found_card)
-	print(found_card.resource.title)
 	return found_card
 #filter.call(card)
 
@@ -388,6 +424,35 @@ func compare_higher_health(card_a: Card, card_b : Card) -> Card:
 
 func compare_lower_health(card_a: Card, card_b : Card) -> Card:
 	return card_a if card_a.hp < card_b.hp else card_b
+	
+	
+	
+# ============================ VFX ==============================================
+# Defintly could have used seperate script but weeeeee
+
+var animation_queue: Array[Callable]
+
+func _vfx_move(node: Node2D, target_position: Vector2, duration: float = 0.2) -> void:
+	var speed: float = (target_position - node.position).abs().length() / duration
+	while node and node.position != target_position:
+		node.position = node.position.move_toward(target_position, get_process_delta_time() * speed)
+		if (get_tree() == null):
+			break
+		await get_tree().process_frame
+		
+func queue_animation(animation_func: Callable) -> void:
+	animation_queue.append(animation_func)
+	
+func process_animations() -> void:
+	while true:
+		if not get_tree():
+			break
+		if animation_queue.is_empty():
+			await get_tree().process_frame
+			continue
+		await animation_queue.pop_front().call()
+
+#================================================================================
 # A way to use lambda functions to filter things
 # Take in a lambda call to figure out what to filter by, and then go for it
 #====================== Section of iterating over the entire grid =====================
@@ -398,14 +463,23 @@ func compare_lower_health(card_a: Card, card_b : Card) -> Card:
 func fill_empty_decks() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			if grid[y][x].is_empty(): draw_card(Vector2i(x, y))
+			if not grid[y][x] or not grid[y][x] is Deck:
+				grid[y][x] = Deck.new()
+				slot_grid[y][x].add_child(grid[y][x])
+			
+			if grid[y][x].is_empty(): 
+				draw_card(Vector2i(x, y))
 	
 func on_start_of_new_turn() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
 			if not grid[y][x].get_top_card():
 				draw_card(Vector2i(x,y))
-			grid[y][x].get_top_card().on_start_of_turn()
+			for card in grid[y][x].deck_array:
+				# If the card blocks global events from invoking underneath it
+				card.on_start_of_turn()
+				if card.resource.blocking: break
+			
 	await EventManager.process_event_queue()
 
 func on_end_of_new_turn() -> void:
@@ -413,13 +487,40 @@ func on_end_of_new_turn() -> void:
 		for x in rift_grid_width:
 			if not grid[y][x].get_top_card():
 				draw_card(Vector2i(x,y))
-			grid[y][x].get_top_card().on_end_of_turn()
+			for card in grid[y][x].deck_array:
+				# If the card blocks global events from invoking underneath it
+				card.on_end_of_turn()
+				if card.resource.blocking: break
 	await EventManager.process_event_queue()
-			
+	
+# Intentionally sequential to avoid broadcast reordering
+func emit_global_event(global_event_type: PassiveEventResource.GlobalEvent, card_invoker: Card = null) -> void:
+	if card_invoker:
+		EventManager.queue_event_group(QuestManager.Instance.currentQuest.passive_events[global_event_type], \
+		card_invoker)
+		for y in rift_grid_height:
+			for x in rift_grid_width:
+				for card in (grid[y][x] as Deck).deck_array:			
+					EventManager.queue_event_group(card.passive_events[global_event_type], card_invoker)
+					# If the card blocks global events from invoking underneath it
+					if card.resource.blocking: break
+	else:
+		for y in rift_grid_height:
+			for x in rift_grid_width:
+				for card in (grid[y][x] as Deck).deck_array:
+					EventManager.queue_event_group(card.passive_events[global_event_type], card)
+					EventManager.queue_event_group(QuestManager.Instance.currentQuest.passive_events[global_event_type], card)
+					# If the card blocks global events from invoking underneath it
+					if card.resource.blocking: break
+	# (Ryan) Commented out to avoid processing mid processor await EventManager.process_event_queue()
+	
 func _on_state_of_grid_change() -> void:
 	for y in rift_grid_height:
 		for x in rift_grid_width:
-			grid[y][x].get_top_card().on_state_of_grid_change()
+			for card in grid[y][x].deck_array:
+				# If the card blocks global events from invoking underneath it
+				card.on_state_of_grid_change()
+				if card.resource.blocking: break
 			
 # Only when things get CRAAAAZZZZZYYY
 # This should hopefully not happen, unless the deck isn't created that well

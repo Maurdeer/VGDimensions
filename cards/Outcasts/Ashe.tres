@@ -1,24 +1,59 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://cgc6j288lco7g"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=17 format=3 uid="uid://cgc6j288lco7g"]
 
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_gdfbu"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_oe36o"]
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_woeob"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_2258d"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_60hme"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="3_gas5l"]
+[ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="3_vkc62"]
 [ext_resource type="Texture2D" uid="uid://dxsicibt8xu3t" path="res://art/card_art/Outcasts/Ashe.png" id="3_woeob"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_60hme"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="6_ijftc"]
+
+[sub_resource type="Resource" id="Resource_bfsdr"]
+script = ExtResource("3_gas5l")
+source_selection_type = 1
+only_adjacent_cards = true
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_pgeov"]
+script = ExtResource("1_gdfbu")
+bullet_type = 2
+bullet_event = SubResource("Resource_bfsdr")
+bullet_events = Array[ExtResource("3_60hme")]([SubResource("Resource_bfsdr")])
+bullet_description = "On Social: Stack this card on an adjacent card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_ijftc"]
+script = ExtResource("3_vkc62")
+source_selection_type = 2
+metadata/_custom_type_script = "uid://banseryattu42"
 
 [sub_resource type="Resource" id="Resource_11ysp"]
 script = ExtResource("1_gdfbu")
-bullet_type = 3
-bullet_cost = 2
-bullet_description = "Swap any 2 cards on the rift."
+bullet_type = 2
+bullet_event = SubResource("Resource_ijftc")
+bullet_events = Array[ExtResource("3_60hme")]([SubResource("Resource_ijftc")])
+bullet_description = "On Social: Swap any 2 cards on the rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_gas5l"]
+script = ExtResource("6_ijftc")
+amount = 4
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_ge41m"]
+script = ExtResource("1_woeob")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_c7etx"]
 script = ExtResource("1_gdfbu")
-bullet_type = 3
-bullet_cost = 2
-bullet_description = "Deal 4 damage to any adjacent damagable card."
+bullet_type = 2
+bullet_event = SubResource("Resource_gas5l")
+bullet_events = Array[ExtResource("3_60hme")]([SubResource("Resource_gas5l")])
+passive_event = SubResource("Resource_ge41m")
+passive_events = Array[ExtResource("1_woeob")]([SubResource("Resource_ge41m")])
+bullet_description = "On Social: Deal 4 damage to an adjacent card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -26,9 +61,8 @@ script = ExtResource("2_2258d")
 title = "Ashe"
 type = 7
 game_origin = 25
-deleon_value = 5
-starting_hp = 5
-bullets = Array[ExtResource("1_gdfbu")]([SubResource("Resource_11ysp"), SubResource("Resource_c7etx")])
+starting_hp = 8
+bullets = Array[ExtResource("1_gdfbu")]([SubResource("Resource_pgeov"), SubResource("Resource_11ysp"), SubResource("Resource_c7etx")])
 quip_description = "Lost to time, yet still persists in its own mystery."
 card_art = ExtResource("3_woeob")
 background_art = ExtResource("1_oe36o")

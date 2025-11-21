@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbpdi5v1c5ch"]
+
+[ext_resource type="Script" uid="uid://d1qkolmp42v4o" path="res://external_work/brett/spin_that_wheel/the_wheel.gd" id="1_88l3q"]
+[ext_resource type="Script" uid="uid://dohvi78v6vjw" path="res://external_work/brett/spin_that_wheel/wheel_sub_container.gd" id="1_g4f5v"]
+[ext_resource type="FontFile" uid="uid://c52mdasflhbbi" path="res://font/Jersey10-Regular.ttf" id="2_idaib"]
+[ext_resource type="Script" uid="uid://8efuev2lcoly" path="res://external_work/brett/spin_that_wheel/the_arrow.gd" id="2_p6jua"]
+[ext_resource type="Script" uid="uid://cafhrlj8s1oc5" path="res://external_work/brett/spin_that_wheel/wheel_debugging.gd" id="3_aptao"]
+
+[node name="TheWheel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WheelSubContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_g4f5v")
+descent_speed = 500
+
+[node name="Wheel" type="Control" parent="WheelSubContainer"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 39.99997
+script = ExtResource("1_88l3q")
+wheel_font = ExtResource("2_idaib")
+dimension_list = Array[String](["From Nava", "Outcasts", "Willow", "Tetra City", "Sleighers", "Altarune"])
+color_list = Array[Color]([Color(1, 0.6333333, 0, 1), Color(0, 0.5882353, 0.050980393, 1), Color(0.7000003, 0, 1, 1), Color(0, 0.10000014, 1, 1), Color(1, 0, 0.016666412, 1), Color(1, 0.8666667, 0, 1), Color(0, 0.72156864, 0.5882353, 1), Color(0.53, 0.53, 0.53, 1), Color(0.38436526, 0.20389923, 1.92523e-07, 1)])
+
+[node name="Timer" type="Timer" parent="WheelSubContainer/Wheel"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Arrow" type="Control" parent="WheelSubContainer" node_paths=PackedStringArray("TheWheel")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_p6jua")
+TheWheel = NodePath("../Wheel")
+
+[node name="wheel debugging" type="Control" parent="WheelSubContainer"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_aptao")

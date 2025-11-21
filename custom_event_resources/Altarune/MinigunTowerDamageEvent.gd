@@ -17,7 +17,7 @@ func on_execute() -> bool:
 		
 	for i in targetedCards.size():
 		var card_pos : Vector2i = targetedCards[i].grid_pos
-		print("Dealing damage to card position %d", targetedCards[i].grid_pos)
+		#print("Dealing damage to card position %d", targetedCards[i].grid_pos)
 		var defeated: bool = targetedCards[i].damage(amount)
 		if defeated: RiftGrid.Instance.draw_card(card_pos)
 

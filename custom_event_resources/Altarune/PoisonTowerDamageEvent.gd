@@ -11,7 +11,7 @@ func on_execute() -> bool:
 	#print("attempting the thing")
 	targetedCards.append_array(RiftGrid.Instance.get_diagonal_cards(curr_pos))
 	targetedCards.append_array(RiftGrid.Instance.get_adjacent_cards(curr_pos))
-	print(targetedCards.size())
+	#print(targetedCards.size())
 	
 	for i in targetedCards.size():
 		#print("Is this even running")

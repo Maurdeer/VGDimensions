@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DimensionResource" load_steps=5 format=3 uid="uid://b1m2jnur0le5d"]
+
+[ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="1_j062g"]
+[ext_resource type="Resource" uid="uid://ytv15oyix42d" path="res://card_packs/OutcastsPack.tres" id="2_kvxfd"]
+[ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="2_trhs7"]
+[ext_resource type="Resource" uid="uid://dc4nu5r2x6mqr" path="res://cards/Outcasts/ItTakesTeamwork.tres" id="3_kvxfd"]
+
+[resource]
+script = ExtResource("2_trhs7")
+card_packs = Array[ExtResource("1_j062g")]([ExtResource("2_kvxfd")])
+game_name = "Outcasts"
+quest_card = ExtResource("3_kvxfd")
+music = "Outcasts"
+rift_grid_size = Vector2i(4, 4)
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"

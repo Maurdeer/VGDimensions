@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=18 format=3 uid="uid://dwphbb10784oh"]
+
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_qtn7d"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_7c8rq"]
+[ext_resource type="Texture2D" uid="uid://cbrigcehn7xn7" path="res://art/card_art/Altarune/yan card.jpg" id="3_l23ee"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_lkxi8"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_t3x7o"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_lkxi8"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_t3x7o"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="5_7286b"]
+[ext_resource type="Resource" uid="uid://bu3q5f5qh86v5" path="res://cards/Altarune/PoisonTower.tres" id="7_7286b"]
+[ext_resource type="Resource" uid="uid://bb3w4uhglo4xt" path="res://cards/Altarune/FurnaceTower.tres" id="8_ack54"]
+
+[sub_resource type="Resource" id="Resource_ack54"]
+script = ExtResource("3_lkxi8")
+type = 2
+amount = 2
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_m6afr"]
+script = ExtResource("5_7286b")
+source_selection_type = 1
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_7286b"]
+script = ExtResource("2_7c8rq")
+is_multi_event = true
+bullet_event = SubResource("Resource_ack54")
+bullet_events = Array[ExtResource("3_t3x7o")]([SubResource("Resource_ack54"), SubResource("Resource_m6afr")])
+bullet_description = "On Play: Gain 2 Social and place this card down on the Rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_f35ag"]
+script = ExtResource("5_7286b")
+source_selection_type = 1
+other_card_resource = ExtResource("7_7286b")
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_lkxi8"]
+script = ExtResource("2_7c8rq")
+bullet_type = 2
+bullet_cost = 2
+bullet_event = SubResource("Resource_f35ag")
+bullet_events = Array[ExtResource("3_t3x7o")]([SubResource("Resource_f35ag")])
+bullet_description = "On Social: Place a Poison Tower on the Rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_uwgxo"]
+script = ExtResource("5_7286b")
+source_selection_type = 1
+other_card_resource = ExtResource("8_ack54")
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
+
+[sub_resource type="Resource" id="Resource_kp1wt"]
+script = ExtResource("2_7c8rq")
+bullet_type = 2
+bullet_cost = 2
+bullet_event = SubResource("Resource_uwgxo")
+bullet_events = Array[ExtResource("3_t3x7o")]([SubResource("Resource_uwgxo")])
+bullet_description = "On Social: Place a Furnace Tower on the Rift."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("4_t3x7o")
+title = "Yanenmhat Astarte Al-Kabira"
+type = 1
+game_origin = 7
+deleon_value = 5
+starting_hp = 8
+bullets = Array[ExtResource("2_7c8rq")]([SubResource("Resource_7286b"), SubResource("Resource_lkxi8"), SubResource("Resource_kp1wt")])
+card_art = ExtResource("3_l23ee")
+background_art = ExtResource("1_qtn7d")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

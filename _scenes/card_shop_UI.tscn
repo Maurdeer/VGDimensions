@@ -1,33 +1,234 @@
-[gd_scene load_steps=2 format=3 uid="uid://chx38irjvtuj1"]
+[gd_scene load_steps=11 format=3 uid="uid://chx38irjvtuj1"]
 
 [ext_resource type="Script" uid="uid://bjtfugcp1ssx8" path="res://_scripts/shop/card_shop_ui.gd" id="1_yata5"]
+[ext_resource type="PackedScene" uid="uid://c3e8058lwu0a" path="res://_scenes/card/card.tscn" id="2_bmh5o"]
+[ext_resource type="Texture2D" uid="uid://bnove3tmf34re" path="res://art/card_ui/Description Area.png" id="2_e8ren"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="2_ju8iy"]
+[ext_resource type="Texture2D" uid="uid://byher35tj2cm0" path="res://art/card_ui/lilguyicon.png" id="3_woott"]
 
-[node name="CardShopUI" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_e8ren"]
+font_size = 41
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ju8iy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-296.26, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bmh5o"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.14865123),
+"update": 0,
+"values": [Vector2(309, 0), Vector2(-296.26, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e8ren"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.14865123),
+"update": 0,
+"values": [Vector2(-296.26, 0), Vector2(309, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8ren"]
+_data = {
+&"RESET": SubResource("Animation_ju8iy"),
+&"hide": SubResource("Animation_bmh5o"),
+&"show": SubResource("Animation_e8ren")
+}
+
+[node name="CardShopUI" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -296.26
+offset_right = -296.26
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_yata5")
+
+[node name="title_background" type="NinePatchRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -251.0
+offset_top = -347.0
+offset_right = 251.0
+offset_bottom = -249.0
+grow_horizontal = 2
+texture = ExtResource("2_e8ren")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Label" type="Label" parent="Control/title_background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -245.73999
+offset_top = -47.0
+offset_right = 245.26001
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("1_yata5")
+text = "Lil' Guy's Limbo"
+label_settings = SubResource("LabelSettings_e8ren")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control/title_background"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 7.2250004
-anchor_top = 1.45
-anchor_right = 22.925001
-anchor_bottom = 15.109001
-offset_right = -78.00006
-offset_bottom = 3.6399536
-mouse_filter = 2
+offset_left = 0.26000977
+offset_top = -4.0
+offset_right = 89.52002
+offset_bottom = 77.0
+texture = ExtResource("3_woott")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="background" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -303.0
+offset_top = -279.5
+offset_right = 303.0
+offset_bottom = 279.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ju8iy")
+expand_mode = 1
+
+[node name="GridContainer" type="GridContainer" parent="Control/background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.5
+offset_top = -270.0
+offset_right = 290.5
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
 columns = 3
+
+[node name="Control" type="Control" parent="Control/background/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+
+[node name="Card" parent="Control/background/GridContainer/Control" instance=ExtResource("2_bmh5o")]
+
+[node name="Control2" type="Control" parent="Control/background/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+
+[node name="Card" parent="Control/background/GridContainer/Control2" instance=ExtResource("2_bmh5o")]
+
+[node name="Control3" type="Control" parent="Control/background/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+
+[node name="Card" parent="Control/background/GridContainer/Control3" instance=ExtResource("2_bmh5o")]
+
+[node name="Control4" type="Control" parent="Control/background/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+
+[node name="Card" parent="Control/background/GridContainer/Control4" instance=ExtResource("2_bmh5o")]
+
+[node name="Control5" type="Control" parent="Control/background/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+
+[node name="Card" parent="Control/background/GridContainer/Control5" instance=ExtResource("2_bmh5o")]
+
+[node name="Control6" type="Control" parent="Control/background/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+
+[node name="Card" parent="Control/background/GridContainer/Control6" instance=ExtResource("2_bmh5o")]
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 303.0
+offset_top = -268.5
+offset_right = 332.0
+offset_bottom = 268.5
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = ">"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e8ren")
+}
+speed_scale = 5.0
+
+[connection signal="mouse_entered" from="Control/background" to="Control" method="_on_background_mouse_entered"]
+[connection signal="mouse_exited" from="Control/background" to="Control" method="_on_background_mouse_exited"]
+[connection signal="mouse_entered" from="Control/background/GridContainer" to="Control" method="_on_grid_container_mouse_entered"]
+[connection signal="mouse_exited" from="Control/background/GridContainer" to="Control" method="_on_grid_container_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Button" to="Control" method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]

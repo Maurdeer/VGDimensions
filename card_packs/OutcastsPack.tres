@@ -1,8 +1,26 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=3 format=3 uid="uid://ytv15oyix42d"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=11 format=3 uid="uid://ytv15oyix42d"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_w688w"]
+[ext_resource type="Resource" uid="uid://doj57pqlx14mt" path="res://cards/Outcasts/BreakableWall.tres" id="2_xu8kn"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="2_yutvc"]
+[ext_resource type="Resource" uid="uid://br16pjfcij048" path="res://cards/Outcasts/ReinforcedWall.tres" id="3_3nr70"]
+[ext_resource type="Resource" uid="uid://b7s10n06pkafm" path="res://cards/Outcasts/LuxuriousOre.tres" id="4_rjlun"]
+[ext_resource type="Resource" uid="uid://ciw3hs3frnaj7" path="res://cards/Outcasts/TinkerGem.tres" id="5_le2at"]
+[ext_resource type="Resource" uid="uid://ctlmmg00w3i14" path="res://cards/Outcasts/AsheGem.tres" id="6_nemjg"]
+[ext_resource type="Resource" uid="uid://b1x13ljuaukm5" path="res://cards/Outcasts/TinkerDoor.tres" id="7_t8w8h"]
+[ext_resource type="Resource" uid="uid://k827gg8hwp8l" path="res://cards/Outcasts/AsheDoor.tres" id="8_oejxf"]
+[ext_resource type="Resource" uid="uid://c1wujf4waferx" path="res://cards/Outcasts/RattusNationGuard.tres" id="9_metjh"]
 
 [resource]
 script = ExtResource("2_yutvc")
+card_resources = Dictionary[ExtResource("1_w688w"), int]({
+ExtResource("2_xu8kn"): 8,
+ExtResource("3_3nr70"): 4,
+ExtResource("4_rjlun"): 5,
+ExtResource("5_le2at"): 5,
+ExtResource("6_nemjg"): 5,
+ExtResource("7_t8w8h"): 1,
+ExtResource("8_oejxf"): 1,
+ExtResource("9_metjh"): 8
+})
 metadata/_custom_type_script = "uid://div70lvrir1m0"

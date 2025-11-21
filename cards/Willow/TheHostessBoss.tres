@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://dxa0fggpwcnbx"]
+
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="1_qh8o1"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_gflah"]
+[ext_resource type="Script" uid="uid://dqurndy8l8ld7" path="res://custom_event_resources/Willow/BulletSpawnEvent.gd" id="4_s8mm6"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_xeq1x"]
+[ext_resource type="Script" uid="uid://dl6qbg1lsuuj0" path="res://custom_event_resources/Willow/CheckForPlayerEvent.gd" id="6_qh8o1"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="6_s11k7"]
+[ext_resource type="Texture2D" uid="uid://b1ie7o6xgw7jk" path="res://art/card_art/Willow/hostess_card.png" id="7_sg28j"]
+[ext_resource type="Texture2D" uid="uid://b2ushca6h1uky" path="res://art/card_ui/WillowGrids/grid_Hostess.png" id="8_gflah"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="8_uaaky"]
+
+[sub_resource type="Resource" id="Resource_gfx24"]
+script = ExtResource("4_s8mm6")
+spawn_positions = Array[Vector2i]([Vector2i(1, 0), Vector2i(0, 1), Vector2i(0, 3), Vector2i(4, 0), Vector2i(4, 4), Vector2i(3, 4)])
+metadata/_custom_type_script = "uid://dqurndy8l8ld7"
+
+[sub_resource type="Resource" id="Resource_gflah"]
+script = ExtResource("6_s11k7")
+passive_event_type = 3
+global_event_type = 15
+event = SubResource("Resource_gfx24")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_s11k7"]
+script = ExtResource("6_qh8o1")
+bullet_spawn = SubResource("Resource_gfx24")
+metadata/_custom_type_script = "uid://dl6qbg1lsuuj0"
+
+[sub_resource type="Resource" id="Resource_xeq1x"]
+script = ExtResource("6_s11k7")
+is_global = true
+global_event_type = 19
+event = SubResource("Resource_s11k7")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_mca72"]
+script = ExtResource("2_gflah")
+bullet_type = 3
+is_multi_event = true
+passive_event = SubResource("Resource_gflah")
+passive_events = Array[ExtResource("6_s11k7")]([SubResource("Resource_gflah"), SubResource("Resource_xeq1x")])
+bullet_description = "On Enter, and On Start Of Turn, spawn the following bullet pattern"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("8_uaaky")
+title = "The Hostess"
+type = 8
+game_origin = 30
+starting_hp = 20
+bullets = Array[ExtResource("2_gflah")]([SubResource("Resource_mca72")])
+description_textures = Array[Texture]([ExtResource("8_gflah")])
+card_art = ExtResource("7_sg28j")
+background_art = ExtResource("1_qh8o1")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

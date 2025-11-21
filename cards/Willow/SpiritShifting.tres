@@ -1,21 +1,31 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=7 format=3 uid="uid://fy5u21cthrw7"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://fy5u21cthrw7"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_airt8"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_42t6d"]
 [ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="2_hxg26"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_aitro"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_h55c3"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_hxg26"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_h55c3"]
 [ext_resource type="Texture2D" uid="uid://3q5ih2xyica4" path="res://art/card_art/Willow/Shift.png" id="5_sm85p"]
+
+[sub_resource type="Resource" id="Resource_sm85p"]
+script = ExtResource("3_h55c3")
+type = 1
+amount = 3
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
 [sub_resource type="Resource" id="Resource_86hc7"]
 script = ExtResource("2_42t6d")
-bullet_description = "Play this card to gain 3 Actions"
+bullet_event = SubResource("Resource_sm85p")
+bullet_events = Array[ExtResource("3_hxg26")]([SubResource("Resource_sm85p")])
+bullet_description = "On Play: Gain 3 Actions"
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
 script = ExtResource("3_aitro")
 title = "Spirit Shifting"
 game_origin = 30
-deleon_value = 4
+deleon_value = 6
 bullets = Array[ExtResource("2_42t6d")]([SubResource("Resource_86hc7")])
 card_art = ExtResource("5_sm85p")
 background_art = ExtResource("2_hxg26")

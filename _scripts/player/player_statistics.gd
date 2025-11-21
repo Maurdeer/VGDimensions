@@ -33,6 +33,10 @@ signal on_resource_spend_success(ResourceType)
 	set(value):
 		quests_completed = value
 		on_stats_change.emit()
+@export var dimensions_won: int:
+	set(value):
+		dimensions_won = value
+		on_stats_change.emit()
 @export var sleighers_cheer: int:
 	set(value):
 		sleighers_cheer = value
@@ -40,9 +44,8 @@ signal on_resource_spend_success(ResourceType)
 
 #For Sleighers implementation, remember to set this correctly
 @export var sleighers_team =  SleighersTeam.FAE
-
-
-func modify_resource(type: ResourceType, amount: int, team=null) -> void:
+		
+func modify_resource(type: ResourceType, amount: int) -> void:
 	match(type):
 		ResourceType.DELEON:
 			deleons += amount

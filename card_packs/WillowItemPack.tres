@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardPackResource" load_steps=10 format=3 uid="uid://c1ciuxwp3folr"]
+[gd_resource type="Resource" script_class="CardPackResource" load_steps=11 format=3 uid="uid://c1ciuxwp3folr"]
 
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="1_5nel5"]
 [ext_resource type="Resource" uid="uid://dukngenqtaln" path="res://cards/Willow/MysteriousNote.tres" id="2_6gw20"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://fy5u21cthrw7" path="res://cards/Willow/SpiritShifting.tres" id="6_3w2y0"]
 [ext_resource type="Resource" uid="uid://fuprndqilal5" path="res://cards/Willow/TheWandererAlly.tres" id="7_l4x2f"]
 [ext_resource type="Resource" uid="uid://qmga8sfbyw11" path="res://cards/Willow/TheHostessAlly.tres" id="8_n2sas"]
+[ext_resource type="Resource" uid="uid://druehfvw6obp3" path="res://cards/Willow/GoliathStone.tres" id="9_n2sas"]
 
 [resource]
 script = ExtResource("2_em0jp")
@@ -19,6 +20,7 @@ ExtResource("4_0ni82"): 2,
 ExtResource("5_0ni82"): 2,
 ExtResource("6_3w2y0"): 2,
 ExtResource("7_l4x2f"): 1,
-ExtResource("8_n2sas"): 1
+ExtResource("8_n2sas"): 1,
+ExtResource("9_n2sas"): 2
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"

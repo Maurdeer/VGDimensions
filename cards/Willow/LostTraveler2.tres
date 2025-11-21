@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=17 format=3 uid="uid://bvoxiky36b0uw"]
+
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="1_cv0ry"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_hdf6n"]
+[ext_resource type="Script" uid="uid://banseryattu42" path="res://_scripts/resources/EventResources/SwapEvent.gd" id="2_u8uj2"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_cv0ry"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_uftkg"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="5_8x4ue"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="6_8x4ue"]
+[ext_resource type="Texture2D" uid="uid://bxw30ntqb8vnu" path="res://art/card_art/Willow/LostTravelerBlue.png" id="6_uftkg"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="7_awu63"]
+
+[sub_resource type="Resource" id="Resource_yhlb6"]
+script = ExtResource("2_u8uj2")
+source_selection_type = 1
+only_adjacent_cards = true
+metadata/_custom_type_script = "uid://banseryattu42"
+
+[sub_resource type="Resource" id="Resource_3tyil"]
+script = ExtResource("1_hdf6n")
+bullet_type = 1
+bullet_event = SubResource("Resource_yhlb6")
+bullet_events = Array[ExtResource("3_cv0ry")]([SubResource("Resource_yhlb6")])
+bullet_description = "On Interact: Swap this card with an adjacent card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_exu4s"]
+script = ExtResource("6_8x4ue")
+amount = 3
+adjacent_only = true
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_4f0rd"]
+script = ExtResource("1_hdf6n")
+bullet_type = 1
+bullet_event = SubResource("Resource_exu4s")
+bullet_events = Array[ExtResource("3_cv0ry")]([SubResource("Resource_exu4s")])
+bullet_description = "On Interact: Deal 3 damage to an adjacent card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_6bgee"]
+script = ExtResource("7_awu63")
+type = 1
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_ey03r"]
+script = ExtResource("4_uftkg")
+is_global = true
+global_event_type = 18
+event = SubResource("Resource_6bgee")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_7fn6e"]
+script = ExtResource("1_hdf6n")
+bullet_type = 3
+passive_event = SubResource("Resource_ey03r")
+passive_events = Array[ExtResource("4_uftkg")]([SubResource("Resource_ey03r")])
+bullet_description = "On Start of Turn: Gain 1 Action"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("5_8x4ue")
+title = "Lost Traveler #2"
+type = 1
+game_origin = 30
+starting_hp = 2
+bullets = Array[ExtResource("1_hdf6n")]([SubResource("Resource_3tyil"), SubResource("Resource_4f0rd"), SubResource("Resource_7fn6e")])
+card_art = ExtResource("6_uftkg")
+background_art = ExtResource("1_cv0ry")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dl5u6ss71taw2" path="res://_scripts/ui/deck_inspector.gd" id="1_e20cl"]
 
 [node name="DeckInspector" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +22,7 @@ offset_right = -1.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 2
 color = Color(0, 0, 0, 0.49803922)
 
 [node name="GridContainer" type="GridContainer" parent="."]

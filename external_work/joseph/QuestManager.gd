@@ -23,9 +23,16 @@ func add_quest(card : Card):
 	currentQuest = card
 	add_child(currentQuest)
 	currentQuest.card_sm.transition_to_state(CardStateMachine.StateType.IN_QUEST)
-	currentQuest.flip_reveal()
+	currentQuest.flip_hide()
 	print("Quest added succesfully!")
 	return true
+	
+func reveal_quest():
+	if (currentQuest == null): 
+		print("There is no current quest to reveal!")
+		return
+	currentQuest.flip_reveal()
+	currentQuest.on_enter_tree()
 
 func remove_quest():
 	if (currentQuest == null):
@@ -36,10 +43,11 @@ func remove_quest():
 	print("Quest removed successfully!")
 	return true
 
+# This function is likely deprecated, though I don't want to comment it out in fear
+# of the M4 Demo happening today
 func update_quest():
 	if (currentQuest == null):
 		print("There is no quest to call update on!")
 		return false
-	currentQuest.on_quest_progress()
 	print("Quest updated successfully!")
 	return true

@@ -33,8 +33,8 @@ func _on_bullet_description_change() -> void:
 				
 				# It woudln't add it to the edited scene root without it.
 				# But would that work during runtime?
-				if Engine.is_editor_hint():
-					bullet_node.owner = get_tree().edited_scene_root
+				#if Engine.is_editor_hint():
+					#bullet_node.owner = get_tree().edited_scene_root
 			
 			# Set the bullet node to have the resource, which should update its visual on its own.
 			var bullet_visual: ClickableBulletVisualizer = bullet_list.get_child(child_idx)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cffwpx4i5iult"]
+[gd_scene load_steps=29 format=3 uid="uid://cyn2bda8nblgv"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_pgr64"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_uwtkr"]

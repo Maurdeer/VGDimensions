@@ -89,6 +89,7 @@ enum GameOrigin {
 @export var refreshable: bool = false
 @export var stunnable: bool = true
 @export var flippable: bool = true
+@export var blocking: bool = false
 var damagable: bool = starting_hp > -1
 
 # Description Area

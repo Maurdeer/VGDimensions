@@ -1,42 +1,33 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://doj57pqlx14mt"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://doj57pqlx14mt"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_1d4nq"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_1rnrp"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_4siri"]
-[ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="2_lu05x"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_plkjb"]
-[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="3_1sf21"]
+[ext_resource type="Script" uid="uid://bfa0ox70sgb47" path="res://_scripts/resources/EventResources/HealEvent.gd" id="4_3hacm"]
 [ext_resource type="Texture2D" uid="uid://b1ib5ux1y6l4c" path="res://art/card_art/Outcasts/Cave Breakable Tiles.png" id="6_1sf21"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="6_uaglv"]
 
-[sub_resource type="Resource" id="Resource_lu05x"]
-script = ExtResource("2_lu05x")
-self_heal = true
-health_amount = 2
+[sub_resource type="Resource" id="Resource_uaglv"]
+script = ExtResource("4_3hacm")
+selection_type = 1
+heal_amount = 2
 cap_at_starting_hp = true
 metadata/_custom_type_script = "uid://bfa0ox70sgb47"
 
-[sub_resource type="Resource" id="Resource_1sf21"]
+[sub_resource type="Resource" id="Resource_kwuwe"]
 script = ExtResource("1_1d4nq")
-event_type = 6
-event = SubResource("Resource_lu05x")
-metadata/_custom_type_script = "uid://bat0pcm2x7x13"
-
-[sub_resource type="Resource" id="Resource_3mlch"]
-script = ExtResource("3_1sf21")
-amount = 2
-metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
-
-[sub_resource type="Resource" id="Resource_cnumb"]
-script = ExtResource("1_1d4nq")
-event_type = 8
-event = SubResource("Resource_3mlch")
+is_global = true
+global_event_type = 19
+event = SubResource("Resource_uaglv")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
 [sub_resource type="Resource" id="Resource_4siri"]
 script = ExtResource("1_1rnrp")
-bullet_type = 5
-bullet_description = "Heal to full hp at the end of the current turn."
+bullet_type = 3
+passive_event = SubResource("Resource_kwuwe")
+passive_events = Array[ExtResource("1_1d4nq")]([SubResource("Resource_kwuwe")])
+bullet_description = "On End of Turn: Heal to full HP."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -45,12 +36,11 @@ title = "Breakable Wall"
 type = 5
 game_origin = 25
 deleon_value = 5
-starting_hp = 2
+starting_hp = 3
 movable = false
 burnable = false
 bullets = Array[ExtResource("1_1rnrp")]([SubResource("Resource_4siri")])
 quip_description = "Crunchy Walls"
-_passive_event_resources = Array[ExtResource("1_1d4nq")]([SubResource("Resource_1sf21"), SubResource("Resource_cnumb")])
 card_art = ExtResource("6_1sf21")
 background_art = ExtResource("2_4siri")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

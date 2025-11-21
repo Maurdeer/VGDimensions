@@ -1,26 +1,37 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://bwgk83gwvfr8w"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://bwgk83gwvfr8w"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_gh3sg"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_n6tfm"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_xcs7r"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_cmp8r"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_8mlyg"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="3_p227w"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_p227w"]
 [ext_resource type="Texture2D" uid="uid://bns44s8x7guot" path="res://art/card_art/Outcasts/RockBlock.png" id="5_3xv7v"]
+
+[sub_resource type="Resource" id="Resource_l4d46"]
+script = ExtResource("3_p227w")
+source_selection_type = 1
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_n6tfm"]
 script = ExtResource("1_n6tfm")
-bullet_description = "Play this card to stack this card on any valid grid tile card."
+bullet_event = SubResource("Resource_l4d46")
+bullet_events = Array[ExtResource("3_8mlyg")]([SubResource("Resource_l4d46")])
+bullet_description = "On Play: Stack this card on any valid grid tile card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_p227w"]
+script = ExtResource("3_p227w")
+source_selection_type = 2
+only_adjacent_cards = true
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_cmvd4"]
 script = ExtResource("1_n6tfm")
 bullet_type = 1
-bullet_description = "Use 1 Action to stack this card on any valid adjacent grid."
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_3xv7v"]
-script = ExtResource("1_n6tfm")
-bullet_type = 1
-bullet_description = "Use 1 Action to remove this card if next to rift grid edge."
+bullet_event = SubResource("Resource_p227w")
+bullet_events = Array[ExtResource("3_8mlyg")]([SubResource("Resource_p227w")])
+bullet_description = "On Interact: Stack this card on any valid adjacent grid."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -28,8 +39,10 @@ script = ExtResource("2_cmp8r")
 title = "Rock Block"
 type = 2
 game_origin = 25
-deleon_value = 1
-bullets = Array[ExtResource("1_n6tfm")]([SubResource("Resource_n6tfm"), SubResource("Resource_cmvd4"), SubResource("Resource_3xv7v")])
+deleon_value = 2
+starting_hp = 4
+blocking = true
+bullets = Array[ExtResource("1_n6tfm")]([SubResource("Resource_n6tfm"), SubResource("Resource_cmvd4")])
 quip_description = "Hard but flexible."
 card_art = ExtResource("5_3xv7v")
 background_art = ExtResource("1_xcs7r")

@@ -1,22 +1,37 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=10 format=3 uid="uid://dwkdhtd2hc5xo"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=14 format=3 uid="uid://dwkdhtd2hc5xo"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_c71t1"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="2_iieos"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_mi7rg"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_mll46"]
+[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="3_iieos"]
+[ext_resource type="Script" uid="uid://dk8vfhf4dqxns" path="res://_scripts/resources/TemporaryEffects/BurnEffect.gd" id="4_e4jcp"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_hpcky"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="5_e4jcp"]
 [ext_resource type="Texture2D" uid="uid://dg623aalbeqda" path="res://art/card_art/FromNava/-e Fire -e.png" id="5_hpcky"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="7_tafpt"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="6_exm1x"]
+[ext_resource type="Script" uid="uid://dgpr0uywveph4" path="res://_scripts/resources/EventResources/DamageEvent.gd" id="6_mll46"]
 
-[sub_resource type="Resource" id="Resource_efxmc"]
-script = ExtResource("7_tafpt")
-metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+[sub_resource type="Resource" id="Resource_eho4j"]
+script = ExtResource("4_e4jcp")
+metadata/_custom_type_script = "uid://dk8vfhf4dqxns"
 
-[sub_resource type="Resource" id="Resource_exm1x"]
+[sub_resource type="Resource" id="Resource_8yv6m"]
+script = ExtResource("3_iieos")
+selection_type = 2
+temp_effect = SubResource("Resource_eho4j")
+metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
+
+[sub_resource type="Resource" id="Resource_6i1e5"]
+script = ExtResource("6_mll46")
+selection_type = 0
+amount = 3
+metadata/_custom_type_script = "uid://dgpr0uywveph4"
+
+[sub_resource type="Resource" id="Resource_tafpt"]
 script = ExtResource("2_mi7rg")
-bullet_cost = 0
-bullet_event = SubResource("Resource_efxmc")
-bullet_description = "Play this card to deal 3 Damage and burn the target."
+is_multi_event = true
+bullet_event = SubResource("Resource_8yv6m")
+bullet_events = Array[ExtResource("5_e4jcp")]([SubResource("Resource_8yv6m"), SubResource("Resource_6i1e5")])
+bullet_description = "On Play: Deal 3 damage and Burn target card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -24,7 +39,7 @@ script = ExtResource("4_hpcky")
 title = "Fireball Spell"
 game_origin = 26
 deleon_value = 4
-bullets = Array[ExtResource("2_mi7rg")]([SubResource("Resource_exm1x")])
+bullets = Array[ExtResource("2_mi7rg")]([SubResource("Resource_tafpt")])
 card_art = ExtResource("5_hpcky")
 background_art = ExtResource("2_iieos")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

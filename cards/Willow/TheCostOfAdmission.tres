@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=18 format=3 uid="uid://ckjjtm1swfj6p"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_3l2fq"]
+[ext_resource type="Texture2D" uid="uid://dppqcmg3sao88" path="res://art/card_background_art/willow_background.png" id="1_asy8a"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_56tus"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_w0uor"]
+[ext_resource type="Script" uid="uid://d3htkobmwuall" path="res://custom_event_resources/Quest/WillowQuestProgressEvent.gd" id="3_eebga"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_asy8a"]
+[ext_resource type="Texture2D" uid="uid://ddupv4guwbl8o" path="res://art/card_art/Willow/TheCostOfAdmission.png" id="6_37fd0"]
+[ext_resource type="Resource" uid="uid://ky0ebk8w321d" path="res://cards/Willow/LostTraveler1.tres" id="6_v7i61"]
+[ext_resource type="Resource" uid="uid://bvoxiky36b0uw" path="res://cards/Willow/LostTraveler2.tres" id="7_6347q"]
+[ext_resource type="Script" uid="uid://bi6v78lx4ugqy" path="res://_scripts/resources/EventResources/RespawnCornerCardsEvent.gd" id="8_v7i61"]
+
+[sub_resource type="Resource" id="Resource_37fd0"]
+script = ExtResource("3_eebga")
+metadata/_custom_type_script = "uid://d3htkobmwuall"
+
+[sub_resource type="Resource" id="Resource_osa1m"]
+script = ExtResource("4_asy8a")
+is_global = true
+global_event_type = 21
+event = SubResource("Resource_37fd0")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_v7i61"]
+script = ExtResource("1_3l2fq")
+bullet_type = 3
+passive_event = SubResource("Resource_osa1m")
+passive_events = Array[ExtResource("4_asy8a")]([SubResource("Resource_osa1m")])
+bullet_description = "Defeat the Hostess in order to win in this Dimension!"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_74pwp"]
+script = ExtResource("8_v7i61")
+card_1 = ExtResource("6_v7i61")
+card_2 = ExtResource("7_6347q")
+metadata/_custom_type_script = "uid://bi6v78lx4ugqy"
+
+[sub_resource type="Resource" id="Resource_fta2g"]
+script = ExtResource("4_asy8a")
+passive_event_type = 3
+global_event_type = 28
+event = SubResource("Resource_74pwp")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_6347q"]
+script = ExtResource("4_asy8a")
+is_global = true
+passive_event_type = 3
+global_event_type = 21
+event = SubResource("Resource_74pwp")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_fpoft"]
+script = ExtResource("1_3l2fq")
+bullet_type = 3
+is_multi_event = true
+passive_event = SubResource("Resource_fta2g")
+passive_events = Array[ExtResource("4_asy8a")]([SubResource("Resource_fta2g"), SubResource("Resource_6347q")])
+bullet_description = "At the beginnning of this Dimension and whenever they die, spawn two Lost Travelers. "
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_w0uor")
+title = "The Cost of Admission"
+type = 4
+game_origin = 30
+bullets = Array[ExtResource("1_3l2fq")]([SubResource("Resource_v7i61"), SubResource("Resource_fpoft")])
+card_art = ExtResource("6_37fd0")
+background_art = ExtResource("1_asy8a")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

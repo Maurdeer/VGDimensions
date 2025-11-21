@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=5 format=3 uid="uid://b1x13ljuaukm5"]
+
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_58mbm"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_mh2as"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_ij7e0"]
+[ext_resource type="Texture2D" uid="uid://coxh0b6y5sqtf" path="res://art/card_art/Outcasts/TinkerDoor.png" id="3_8bkui"]
+
+[resource]
+script = ExtResource("2_ij7e0")
+title = "Tinker Door"
+type = 5
+game_origin = 25
+card_art = ExtResource("3_8bkui")
+background_art = ExtResource("1_58mbm")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

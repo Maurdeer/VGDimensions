@@ -1,43 +1,44 @@
 [gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://bfmf5a377dkdm"]
 
-[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_02xht"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_13rty"]
 [ext_resource type="Texture2D" uid="uid://dg6vrrkckdb3r" path="res://art/card_art/FromNava/labbackground.png" id="3_c78l2"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_gjxh4"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_qi8vg"]
-[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="4_mxq4v"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_c78l2"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="4_wu7on"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="5_ff2lb"]
 [ext_resource type="Texture2D" uid="uid://b52gn6tbq0if" path="res://art/card_art/FromNava/fan.png" id="5_mxq4v"]
-[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="5_wu7on"]
-[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_ff2lb"]
-[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="6_wu7on"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="6_wq70l"]
 
-[sub_resource type="Resource" id="Resource_wq70l"]
-script = ExtResource("5_wu7on")
+[sub_resource type="Resource" id="Resource_kgowp"]
+script = ExtResource("4_wu7on")
 type = 3
 amount = 1
 metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
 
-[sub_resource type="Resource" id="Resource_ff2lb"]
-script = ExtResource("6_wu7on")
+[sub_resource type="Resource" id="Resource_nv2p1"]
+script = ExtResource("5_ff2lb")
 selection_type = 1
 metadata/_custom_type_script = "uid://bcwfjrechyjc"
 
-[sub_resource type="Resource" id="Resource_kgowp"]
-script = ExtResource("6_ff2lb")
-events = Array[ExtResource("4_mxq4v")]([SubResource("Resource_wq70l"), SubResource("Resource_ff2lb")])
+[sub_resource type="Resource" id="Resource_mxfw3"]
+script = ExtResource("6_wq70l")
+events = Array[ExtResource("3_gjxh4")]([SubResource("Resource_kgowp"), SubResource("Resource_nv2p1")])
 metadata/_custom_type_script = "uid://eoq3ah17rnyo"
 
-[sub_resource type="Resource" id="Resource_nv2p1"]
-script = ExtResource("1_02xht")
-event_type = 13
-event = SubResource("Resource_kgowp")
+[sub_resource type="Resource" id="Resource_oswot"]
+script = ExtResource("4_c78l2")
+passive_event_type = 10
+global_event_type = 15
+event = SubResource("Resource_mxfw3")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
-[sub_resource type="Resource" id="Resource_gjxh4"]
+[sub_resource type="Resource" id="Resource_d2gkh"]
 script = ExtResource("2_13rty")
 bullet_type = 3
-bullet_cost = 0
-passive_events = Array[ExtResource("1_02xht")]([SubResource("Resource_nv2p1")])
-bullet_description = "If this card would be moved, instead remove it from the Rift and gain a Polaroid."
+passive_event = SubResource("Resource_oswot")
+passive_events = Array[ExtResource("4_c78l2")]([SubResource("Resource_oswot")])
+bullet_description = "On Move: Gain 1 Polaroid and remove this card from the Rift."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -45,7 +46,8 @@ script = ExtResource("3_qi8vg")
 title = "Fan"
 type = 5
 game_origin = 26
-bullets = Array[ExtResource("2_13rty")]([SubResource("Resource_gjxh4")])
+bullets = Array[ExtResource("2_13rty")]([SubResource("Resource_d2gkh")])
+quip_description = "On Move: Gain 1 Polaroid and remove this card from the Rift."
 card_art = ExtResource("5_mxq4v")
 background_art = ExtResource("3_c78l2")
 metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

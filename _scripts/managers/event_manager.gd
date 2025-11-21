@@ -1,17 +1,21 @@
 extends Node
-
+# EventManager Here yes :3
 var _callable_queue: Array[Array]
 
 var stored_card: Dictionary[int, Card]
 var selection: Card
 signal peer_selection
+var in_process: bool
 
 # returns false is Completed, true if canceled by player input
 func process_event_queue() -> bool:
 	if _callable_queue.is_empty():
 		#push_warning("Called Process Event Queue, but queue was empty")
 		return true
-	
+	if in_process:
+		push_warning("Called Process Event Queue while it was already in progress")
+		return false
+	in_process = true
 	var card_refs: Dictionary[int, Card] = {}
 	var pass_selection: bool = false
 	var event_fault: EventResource
@@ -49,7 +53,8 @@ func process_event_queue() -> bool:
 			if event.execute(card_invoker, card_refs):
 				process_result = ProcessResult.FAILED
 				event_fault = event
-			
+	
+	
 	match (process_result):
 		# (Ryan) Clearing the queue may or may not go here, you could want them to remain?
 		# But no situation where that is clear yet
@@ -58,13 +63,15 @@ func process_event_queue() -> bool:
 		ProcessResult.CANCELED:
 			# Flush left over events since we are cancelling the process
 			_callable_queue.clear()
+			in_process = false
 			return true
 		ProcessResult.FAILED:
 			# Flush left over events since we are cancelling the process
 			_callable_queue.clear()
+			in_process = false
 			printerr("Process had failed unexpectadly due to event at %s" % event_fault.resource_path)
 			return true
-			
+	in_process = false
 	return false
 
 @rpc("call_remote", "any_peer", "reliable")
@@ -78,7 +85,8 @@ func queue_event(event: EventResource, card_invoker: Card) -> void:
 		return 
 	
 	# Desinger input if they want these queued up or not
-	var required_events: Array[EventResource] = (event as EventResource).required_events()
+	event.m_card_invoker = card_invoker
+	var required_events: Array[EventResource] = event.required_events()
 	if not required_events.is_empty(): queue_event_group(required_events, card_invoker)
 	_callable_queue.push_back([event, card_invoker])
 	
@@ -100,21 +108,33 @@ func queue_and_process_bullet_event(cid: int, bullet_type: BulletResource.Bullet
 @rpc("call_remote", "any_peer", "reliable")
 func _queue_bullet_event(cid: int, bullet_type: BulletResource.BulletType, idx: int) -> bool:
 	var card_invoker: Card = CardManager.get_card_by_id(cid)
+	var passive_call: Callable
+	var bullet: BulletResource
 	match(bullet_type):
 		BulletResource.BulletType.PLAY:
-			queue_event(card_invoker.play_bullets[idx].bullet_event, card_invoker)
-			if await process_event_queue(): return true
-			card_invoker.on_play()
+			bullet = card_invoker.play_bullets[idx]
+			passive_call = card_invoker.on_play
 		BulletResource.BulletType.ACTION:
-			queue_event(card_invoker.action_bullets[idx].bullet_event, card_invoker)
-			if await process_event_queue(): return true
-			card_invoker.on_action()
+			bullet = card_invoker.action_bullets[idx]
+			passive_call = card_invoker.on_action
 		BulletResource.BulletType.SOCIAL:
-			queue_event(card_invoker.social_bullets[idx].bullet_event, card_invoker)
-			if await EventManager.process_event_queue(): return true
-			card_invoker.on_social()
+			bullet = card_invoker.social_bullets[idx]
+			passive_call = card_invoker.on_social
+			
+	# Queue up the bullet event
+	if bullet.is_multi_event: 
+		queue_event_group(bullet.bullet_events, card_invoker)
+	else: 
+		queue_event(bullet.bullet_event, card_invoker)
+	
+	if await process_event_queue():
+		# If any actions failed unexpectedly notify up
+		return true
+	
+	passive_call.call()
 	# Process If there were added events from the card passives or not
-	await EventManager.process_event_queue()
+	# (Ryan) Do I need to propagate any passive event errors?
+	await process_event_queue()
 	return false
 	
 enum ProcessResult {

@@ -1,11 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://j7pqrrms4ivv"]
+[gd_scene load_steps=8 format=3 uid="uid://j7pqrrms4ivv"]
 
 [ext_resource type="Script" uid="uid://blgkt0a5d6htk" path="res://_scripts/ui/pause_menu.gd" id="1_fbjqs"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="2_edxbm"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jquqm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_edxbm"]
 font_size = 131
+
+[sub_resource type="LabelSettings" id="LabelSettings_mhj4j"]
+font_size = 91
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s48a2"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7x5sl"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" type="Control"]
 visible = false
@@ -34,9 +45,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -388.0
-offset_top = 130.0
+offset_top = 159.0
 offset_right = 388.0
-offset_bottom = 310.0
+offset_bottom = 339.0
 grow_horizontal = 2
 text = "Pause Menu"
 label_settings = SubResource("LabelSettings_edxbm")
@@ -62,10 +73,156 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Back To Game"
 
+[node name="settings_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+
 [node name="disconnect_from_server" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Disconnect From Game"
 
+[node name="SettingsPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -539.0
+offset_right = 960.0
+offset_bottom = 539.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.5
+offset_top = -345.5
+offset_right = 375.5
+offset_bottom = 345.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_edxbm")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="SettingsPanel/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -374.5
+offset_right = 374.5
+offset_bottom = 154.0
+grow_horizontal = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_mhj4j")
+horizontal_alignment = 1
+
+[node name="close_button" type="Button" parent="SettingsPanel/TextureRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 9.0
+offset_right = -10.0
+offset_bottom = 72.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "X"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -365.0
+offset_top = -560.0
+offset_right = 365.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="SettingsPanel/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_s48a2")
+horizontal_alignment = 1
+
+[node name="Audio Settings" type="VBoxContainer" parent="SettingsPanel/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Master Volume" type="HBoxContainer" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/Master Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.38
+text = "Master"
+label_settings = SubResource("LabelSettings_7x5sl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/Master Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="LineEdit" type="LineEdit" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/Master Volume"]
+layout_mode = 2
+
+[node name="Music Volume" type="HBoxContainer" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/Music Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.38
+text = "Music"
+label_settings = SubResource("LabelSettings_7x5sl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/Music Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="LineEdit" type="LineEdit" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/Music Volume"]
+layout_mode = 2
+
+[node name="SFX Volume" type="HBoxContainer" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/SFX Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.38
+text = "SFX"
+label_settings = SubResource("LabelSettings_7x5sl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/SFX Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="LineEdit" type="LineEdit" parent="SettingsPanel/TextureRect/VBoxContainer/Audio Settings/SFX Volume"]
+layout_mode = 2
+
 [connection signal="pressed" from="VBoxContainer/back_to_game_button" to="." method="_on_back_to_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/disconnect_from_server" to="." method="_on_disconnect_from_server_pressed"]
+[connection signal="pressed" from="SettingsPanel/TextureRect/close_button" to="." method="_on_close_button_pressed"]

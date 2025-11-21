@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://ctlmmg00w3i14"]
+
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_2juvn"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_8m74h"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_7scqo"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="2_gleum"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_ofa2u"]
+[ext_resource type="Script" uid="uid://bcwfjrechyjc" path="res://_scripts/resources/EventResources/DiscardEvent.gd" id="4_j30nk"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="5_2juvn"]
+[ext_resource type="Texture2D" uid="uid://ca2ya01c2rmb0" path="res://art/card_art/Outcasts/AsheGem.png" id="8_5oma3"]
+
+[sub_resource type="Resource" id="Resource_5oma3"]
+script = ExtResource("2_gleum")
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_nv2v3"]
+script = ExtResource("4_j30nk")
+selection_type = 1
+metadata/_custom_type_script = "uid://bcwfjrechyjc"
+
+[sub_resource type="Resource" id="Resource_ivqpg"]
+script = ExtResource("1_8m74h")
+bullet_type = 1
+is_multi_event = true
+bullet_event = SubResource("Resource_5oma3")
+bullet_events = Array[ExtResource("3_ofa2u")]([SubResource("Resource_5oma3"), SubResource("Resource_nv2v3")])
+bullet_description = "On interact: Gain 1 Deleon and discard this card."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_7scqo")
+title = "Ashe Gem"
+type = 5
+game_origin = 25
+bullets = Array[ExtResource("1_8m74h")]([SubResource("Resource_ivqpg")])
+card_art = ExtResource("8_5oma3")
+background_art = ExtResource("1_2juvn")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

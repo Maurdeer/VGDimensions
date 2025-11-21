@@ -48,6 +48,8 @@ func add_card_under(card: Card) -> void:
 		return
 	deck_array.push_back(card)
 	update_card_deck_poses()
+	
+	if card.get_parent(): card.get_parent().remove_child(card)
 		
 func get_top_card() -> Card:
 	if deck_size <= 0: return null
@@ -108,6 +110,7 @@ func is_empty() -> bool:
 func display_card(card: Card) -> void:
 	if not card in deck_array: return
 	add_child(card)
+	#card.card_sm.transition_to_state(CardStateMachine.StateType.IN_DECK)
 	if flipped: 
 		card.flip_reveal()
 	else: 

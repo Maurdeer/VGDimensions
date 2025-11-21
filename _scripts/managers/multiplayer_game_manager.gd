@@ -1,17 +1,16 @@
 extends GameManager
 class_name MultiplayerGameManager
 @onready var chat: Chat = $Chat
-@onready var name_label: Label = $PlayerHandUI/name_label
-
+@onready var name_label: Label = $PlayerHandUI/TextureRect/name_label
 
 var player_turn_queue: Array[int]
 var curr_turn: int
 var random_seed: int
+var created_player_hand: bool = false
 
 func _ready() -> void:
 	if multiplayer.is_server():
 		GNM.all_players_loaded.connect(_start_game)
-	CardManager.create_card(initial_quest_card)
 	super._ready()
 	
 func _after_ready() -> void:
@@ -23,11 +22,47 @@ func _after_ready() -> void:
 func _start_game() -> void:
 	if not multiplayer.is_server(): return
 	chat.create_message.rpc("Game Will Start!")
-	CardManager.create_card(initial_quest_card)
+	#CardManager.create_card(initial_quest_card)
 	setup_peers()
 	setup_card_shop()
-	setup_rift_grid()
+	setup_wheel()
 	create_cards_for_player_hand()
+	dimension_select() # Will begin our loop
+	
+func setup_wheel() -> void:
+	_setup_wheel_rpc.rpc()
+	
+@rpc("any_peer", "call_local", "reliable")
+func _setup_wheel_rpc() -> void:
+	super.setup_wheel()
+	
+func dimension_select():
+	selected_dimension = rigged_dimensions.pick_random()
+	rigged_dimensions.erase(selected_dimension)
+	launch_wheel_rpc.rpc(selected_dimension)
+
+@rpc("any_peer", "call_local", "reliable")
+func launch_wheel_rpc(dimension_picked: String):
+	selected_dimension = dimension_picked
+	rift_grid.clear_grid()
+	#await the_wheel.descend()
+	the_wheel.descend(selected_dimension)
+	var quest_card = CardManager.create_card_locally(dimension_dictionary[selected_dimension].quest_card, false)
+	QuestManager.Instance.add_quest(quest_card)
+	await the_wheel.wheel_done
+	QuestManager.Instance.reveal_quest()
+	await get_tree().create_timer(2).timeout
+	the_wheel.ascend()
+	
+	if multiplayer.is_server():
+		setup_dimension()
+	
+	AudioManager.play_music(dimension_dictionary[selected_dimension].music)
+	await get_tree().create_timer(4).timeout
+	the_wheel.dimension_list.erase(selected_dimension)
+	
+func setup_dimension():
+	setup_rift_grid()
 	_setup_player_turn.rpc(player_turn_queue[curr_turn])
 
 func start_next_turn() -> void:
@@ -53,7 +88,7 @@ func _start_next_turn() -> void:
 	
 func create_cards_for_player_hand():
 	_create_cards_for_player_hand_rpc.rpc()
-	
+		
 @rpc("any_peer", "call_local", "reliable")
 func _create_cards_for_player_hand_rpc():
 	var player_hand_cards: Array[Card] = CardManager.create_cards_from_packs([initial_hand_card_pack])
@@ -85,6 +120,8 @@ func end_local_play_turn() -> void:
 	reset_temporary_resources()
 	
 func is_my_turn() -> bool:
+	if not multiplayer:
+		return false
 	return player_turn_queue.size() <= 0 or multiplayer.get_unique_id() == player_turn_queue[curr_turn]
 	
 func setup_card_shop():
@@ -113,8 +150,29 @@ func _on_victory() -> void:
 		get_tree().change_scene_to_file("res://_scenes/win_screen.tscn")
 	else:
 		get_tree().change_scene_to_file("res://_scenes/lose_screen.tscn")
+		
+@rpc("any_peer", "call_local", "reliable")
+func _on_quest_completed_rpc() -> void:
+	var winner: bool = multiplayer.get_unique_id() == multiplayer.get_remote_sender_id()
+	QuestManager.Instance.remove_quest()
+	if winner:
+		PlayerStatistics.dimensions_won += 1
+		if PlayerStatistics.dimensions_won >= 2:
+			game_victory()
+			return
+			
+	if is_my_turn():
+		end_local_play_turn()
+		
+	rift_grid.clear_grid()
+	
+	if multiplayer.is_server():
+		dimension_select()
 	
 func game_victory() -> void:
 	# only the winner calls this, so 
 	_on_victory.rpc()
+	
+func on_quest_completed() -> void:
+	_on_quest_completed_rpc.rpc()
 	

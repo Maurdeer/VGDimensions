@@ -1,0 +1,278 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3e8058lwu0a"]
+
+[ext_resource type="Script" uid="uid://ctp2cmjlkd2n6" path="res://_scripts/card/card.gd" id="1_q5obu"]
+[ext_resource type="Resource" uid="uid://cx8yypimalqcf" path="res://cards/BuffGuy.tres" id="2_oyue5"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="3_2ol5b"]
+[ext_resource type="Texture2D" uid="uid://bvpweyg4quhuk" path="res://art/blankcard.png" id="3_7ystx"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="3_uhl3e"]
+[ext_resource type="Texture2D" uid="uid://cwqdl7hd2sm6" path="res://art/card_back.png" id="4_7ystx"]
+[ext_resource type="Script" uid="uid://dq3tnbquciau0" path="res://_scripts/components2D/dnd_component2D.gd" id="4_f61jr"]
+[ext_resource type="PackedScene" uid="uid://bufxhut03l01j" path="res://_scenes/card/card_visualizer.tscn" id="4_pots7"]
+[ext_resource type="PackedScene" uid="uid://co6hom85w8oad" path="res://_scenes/card/gridcard_visualizer.tscn" id="6_dkfrl"]
+[ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="8_2ol5b"]
+[ext_resource type="Script" uid="uid://d1y23uhkdag2" path="res://_scripts/card/card_state_machine.gd" id="9_uhl3e"]
+
+[sub_resource type="Animation" id="Animation_ajdvn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_visualizer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.177, 0.177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_back:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0.177)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_back:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hkicm"]
+resource_name = "flip_hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_back:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00152054, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(1e-05, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_visualizer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177, 0.177), Vector2(0, 0.177)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("gridcard_back:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(1e-05, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("gridcard_visualizer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177, 0.177), Vector2(0, 0.177)]
+}
+
+[sub_resource type="Animation" id="Animation_wb4pw"]
+resource_name = "flip_reveal"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card_visualizer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(0, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_back:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177352, 0.177352), Vector2(0, 0.177)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("gridcard_visualizer:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0.177), Vector2(0, 0.177), Vector2(0.177, 0.177)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("gridcard_back:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.177352, 0.177352), Vector2(0, 0.177)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("card_back:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1000000, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("gridcard_back:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1000000, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51bko"]
+_data = {
+&"RESET": SubResource("Animation_ajdvn"),
+&"flip_hide": SubResource("Animation_hkicm"),
+&"flip_reveal": SubResource("Animation_wb4pw")
+}
+
+[sub_resource type="Resource" id="Resource_u8xt1"]
+script = ExtResource("3_uhl3e")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
+
+[node name="Card" type="Node2D"]
+scale = Vector2(0.55, 0.55)
+script = ExtResource("1_q5obu")
+resource = ExtResource("2_oyue5")
+
+[node name="card_visualizer" parent="." node_paths=PackedStringArray("card") instance=ExtResource("4_pots7")]
+use_parent_material = true
+card = NodePath("..")
+card_resource = ExtResource("2_oyue5")
+
+[node name="card_back" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(4.76837e-06, 0)
+scale = Vector2(1e-05, 0.177)
+
+[node name="card_background2" type="Sprite2D" parent="card_back"]
+clip_children = 2
+position = Vector2(-2.69399e-05, 0)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_7ystx")
+
+[node name="image" type="Sprite2D" parent="card_back/card_background2"]
+clip_children = 2
+position = Vector2(-14.0076, 0)
+scale = Vector2(3.94079, 3.32063)
+texture = ExtResource("4_7ystx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_51bko")
+}
+speed_scale = 3.0
+
+[node name="gridcard_back" type="Sprite2D" parent="."]
+visible = false
+clip_children = 2
+position = Vector2(4.76837e-06, 0)
+scale = Vector2(0.177352, 0.177352)
+
+[node name="background" type="Sprite2D" parent="gridcard_back"]
+clip_children = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_2ol5b")
+
+[node name="image" type="Sprite2D" parent="gridcard_back/background"]
+position = Vector2(-29.290972, 248.97292)
+scale = Vector2(4.5153637, 4.5153637)
+texture = ExtResource("4_7ystx")
+
+[node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
+visible = false
+scale = Vector2(1e-05, 0.177)
+card_resource = SubResource("Resource_u8xt1")
+
+[node name="gridcard_shape" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -109.090904
+offset_top = -109.090904
+offset_right = 109.090904
+offset_bottom = 109.090904
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+script = ExtResource("4_f61jr")
+
+[node name="card_shape" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -170.90909
+offset_top = -238.18181
+offset_right = 170.90909
+offset_bottom = 239.99998
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+script = ExtResource("4_f61jr")
+
+[node name="CardSM" type="Node" parent="."]
+script = ExtResource("9_uhl3e")
+
+[connection signal="gui_input" from="gridcard_shape" to="." method="_on_gridcard_shape_gui_input"]
+[connection signal="mouse_entered" from="gridcard_shape" to="gridcard_shape" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="gridcard_shape" to="gridcard_shape" method="_on_mouse_exited"]
+[connection signal="gui_input" from="card_shape" to="." method="_on_card_shape_gui_input"]
+[connection signal="mouse_entered" from="card_shape" to="card_shape" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="card_shape" to="card_shape" method="_on_mouse_exited"]

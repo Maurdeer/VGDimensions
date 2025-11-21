@@ -3,6 +3,7 @@ class_name DamageEvent
 
 @export var selection_type: SelectionEventResource.SelectionType = SelectionEventResource.SelectionType.RIFT
 @export var amount: int
+@export var adjacent_only : bool
 
 const target_card_at: int = 0
 func on_execute() -> bool:
@@ -17,4 +18,5 @@ func required_events() -> Array[EventResource]:
 	var selection: SelectionEventResource = SelectionEventResource.new()
 	selection.store_at = target_card_at
 	selection.type = selection_type
+	if adjacent_only: selection.filter = RiftCardSelector.Instance.adjacent_only(m_card_invoker)
 	return [selection]

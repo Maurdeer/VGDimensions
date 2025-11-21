@@ -1,16 +1,19 @@
-[gd_scene load_steps=28 format=3 uid="uid://b78acuqchwjyj"]
+[gd_scene load_steps=36 format=3 uid="uid://b78acuqchwjyj"]
 
 [ext_resource type="Script" uid="uid://cr72hv20q381p" path="res://_scripts/managers/game_manager.gd" id="1_3y3hc"]
 [ext_resource type="Resource" uid="uid://8hs1si2p5kxw" path="res://card_packs/StarterDeck.tres" id="2_5x1ca"]
+[ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="3_huwjo"]
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="3_jd3sr"]
 [ext_resource type="Resource" uid="uid://b66r18jp8ponq" path="res://card_packs/FromNavaPack.tres" id="4_huwjo"]
 [ext_resource type="Resource" uid="uid://r50g8fx1bja5" path="res://card_packs/OutcastsItemPack.tres" id="5_5wpnl"]
 [ext_resource type="Resource" uid="uid://ddtpetavhnuc0" path="res://card_packs/FromNavaItemPack.tres" id="6_wxbsy"]
+[ext_resource type="Resource" uid="uid://ytv15oyix42d" path="res://card_packs/OutcastsPack.tres" id="7_5wpnl"]
 [ext_resource type="Resource" uid="uid://c1ciuxwp3folr" path="res://card_packs/WillowItemPack.tres" id="7_cd0cq"]
 [ext_resource type="Shader" uid="uid://cyc3ken2k7hyv" path="res://external_work/chrizz/balatro.tres" id="8_c2tc1"]
 [ext_resource type="PackedScene" uid="uid://bgrqj32tibok0" path="res://_scenes/card_containers/rift_grid.tscn" id="10_c2s8n"]
 [ext_resource type="Script" uid="uid://drhyp4uo8taws" path="res://external_work/joseph/QuestManager.gd" id="12_3qfnp"]
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="13_2thif"]
+[ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="13_k3prr"]
 [ext_resource type="Script" uid="uid://dhxp530wfdh4e" path="res://_scripts/ui/player_stats_ui.gd" id="14_mkmui"]
 [ext_resource type="Texture2D" uid="uid://bhxsnpgegdxuk" path="res://art/blankgridcard.png" id="15_kw02p"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="16_7hw7e"]
@@ -21,7 +24,25 @@
 [ext_resource type="PackedScene" uid="uid://chx38irjvtuj1" path="res://_scenes/card_shop_UI.tscn" id="21_34wvw"]
 [ext_resource type="PackedScene" uid="uid://g2ssr3tyqdis" path="res://_scenes/ui/chat.tscn" id="22_e0rbx"]
 [ext_resource type="PackedScene" uid="uid://452m5n540tv1" path="res://_scenes/card/card_viewer.tscn" id="23_fn044"]
+[ext_resource type="Script" uid="uid://d1sug2on8v3c4" path="res://_scripts/ui/ui_manager.gd" id="23_qt330"]
 [ext_resource type="PackedScene" uid="uid://j7pqrrms4ivv" path="res://_scenes/ui/pause_menu.tscn" id="24_7qvlh"]
+[ext_resource type="PackedScene" uid="uid://c71uoxlt0gksi" path="res://_scenes/ui/deck_inspector.tscn" id="25_5x1ca"]
+[ext_resource type="PackedScene" uid="uid://bbpdi5v1c5ch" path="res://external_work/brett/spin_that_wheel/the_wheel.tscn" id="25_jd3sr"]
+
+[sub_resource type="Resource" id="Resource_5wpnl"]
+script = ExtResource("3_huwjo")
+card_packs = Array[ExtResource("3_jd3sr")]([ExtResource("4_huwjo")])
+game_name = "From Nava"
+quest_card = ExtResource("13_2thif")
+music = "FromNava"
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
+
+[sub_resource type="Resource" id="Resource_wxbsy"]
+script = ExtResource("3_huwjo")
+card_packs = Array[ExtResource("3_jd3sr")]([ExtResource("7_5wpnl")])
+game_name = "Outcasts"
+music = "Outcasts"
+metadata/_custom_type_script = "uid://ce2h3rysiqvu1"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hvy2v"]
 shader = ExtResource("8_c2tc1")
@@ -40,7 +61,7 @@ font_size = 30
 font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ccn5w"]
-font_size = 30
+font_size = 32
 font_color = Color(0, 0, 0, 1)
 
 [node name="singleplayer" type="Control" node_paths=PackedStringArray("rift_grid")]
@@ -53,7 +74,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_3y3hc")
 initial_hand_card_pack = ExtResource("2_5x1ca")
-rift_card_pack = Array[ExtResource("3_jd3sr")]([ExtResource("4_huwjo")])
+dimensions = Array[ExtResource("3_huwjo")]([SubResource("Resource_5wpnl"), SubResource("Resource_wxbsy")])
+rigged_dimensions = Array[String](["From Nava"])
 shop_initial_packs = Array[ExtResource("3_jd3sr")]([ExtResource("6_wxbsy"), ExtResource("7_cd0cq"), ExtResource("5_5wpnl")])
 infinite_resources = true
 rift_grid = NodePath("RiftGrid")
@@ -66,6 +88,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("CanvasTexture_5f5da")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -73,14 +96,7 @@ anchor_mode = 0
 
 [node name="RiftGrid" parent="." instance=ExtResource("10_c2s8n")]
 layout_mode = 1
-anchors_preset = 5
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = 248.0
-offset_top = 344.0
-offset_right = 248.0
-offset_bottom = 344.0
-grow_vertical = 1
+scale = Vector2(1.25, 1.25)
 
 [node name="QuestManager" type="Control" parent="RiftGrid"]
 layout_mode = 1
@@ -89,10 +105,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 596.0
-offset_top = 9.0
-offset_right = 636.0
-offset_bottom = 49.0
+offset_left = -495.2
+offset_top = -46.400017
+offset_right = -290.39996
+offset_bottom = 198.39996
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("12_3qfnp")
@@ -101,64 +117,72 @@ metadata/_custom_type_script = "uid://drhyp4uo8taws"
 
 [node name="PlayerHandUI" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -713.0
-offset_top = -148.0
-offset_right = -713.0
-offset_bottom = -148.0
-grow_horizontal = 0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerStatsUI" type="HBoxContainer" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message")]
-layout_mode = 0
-offset_left = -159.0
-offset_top = -185.0
-offset_right = -119.0
-offset_bottom = -145.0
-theme_override_constants/separation = 204
+[node name="PlayerStatsUI" type="Control" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message", "wins_amount")]
+anchors_preset = 0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 1922.0
+offset_bottom = 1081.0
+mouse_filter = 2
 script = ExtResource("14_mkmui")
 deleon_amount = NodePath("Deleon/TextureRect/HBoxContainer/Label")
 action_amount = NodePath("Action/TextureRect/HBoxContainer/Label")
 social_amount = NodePath("Social/TextureRect/HBoxContainer/Label")
-polariod_amount = NodePath("Message/Polaroids/TextureRect/HBoxContainer/Label")
+polariod_amount = NodePath("Polaroids/TextureRect/HBoxContainer/Label")
 message = NodePath("Message/TextureRect/Label")
+wins_amount = NodePath("Wins/TextureRect/HBoxContainer/Label")
 
 [node name="Deleon" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 694.0
+offset_top = -1022.0
+offset_right = 694.0
+offset_bottom = -1022.0
+grow_vertical = 0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Deleon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -38.0
-offset_right = 50.0
-offset_bottom = 48.0
+offset_left = -101.0
+offset_top = -50.0
+offset_right = 103.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("15_kw02p")
-expand_mode = 1
+texture = ExtResource("13_k3prr")
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -81.0
-offset_top = 6.0
+offset_top = -29.5
 offset_right = 81.0
-offset_bottom = 65.0
+offset_bottom = 29.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Deleon/TextureRect/HBoxContainer"]
@@ -176,10 +200,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Action" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -404.0
+offset_right = -71.0
+offset_bottom = -404.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action"]
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Action"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -192,20 +227,25 @@ offset_right = 50.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 texture = ExtResource("15_kw02p")
-expand_mode = 1
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -81.0
-offset_top = 6.0
+offset_top = -29.5
 offset_right = 81.0
-offset_bottom = 65.0
+offset_bottom = 29.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Action/TextureRect/HBoxContainer"]
@@ -223,10 +263,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Social" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -297.0
+offset_right = -73.0
+offset_bottom = -297.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social"]
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI/PlayerStatsUI/Social"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -239,20 +290,25 @@ offset_right = 50.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 texture = ExtResource("15_kw02p")
-expand_mode = 1
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -81.0
-offset_top = 6.0
+offset_top = -29.5
 offset_right = 81.0
-offset_bottom = 65.0
+offset_bottom = 29.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="icon" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Social/TextureRect/HBoxContainer"]
@@ -269,19 +325,15 @@ label_settings = SubResource("LabelSettings_u4bsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI/Message"]
+[node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
 anchors_preset = 0
-offset_left = -14.0
-offset_top = -59.0
-offset_right = 323.0
-offset_bottom = -19.0
+offset_left = 923.0
+offset_top = 36.0
+offset_right = 1260.0
+offset_bottom = 76.0
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids"]
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Polaroids"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -298,7 +350,7 @@ mouse_filter = 2
 texture = ExtResource("15_kw02p")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Polaroids/TextureRect"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -310,19 +362,78 @@ offset_bottom = 65.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect/HBoxContainer"]
+[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Polaroids/TextureRect/HBoxContainer"]
 layout_mode = 2
 text = "Polaroids:"
 label_settings = SubResource("LabelSettings_u4bsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect/HBoxContainer"]
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Polaroids/TextureRect/HBoxContainer"]
 layout_mode = 2
 text = "9999"
 label_settings = SubResource("LabelSettings_u4bsf")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Wins" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+anchors_preset = 0
+offset_left = 1272.0
+offset_top = 36.0
+offset_right = 1609.0
+offset_bottom = 76.0
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Wins"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.5
+offset_top = -41.0
+offset_right = 50.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Wins/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Wins/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "Wins:"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Wins/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+anchors_preset = 0
+offset_left = 1689.0
+offset_top = 128.0
+offset_right = 1689.0
+offset_bottom = 128.0
+size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message"]
 layout_mode = 1
@@ -331,10 +442,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -38.0
-offset_right = 221.0
-offset_bottom = 48.0
+offset_left = -146.0
+offset_top = -107.0
+offset_right = 216.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -351,54 +462,87 @@ label_settings = SubResource("LabelSettings_kgmkq")
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="player_hand" parent="PlayerHandUI" instance=ExtResource("20_1nh7j")]
-scale = Vector2(0.9, 0.9)
+[node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI"]
+layout_mode = 1
+offset_left = 9.0
+offset_top = 14.0
+offset_right = 583.0
+offset_bottom = 94.0
+texture = ExtResource("15_kw02p")
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
 
-[node name="name_label" type="Label" parent="PlayerHandUI"]
-layout_mode = 0
-offset_left = -662.0
-offset_top = -186.0
-offset_right = -315.0
-offset_bottom = -134.0
+[node name="name_label" type="Label" parent="PlayerHandUI/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Player Name"
 label_settings = SubResource("LabelSettings_ccn5w")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+
+[node name="player_hand" parent="PlayerHandUI" node_paths=PackedStringArray("deck_inspector") instance=ExtResource("20_1nh7j")]
+layout_mode = 1
+deck_inspector = NodePath("../../DeckInspector")
 
 [node name="next_turn_button" type="Button" parent="."]
-visible = false
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -237.0
-offset_top = 13.0
-offset_right = -9.516113
-offset_bottom = 69.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -516.0
+offset_right = -12.516113
+offset_bottom = -460.0
 grow_horizontal = 0
-text = "Next Turn"
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "End Turn"
 
 [node name="CardShopUI" parent="." instance=ExtResource("21_34wvw")]
-position = Vector2(0, 129)
+layout_mode = 1
+offset_top = -76.0
+offset_bottom = -76.0
 
 [node name="Chat" parent="." instance=ExtResource("22_e0rbx")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.006
-anchor_top = 0.63100004
+anchor_top = 0.69100004
 anchor_right = 0.26500002
 anchor_bottom = 0.989
 offset_left = -0.53200054
-offset_top = 0.25793457
+offset_top = -0.2800293
 offset_right = -0.3300171
 offset_bottom = -0.09802246
+mouse_filter = 2
+
+[node name="GUI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 249.0
+offset_bottom = 163.0
+mouse_filter = 2
+script = ExtResource("23_qt330")
+
+[node name="DeckInspector" parent="." instance=ExtResource("25_5x1ca")]
+layout_mode = 1
 
 [node name="CardViewer" parent="." instance=ExtResource("23_fn044")]
 visible = false
 layout_mode = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("24_7qvlh")]
+layout_mode = 1
+
+[node name="TheWheel" parent="." instance=ExtResource("25_jd3sr")]
 layout_mode = 1
 
 [connection signal="pressed" from="next_turn_button" to="." method="_on_next_turn_button_pressed"]
