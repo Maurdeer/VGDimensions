@@ -102,6 +102,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0.177, 0.177), Vector2(0, 0.177)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("card_back:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1000000),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("gridcard_back:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1000000),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_wb4pw"]
 resource_name = "flip_reveal"
@@ -230,7 +254,7 @@ speed_scale = 3.0
 visible = false
 clip_children = 2
 position = Vector2(4.76837e-06, 0)
-scale = Vector2(0.177352, 0.177352)
+scale = Vector2(1e-05, 0.177)
 
 [node name="background" type="Sprite2D" parent="gridcard_back"]
 clip_children = 2
@@ -244,7 +268,6 @@ texture = ExtResource("4_7ystx")
 
 [node name="gridcard_visualizer" parent="." instance=ExtResource("6_dkfrl")]
 visible = false
-scale = Vector2(1e-05, 0.177)
 card_resource = SubResource("Resource_u8xt1")
 
 [node name="gridcard_shape" type="Control" parent="."]

@@ -11,6 +11,7 @@ const hand_draw_limit: int = 5
 @onready var slots: HBoxContainer = $hand_region/Slots
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var draw_pile_size_label: Label = $NinePatchRect2/HBoxContainer/VBoxContainer2/DrawPile/Label
+@onready var discard_pile_size_label: Label = $NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile/Label2
 
 var empty_card: Card
 var slot_queue: Array[Control]
@@ -105,12 +106,14 @@ func draw_card_to_hand() -> bool:
 func reshuffle_draw_pile() -> void:
 	draw_pile.mergeDeck(discard_pile)
 	draw_pile_size_label.text = "%s" % draw_pile.deck_size
+	discard_pile_size_label.text = "%s" % discard_pile.deck_size
 	draw_pile.shuffleDeck()
 	
 # adds to discard pile ONLY
 func add_to_discard(card: Card) -> void:
 	card.grid_pos = Vector2i(-1, -1)
 	discard_pile.addCard(card)
+	discard_pile_size_label.text = "%s" % discard_pile.deck_size
 	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 func add_to_draw_pile(card: Card) -> void:
@@ -123,6 +126,7 @@ func discard_card(card: Card) -> void:
 	remove_card_from_hand(card)
 	card.grid_pos = Vector2i(-1, -1)
 	discard_pile.addCard(card)
+	discard_pile_size_label.text = "%s" % discard_pile.deck_size
 	card.card_sm.transition_to_state(CardStateMachine.StateType.UNDEFINED)
 	
 func remove_card_from_hand(card: Card) -> void:

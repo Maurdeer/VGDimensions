@@ -10,15 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://tv4w2lagffrf" path="res://art/card_ui/social.png" id="7_7senp"]
 [ext_resource type="Texture2D" uid="uid://bi5onoqlrvjri" path="res://art/card_ui/passive.png" id="8_y3o18"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_gsy7b"]
-font_size = 32
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_7senp"]
 font = ExtResource("4_7vlg1")
 font_size = 100
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gsy7b"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ovsbo"]
 length = 0.001
@@ -191,6 +191,24 @@ size_flags_vertical = 2
 [node name="Deck" type="Node2D" parent="NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile"]
 script = ExtResource("2_l6uod")
 flipped = true
+
+[node name="Label2" type="Label" parent="NinePatchRect2/HBoxContainer/VBoxContainer/DiscardPile"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -54.0
+offset_right = 90.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "32"
+label_settings = SubResource("LabelSettings_7senp")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="NinePatchRect2/HBoxContainer/VBoxContainer"]
 layout_mode = 2
