@@ -47,10 +47,12 @@ func launch_wheel_rpc(dimension_picked: String):
 	#await the_wheel.descend()
 	the_wheel.descend(selected_dimension)
 	var quest_card = CardManager.create_card_locally(dimension_dictionary[selected_dimension].quest_card, false)
+	QuestManager.Instance.add_quest(quest_card)
 	await the_wheel.wheel_done
+	QuestManager.Instance.reveal_quest()
 	await get_tree().create_timer(2).timeout
 	the_wheel.ascend()
-	QuestManager.Instance.add_quest(quest_card)
+	
 	if multiplayer.is_server():
 		setup_dimension()
 	

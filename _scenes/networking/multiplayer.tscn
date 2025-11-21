@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://vlbi622x6nho" path="res://cards/From Nava/ThroughTheLens.tres" id="6_vw4oh"]
 [ext_resource type="Resource" uid="uid://ytv15oyix42d" path="res://card_packs/OutcastsPack.tres" id="7_4glm7"]
 [ext_resource type="Resource" uid="uid://cb4mmmoirfemr" path="res://card_packs/WillowPack.tres" id="8_gethx"]
-[ext_resource type="Resource" uid="uid://r3nntk0qy8l3" path="res://cards/Willow/TheCostOfAdmission.tres" id="9_u7dbv"]
+[ext_resource type="Resource" uid="uid://ckjjtm1swfj6p" path="res://cards/Willow/TheCostOfAdmission.tres" id="9_u7dbv"]
 
 [sub_resource type="Resource" id="Resource_5wpnl"]
 script = ExtResource("3_wvlfi")

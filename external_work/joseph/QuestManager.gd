@@ -23,9 +23,15 @@ func add_quest(card : Card):
 	currentQuest = card
 	add_child(currentQuest)
 	currentQuest.card_sm.transition_to_state(CardStateMachine.StateType.IN_QUEST)
-	currentQuest.flip_reveal()
+	currentQuest.flip_hide()
 	print("Quest added succesfully!")
 	return true
+	
+func reveal_quest():
+	if (currentQuest == null): 
+		print("There is no current quest to reveal!")
+		return
+	currentQuest.flip_reveal()
 
 func remove_quest():
 	if (currentQuest == null):
