@@ -18,7 +18,7 @@
 [node name="multiplayer" instance=ExtResource("1_l7x4r")]
 script = ExtResource("1_7aq5h")
 dimensions = Array[ExtResource("3_wvlfi")]([ExtResource("4_u7dbv"), ExtResource("5_7aq5h"), ExtResource("6_vw4oh"), ExtResource("7_4glm7"), ExtResource("8_gethx"), ExtResource("9_f2c4h")])
-rigged_dimensions = Array[String](["From Nava", "Willow"])
+rigged_dimensions = Array[String](["Outcasts", "From Nava", "Willow"])
 shop_initial_packs = Array[ExtResource("10_f2c4h")]([ExtResource("11_d51l6"), ExtResource("12_62nay"), ExtResource("13_e1t0q"), ExtResource("14_atenx")])
 
 [node name="next_turn_button" parent="." index="4"]

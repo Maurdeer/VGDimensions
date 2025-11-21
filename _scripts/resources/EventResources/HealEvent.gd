@@ -9,7 +9,7 @@ const selected_card_int: int = 0
 func on_execute() -> bool:
 	var target_card : Card = m_card_refs[selected_card_int]
 	if (cap_at_starting_hp):
-		target_card.hp = min(target_card.hp + heal_amount, target_card.resource.hp)
+		target_card.hp = min(target_card.hp + heal_amount, target_card.resource.starting_hp)
 	else:
 		target_card.hp += heal_amount
 	return false

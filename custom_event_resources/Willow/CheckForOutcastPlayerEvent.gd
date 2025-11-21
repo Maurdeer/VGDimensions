@@ -11,13 +11,16 @@ var ashe_resource : CardResource = load("res://cards/Outcasts/Ashe.tres")
 # This check can't be correct due to 
 func on_execute() -> bool:
 	var top_card : Card = RiftGrid.Instance.get_top_card(m_card_invoker.grid_pos)
+	print("The current card invoker is ", m_card_invoker.resource.title)
 	#print("The current top card is ", top_card.resource.title)
 	if (top_card.resource.title == ashe_resource.title):
+		RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_QUEST_PROGRESS, m_card_invoker)
 		for event in ashe_event:
-			event.on_execute()
+			event.execute(m_card_invoker, m_card_refs)
 	if (top_card.resource.title == tinker_resource.title):
+		RiftGrid.Instance.emit_global_event(PassiveEventResource.GlobalEvent.ON_QUEST_PROGRESS, m_card_invoker)
 		for event in tinker_event:
-			event.on_execute()
+			event.execute(m_card_invoker, m_card_refs)
 	return false
 	
 func required_events() -> Array[EventResource]:
