@@ -511,6 +511,7 @@ offset_top = -76.0
 offset_bottom = -76.0
 
 [node name="Chat" parent="." instance=ExtResource("22_e0rbx")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.006
