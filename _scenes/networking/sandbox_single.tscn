@@ -104,10 +104,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 532.0
-offset_top = -287.2
-offset_right = 736.80005
-offset_bottom = -42.400024
+offset_left = -495.2
+offset_top = -46.400017
+offset_right = -290.39996
+offset_bottom = 198.39996
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("12_3qfnp")
@@ -123,7 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerStatsUI" type="Control" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message")]
+[node name="PlayerStatsUI" type="Control" parent="PlayerHandUI" node_paths=PackedStringArray("deleon_amount", "action_amount", "social_amount", "polariod_amount", "message", "wins_amount")]
 anchors_preset = 0
 offset_left = 2.0
 offset_top = -1.0
@@ -134,18 +134,19 @@ script = ExtResource("14_mkmui")
 deleon_amount = NodePath("Deleon/TextureRect/HBoxContainer/Label")
 action_amount = NodePath("Action/TextureRect/HBoxContainer/Label")
 social_amount = NodePath("Social/TextureRect/HBoxContainer/Label")
-polariod_amount = NodePath("Message/Polaroids/TextureRect/HBoxContainer/Label")
+polariod_amount = NodePath("Polaroids/TextureRect/HBoxContainer/Label")
 message = NodePath("Message/TextureRect/Label")
+wins_amount = NodePath("Wins/TextureRect/HBoxContainer/Label")
 
 [node name="Deleon" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 115.0
-offset_top = -150.0
-offset_right = 115.0
-offset_bottom = -150.0
+offset_left = 694.0
+offset_top = -1022.0
+offset_right = 694.0
+offset_bottom = -1022.0
 grow_vertical = 0
 size_flags_horizontal = 4
 
@@ -323,23 +324,15 @@ label_settings = SubResource("LabelSettings_u4bsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+[node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
 anchors_preset = 0
-offset_left = 1687.0
-offset_top = 133.0
-offset_right = 1687.0
-offset_bottom = 133.0
+offset_left = 923.0
+offset_top = 36.0
+offset_right = 1260.0
+offset_bottom = 76.0
 size_flags_horizontal = 4
 
-[node name="Polaroids" type="Control" parent="PlayerHandUI/PlayerStatsUI/Message"]
-anchors_preset = 0
-offset_left = -1341.0
-offset_top = 780.0
-offset_right = -1004.0
-offset_bottom = 820.0
-size_flags_horizontal = 4
-
-[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids"]
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Polaroids"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -356,7 +349,7 @@ mouse_filter = 2
 texture = ExtResource("15_kw02p")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Polaroids/TextureRect"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -368,19 +361,78 @@ offset_bottom = 65.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
-[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect/HBoxContainer"]
+[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Polaroids/TextureRect/HBoxContainer"]
 layout_mode = 2
 text = "Polaroids:"
 label_settings = SubResource("LabelSettings_u4bsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Message/Polaroids/TextureRect/HBoxContainer"]
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Polaroids/TextureRect/HBoxContainer"]
 layout_mode = 2
 text = "9999"
 label_settings = SubResource("LabelSettings_u4bsf")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Wins" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+anchors_preset = 0
+offset_left = 1272.0
+offset_top = 36.0
+offset_right = 1609.0
+offset_bottom = 76.0
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Wins"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.5
+offset_top = -41.0
+offset_right = 50.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_kw02p")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHandUI/PlayerStatsUI/Wins/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 6.0
+offset_right = 81.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="PlayerHandUI/PlayerStatsUI/Wins/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "Wins:"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PlayerHandUI/PlayerStatsUI/Wins/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "9999"
+label_settings = SubResource("LabelSettings_u4bsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Control" parent="PlayerHandUI/PlayerStatsUI"]
+anchors_preset = 0
+offset_left = 1689.0
+offset_top = 128.0
+offset_right = 1689.0
+offset_bottom = 128.0
+size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHandUI/PlayerStatsUI/Message"]
 layout_mode = 1
@@ -411,17 +463,10 @@ autowrap_mode = 1
 
 [node name="TextureRect" type="NinePatchRect" parent="PlayerHandUI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -948.0
-offset_top = 450.0
-offset_right = -374.0
-offset_bottom = 530.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 9.0
+offset_top = 14.0
+offset_right = 583.0
+offset_bottom = 94.0
 texture = ExtResource("15_kw02p")
 patch_margin_left = 40
 patch_margin_top = 40
@@ -462,17 +507,18 @@ text = "End Turn"
 
 [node name="CardShopUI" parent="." instance=ExtResource("21_34wvw")]
 layout_mode = 1
+offset_top = -76.0
+offset_bottom = -76.0
 
 [node name="Chat" parent="." instance=ExtResource("22_e0rbx")]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.006
-anchor_top = 0.63100004
+anchor_top = 0.69100004
 anchor_right = 0.26500002
 anchor_bottom = 0.989
 offset_left = -0.53200054
-offset_top = 0.25793457
+offset_top = -0.2800293
 offset_right = -0.3300171
 offset_bottom = -0.09802246
 mouse_filter = 2

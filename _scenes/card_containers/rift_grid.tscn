@@ -29,10 +29,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -442.0
-offset_top = -46.0
-offset_right = -442.0
-offset_bottom = -46.0
+offset_left = -230.0
+offset_top = -699.0
+offset_right = -230.0
+offset_bottom = -699.0
 grow_horizontal = 0
 size_flags_horizontal = 2
 size_flags_vertical = 4
@@ -42,15 +42,17 @@ script = ExtResource("3_l8qsw")
 flipped = true
 metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
 
+[node name="Card" parent="Control/DiscardPile" instance=ExtResource("4_o8edh")]
+
 [node name="Control2" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 399.0
-offset_top = -39.0
-offset_right = 399.0
-offset_bottom = -39.0
+offset_left = 29.0
+offset_top = -698.0
+offset_right = 29.0
+offset_bottom = -698.0
 grow_horizontal = 0
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -58,6 +60,8 @@ size_flags_vertical = 4
 [node name="DrawPile" type="Node2D" parent="Control2"]
 script = ExtResource("3_l8qsw")
 metadata/_custom_type_script = "uid://b8w3xx7rbfgxj"
+
+[node name="Card" parent="Control2/DrawPile" instance=ExtResource("4_o8edh")]
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("4_rrgr0")

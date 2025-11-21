@@ -4,6 +4,7 @@ extends Control
 @export var social_amount: Label
 @export var polariod_amount: Label
 @export var message: Label
+@export var wins_amount: Label
 
 
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _update_ui() -> void:
 	action_amount.text = "%s" % PlayerStatistics.actions
 	social_amount.text = "%s" % PlayerStatistics.socials
 	polariod_amount.text = "%s" % PlayerStatistics.from_nava_polaroids
+	wins_amount.text = "%s" % PlayerStatistics.dimensions_won
 	
 func _on_player_stats_resource_spend_fail(type: PlayerStatistics.ResourceType):
 	match(type):
