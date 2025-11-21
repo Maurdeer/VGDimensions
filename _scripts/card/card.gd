@@ -63,6 +63,9 @@ enum CardDirection {
 	NORTH_WEST
 }
 var card_dir: CardDirection
+var can_activate: bool = true #used to activate a action only once per turn.
+#Used for Sleighers Team points
+var sleighers_team = PlayerStatistics.SleighersTeam.NEUTRAL
 
 # Dynamic Bullet Functions
 var play_bullets: Array[BulletResource]

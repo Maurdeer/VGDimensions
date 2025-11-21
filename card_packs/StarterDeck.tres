@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("2_gmdg0")
 card_resources = Dictionary[ExtResource("1_2dj4a"), int]({
-ExtResource("2_0pbts"): 5,
+ExtResource("2_0pbts"): 20,
 ExtResource("3_bfju4"): 5
 })
 metadata/_custom_type_script = "uid://div70lvrir1m0"

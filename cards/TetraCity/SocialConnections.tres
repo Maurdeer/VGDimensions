@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=16 format=3 uid="uid://fckn887eitah"]
+
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_730k3"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="2_ic4vc"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_q4b1g"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="4_1x0wk"]
+[ext_resource type="Script" uid="uid://eoq3ah17rnyo" path="res://_scripts/resources/EventResources/MultiEvent.gd" id="5_c42lq"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="6_s0kgq"]
+[ext_resource type="Script" uid="uid://cla17ebx8p6c6" path="res://custom_event_resources/TetraCity/TargetSqaureGainResurceEvent.gd" id="7_eljrm"]
+[ext_resource type="Texture2D" uid="uid://75ognrpg03fu" path="res://art/card_art/TetraCity/SocialConnections.png" id="8_e31bs"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="9_cupyp"]
+
+[sub_resource type="Resource" id="Resource_1edaj"]
+script = ExtResource("4_1x0wk")
+type = 1
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_1r1rn"]
+script = ExtResource("4_1x0wk")
+type = 2
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_63iq6"]
+script = ExtResource("5_c42lq")
+events = Array[ExtResource("3_q4b1g")]([SubResource("Resource_1edaj"), SubResource("Resource_1r1rn")])
+metadata/_custom_type_script = "uid://eoq3ah17rnyo"
+
+[sub_resource type="Resource" id="Resource_ld8nd"]
+script = ExtResource("2_ic4vc")
+bullet_event = SubResource("Resource_63iq6")
+bullet_description = "Gain 1 Action and 1 Social"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_304v7"]
+script = ExtResource("7_eljrm")
+amounts = Array[int]([1, 2])
+types = Array[int]([1, 2])
+maxes = Array[int]([3, 4])
+target = 7
+metadata/_custom_type_script = "uid://cla17ebx8p6c6"
+
+[sub_resource type="Resource" id="Resource_6ireo"]
+script = ExtResource("2_ic4vc")
+bullet_event = SubResource("Resource_304v7")
+bullet_description = "Target a space on the Rift. For every character adjacent to the space, gain 1 action up to a maximum of 3 and gain 2 social up to a maximum of 4."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("9_cupyp")
+title = "Social Connections"
+game_origin = 12
+deleon_value = 4
+bullets = Array[ExtResource("2_ic4vc")]([SubResource("Resource_ld8nd"), SubResource("Resource_6ireo")])
+quip_description = "I know a guy who knows a guy"
+card_art = ExtResource("8_e31bs")
+background_art = ExtResource("1_730k3")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

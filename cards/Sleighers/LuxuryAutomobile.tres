@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=13 format=3 uid="uid://dfacn4suxsouf"]
+
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_7rlh6"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="2_kkrbk"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_ysoey"]
+[ext_resource type="Script" uid="uid://bf6x2y3xsccv8" path="res://custom_event_resources/Sleighers/GainCheer.gd" id="3_45s4i"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="4_b28ej"]
+
+[sub_resource type="Resource" id="Resource_df3o4"]
+script = ExtResource("1_7rlh6")
+bullet_type = 3
+bullet_description = "(Passive) - Luxury Automobile has 3 alignment states, FAE, Neutral, FIR. Luxury Automobile  start as FAE. "
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_465t7"]
+script = ExtResource("3_45s4i")
+amount = 5
+metadata/_custom_type_script = "uid://bf6x2y3xsccv8"
+
+[sub_resource type="Resource" id="Resource_8k44e"]
+script = ExtResource("2_kkrbk")
+event_type = 5
+event = SubResource("Resource_465t7")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_punc8"]
+script = ExtResource("4_b28ej")
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_bywq4"]
+script = ExtResource("2_kkrbk")
+event_type = 5
+event = SubResource("Resource_punc8")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_u87y8"]
+script = ExtResource("1_7rlh6")
+bullet_type = 3
+passive_events = Array[ExtResource("2_kkrbk")]([SubResource("Resource_8k44e"), SubResource("Resource_bywq4")])
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_kkrbk"]
+script = ExtResource("1_7rlh6")
+bullet_type = 3
+bullet_description = "(Passive) - When this card would be discarded due to the effects of Chill, reset alignment to Neutral."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_ysoey")
+title = "Luxury Automobile"
+type = 5
+game_origin = 6
+starting_hp = 2
+movable = false
+discardable = false
+stackable = false
+bullets = Array[ExtResource("1_7rlh6")]([SubResource("Resource_df3o4"), SubResource("Resource_u87y8"), SubResource("Resource_kkrbk")])
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

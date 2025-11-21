@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=9 format=3 uid="uid://7ih8cf1keutp"]
+
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_dxq31"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_j3q71"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_dxq31"]
+[ext_resource type="Script" uid="uid://cx6bynx7co5hu" path="res://custom_event_resources/TetraCity/DisrcardTypeEvent.gd" id="3_ovelr"]
+[ext_resource type="Texture2D" uid="uid://cn6j8roslpixh" path="res://art/card_art/TetraCity/AcidRain.png" id="4_m2wt5"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="4_ovelr"]
+
+[sub_resource type="Resource" id="Resource_hdf63"]
+script = ExtResource("3_ovelr")
+target_type = 5
+metadata/_custom_type_script = "uid://cx6bynx7co5hu"
+
+[sub_resource type="Resource" id="Resource_8a3n6"]
+script = ExtResource("1_j3q71")
+bullet_event = SubResource("Resource_hdf63")
+bullet_description = "Discard the top structure card of a stack"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("4_ovelr")
+title = "Acid Rain"
+game_origin = 12
+deleon_value = 4
+bullets = Array[ExtResource("1_j3q71")]([SubResource("Resource_8a3n6")])
+quip_description = "Maybe we should have taken toxic fumes more seriously. HEY THIS ISN\"T IMPLMENTED CORRECTLY, IT DOESN\"T REDRAW CARDS WHEN DESTROYED"
+card_art = ExtResource("4_m2wt5")
+background_art = ExtResource("1_dxq31")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

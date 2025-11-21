@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=12 format=3 uid="uid://l1kyqksetyom"]
+
+[ext_resource type="Texture2D" uid="uid://c144igpvbhabg" path="res://art/card_background_art/back.png" id="1_6dxrm"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_lxnlh"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="2_rsuj8"]
+[ext_resource type="Script" uid="uid://ddcwlh4g3nc6b" path="res://_scripts/resources/EventResources/GainResourceEvent.gd" id="2_v5dj6"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="3_tk5mp"]
+[ext_resource type="Script" uid="uid://cla17ebx8p6c6" path="res://custom_event_resources/TetraCity/TargetSqaureGainResurceEvent.gd" id="4_6dxrm"]
+[ext_resource type="Texture2D" uid="uid://dbdw5hcwa3ipd" path="res://art/card_art/TetraCity/CityPlanning.png" id="6_giwmh"]
+
+[sub_resource type="Resource" id="Resource_giwmh"]
+script = ExtResource("2_v5dj6")
+type = 1
+amount = 1
+metadata/_custom_type_script = "uid://ddcwlh4g3nc6b"
+
+[sub_resource type="Resource" id="Resource_cl7yo"]
+script = ExtResource("1_lxnlh")
+bullet_event = SubResource("Resource_giwmh")
+bullet_description = "Gain 1 Action"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_n1u3r"]
+script = ExtResource("4_6dxrm")
+amounts = Array[int]([1])
+types = Array[int]([1])
+maxes = Array[int]([3])
+target = 5
+metadata/_custom_type_script = "uid://cla17ebx8p6c6"
+
+[sub_resource type="Resource" id="Resource_m54ej"]
+script = ExtResource("1_lxnlh")
+bullet_event = SubResource("Resource_n1u3r")
+bullet_description = "Target a Rift location. For every adjacent structure, gain 1 action up to a maximum of 3."
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("2_rsuj8")
+title = "City Planning"
+game_origin = 12
+deleon_value = 5
+bullets = Array[ExtResource("1_lxnlh")]([SubResource("Resource_cl7yo"), SubResource("Resource_m54ej")])
+quip_description = "Smart city planning is its own reward"
+card_art = ExtResource("6_giwmh")
+background_art = ExtResource("1_6dxrm")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"

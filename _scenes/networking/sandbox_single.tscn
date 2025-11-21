@@ -55,6 +55,7 @@ script = ExtResource("1_3y3hc")
 initial_hand_card_pack = ExtResource("2_5x1ca")
 rift_card_pack = Array[ExtResource("3_jd3sr")]([ExtResource("4_huwjo")])
 shop_initial_packs = Array[ExtResource("3_jd3sr")]([ExtResource("6_wxbsy"), ExtResource("7_cd0cq"), ExtResource("5_5wpnl")])
+infinite_resources = true
 rift_grid = NodePath("RiftGrid")
 
 [node name="TextureRect" type="TextureRect" parent="."]
