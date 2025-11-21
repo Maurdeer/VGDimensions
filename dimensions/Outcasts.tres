@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://div70lvrir1m0" path="res://_scripts/resources/CardPackResource.gd" id="1_j062g"]
 [ext_resource type="Resource" uid="uid://ytv15oyix42d" path="res://card_packs/OutcastsPack.tres" id="2_kvxfd"]
 [ext_resource type="Script" uid="uid://ce2h3rysiqvu1" path="res://_scripts/resources/dimension_resource.gd" id="2_trhs7"]
-[ext_resource type="Resource" uid="uid://dc4nu5r2x6mqr" path="res://cards/Outcasts/ItTakesTwo.tres" id="3_kvxfd"]
+[ext_resource type="Resource" uid="uid://dc4nu5r2x6mqr" path="res://cards/Outcasts/ItTakesTeamwork.tres" id="3_kvxfd"]
 
 [resource]
 script = ExtResource("2_trhs7")

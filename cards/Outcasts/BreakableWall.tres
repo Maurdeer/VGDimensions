@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://bfa0ox70sgb47"
 [sub_resource type="Resource" id="Resource_kwuwe"]
 script = ExtResource("1_1d4nq")
 is_global = true
-global_event_type = 20
+global_event_type = 19
 event = SubResource("Resource_uaglv")
 metadata/_custom_type_script = "uid://bat0pcm2x7x13"
 
@@ -27,7 +27,7 @@ script = ExtResource("1_1rnrp")
 bullet_type = 3
 passive_event = SubResource("Resource_kwuwe")
 passive_events = Array[ExtResource("1_1d4nq")]([SubResource("Resource_kwuwe")])
-bullet_description = "On End of Turn: Heal to full hp at the end of the current turn."
+bullet_description = "On End of Turn: Heal to full HP."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -36,7 +36,7 @@ title = "Breakable Wall"
 type = 5
 game_origin = 25
 deleon_value = 5
-starting_hp = 2
+starting_hp = 3
 movable = false
 burnable = false
 bullets = Array[ExtResource("1_1rnrp")]([SubResource("Resource_4siri")])

@@ -1,35 +1,48 @@
-[gd_resource type="Resource" script_class="CardResource" load_steps=11 format=3 uid="uid://dkv5fsn4snafe"]
+[gd_resource type="Resource" script_class="CardResource" load_steps=15 format=3 uid="uid://dkv5fsn4snafe"]
 
 [ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="1_jblfp"]
 [ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="2_e5uie"]
 [ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="3_e5uie"]
+[ext_resource type="Script" uid="uid://d1rn5vdqwg4gi" path="res://_scripts/resources/EventResources/PlaceEvent.gd" id="3_iedem"]
 [ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="3_nns4j"]
 [ext_resource type="Texture2D" uid="uid://ce46jtioa5jf" path="res://art/card_art/Outcasts/Tinker.png" id="4_iedem"]
 [ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="5_5yx88"]
+[ext_resource type="Script" uid="uid://dcn2oigkgp1ue" path="res://_scripts/resources/EventResources/ApplyTemporaryEffectEvent.gd" id="6_5yx88"]
+[ext_resource type="Script" uid="uid://lr4o3s55jrrx" path="res://_scripts/resources/TemporaryEffects/FreezeEffect.gd" id="7_c7v5c"]
+
+[sub_resource type="Resource" id="Resource_5yx88"]
+script = ExtResource("3_iedem")
+source_selection_type = 1
+only_adjacent_cards = true
+metadata/_custom_type_script = "uid://d1rn5vdqwg4gi"
 
 [sub_resource type="Resource" id="Resource_fsag3"]
 script = ExtResource("3_nns4j")
-bullet_type = 3
-bullet_description = "Swap Places with any adjacent card."
+bullet_type = 2
+bullet_event = SubResource("Resource_5yx88")
+bullet_events = Array[ExtResource("3_e5uie")]([SubResource("Resource_5yx88")])
+bullet_description = "On Social: Stack this card on an adjacent card."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_68wxr"]
+script = ExtResource("7_c7v5c")
+is_global = true
+global_event = 18
+metadata/_custom_type_script = "uid://lr4o3s55jrrx"
+
+[sub_resource type="Resource" id="Resource_6ink1"]
+script = ExtResource("6_5yx88")
+selection_type = 2
+temp_effect = SubResource("Resource_68wxr")
+metadata/_custom_type_script = "uid://dcn2oigkgp1ue"
 
 [sub_resource type="Resource" id="Resource_ye420"]
 script = ExtResource("3_nns4j")
-bullet_type = 3
+bullet_type = 2
 bullet_cost = 2
-bullet_description = "Flip any card over until your next turn."
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_56sgf"]
-script = ExtResource("3_nns4j")
-bullet_type = 5
-bullet_description = "Reduces 1 social requirement for adjacent cards."
-metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
-
-[sub_resource type="Resource" id="Resource_dql0n"]
-script = ExtResource("3_nns4j")
-bullet_type = 5
-bullet_description = "Megateamwork Bounce: When Tinker is above Ashe the card above her will be dsicarded every turn."
+bullet_event = SubResource("Resource_6ink1")
+bullet_events = Array[ExtResource("3_e5uie")]([SubResource("Resource_6ink1")])
+bullet_description = "On 2 Social: Freeze a card until your next turn."
 metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
 
 [resource]
@@ -37,7 +50,7 @@ script = ExtResource("5_5yx88")
 title = "Tinker"
 type = 7
 game_origin = 25
-bullets = Array[ExtResource("3_nns4j")]([SubResource("Resource_fsag3"), SubResource("Resource_ye420"), SubResource("Resource_56sgf"), SubResource("Resource_dql0n")])
+bullets = Array[ExtResource("3_nns4j")]([SubResource("Resource_fsag3"), SubResource("Resource_ye420")])
 quip_description = "A determined mouse that leads the resistance against the rat king's schackle on the rat burrowers."
 card_art = ExtResource("4_iedem")
 background_art = ExtResource("2_e5uie")

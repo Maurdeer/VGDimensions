@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=18 format=3 uid="uid://dc4nu5r2x6mqr"]
+
+[ext_resource type="Texture2D" uid="uid://vcrdhe8qpt3m" path="res://art/card_background_art/outcasts_background.png" id="1_1e1tv"]
+[ext_resource type="Script" uid="uid://cyxcnkyv5m57c" path="res://_scripts/card/bullet_resource.gd" id="1_yejvj"]
+[ext_resource type="Script" uid="uid://b87lforig8tam" path="res://_scripts/resources/EventResource.gd" id="2_flgfg"]
+[ext_resource type="Script" uid="uid://ubm3m657gud6" path="res://custom_event_resources/Quest/OutcastsQuestProgressEvent.gd" id="3_1e1tv"]
+[ext_resource type="Script" uid="uid://bat0pcm2x7x13" path="res://_scripts/resources/PassiveEventResource.gd" id="4_21lgy"]
+[ext_resource type="Resource" uid="uid://cgc6j288lco7g" path="res://cards/Outcasts/Ashe.tres" id="5_qqnsm"]
+[ext_resource type="Resource" uid="uid://dkv5fsn4snafe" path="res://cards/Outcasts/Tinker.tres" id="6_umlna"]
+[ext_resource type="Script" uid="uid://bi6v78lx4ugqy" path="res://_scripts/resources/EventResources/RespawnCornerCardsEvent.gd" id="7_71wcq"]
+[ext_resource type="Script" uid="uid://cg5eo4ycbga2u" path="res://_scripts/resources/CardResource.gd" id="8_egaen"]
+[ext_resource type="Texture2D" uid="uid://bwi37wqtmsonr" path="res://art/card_art/Outcasts/ItTakesTeamwork.png" id="9_21lgy"]
+
+[sub_resource type="Resource" id="Resource_ndknl"]
+script = ExtResource("3_1e1tv")
+metadata/_custom_type_script = "uid://ubm3m657gud6"
+
+[sub_resource type="Resource" id="Resource_7r6el"]
+script = ExtResource("4_21lgy")
+is_global = true
+global_event_type = 23
+event = SubResource("Resource_ndknl")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_q30lc"]
+script = ExtResource("1_yejvj")
+bullet_type = 3
+passive_event = SubResource("Resource_7r6el")
+passive_events = Array[ExtResource("4_21lgy")]([SubResource("Resource_7r6el")])
+bullet_description = "Get Ashe and Tinker to stand on their respective doors to win this Dimension!"
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[sub_resource type="Resource" id="Resource_gpgyc"]
+script = ExtResource("7_71wcq")
+card_1 = ExtResource("5_qqnsm")
+card_2 = ExtResource("6_umlna")
+metadata/_custom_type_script = "uid://bi6v78lx4ugqy"
+
+[sub_resource type="Resource" id="Resource_mrloe"]
+script = ExtResource("4_21lgy")
+passive_event_type = 3
+global_event_type = 21
+event = SubResource("Resource_gpgyc")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_bxdqn"]
+script = ExtResource("4_21lgy")
+is_global = true
+global_event_type = 21
+event = SubResource("Resource_gpgyc")
+metadata/_custom_type_script = "uid://bat0pcm2x7x13"
+
+[sub_resource type="Resource" id="Resource_jaxqy"]
+script = ExtResource("1_yejvj")
+bullet_type = 3
+is_multi_event = true
+passive_event = SubResource("Resource_mrloe")
+passive_events = Array[ExtResource("4_21lgy")]([SubResource("Resource_mrloe"), SubResource("Resource_bxdqn")])
+metadata/_custom_type_script = "uid://cyxcnkyv5m57c"
+
+[resource]
+script = ExtResource("8_egaen")
+title = "It Takes Teamwork!"
+type = 4
+game_origin = 25
+bullets = Array[ExtResource("1_yejvj")]([SubResource("Resource_q30lc"), SubResource("Resource_jaxqy")])
+card_art = ExtResource("9_21lgy")
+background_art = ExtResource("1_1e1tv")
+metadata/_custom_type_script = "uid://cg5eo4ycbga2u"
