@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cw6ccessege6d" path="res://art/card_ui/card_img_bkg.png" id="6_8lnxd"]
 [ext_resource type="Texture2D" uid="uid://h28ibhh3pxam" path="res://art/card_ui/cardimage_frame.png" id="7_r8tiv"]
 [ext_resource type="Texture2D" uid="uid://cmnhoqlxq5vvd" path="res://art/card_ui/effects_frame copy 3.png" id="8_m0jti"]
-[ext_resource type="Texture2D" uid="uid://dad06w6id2pkd" path="res://art/card_ui/heart.png" id="9_tbra6"]
+[ext_resource type="Texture2D" uid="uid://vxnt8g0gj248" path="res://art/card_ui/heart.png" id="9_tbra6"]
 [ext_resource type="Texture2D" uid="uid://b6o4yqh12lf1u" path="res://art/card_ui/deleon.png" id="10_fh26a"]
 [ext_resource type="Texture2D" uid="uid://423bb7447g6p" path="res://art/card_ui/move_icon copy.png" id="11_eevst"]
 [ext_resource type="Texture2D" uid="uid://blhkk4ue8myyp" path="res://art/card_ui/title_frame.png" id="11_rw1a8"]
@@ -112,13 +112,14 @@ anchor_left = 0.168
 anchor_top = 0.306
 anchor_right = 0.828
 anchor_bottom = 0.798
-offset_left = -5.68968
-offset_top = -4.37424
-offset_right = 3.01031
-offset_bottom = 14.9218
+offset_left = -15.4750805
+offset_top = -9.865795
+offset_right = 17.818176
+offset_bottom = 17.77481
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_tbra6")
+expand_mode = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer/health_value_frame/TextureRect"]
 layout_mode = 0
@@ -140,9 +141,10 @@ texture = ExtResource("8_m0jti")
 layout_mode = 0
 offset_left = 26.296
 offset_top = 43.298
-offset_right = 129.296
-offset_bottom = 145.298
+offset_right = 129.20903
+offset_bottom = 147.05093
 texture = ExtResource("10_fh26a")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/deleon_value_frame/TextureRect"]
 layout_mode = 0
